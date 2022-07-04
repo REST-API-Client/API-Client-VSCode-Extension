@@ -1,40 +1,78 @@
 {
   "name": "rest-api-tester",
-	"displayName": "REST API Tester",
-	"description": "",
-	"version": "0.0.1",
-	"engines": {
-		"vscode": "^1.68.0"
-	},
-	"categories": [
-		"Other"
-	],
-	"activationEvents": [
-        "onCommand:rest-api-tester.helloWorld"
-	],
-	"main": "./extension.js",
-	"contributes": {
-		"commands": [{
-            "command": "rest-api-tester.helloWorld",
-            "title": "Hello World"
-
-		}]
-	},
-	"scripts": {
-		"lint": "eslint .",
-		"pretest": "npm run lint",
-		"test": "node ./test/runTest.js"
-	},
-	"devDependencies": {
-        "@types/vscode": "^1.68.0",
-        "@types/glob": "^7.2.0",
-        "@types/mocha": "^9.1.1",
-        "@types/node": "16.x",
-        "eslint": "^8.16.0",
-        "glob": "^8.0.3",
-        "mocha": "^10.0.0",
-        "typescript": "^4.7.2",
-        "@vscode/test-electron": "^2.1.3"
-    }
-
+  "displayName": "REST API Tester",
+  "description": "REST API Testing VSCode Extension",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.68.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:rest-api-tester.helloWorld"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "rest-api-tester.newRequest",
+        "category": "APP Test",
+        "title": "New Request"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "RESTAPITester",
+          "title": "REST API Tester",
+          "icon": "icons/httpIcon.svg"
+        }
+      ]
+    },
+    "views": {
+      "RESTAPITester": [
+        {
+          "id": "REST API Tester",
+          "name": ""
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "REST API Tester",
+        "contents": "To start sending HTTP requests, press the 'New Request' button below. \n[New Request](command:rest-api-tester.newRequest)"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "webpack": "webpack --mode development",
+    "webpack-dev": "webpack --mode development --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "test-compile": "tsc -p ./",
+    "lint": "eslint --fix --ext .js,.jsx .",
+    "pretest": "npm run lint",
+    "test": "node ./test/runTest.js"
+  },
+  "devDependencies": {
+    "@vscode/test-electron": "^2.1.3",
+    "eslint": "^8.19.0",
+    "eslint-plugin-react": "^7.30.1",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "glob": "^8.0.3",
+    "mocha": "^10.0.0",
+    "webpack": "^5.73.0",
+    "webpack-cli": "^4.10.0"
+  },
+  "dependencies": {
+    "assert": "^2.0.0",
+    "buffer": "^6.0.3",
+    "css-loader": "^6.7.1",
+    "file-loader": "^6.2.0",
+    "path-browserify": "^1.0.1",
+    "style-loader": "^3.3.1",
+    "url": "^0.11.0",
+    "zustand": "^4.0.0-rc.1"
+  }
 }
