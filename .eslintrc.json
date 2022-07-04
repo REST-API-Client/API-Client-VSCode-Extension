@@ -1,25 +1,37 @@
 {
-	"env": {
-		"browser": false,
-		"commonjs": true,
-		"es6": true,
-		"node": true,
-		"mocha": true
-	},
-	"parserOptions": {
-		"ecmaVersion": 2018,
-		"ecmaFeatures": {
-			"jsx": true
-		},
-		"sourceType": "module"
-	},
-	"rules": {
-		"no-const-assign": "warn",
-		"no-this-before-super": "warn",
-		"no-undef": "warn",
-		"no-unreachable": "warn",
-		"no-unused-vars": "warn",
-		"constructor-super": "warn",
-		"valid-typeof": "warn"
-	}
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "node": true,
+    "mocha": true
+  },
+  "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "requireConfigFile": false,
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "sourceType": "module"
+  },
+  "plugins": ["simple-import-sort", "react"],
+  "extends": ["plugin:react/recommended"],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "rules": {
+    "no-const-assign": "warn",
+    "no-this-before-super": "warn",
+    "no-undef": "warn",
+    "no-unreachable": "warn",
+    "no-unused-vars": "warn",
+    "constructor-super": "warn",
+    "valid-typeof": "warn",
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error"
+  },
+  "ignorePatterns": ["out", "dist", "**/*.d.ts"]
 }
