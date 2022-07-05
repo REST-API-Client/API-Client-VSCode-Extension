@@ -1,0 +1,49 @@
+<svg width="150" height="150" viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 200px; height: 200px;"><style>
+     .earth2-line1 {animation: earth2-line1 7s infinite; stroke-dasharray: 120; stroke-dashoffset: 120;}
+     .earth2-line2 {animation: earth2-line2 7s 1s infinite; stroke-dasharray: 120; stroke-dashoffset: 120;}
+     .earth2-line3 {animation: earth2-line3 7s 3s infinite; stroke-dasharray: 120; stroke-dashoffset: 120;}
+     .earth2-line4 {animation: earth2-line4 7s 2s infinite; stroke-dasharray: 320; stroke-dashoffset: 320;}
+     .earth2-line5 {animation: earth2-line5 7s 4s infinite; stroke-dasharray: 340; stroke-dashoffset: 340;}
+     .earth2-line6 {animation: earth2-line6 7s 3.5s infinite; stroke-dasharray: 120; stroke-dashoffset: 120;}
+     @keyframes earth2-line1 {
+         0%{stroke-dashoffset: 120;}
+         10%{stroke-dashoffset: 120;}
+         60%{stroke-dashoffset: 0;}
+         100%{stroke-dashoffset: -120;}
+     }
+     @keyframes earth2-line2 {
+         0%{stroke-dashoffset: 120;}
+         10%{stroke-dashoffset: 120;}
+         60%{stroke-dashoffset: 0;}
+         100%{stroke-dashoffset: -120;}
+     }
+     @keyframes earth2-line3 {
+         0%{stroke-dashoffset: 120;}
+         10%{stroke-dashoffset: 120;}
+         60%{stroke-dashoffset: 0;}
+         100%{stroke-dashoffset: -120;}
+     }
+     @keyframes earth2-line4 {
+         0%{stroke-dashoffset: 320;}
+         10%{stroke-dashoffset: 320;}
+         60%{stroke-dashoffset: 0;}
+         100%{stroke-dashoffset: -320;}
+     }
+     @keyframes earth2-line5 {
+         0%{stroke-dashoffset: 340;}
+         10%{stroke-dashoffset: 340;}
+         60%{stroke-dashoffset: 0;}
+         100%{stroke-dashoffset: -340;}
+     }
+     @keyframes earth2-line6 {
+         0%{stroke-dashoffset: 120;}
+         10%{stroke-dashoffset: 120;}
+         60%{stroke-dashoffset: 0;}
+         100%{stroke-dashoffset: -120;}
+     }
+     @media (prefers-reduced-motion: reduce) {
+         .earth2-line1, .earth2-line2, .earth2-line3, .earth2-line4, .earth2-line5, .earth2-line6 {
+             animation: none;
+         }
+     }
+    </style><circle class="earth2-sea fillCls1" cx="68.2664" cy="81.249" r="54.155" fill="#85CEFE" stroke-width="2.0px" style="animation-duration: 15s;"></circle><path class="earth2-land fillCls2" d="M111.951 61.3921C113.575 57.8912 113.576 51.6442 113.576 51.6442C113.576 51.6442 123.189 64.822 122.421 83.5054C121.639 102.55 110.327 115.367 110.327 115.367C110.327 115.367 100.829 113.906 98.7734 109.229C97.8022 107.02 97.7629 105.488 98.0514 103.092C98.4434 99.8356 100.654 98.6306 101.662 95.5098C102.35 93.3777 102.042 91.9728 102.925 89.9138C104.115 87.1407 106.488 86.5736 107.619 83.7762C109.337 79.5261 109.954 75.7504 107.258 72.0426C106.875 71.517 106.413 71.3836 106.175 70.779C105.779 69.7758 106.387 69.0981 106.716 68.0713C107.729 64.9157 110.557 64.3985 111.951 61.3921Z" fill="#62BF66" stroke-width="2.0px" style="animation-duration: 15s;"></path><path class="earth2-land fillCls2" d="M57.4347 74.931C61.1773 75.5678 60.8832 70.0671 62.4892 66.6272C63.1981 65.1088 63.1193 64.0044 64.1139 62.6558C66.4164 59.5339 72.528 63.1618 73.5007 59.4065C74.1835 56.7705 70.7898 55.6247 70.9735 52.9079C71.3853 46.8179 87.5321 55.0594 86.1369 49.1171C85.703 47.2691 83.9119 46.8391 83.6097 44.9652C83.3715 43.4888 84.5602 42.6128 84.1512 41.1743C83.2352 37.9521 78.9393 40.6272 75.6669 39.9107C65.8639 37.7642 52.1998 29.4407 52.1998 29.4407C52.1998 29.4407 41.441 32.752 32.5956 40.5245C23.4333 48.5755 19.3457 57.9624 19.3457 57.9624C19.3457 57.9624 23.7526 64.2893 28.0105 64.6415C33.453 65.0917 33.3821 55.6639 38.8415 55.7962C43.8606 55.9178 46.6879 59.257 48.9505 63.7389C50.1293 66.0742 48.0949 69.4058 50.5751 70.2375C51.5108 70.5513 52.1403 70.017 53.1023 70.2375C55.5337 70.7948 54.9757 74.5125 57.4347 74.931Z" fill="#62BF66" stroke-width="2.0px" style="animation-duration: 15s;"></path><path class="earth2-land fillCls2" d="M71.3366 95.3294C69.6063 97.6797 72.9646 100.845 75.8495 101.286C76.4767 101.382 76.8401 101.309 77.4742 101.286C80.5693 101.178 82.1498 99.9153 85.2364 99.6618C87.2739 99.4944 88.6386 100.567 90.4714 99.6618C94.6027 97.6202 89.1978 90.3514 84.6948 89.3723C82.3843 88.8699 80.5976 88.9953 78.7378 90.4554C77.3683 91.5306 77.7822 93.1992 76.3911 94.2463C74.7782 95.4603 72.5334 93.7037 71.3366 95.3294Z" fill="#62BF66" stroke-width="2.0px" style="animation-duration: 15s;"></path><path class="earth2-land fillCls2" d="M32.3431 112.659C28.7042 112.606 23.1367 111.215 23.1367 111.215C23.1367 111.215 28.0107 118.616 34.8703 123.851C43.1741 130.35 50.9363 132.588 50.9363 132.588C50.9363 132.588 48.4163 128.69 49.1311 126.198C49.8751 123.603 53.2484 124.142 54.3661 121.685C56.7192 116.513 50.8798 112.021 45.5208 110.132C40.5789 108.39 37.5825 112.735 32.3431 112.659Z" fill="#62BF66" stroke-width="2.0px" style="animation-duration: 15s;"></path><path class="earth2-line6 strokeCls1" d="M22.2339 52.547C22.2339 52.547 5.44576 39.5497 8.33412 35.5784C12.1249 31.4264 36.4947 46.5899 36.4947 46.5899" stroke="rgba(255,255,255,1)" stroke-width="2.0px" stroke-linecap="round" style="animation-duration: 15s;"></path><path class="earth2-line5 strokeCls1" d="M45.8836 31.8777C45.8836 31.8777 34.6909 12.4721 31.4422 14.0966C22.9572 18.3388 80.1818 95.6902 80.1818 95.6902" stroke="rgba(255,255,255,1)" stroke-width="2.0px" stroke-linecap="round" style="animation-duration: 15s;"></path><path class="earth2-line4 strokeCls1" d="M91.1927 32.1477C91.1927 32.1477 109.605 13.3746 115.021 17.3454C120.075 24.0249 56.8945 70.9588 56.8945 70.9588" stroke="rgba(255,255,255,1)" stroke-width="2.0px" stroke-linecap="round" style="animation-duration: 15s;"></path><path class="earth2-line3 strokeCls1" d="M122.061 74.9305C122.061 74.9305 143.001 73.1258 143.001 71.3202C143.001 68.4323 107.078 68.793 107.078 68.793" stroke="rgba(255,255,255,1)" stroke-width="2.0px" stroke-linecap="round" style="animation-duration: 15s;"></path><path class="earth2-line2 strokeCls1" d="M26.5668 115.908C26.5668 115.908 9.77859 131.252 11.9449 134.321C15.3745 136.668 39.203 118.616 39.203 118.616" stroke="rgba(255,255,255,1)" stroke-width="2.0px" stroke-linecap="round" style="animation-duration: 15s;"></path><path class="earth2-line1 strokeCls1" d="M119.714 98.3982C119.714 98.3982 139.39 106.702 137.766 113.02C136.141 119.338 100.76 103.453 100.76 103.453" stroke="rgba(255,255,255,1)" stroke-width="2.0px" stroke-linecap="round" style="animation-duration: 15s;"></path></svg>
