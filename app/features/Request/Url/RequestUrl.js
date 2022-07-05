@@ -1,8 +1,20 @@
 import React from "react";
 import styled from "styled-components";
 
+import useRequestOptionStore from "../../../store/requestOptionStore";
+
 function RequestUrl() {
-  return <InputContainer placeholder="Enter Request URL" />;
+  const { requestUrl, handleRequestUrlChange } = useRequestOptionStore(
+    (state) => state,
+  );
+
+  return (
+    <InputContainer
+      placeholder="Enter Request URL"
+      value={requestUrl}
+      onChange={(event) => handleRequestUrlChange(event.target.value)}
+    />
+  );
 }
 
 const InputContainer = styled.input`
