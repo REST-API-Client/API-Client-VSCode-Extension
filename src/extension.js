@@ -1,18 +1,29 @@
 const vscode = require("vscode");
+const WebViewPanel = require("./WebViewPanel");
+const { WELCOME_MESSAGE, MAIN_PANEL_NAME } = require("./constants/constants");
 
 function activate(context) {
-  console.log(
-    'Congratulations, your extension "rest-api-tester" is now active!'
-  );
+  const WebView = new WebViewPanel(context.extensionUri);
 
-  let disposable = vscode.commands.registerCommand(
-    "rest-api-tester.helloWorld",
-    function () {
-      vscode.window.showInformationMessage("Hello World from REST API Tester!");
-    }
-  );
+  context.subscriptions.push(
+    vscode.commands.registerCommand("rest-api-tester.newRequest", () => {
+      const mainPanel = vscode.window.createWebviewPanel(
+        "RestApiTester",
+        MAIN_PANEL_NAME,
+        vscode.ViewColumn.One,
+        {
+          enableScripts: true,
+          localResourceRoots: [
+            vscode.Uri.joinPath(context.extensionUri, "media"),
+            vscode.Uri.joinPath(context.extensionUri, "dist"),
+          ],
+        },
+      );
 
-  context.subscriptions.push(disposable);
+      vscode.window.showInformationMessage(WELCOME_MESSAGE);
+      mainPanel.webview.html = WebView.getHtmlForWebView(mainPanel);
+    }),
+  );
 }
 
 function deactivate() {}
