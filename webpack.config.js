@@ -32,4 +32,41 @@ const extensionConfig = {
   },
 };
 
-module.exports = [extensionConfig];
+const webviewConfig = {
+  entry: "./app/index.js",
+  output: {
+    path: path.resolve(__dirname, "dist"),
+    filename: "bundle.js",
+  },
+  resolve: {
+    mainFields: ["browser", "module", "main"],
+    extensions: [".js", "jsx"],
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(png|jp(e*)g|svg|gif)$/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              name: "images/[hash]-[name].[ext]",
+            },
+          },
+        ],
+      },
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-env", "@babel/preset-react"],
+          },
+        },
+      },
+    ],
+  },
+};
+
+module.exports = [extensionConfig, webviewConfig];
