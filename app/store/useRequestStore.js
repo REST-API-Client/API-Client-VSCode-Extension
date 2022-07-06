@@ -9,7 +9,7 @@ const initialState = {
   requestOption: PARAMS,
 };
 
-const useRequestOptionStore = create((set) => ({
+const useRequestStore = create((set) => ({
   requestMethod: initialState.requestMethod,
   requestUrl: initialState.requestUrl,
   requestUrlParams: initialState.requestUrlParams,
@@ -25,4 +25,4 @@ const useRequestOptionStore = create((set) => ({
   handleRequestOptionChange: (option) => set(() => ({ requestOption: option })),
 }));
 
-export default useRequestOptionStore;
+export default useRequestStore;

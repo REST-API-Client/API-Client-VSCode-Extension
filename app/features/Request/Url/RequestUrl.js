@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-import useRequestOptionStore from "../../../store/requestOptionStore";
+import useRequestStore from "../../../store/useRequestStore";
 
 function RequestUrl() {
-  const { requestUrl, handleRequestUrlChange } = useRequestOptionStore(
+  const { requestUrl, handleRequestUrlChange } = useRequestStore(
     (state) => state,
   );
 

@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import RequestButton from "../Button/RequestButton";
+import RequestDetailOption from "../Menu/RequestMenu";
 import RequestMethod from "../Method/RequestMethod";
 import RequestUrl from "../Url/RequestUrl";
 
@@ -13,13 +14,14 @@ function RequestPanel() {
         <RequestUrl />
         <RequestButton />
       </RequestMainForm>
+      <RequestDetailOption />
     </RequestPanelWrapper>
   );
 }
 
 const RequestPanelWrapper = styled.div`
-  overflow: hidden;
   margin: 5.5rem 5rem 1.5rem 5rem;
+  overflow: hidden;
 `;
 
 const RequestMainForm = styled.form`
