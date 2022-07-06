@@ -1,6 +1,7 @@
 const path = require("path");
 
 const extensionConfig = {
+  target: "webworker",
   entry: "./src/extension.js",
   output: {
     path: path.resolve(__dirname, "dist"),
@@ -28,6 +29,16 @@ const extensionConfig = {
         test: /\.css$/,
         use: ["style-loader", "css-loader"],
       },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: [["@babel/preset-env", { targets: "defaults" }]],
+          },
+        },
+      },
     ],
   },
 };
@@ -45,7 +56,7 @@ const webviewConfig = {
   module: {
     rules: [
       {
-        test: /\.(png|jp(e*)g|svg|gif)$/,
+        test: /\.(png|jp(e*)g|svg)$/,
         use: [
           {
             loader: "file-loader",
