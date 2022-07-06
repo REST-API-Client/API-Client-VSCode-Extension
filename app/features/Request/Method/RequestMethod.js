@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { REQUEST_METHOD_OPTIONS } from "../../../constants/request";
-import useRequestOptionStore from "../../../store/requestOptionStore";
+import useRequestOptionStore from "../../../store/useRequestStore";
 
 function RequestMethod() {
   const changeRequestMethod = useRequestOptionStore(
