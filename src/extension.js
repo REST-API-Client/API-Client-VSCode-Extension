@@ -1,34 +1,15 @@
-const vscode = require("vscode");
-const WebViewPanel = require("./WebViewPanel");
-const { WELCOME_MESSAGE, MAIN_PANEL_NAME } = require("./constants/constants");
+import vscode from "vscode";
 
-function activate(context) {
-  const WebView = new WebViewPanel(context.extensionUri);
+import WebViewPanel from "./WebViewPanel";
 
+export function activate(context) {
   context.subscriptions.push(
     vscode.commands.registerCommand("rest-api-tester.newRequest", () => {
-      const mainPanel = vscode.window.createWebviewPanel(
-        "RestApiTester",
-        MAIN_PANEL_NAME,
-        vscode.ViewColumn.One,
-        {
-          enableScripts: true,
-          localResourceRoots: [
-            vscode.Uri.joinPath(context.extensionUri, "media"),
-            vscode.Uri.joinPath(context.extensionUri, "dist"),
-          ],
-        },
-      );
+      const WebView = new WebViewPanel(context.extensionUri);
 
-      vscode.window.showInformationMessage(WELCOME_MESSAGE);
-      mainPanel.webview.html = WebView.getHtmlForWebView(mainPanel);
+      WebView.initializeWebView();
     }),
   );
 }
 
-function deactivate() {}
-
-module.exports = {
-  activate,
-  deactivate,
-};
+export function deactivate() {}
