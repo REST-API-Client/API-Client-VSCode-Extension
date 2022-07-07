@@ -1,14 +1,22 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 
+import useHeightStore from "../../../store/useHeightStore";
 import RequestButton from "../Button/RequestButton";
 import RequestDetailOption from "../Menu/RequestMenu";
 import RequestMethod from "../Method/RequestMethod";
 import RequestUrl from "../Url/RequestUrl";
 
 function RequestPanel() {
+  const requestMenuRef = useRef(height);
+  const height = useHeightStore((state) => state.height);
+
+  useEffect(() => {
+    requestMenuRef.current.style.height = height;
+  }, [height]);
+
   return (
-    <RequestPanelWrapper>
+    <RequestPanelWrapper ref={requestMenuRef}>
       <RequestMainForm>
         <RequestMethod />
         <RequestUrl />
