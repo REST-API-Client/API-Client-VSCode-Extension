@@ -1,9 +1,9 @@
 import React from "react";
 
-import RequestPanel from "./features/Request/Panel/RequestPanel";
+import MainPage from "./page/MainPage";
 
 function App() {
-  return <RequestPanel />;
+  return <MainPage />;
 }
 
 export default App;
