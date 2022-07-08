@@ -3,9 +3,10 @@ import React from "react";
 import KeyValueTable from "../../../components/KeyValueTable";
 import { AUTH, PARAMS } from "../../../constants/request";
 import { BODY, HEADERS } from "../../../constants/shared";
-import useKeyValueStore from "../../../store/useKeyValueStore";
+import useKeyValueTableStore from "../../../store/useKeyValueTableStore";
 import useRequestStore from "../../../store/useRequestStore";
 import RequestAuthMenu from "../Authorization/RequestAuthMenu";
+import RequestBodyMenu from "../Body/RequestBodyMenu";
 
 function RequestMenuOption() {
   const currentOption = useRequestStore((state) => state.requestOption);
@@ -17,7 +18,7 @@ function RequestMenuOption() {
     handleRequestDescription,
     addNewTableRow,
     deleteTableRow,
-  } = useKeyValueStore((state) => state);
+  } = useKeyValueTableStore((state) => state);
 
   switch (currentOption) {
     case PARAMS:
@@ -37,7 +38,7 @@ function RequestMenuOption() {
     case AUTH:
       return <RequestAuthMenu />;
     case BODY:
-      return <h1>Body</h1>;
+      return <RequestBodyMenu />;
     default:
       return <h1>Options </h1>;
   }
