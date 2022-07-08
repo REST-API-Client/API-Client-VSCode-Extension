@@ -5,6 +5,7 @@ import { AUTH, PARAMS } from "../../../constants/request";
 import { BODY, HEADERS } from "../../../constants/shared";
 import useKeyValueStore from "../../../store/useKeyValueStore";
 import useRequestStore from "../../../store/useRequestStore";
+import RequestAuthMenu from "../Authorization/RequestAuthMenu";
 
 function RequestMenuOption() {
   const currentOption = useRequestStore((state) => state.requestOption);
@@ -34,7 +35,7 @@ function RequestMenuOption() {
         />
       );
     case AUTH:
-      return <h1>Auth</h1>;
+      return <RequestAuthMenu />;
     case BODY:
       return <h1>Body</h1>;
     default:
