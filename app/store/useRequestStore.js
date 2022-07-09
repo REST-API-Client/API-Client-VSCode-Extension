@@ -1,6 +1,6 @@
 import create from "zustand";
 
-import { GET, NO_AUTH, PARAMS } from "../constants/request";
+import { GET, NO_AUTH, NONE, PARAMS } from "../constants/request";
 
 const initialState = {
   requestMethod: GET,
@@ -9,6 +9,7 @@ const initialState = {
   requestOption: PARAMS,
   authOption: NO_AUTH,
   authData: { username: "", password: "", token: "" },
+  bodyOption: NONE,
 };
 
 const useRequestStore = create((set) => ({
@@ -18,6 +19,7 @@ const useRequestStore = create((set) => ({
   requestOption: initialState.requestOption,
   authOption: initialState.authOption,
   authData: initialState.authData,
+  bodyOption: initialState.bodyOption,
 
   handleRequestUrlChange: (url) => set(() => ({ requestUrl: url })),
 
@@ -53,6 +55,8 @@ const useRequestStore = create((set) => ({
         token: data,
       },
     })),
+
+  handleRequestBodyOption: (type) => set(() => ({ bodyOption: type })),
 }));
 
 export default useRequestStore;

@@ -1,15 +1,13 @@
 import React from "react";
 
 import KeyValueTable from "../../../components/KeyValueTable";
-import { AUTH, PARAMS } from "../../../constants/request";
-import { BODY, HEADERS } from "../../../constants/shared";
+import { FORM_DATA, FORM_URLENCODED, RAW } from "../../../constants/request";
 import useKeyValueTableStore from "../../../store/useKeyValueTableStore";
 import useRequestStore from "../../../store/useRequestStore";
-import RequestAuthMenu from "../Authorization/RequestAuthMenu";
-import RequestBodyMenu from "../Body/RequestBodyMenu";
+import RequestNoBody from "./RequestNoBody";
 
-function RequestMenuOption() {
-  const currentOption = useRequestStore((state) => state.requestOption);
+function RequestBodyMenuOption() {
+  const { bodyOption } = useRequestStore((state) => state);
   const {
     requestKeyValueTableData,
     handleRequestCheckbox,
@@ -20,12 +18,13 @@ function RequestMenuOption() {
     deleteTableRow,
   } = useKeyValueTableStore((state) => state);
 
-  switch (currentOption) {
-    case PARAMS:
-    case HEADERS:
+  switch (bodyOption) {
+    case FORM_DATA:
+    case FORM_URLENCODED:
       return (
         <KeyValueTable
-          type={currentOption}
+          type={bodyOption}
+          title={bodyOption}
           tableData={requestKeyValueTableData}
           handleCheckboxInput={handleRequestCheckbox}
           handleKeyInput={handleRequestKey}
@@ -35,13 +34,11 @@ function RequestMenuOption() {
           handleDeleteButton={deleteTableRow}
         />
       );
-    case AUTH:
-      return <RequestAuthMenu />;
-    case BODY:
-      return <RequestBodyMenu />;
+    case RAW:
+      return <h1>Raw Data Input</h1>;
     default:
-      return <h1>Options </h1>;
+      return <RequestNoBody />;
   }
 }
 
-export default RequestMenuOption;
+export default RequestBodyMenuOption;
