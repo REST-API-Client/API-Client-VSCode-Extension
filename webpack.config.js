@@ -1,18 +1,21 @@
 const path = require("path");
+const nodeExternals = require("webpack-node-externals");
 
 const extensionConfig = {
-  target: "webworker",
+  target: "node",
   entry: "./src/extension.js",
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "extension.js",
     libraryTarget: "commonjs2",
-    devtoolModuleFilenameTemplate: "../[resource-path]",
   },
   devtool: "source-map",
-  externals: {
-    vscode: "commonjs vscode",
-  },
+  externals: [
+    {
+      vscode: "commonjs vscode",
+    },
+    nodeExternals(),
+  ],
   resolve: {
     mainFields: ["browser", "module", "main"],
     extensions: [".js"],
@@ -31,7 +34,7 @@ const extensionConfig = {
       },
       {
         test: /\.js$/,
-        exclude: /node_modules/,
+        exclude: path.resolve(__dirname, "node_modules"),
         use: {
           loader: "babel-loader",
           options: {
@@ -68,7 +71,7 @@ const webviewConfig = {
       },
       {
         test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
+        exclude: path.resolve(__dirname, "node_modules"),
         use: {
           loader: "babel-loader",
           options: {
