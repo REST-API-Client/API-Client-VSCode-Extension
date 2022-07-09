@@ -4,6 +4,7 @@ import { FORM_DATA, FORM_URLENCODED, RAW } from "../constants/bodyTypes";
 
 function getBody(keyValueData, bodyOption, bodyRawData) {
   if (bodyOption === "None") return;
+
   if (bodyOption === RAW) return JSON.parse(bodyRawData);
 
   if (bodyOption === FORM_DATA) {

@@ -41,19 +41,8 @@ async function generateResponseObject(configuration) {
     return responseDataObject;
   } catch (error) {
     if (error.response) {
-      //   this.#mainPanel.webview.postMessage({
-      //     data: error.response.data,
-      //     headers: error.response.headers,
-      //     statusCode: error.response.status,
-      //   });
     } else if (error.request) {
-      //   this.#mainPanel.webview.postMessage({
-      //     data: error.request,
-      //   });
     } else {
-      //   this.#mainPanel.webview.postMessage({
-      //     message: error.message,
-      //   });
     }
   }
 }
