@@ -5,17 +5,17 @@ import { BODY, HEADERS } from "../../../constants/shared";
 import KeyValueTable from "../../../shared/KeyValueTable";
 import useKeyValueTableStore from "../../../store/useKeyValueTableStore";
 import useRequestStore from "../../../store/useRequestStore";
-import RequestAuthMenu from "../Authorization/RequestAuthMenu";
-import RequestBodyMenu from "../Body/RequestBodyMenu";
+import RequestAuthMenu from "../Authorization/RequestAuthSelectMenu";
+import RequestBodyMenu from "../Body/RequestBodySelectMenu";
 
 const RequestMenuOption = () => {
-  const currentOption = useRequestStore((state) => state.requestOption);
-  const keyValueProps = useKeyValueTableStore((state) => state);
+  const keyValueProps = useKeyValueTableStore();
+  const requestOption = useRequestStore((state) => state.requestOption);
 
-  switch (currentOption) {
+  switch (requestOption) {
     case PARAMS:
     case HEADERS:
-      return <KeyValueTable type={currentOption} {...keyValueProps} />;
+      return <KeyValueTable type={requestOption} {...keyValueProps} />;
     case AUTH:
       return <RequestAuthMenu />;
     case BODY:

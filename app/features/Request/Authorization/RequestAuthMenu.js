@@ -1,14 +1,19 @@
 import React from "react";
 import styled from "styled-components";
+import shallow from "zustand/shallow";
 
 import SelectWrapper from "../../../components/SelectWrapper";
 import { AUTHORIZATION_OPTIONS } from "../../../constants/request";
 import useRequestStore from "../../../store/useRequestStore";
-import RequestAuthMenuOption from "./RequestAuthMenuOption";
+import RequestAuthMenuOption from "./RequestAuthSelectMenuOption";
 
 const RequestAuthMenu = () => {
   const { authOption, handleRequestAuthType } = useRequestStore(
-    (state) => state,
+    (state) => ({
+      authOption: state.authOption,
+      handleRequestAuthType: state.handleRequestAuthType,
+    }),
+    shallow,
   );
 
   return (

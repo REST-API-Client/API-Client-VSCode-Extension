@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import shallow from "zustand/shallow";
 
 import InputWrapper from "../../../components/InputWrapper";
 import Wrapper from "../../../components/Wrapper";
@@ -7,7 +8,14 @@ import useRequestStore from "../../../store/useRequestStore";
 const RequestBasicAuth = () => {
   const [shouldShowPassword, setShouldShowPassword] = useState(false);
   const { authData, handleRequestUsernameData, handleRequestPasswordData } =
-    useRequestStore((state) => state);
+    useRequestStore(
+      (state) => ({
+        authData: state.authData,
+        handleRequestUsernameData: state.handleRequestUsernameData,
+        handleRequestPasswordData: state.handleRequestPasswordData,
+      }),
+      shallow,
+    );
 
   const handlePasswordDisplayOption = () => {
     setShouldShowPassword((state) => !state);

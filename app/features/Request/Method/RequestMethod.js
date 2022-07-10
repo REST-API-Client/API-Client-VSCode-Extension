@@ -5,13 +5,13 @@ import { REQUEST_METHOD_OPTIONS } from "../../../constants/request";
 import useRequestStore from "../../../store/useRequestStore";
 
 const RequestMethod = () => {
-  const changeRequestMethod = useRequestStore(
+  const handleRequestMethodChange = useRequestStore(
     (state) => state.handleRequestMethodChange,
   );
 
   return (
     <MethodOptionWrapper
-      onChange={(event) => changeRequestMethod(event.target.value)}
+      onChange={(event) => handleRequestMethodChange(event.target.value)}
       name="httpRequestMethods"
     >
       {REQUEST_METHOD_OPTIONS.map((requestMethod, index) => (

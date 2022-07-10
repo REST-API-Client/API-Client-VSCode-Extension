@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
+import shallow from "zustand/shallow";
 
 import { LOADING } from "../../../constants/shared";
 import useHeightStore from "../../../store/useHeightStore";
@@ -15,12 +16,22 @@ import RequestUrl from "../Url/RequestUrl";
 const RequestPanel = () => {
   const requestMenuRef = useRef(height);
   const height = useHeightStore((state) => state.height);
-  const requestData = useRequestStore((state) => state);
   const keyValueData = useKeyValueTableStore(
     (state) => state.keyValueTableData,
   );
   const handleRequestProcessStatus = useResponseDataStore(
     (state) => state.handleRequestProcessStatus,
+  );
+  const requestData = useRequestStore(
+    (state) => ({
+      requestMethod: state.requestMethod,
+      requestUrl: state.requestUrl,
+      authOption: state.authOption,
+      authData: state.authData,
+      bodyOption: state.bodyOption,
+      bodyRawData: state.bodyRawData,
+    }),
+    shallow,
   );
 
   const handleFormSubmit = (event) => {

@@ -1,14 +1,20 @@
 import React from "react";
 import styled from "styled-components";
+import shallow from "zustand/shallow";
 
 import SelectWrapper from "../../../components/SelectWrapper";
 import { REQUEST_BODY_OPTIONS } from "../../../constants/request";
 import useRequestStore from "../../../store/useRequestStore";
-import RequestBodyMenuOption from "./RequestBodyMenuOption";
+import RequestBodyFormatButton from "../Button/RequestBodyFormatButton";
+import RequestBodyMenuOption from "./RequestBodySelectMenuOption";
 
-function RequestBodyMenu() {
+const RequestBodyMenu = () => {
   const { bodyOption, handleRequestBodyOption } = useRequestStore(
-    (state) => state,
+    (state) => ({
+      bodyOption: state.bodyOption,
+      handleRequestBodyOption: state.handleRequestBodyOption,
+    }),
+    shallow,
   );
 
   return (
@@ -26,11 +32,12 @@ function RequestBodyMenu() {
             <label htmlFor={option}>{option}</label>
           </RadioInputWrapper>
         ))}
+        {bodyOption === "Raw" && <RequestBodyFormatButton />}
       </SelectWrapper>
       <RequestBodyMenuOption />
     </>
   );
-}
+};
 
 const RadioInputWrapper = styled.div`
   display: flex;
