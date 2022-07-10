@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
+import shallow from "zustand/shallow";
 
 import { PARAMS } from "../../../constants/request";
 import useKeyValueTableStore from "../../../store/useKeyValueTableStore";
@@ -11,9 +12,16 @@ import {
 
 const RequestUrl = () => {
   const { requestOption, requestUrl, handleRequestUrlChange } = useRequestStore(
-    (state) => state,
+    (state) => ({
+      requestOption: state.requestOption,
+      requestUrl: state.requestUrl,
+      handleRequestUrlChange: state.handleRequestUrlChange,
+    }),
+    shallow,
   );
-  const { keyValueTableData } = useKeyValueTableStore((state) => state);
+  const keyValueTableData = useKeyValueTableStore(
+    (state) => state.keyValueTableData,
+  );
 
   useEffect(() => {
     if (requestOption !== PARAMS) return;

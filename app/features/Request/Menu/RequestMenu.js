@@ -1,4 +1,5 @@
 import React from "react";
+import shallow from "zustand/shallow";
 
 import DetailOption from "../../../components/DetailOption";
 import MenuOption from "../../../components/MenuOption";
@@ -9,14 +10,20 @@ import useRequestStore from "../../../store/useRequestStore";
 import RequestMenuOption from "./RequestMenuOption";
 
 const RequestMenu = () => {
-  const currentOption = useRequestStore((state) => state.requestOption);
-  const changeRequestOption = useRequestStore(
-    (state) => state.handleRequestOptionChange,
+  const keyValueTableData = useKeyValueTableStore(
+    (state) => state.keyValueTableData,
   );
-  const { keyValueTableData } = useKeyValueTableStore((state) => state);
+  const { requestOption, changeRequestOption } = useRequestStore(
+    (state) => ({
+      requestOption: state.requestOption,
+      changeRequestOption: state.handleRequestOptionChange,
+    }),
+    shallow,
+  );
+
   const headersCount = keyValueTableData.filter(
     (data) => data.optionType === HEADERS && data.isChecked,
-  );
+  ).length;
 
   const handleOptionChange = (event) => {
     changeRequestOption(event.target.innerText);
@@ -28,12 +35,12 @@ const RequestMenu = () => {
         {REQUEST_MENU_OPTIONS.map((requestMenuOption, index) => (
           <React.Fragment key={index}>
             <MenuOption
-              currentOption={currentOption}
+              currentOption={requestOption}
               menuOption={requestMenuOption}
             >
               <h3 onClick={handleOptionChange}>{requestMenuOption}</h3>
             </MenuOption>
-            {requestMenuOption === HEADERS && <p>({headersCount.length})</p>}
+            {requestMenuOption === HEADERS && <p>({headersCount})</p>}
           </React.Fragment>
         ))}
       </DetailOption>
