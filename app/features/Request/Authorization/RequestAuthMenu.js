@@ -6,7 +6,7 @@ import { AUTHORIZATION_OPTIONS } from "../../../constants/request";
 import useRequestStore from "../../../store/useRequestStore";
 import RequestAuthMenuOption from "./RequestAuthMenuOption";
 
-function RequestAuthMenu() {
+const RequestAuthMenu = () => {
   const { authOption, handleRequestAuthType } = useRequestStore(
     (state) => state,
   );
@@ -29,7 +29,7 @@ function RequestAuthMenu() {
       <RequestAuthMenuOption />
     </>
   );
-}
+};
 
 const OptionWrapper = styled.select`
   width: 11rem;

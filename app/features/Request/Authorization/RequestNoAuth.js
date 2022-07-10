@@ -2,7 +2,7 @@ import React from "react";
 
 import Message from "../../../components/Message";
 
-function RequestNoAuth() {
+const RequestNoAuth = () => {
   return (
     <Message>
       <p>This request does not use any authorization.</p>
@@ -12,6 +12,6 @@ function RequestNoAuth() {
       </p>
     </Message>
   );
-}
+};
 
 export default RequestNoAuth;

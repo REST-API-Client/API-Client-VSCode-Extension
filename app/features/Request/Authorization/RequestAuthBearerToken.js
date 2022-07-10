@@ -4,7 +4,7 @@ import InputWrapper from "../../../components/InputWrapper";
 import Wrapper from "../../../components/Wrapper";
 import useRequestStore from "../../../store/useRequestStore";
 
-function RequestAuthBearerToken() {
+const RequestAuthBearerToken = () => {
   const { authData, handleRequestTokenData } = useRequestStore(
     (state) => state,
   );
@@ -23,6 +23,6 @@ function RequestAuthBearerToken() {
       </InputWrapper>
     </Wrapper>
   );
-}
+};
 
 export default RequestAuthBearerToken;

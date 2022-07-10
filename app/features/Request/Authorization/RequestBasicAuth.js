@@ -4,7 +4,7 @@ import InputWrapper from "../../../components/InputWrapper";
 import Wrapper from "../../../components/Wrapper";
 import useRequestStore from "../../../store/useRequestStore";
 
-function RequestBasicAuth() {
+const RequestBasicAuth = () => {
   const [shouldShowPassword, setShouldShowPassword] = useState(false);
   const { authData, handleRequestUsernameData, handleRequestPasswordData } =
     useRequestStore((state) => state);
@@ -43,6 +43,6 @@ function RequestBasicAuth() {
       </InputWrapper>
     </Wrapper>
   );
-}
+};
 
 export default RequestBasicAuth;
