@@ -2,13 +2,13 @@ import PropTypes from "prop-types";
 import React from "react";
 import styled from "styled-components";
 
-function SelectWrapper({ children, requestMenu }) {
+const SelectWrapper = ({ children, requestMenu }) => {
   return (
     <SelectWrapperContainer border={requestMenu}>
       {children}
     </SelectWrapperContainer>
   );
-}
+};
 
 const SelectWrapperContainer = styled.div`
   display: flex;

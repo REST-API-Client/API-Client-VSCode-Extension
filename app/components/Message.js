@@ -4,14 +4,14 @@ import styled from "styled-components";
 
 import emptyComponentIcon from "../assets/empty.svg";
 
-function Message({ children }) {
+const Message = ({ children }) => {
   return (
     <MessageWrapper>
       {children}
       <img src={emptyComponentIcon} alt="Empty Component Icon" />
     </MessageWrapper>
   );
-}
+};
 
 const MessageWrapper = styled.div`
   display: flex;

@@ -2,13 +2,13 @@ import PropTypes from "prop-types";
 import React from "react";
 import styled from "styled-components";
 
-function MenuOption({ children, currentOption, menuOption }) {
+const MenuOption = ({ children, currentOption, menuOption }) => {
   return (
     <MenuOptionWrapper primary={currentOption === menuOption}>
       {children}
     </MenuOptionWrapper>
   );
-}
+};
 
 const MenuOptionWrapper = styled.div`
   display: flex;
