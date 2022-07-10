@@ -2,8 +2,12 @@ import React from "react";
 
 import Button from "../../../components/Button";
 
-function RequestButton() {
-  return <Button buttonPurpose="submit">Send</Button>;
-}
+const RequestButton = () => {
+  return (
+    <Button primary buttonType="submit">
+      Send
+    </Button>
+  );
+};
 
 export default RequestButton;

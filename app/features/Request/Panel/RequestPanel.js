@@ -1,15 +1,38 @@
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 
+import { LOADING } from "../../../constants/shared";
 import useHeightStore from "../../../store/useHeightStore";
+import useKeyValueTableStore from "../../../store/useKeyValueTableStore";
+import useRequestStore from "../../../store/useRequestStore";
+import useResponseDataStore from "../../../store/useResponseDataStore";
+import vscode from "../../../vscode";
 import RequestButton from "../Button/RequestButton";
 import RequestDetailOption from "../Menu/RequestMenu";
 import RequestMethod from "../Method/RequestMethod";
 import RequestUrl from "../Url/RequestUrl";
 
-function RequestPanel() {
+const RequestPanel = () => {
   const requestMenuRef = useRef(height);
   const height = useHeightStore((state) => state.height);
+  const requestData = useRequestStore((state) => state);
+  const keyValueData = useKeyValueTableStore(
+    (state) => state.keyValueTableData,
+  );
+  const handleRequestProcessStatus = useResponseDataStore(
+    (state) => state.handleRequestProcessStatus,
+  );
+
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+
+    handleRequestProcessStatus(LOADING);
+
+    vscode.postMessage({
+      ...requestData,
+      keyValueData,
+    });
+  };
 
   useEffect(() => {
     requestMenuRef.current.style.height = height;
@@ -17,7 +40,7 @@ function RequestPanel() {
 
   return (
     <RequestPanelWrapper ref={requestMenuRef}>
-      <RequestMainForm>
+      <RequestMainForm onSubmit={handleFormSubmit}>
         <RequestMethod />
         <RequestUrl />
         <RequestButton />
@@ -25,7 +48,7 @@ function RequestPanel() {
       <RequestDetailOption />
     </RequestPanelWrapper>
   );
-}
+};
 
 const RequestPanelWrapper = styled.div`
   margin: 5.5rem 5rem 1.5rem 5rem;

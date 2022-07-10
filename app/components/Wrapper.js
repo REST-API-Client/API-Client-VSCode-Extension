@@ -2,9 +2,9 @@ import PropTypes from "prop-types";
 import React from "react";
 import styled from "styled-components";
 
-function Wrapper({ children }) {
+const Wrapper = ({ children }) => {
   return <ComponentWrapper>{children}</ComponentWrapper>;
-}
+};
 
 const ComponentWrapper = styled.div`
   display: flex;

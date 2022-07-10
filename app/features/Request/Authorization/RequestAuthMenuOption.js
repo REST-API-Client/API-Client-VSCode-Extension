@@ -6,7 +6,7 @@ import RequestBearerToken from "./RequestAuthBearerToken";
 import RequestBasicAuth from "./RequestBasicAuth";
 import RequestNoAuth from "./RequestNoAuth";
 
-function RequestAuthMenuOption() {
+const RequestAuthMenuOption = () => {
   const { authOption } = useRequestStore((state) => state);
 
   switch (authOption) {
@@ -17,6 +17,6 @@ function RequestAuthMenuOption() {
     default:
       return <RequestNoAuth />;
   }
-}
+};
 
 export default RequestAuthMenuOption;

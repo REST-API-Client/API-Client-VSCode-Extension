@@ -2,7 +2,7 @@ import React from "react";
 
 import Message from "../../../components/Message";
 
-function RequestNoBody() {
+const RequestNoBody = () => {
   return (
     <Message>
       <p>This request does not have a body.</p>
@@ -11,6 +11,6 @@ function RequestNoBody() {
       </p>
     </Message>
   );
-}
+};
 
 export default RequestNoBody;

@@ -2,11 +2,11 @@ import PropTypes from "prop-types";
 import React from "react";
 import styled from "styled-components";
 
-function DetailOption({ children, requestMenu }) {
+const DetailOption = ({ children, requestMenu }) => {
   return (
     <DetailOptionWrapper purpose={requestMenu}>{children}</DetailOptionWrapper>
   );
-}
+};
 
 const DetailOptionWrapper = styled.div`
   display: flex;

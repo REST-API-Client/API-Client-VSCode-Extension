@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { MAXIMUM_HEIGHT, MINIMUM_HEIGHT } from "../../constants/height";
 import useHeightStore from "../../store/useHeightStore";
 
-function ResizeBar() {
+const ResizeBar = () => {
   const { height, handleRequestHeightChange } = useHeightStore(
     (state) => state,
   );
@@ -57,7 +57,7 @@ function ResizeBar() {
       </div>
     </ResizeBarHitBox>
   );
-}
+};
 
 const ResizeBarHitBox = styled.div`
   display: flex;

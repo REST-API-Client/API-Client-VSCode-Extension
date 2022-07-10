@@ -2,9 +2,9 @@ import PropTypes from "prop-types";
 import React from "react";
 import styled from "styled-components";
 
-function InputWrapper({ children }) {
+const InputWrapper = ({ children }) => {
   return <InputWrapperContainer>{children}</InputWrapperContainer>;
-}
+};
 
 const InputWrapperContainer = styled.div`
   display: flex;
