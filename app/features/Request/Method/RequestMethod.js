@@ -2,10 +2,10 @@ import React from "react";
 import styled from "styled-components";
 
 import { REQUEST_METHOD_OPTIONS } from "../../../constants/request";
-import useRequestOptionStore from "../../../store/useRequestStore";
+import useRequestStore from "../../../store/useRequestStore";
 
-function RequestMethod() {
-  const changeRequestMethod = useRequestOptionStore(
+const RequestMethod = () => {
+  const changeRequestMethod = useRequestStore(
     (state) => state.handleRequestMethodChange,
   );
 
@@ -21,14 +21,15 @@ function RequestMethod() {
       ))}
     </MethodOptionWrapper>
   );
-}
+};
 
 const MethodOptionWrapper = styled.select`
   width: 9rem;
   height: 3.15rem;
   padding-left: 1.2rem;
   font-size: 1.15rem;
-  color: rgba(255, 255, 255, 0.78);
+  color: var(--default-text);
+  font-weight: 500;
 `;
 
 export default RequestMethod;

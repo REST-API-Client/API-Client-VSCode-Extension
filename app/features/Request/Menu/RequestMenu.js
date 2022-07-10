@@ -8,13 +8,13 @@ import useKeyValueTableStore from "../../../store/useKeyValueTableStore";
 import useRequestStore from "../../../store/useRequestStore";
 import RequestMenuOption from "./RequestMenuOption";
 
-function RequestMenu() {
+const RequestMenu = () => {
   const currentOption = useRequestStore((state) => state.requestOption);
   const changeRequestOption = useRequestStore(
     (state) => state.handleRequestOptionChange,
   );
-  const { requestKeyValueTableData } = useKeyValueTableStore((state) => state);
-  const headersCount = requestKeyValueTableData.filter(
+  const { keyValueTableData } = useKeyValueTableStore((state) => state);
+  const headersCount = keyValueTableData.filter(
     (data) => data.optionType === HEADERS && data.isChecked,
   );
 
@@ -40,6 +40,6 @@ function RequestMenu() {
       <RequestMenuOption />
     </>
   );
-}
+};
 
 export default RequestMenu;
