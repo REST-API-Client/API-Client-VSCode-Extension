@@ -3,11 +3,11 @@ import styled from "styled-components";
 import shallow from "zustand/shallow";
 
 import SelectWrapper from "../../../components/SelectWrapper";
-import { AUTHORIZATION_OPTIONS } from "../../../constants/request";
+import { AUTH, AUTHORIZATION_OPTIONS } from "../../../constants/request";
 import useRequestStore from "../../../store/useRequestStore";
 import RequestAuthMenuOption from "./RequestAuthSelectMenuOption";
 
-const RequestAuthMenu = () => {
+const RequestAuthSelectMenu = () => {
   const { authOption, handleRequestAuthType } = useRequestStore(
     (state) => ({
       authOption: state.authOption,
@@ -25,7 +25,7 @@ const RequestAuthMenu = () => {
           value={authOption}
         >
           {AUTHORIZATION_OPTIONS.map((option, index) => (
-            <option key={index} value={option}>
+            <option key={AUTH + index} value={option}>
               {option}
             </option>
           ))}
@@ -49,4 +49,4 @@ const OptionWrapper = styled.select`
   color: rgba(255, 255, 255, 0.78);
 `;
 
-export default RequestAuthMenu;
+export default RequestAuthSelectMenu;

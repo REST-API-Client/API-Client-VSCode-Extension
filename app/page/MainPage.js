@@ -2,14 +2,16 @@ import React from "react";
 
 import RequestPanel from "../features/Request/Panel/RequestPanel";
 import ResizeBar from "../features/ResizeBar/ResizeBar";
+import ResponsePanel from "../features/Response/Panel/ResponsePanel";
 
-function MainPage() {
+const MainPage = () => {
   return (
     <>
       <RequestPanel />
       <ResizeBar />
+      <ResponsePanel />
     </>
   );
-}
+};
 
 export default MainPage;
