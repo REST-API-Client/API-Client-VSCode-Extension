@@ -4,49 +4,55 @@ import { CgAddR } from "react-icons/cg";
 import { FaTrashAlt } from "react-icons/fa";
 import styled from "styled-components";
 
-function KeyValueTable({
+const KeyValueTable = ({
   title,
   type,
-  tableData,
-  handleCheckboxInput,
-  handleKeyInput,
-  handleValueInput,
-  handleDescriptionInput,
-  handleDeleteButton,
-  handleAddButton,
-}) {
+  keyValueTableData,
+  handleRequestCheckbox,
+  handleRequestKey,
+  handleRequestValue,
+  handleRequestDescription,
+  addNewTableRow,
+  deleteTableRow,
+  readOnly,
+}) => {
+  console.log(keyValueTableData);
   return (
-    <>
-      <TableContainer>
+    <TableContainerWrapper>
+      <TableContainer readOnlyMode={readOnly}>
         {title && <h2>{title}</h2>}
-        <Table>
+        <Table readOnlyMode={readOnly}>
           <thead>
             <tr>
-              <th></th>
+              {!readOnly && <th></th>}
               <th>Key</th>
               <th>Value</th>
-              <th>Description</th>
-              <th className="tableIconContainer">
-                <CgAddR
-                  className="tableIcon addButton"
-                  onClick={() => handleAddButton(type)}
-                />
-              </th>
+              {!readOnly && <th> Description</th>}
+              {!readOnly && (
+                <th className="tableIconContainer">
+                  <CgAddR
+                    className="tableIcon addButton"
+                    onClick={() => addNewTableRow(type)}
+                  />
+                </th>
+              )}
             </tr>
           </thead>
           <tbody>
-            {tableData.map(
+            {keyValueTableData?.map(
               ({ optionType, isChecked, key, value, description }, index) => (
                 <React.Fragment key={index}>
                   {optionType === type && (
                     <tr>
-                      <th className="tableIconContainer">
-                        <input
-                          type="checkbox"
-                          checked={isChecked}
-                          onChange={() => handleCheckboxInput(index)}
-                        />
-                      </th>
+                      {!readOnly && (
+                        <th className="tableIconContainer">
+                          <input
+                            type="checkbox"
+                            checked={isChecked}
+                            onChange={() => handleRequestCheckbox(index)}
+                          />
+                        </th>
+                      )}
                       <td>
                         <input
                           type="text"
@@ -54,8 +60,9 @@ function KeyValueTable({
                           placeholder="Key"
                           value={key}
                           onChange={(event) =>
-                            handleKeyInput(index, event.target.value)
+                            handleRequestKey(index, event.target.value)
                           }
+                          readOnly={readOnly}
                         />
                       </td>
                       <td>
@@ -65,27 +72,35 @@ function KeyValueTable({
                           placeholder="Value"
                           value={value}
                           onChange={(event) =>
-                            handleValueInput(index, event.target.value)
+                            handleRequestValue(index, event.target.value)
                           }
+                          readOnly={readOnly}
                         />
                       </td>
-                      <td>
-                        <input
-                          type="text"
-                          name="Description"
-                          placeholder="Description"
-                          value={description}
-                          onChange={(event) =>
-                            handleDescriptionInput(index, event.target.value)
-                          }
-                        />
-                      </td>
-                      <th className="tableIconContainer">
-                        <FaTrashAlt
-                          className="tableIcon"
-                          onClick={() => handleDeleteButton(index)}
-                        />
-                      </th>
+                      {!readOnly && (
+                        <>
+                          <td>
+                            <input
+                              type="text"
+                              name="Description"
+                              placeholder="Description"
+                              value={description}
+                              onChange={(event) =>
+                                handleRequestDescription(
+                                  index,
+                                  event.target.value,
+                                )
+                              }
+                            />
+                          </td>
+                          <th className="tableIconContainer">
+                            <FaTrashAlt
+                              className="tableIcon"
+                              onClick={() => deleteTableRow(index)}
+                            />
+                          </th>
+                        </>
+                      )}
                     </tr>
                   )}
                 </React.Fragment>
@@ -94,18 +109,23 @@ function KeyValueTable({
           </tbody>
         </Table>
       </TableContainer>
-    </>
+    </TableContainerWrapper>
   );
-}
+};
+
+const TableContainerWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`;
 
 const TableContainer = styled.div`
-  height: 35vh;
-  width: 100%;
+  height: ${(props) => (props.readOnlyMode ? "50vh" : "35vh")};
+  width: ${(props) => (props.readOnlyMode ? "75%" : "100%")};
   display: flex;
   align-items: center;
   flex-direction: column;
   padding: 1rem;
-  overflow-y: scroll;
+  overflow-y: ${(props) => (props.readOnlyMode ? "none" : "scroll")};
 
   h2 {
     margin: 1.3rem 0;
@@ -133,6 +153,9 @@ const Table = styled.table`
   input {
     background-color: transparent;
     color: var(--default-text);
+    font-style: ${(props) => props.readOnlyMode && "italic"};
+    font-weight: ${(props) => props.readOnlyMode && "300"};
+    opacity: ${(props) => props.readOnlyMode && "0.75"};
   }
 
   .tableIconContainer {
@@ -157,13 +180,15 @@ const Table = styled.table`
 KeyValueTable.propTypes = {
   title: PropTypes.string,
   type: PropTypes.string,
-  tableData: PropTypes.array,
-  handleCheckboxInput: PropTypes.func,
-  handleKeyInput: PropTypes.func,
-  handleValueInput: PropTypes.func,
-  handleDescriptionInput: PropTypes.func,
-  handleDeleteButton: PropTypes.func,
   handleAddButton: PropTypes.func,
+  keyValueTableData: PropTypes.array,
+  handleRequestCheckbox: PropTypes.func,
+  handleRequestKey: PropTypes.func,
+  handleRequestValue: PropTypes.func,
+  handleRequestDescription: PropTypes.func,
+  addNewTableRow: PropTypes.func,
+  deleteTableRow: PropTypes.func,
+  readOnly: PropTypes.bool,
 };
 
 export default KeyValueTable;
