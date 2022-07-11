@@ -4,6 +4,8 @@ export const GZIP = "gzip";
 export const NONE = "None";
 export const PARAMS = "Params";
 export const ACCEPT = "Accept";
+export const METHOD = "Method";
+export const REQUEST = "Request";
 export const DEFLATE = "deflate";
 export const NO_AUTH = "No Auth";
 export const ANY_MIME_TYPE = "*/*";
@@ -13,6 +15,7 @@ export const FORM_DATA = "Form Data";
 export const BASIC_AUTH = "Basic Auth";
 export const CONNECTION = "Connection";
 export const KEEP_ALIVE = "keep-alive";
+export const CONTENT_TYPE = "Content-Type";
 export const BEARER_TOKEN = "Bearer Token";
 export const CACHE_CONTROL = "Cache-Control";
 export const ACCEPT_ENCODING = "Accept-Encoding";
@@ -26,9 +29,13 @@ export const REQUEST_MENU_OPTIONS = [
   "Body",
   "Options",
 ];
+
 export const REQUEST_BODY_OPTIONS = [
-  "None",
-  "Form Data",
-  "x-www-form-urlencoded",
-  "Raw",
+  { option: "None", headerField: "" },
+  { option: "Form Data", headerField: "multipart/form-data" },
+  {
+    option: "x-www-form-urlencoded",
+    headerField: "application/x-www-form-urlencoded",
+  },
+  { option: "Raw", headerField: "application/json" },
 ];
