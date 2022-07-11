@@ -1,18 +1,24 @@
 import React from "react";
+import shallow from "zustand/shallow";
 
 import DetailOption from "../../../components/DetailOption";
 import MenuOption from "../../../components/MenuOption";
 import SelectWrapper from "../../../components/SelectWrapper";
-import { RESPONSE_MENU_OPTIONS } from "../../../constants/response";
+import { RESPONSE, RESPONSE_MENU_OPTIONS } from "../../../constants/response";
 import { HEADERS } from "../../../constants/shared";
 import useResponseDataStore from "../../../store/useResponseDataStore";
 import useResponseOptionStore from "../../../store/useResponseOptionStore";
+import ResponseMetaData from "../MetaData/ResponseMetaData";
 import ResponseMenuOption from "./ResponseMenuOption";
 
 const ResponseMenu = () => {
-  const { responseData } = useResponseDataStore((state) => state);
+  const responseData = useResponseDataStore((state) => state.responseData);
   const { responseOption, handleResponseOptionChange } = useResponseOptionStore(
-    (state) => state,
+    (state) => ({
+      responseOption: state.responseOption,
+      handleResponseOptionChange: state.handleResponseOptionChange,
+    }),
+    shallow,
   );
 
   const handleOptionChange = (event) => {
@@ -24,7 +30,7 @@ const ResponseMenu = () => {
       <DetailOption>
         <SelectWrapper>
           {RESPONSE_MENU_OPTIONS.map((responseMenuOption, index) => (
-            <React.Fragment key={index}>
+            <React.Fragment key={RESPONSE + index}>
               <MenuOption
                 currentOption={responseOption}
                 menuOption={responseMenuOption}
@@ -37,6 +43,7 @@ const ResponseMenu = () => {
             </React.Fragment>
           ))}
         </SelectWrapper>
+        <ResponseMetaData {...responseData} />
       </DetailOption>
       <ResponseMenuOption />
     </>
