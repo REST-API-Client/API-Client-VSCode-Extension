@@ -76,47 +76,42 @@ const initialState = [
 ];
 
 const useKeyValueTableStore = create((set) => ({
-  requestKeyValueTableData: [...initialState],
+  keyValueTableData: [...initialState],
+
   handleRequestCheckbox: (dataIndex) =>
     set((state) => ({
-      requestKeyValueTableData: state.requestKeyValueTableData.map(
-        (tableData, index) =>
-          dataIndex === index
-            ? { ...tableData, isChecked: !tableData.isChecked }
-            : tableData,
+      keyValueTableData: state.keyValueTableData.map((tableData, index) =>
+        dataIndex === index
+          ? { ...tableData, isChecked: !tableData.isChecked }
+          : tableData,
       ),
     })),
 
   handleRequestKey: (dataIndex, detail) =>
     set((state) => ({
-      requestKeyValueTableData: state.requestKeyValueTableData.map(
-        (tableData, index) =>
-          dataIndex === index ? { ...tableData, key: detail } : tableData,
+      keyValueTableData: state.keyValueTableData.map((tableData, index) =>
+        dataIndex === index ? { ...tableData, key: detail } : tableData,
       ),
     })),
 
   handleRequestValue: (dataIndex, detail) =>
     set((state) => ({
-      requestKeyValueTableData: state.requestKeyValueTableData.map(
-        (tableData, index) =>
-          dataIndex === index ? { ...tableData, value: detail } : tableData,
+      keyValueTableData: state.keyValueTableData.map((tableData, index) =>
+        dataIndex === index ? { ...tableData, value: detail } : tableData,
       ),
     })),
 
   handleRequestDescription: (dataIndex, detail) =>
     set((state) => ({
-      requestKeyValueTableData: state.requestKeyValueTableData.map(
-        (tableData, index) =>
-          dataIndex === index
-            ? { ...tableData, description: detail }
-            : tableData,
+      keyValueTableData: state.keyValueTableData.map((tableData, index) =>
+        dataIndex === index ? { ...tableData, description: detail } : tableData,
       ),
     })),
 
   addNewTableRow: (type) =>
     set((state) => ({
-      requestKeyValueTableData: [
-        ...state.requestKeyValueTableData,
+      keyValueTableData: [
+        ...state.keyValueTableData,
         {
           optionType: type,
           isChecked: false,
@@ -129,7 +124,7 @@ const useKeyValueTableStore = create((set) => ({
 
   deleteTableRow: (dataIndex) => {
     set((state) => ({
-      requestKeyValueTableData: state.requestKeyValueTableData.filter(
+      keyValueTableData: state.keyValueTableData.filter(
         (_, index) => index !== dataIndex,
       ),
     }));
