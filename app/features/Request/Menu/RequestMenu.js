@@ -3,7 +3,7 @@ import shallow from "zustand/shallow";
 
 import DetailOption from "../../../components/DetailOption";
 import MenuOption from "../../../components/MenuOption";
-import { REQUEST_MENU_OPTIONS } from "../../../constants/request";
+import { REQUEST, REQUEST_MENU_OPTIONS } from "../../../constants/request";
 import { HEADERS } from "../../../constants/shared";
 import useKeyValueTableStore from "../../../store/useKeyValueTableStore";
 import useRequestStore from "../../../store/useRequestStore";
@@ -33,7 +33,7 @@ const RequestMenu = () => {
     <>
       <DetailOption requestMenu>
         {REQUEST_MENU_OPTIONS.map((requestMenuOption, index) => (
-          <React.Fragment key={index}>
+          <React.Fragment key={REQUEST + index}>
             <MenuOption
               currentOption={requestOption}
               menuOption={requestMenuOption}
