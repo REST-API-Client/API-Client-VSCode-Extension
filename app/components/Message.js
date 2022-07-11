@@ -2,15 +2,8 @@ import PropTypes from "prop-types";
 import React from "react";
 import styled from "styled-components";
 
-import emptyComponentIcon from "../assets/empty.svg";
-
-const Message = ({ children }) => {
-  return (
-    <MessageWrapper>
-      {children}
-      <img src={emptyComponentIcon} alt="Empty Component Icon" />
-    </MessageWrapper>
-  );
+const Message = ({ children, primary }) => {
+  return <MessageWrapper primary={primary}>{children}</MessageWrapper>;
 };
 
 const MessageWrapper = styled.div`
@@ -18,22 +11,39 @@ const MessageWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 6.5rem;
+  margin-top: ${(props) => (props.primary ? "1.5rem" : " 3.8rem")};
+
+  h2 {
+    margin: 1.3rem 0;
+    opacity: 0.85;
+  }
+
+  h3 {
+    color: rgb(255 100 100);
+    font-style: italic;
+  }
 
   p {
-    margin: 0.7rem 0;
+    margin: 1rem 0;
     opacity: 0.65;
   }
 
   img {
-    width: 2.5rem;
-    margin-top: 1rem;
-    opacity: 0.7;
+    margin-top: ${(props) => (props.primary ? "2rem" : " 0.5rem")};
+    width: ${(props) => (props.primary ? "13rem" : " 2.5rem")};
+    opacity: 0.75;
+  }
+
+  .introMessage {
+    margin: 1.3rem 0;
+    opacity: 0.8;
+    color: var(--vscode-foreground);
   }
 `;
 
 Message.propTypes = {
   children: PropTypes.node,
+  primary: PropTypes.bool,
 };
 
 export default Message;
