@@ -2,25 +2,37 @@ import PropTypes from "prop-types";
 import React from "react";
 import styled from "styled-components";
 
-function Button({ children, buttonPurpose }) {
-  return <ButtonWrapper type={buttonPurpose}>{children}</ButtonWrapper>;
-}
+const Button = ({ children, buttonType, primary, handleButtonClick }) => {
+  return (
+    <ButtonWrapper
+      primary={primary}
+      type={buttonType}
+      onClick={handleButtonClick}
+    >
+      {children}
+    </ButtonWrapper>
+  );
+};
 
 const ButtonWrapper = styled.button`
-  margin-left: 1rem;
-  width: 8rem;
+  width: ${(props) => (props.primary ? "8rem" : "12rem")};
+  margin-left: ${(props) => (props.primary ? "1rem" : "auto")};
   font-size: 1.2rem;
-  background-color: rgb(14, 99, 156);
+  font-weight: 500;
+  background-color: ${(props) =>
+    props.primary ? "rgb(14, 99, 156)" : "var(--vscode-input-background)"};
   transition: background-color 0.2s ease-in-out;
 
   :hover {
-    background-color: rgba(14, 99, 156, 0.5);
+    background-color: ${(props) => props.primary && "rgb(14, 99, 156)"};
   }
 `;
 
 Button.propTypes = {
   children: PropTypes.node,
-  buttonPurpose: PropTypes.string,
+  buttonType: PropTypes.string,
+  primary: PropTypes.bool,
+  handleButtonClick: PropTypes.func,
 };
 
 export default Button;
