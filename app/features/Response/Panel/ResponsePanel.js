@@ -1,22 +1,39 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
+import shallow from "zustand/shallow";
 
 import Loader from "../../../components/Loader";
-import { RESPONSE } from "../../../constants/response";
+import { ERROR, RESPONSE } from "../../../constants/response";
 import { FINISHED, LOADING } from "../../../constants/shared";
 import useResponseDataStore from "../../../store/useResponseDataStore";
-import ResponseEmptyMenu from "../EmptyResponse/EmptyResponse";
+import ResponseEmptyMenu from "../Empty/ResponseEmptyMenu";
+import ResponseErrorMenu from "../Error/ResponseErrorMenu";
 import ResponseMenu from "../Menu/ResponseMenu";
 
 const ResponsePanel = () => {
-  const { requestInProcess, handleResponseData, handleRequestProcessStatus } =
-    useResponseDataStore((state) => state);
+  const {
+    responseData,
+    requestInProcess,
+    handleResponseData,
+    handleRequestProcessStatus,
+  } = useResponseDataStore(
+    (state) => ({
+      responseData: state.responseData,
+      requestInProcess: state.requestInProcess,
+      handleResponseData: state.handleResponseData,
+      handleRequestProcessStatus: state.handleRequestProcessStatus,
+    }),
+    shallow,
+  );
 
   const handleExtensionMessage = (event) => {
-    // if (event.data.type === RESPONSE) {
-    //   handleResponseData(event.data);
-    //   handleRequestProcessStatus(FINISHED);
-    // }
+    if (event.data.type === RESPONSE) {
+      handleResponseData(event.data);
+      handleRequestProcessStatus(FINISHED);
+    } else if (event.data.type === ERROR) {
+      handleResponseData(event.data);
+      handleRequestProcessStatus(ERROR);
+    }
   };
 
   useEffect(() => {
@@ -30,6 +47,12 @@ const ResponsePanel = () => {
       return (
         <ResponsePanelWrapper>
           <ResponseMenu />
+        </ResponsePanelWrapper>
+      );
+    case ERROR:
+      return (
+        <ResponsePanelWrapper>
+          <ResponseErrorMenu {...responseData} />
         </ResponsePanelWrapper>
       );
     default:
