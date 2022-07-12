@@ -21,10 +21,6 @@ const ResponseMenu = () => {
     shallow,
   );
 
-  const handleOptionChange = (event) => {
-    handleResponseOptionChange(event.target.innerText);
-  };
-
   return (
     <>
       <DetailOption>
@@ -35,7 +31,13 @@ const ResponseMenu = () => {
                 currentOption={responseOption}
                 menuOption={responseMenuOption}
               >
-                <h3 onClick={handleOptionChange}>{responseMenuOption}</h3>
+                <h3
+                  onClick={(event) =>
+                    handleResponseOptionChange(event.target.innerText)
+                  }
+                >
+                  {responseMenuOption}
+                </h3>
               </MenuOption>
               {responseMenuOption === HEADERS && (
                 <p>({responseData.headersLength})</p>
