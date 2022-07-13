@@ -46,8 +46,8 @@ const extensionConfig = {
   },
 };
 
-const webviewConfig = {
-  entry: "./app/index.js",
+const MainWebViewConfig = {
+  entry: "./webview/index.js",
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
@@ -83,4 +83,30 @@ const webviewConfig = {
   },
 };
 
-module.exports = [extensionConfig, webviewConfig];
+const SidebarWebViewConfig = {
+  entry: "./webview/sidebar.js",
+  output: {
+    path: path.resolve(__dirname, "dist"),
+    filename: "sidebar.js",
+  },
+  resolve: {
+    mainFields: ["browser", "module", "main"],
+    extensions: [".js", "jsx"],
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: path.resolve(__dirname, "node_modules"),
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-env", "@babel/preset-react"],
+          },
+        },
+      },
+    ],
+  },
+};
+
+module.exports = [extensionConfig, MainWebViewConfig, SidebarWebViewConfig];
