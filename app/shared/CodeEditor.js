@@ -2,6 +2,7 @@ import Editor from "@monaco-editor/react";
 import PropTypes from "prop-types";
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
+import shallow from "zustand/shallow";
 
 import { EDITOR_HEIGHT, FORM_HEIGHT } from "../constants/height";
 import {
@@ -12,31 +13,38 @@ import {
 } from "../constants/options";
 import { RAW } from "../constants/request";
 import { PREVIEW, TEXT, THEME } from "../constants/response";
-import { JSON } from "../constants/shared";
 import ResponsePreview from "../features/Response/Preview/ResponseDataPreview";
-import useRequestStore from "../store/useRequestStore";
 import useResponseOptionStore from "../store/useResponseOptionStore";
 
-const CodeEditor = ({ requestFormValue, responseValue, requestForm }) => {
+const CodeEditor = ({
+  bodyRawOption,
+  bodyRawData,
+  handleBodyRawOptionData,
+  shouldBeautifyEditor,
+  handleBeautifyButton,
+  responseValue,
+  requestForm,
+}) => {
   const editorRef = useRef(null);
   const { responseOption, responseBodyOption, responseBodyViewFormat } =
-    useResponseOptionStore((state) => state);
+    useResponseOptionStore(
+      (state) => ({
+        responseOption: state.responseOption,
+        responseBodyOption: state.responseBodyOption,
+        responseBodyViewFormat: state.responseBodyViewFormat,
+      }),
+      shallow,
+    );
   const [editorLanguage, setEditorLanguage] = useState(
     responseBodyViewFormat.toLowerCase(),
   );
-  const {
-    bodyOption,
-    handleBodyRawData,
-    shouldBeautifyEditor,
-    handleBeautifyButton,
-  } = useRequestStore((state) => state);
 
   const handleEditorOnMount = (editor) => {
     editorRef.current = editor;
   };
 
   function handleRequestBodyEditorChange(bodyValue) {
-    handleBodyRawData(bodyValue);
+    handleBodyRawOptionData(bodyRawOption, bodyValue);
   }
 
   useEffect(() => {
@@ -51,7 +59,7 @@ const CodeEditor = ({ requestFormValue, responseValue, requestForm }) => {
         }, 300);
       }
     }
-  }, [bodyOption, shouldBeautifyEditor]);
+  }, [shouldBeautifyEditor]);
 
   useEffect(() => {
     if (requestForm) return;
@@ -87,9 +95,9 @@ const CodeEditor = ({ requestFormValue, responseValue, requestForm }) => {
       ) : (
         <Editor
           height={requestForm ? FORM_HEIGHT : EDITOR_HEIGHT}
-          language={requestForm ? JSON : editorLanguage}
+          language={requestForm ? bodyRawOption : editorLanguage}
           theme={THEME}
-          value={requestForm ? requestFormValue : responseValue}
+          value={requestForm ? bodyRawData[bodyRawOption] : responseValue}
           options={EDITOR_OPTIONS}
           onChange={requestForm && handleRequestBodyEditorChange}
           onMount={handleEditorOnMount}
@@ -105,7 +113,11 @@ const EditorWrapper = styled.div`
 
 CodeEditor.propTypes = {
   responseValue: PropTypes.string,
-  requestFormValue: PropTypes.string,
+  bodyRawOption: PropTypes.string,
+  bodyRawData: PropTypes.object,
+  handleBodyRawOptionData: PropTypes.func,
+  shouldBeautifyEditor: PropTypes.bool,
+  handleBeautifyButton: PropTypes.func,
   requestForm: PropTypes.bool,
 };
 
