@@ -1,4 +1,4 @@
-export const generateMethodColor = (method) => {
+const generateMethodColor = (method) => {
   switch (method) {
     case "delete":
       return "rgb(235 32 19)";
@@ -7,8 +7,10 @@ export const generateMethodColor = (method) => {
     case "put":
       return "rgb(9 123 237)";
     case "patch":
-      return "rgb(33 33 33)";
+      return "var(--default-text)";
     default:
       return "rgb(12 187 82)";
   }
 };
+
+export default generateMethodColor;
