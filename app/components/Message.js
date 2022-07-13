@@ -11,7 +11,7 @@ const MessageWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: ${(props) => (props.primary ? "1.5rem" : " 3.8rem")};
+  margin-top: ${(props) => (props.primary ? "1rem" : " 3.8rem")};
 
   h2 {
     margin: 1.3rem 0;
@@ -26,6 +26,7 @@ const MessageWrapper = styled.div`
   p {
     margin: 1rem 0;
     opacity: 0.65;
+    line-height: 1.1;
   }
 
   img {
