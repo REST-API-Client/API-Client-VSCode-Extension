@@ -10,6 +10,10 @@ const initialState = {
   authOption: NO_AUTH,
   authData: { username: "", password: "", token: "" },
   bodyOption: NONE,
+  bodyRawOption: "Text",
+  bodyRawData: { text: "", javascript: "", json: "", html: "" },
+  shouldBeautifyEditor: false,
+  shouldShowPassword: false,
 };
 
 const useRequestStore = create((set) => ({
@@ -20,6 +24,10 @@ const useRequestStore = create((set) => ({
   authOption: initialState.authOption,
   authData: initialState.authData,
   bodyOption: initialState.bodyOption,
+  bodyRawOption: initialState.bodyRawOption,
+  bodyRawData: initialState.bodyRawData,
+  shouldShowPassword: initialState.shouldShowPassword,
+  shouldBeautifyEditor: initialState.shouldBeautifyEditor,
 
   handleRequestUrlChange: (url) => set(() => ({ requestUrl: url })),
 
@@ -32,31 +40,28 @@ const useRequestStore = create((set) => ({
 
   handleRequestAuthType: (type) => set(() => ({ authOption: type })),
 
-  handleRequestUsernameData: (data) =>
+  handleRequestAuthData: (authType, data) =>
     set((state) => ({
       authData: {
         ...state.authData,
-        username: data,
-      },
-    })),
-
-  handleRequestPasswordData: (data) =>
-    set((state) => ({
-      authData: {
-        ...state.authData,
-        password: data,
-      },
-    })),
-
-  handleRequestTokenData: (data) =>
-    set((state) => ({
-      authData: {
-        ...state.authData,
-        token: data,
+        [authType]: data,
       },
     })),
 
   handleRequestBodyOption: (type) => set(() => ({ bodyOption: type })),
+
+  handleBodyRawOption: (option) => set(() => ({ bodyRawOption: option })),
+
+  handleBodyRawOptionData: (rawOption, data) =>
+    set((state) => ({
+      bodyRawData: { ...state.bodyRawData, [rawOption]: data },
+    })),
+
+  handleShouldShowPassword: () =>
+    set((state) => ({ shouldShowPassword: !state.shouldShowPassword })),
+
+  handleBeautifyButton: () =>
+    set((state) => ({ shouldBeautifyEditor: !state.shouldBeautifyEditor })),
 }));
 
 export default useRequestStore;
