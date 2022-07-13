@@ -1,4 +1,4 @@
-export const GET = "Get";
+export const GET = "GET";
 export const RAW = "Raw";
 export const GZIP = "gzip";
 export const NONE = "None";
