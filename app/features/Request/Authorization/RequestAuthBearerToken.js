@@ -3,13 +3,14 @@ import shallow from "zustand/shallow";
 
 import InputWrapper from "../../../components/InputWrapper";
 import Wrapper from "../../../components/Wrapper";
+import { TOKEN } from "../../../constants/request";
 import useRequestStore from "../../../store/useRequestStore";
 
 const RequestAuthBearerToken = () => {
-  const { authDataToken, handleRequestTokenData } = useRequestStore(
+  const { authDataToken, handleRequestAuthData } = useRequestStore(
     (state) => ({
       authDataToken: state.authData.token,
-      handleRequestTokenData: state.handleRequestTokenData,
+      handleRequestAuthData: state.handleRequestAuthData,
     }),
     shallow,
   );
@@ -17,13 +18,13 @@ const RequestAuthBearerToken = () => {
   return (
     <Wrapper>
       <InputWrapper>
-        <label htmlFor="token">Token</label>
+        <label htmlFor="token">Token:</label>
         <input
-          placeholder="token"
           name="token"
+          placeholder="token"
           className="authInputBox"
           value={authDataToken}
-          onChange={(event) => handleRequestTokenData(event.target.value)}
+          onChange={(event) => handleRequestAuthData(TOKEN, event.target.value)}
         />
       </InputWrapper>
     </Wrapper>
