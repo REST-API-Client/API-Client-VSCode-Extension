@@ -1,11 +1,11 @@
-import { FormData } from "formdata-node";
+import FormData from "form-data";
 
 import { FORM_DATA, FORM_URLENCODED, RAW } from "../constants/bodyTypes";
 
-function getBody(keyValueData, bodyOption, bodyRawData) {
+function getBody(keyValueData, bodyOption, bodyRawOption, bodyRawData) {
   if (bodyOption === "None") return;
-
-  if (bodyOption === RAW) return JSON.parse(bodyRawData);
+  if (bodyOption === RAW)
+    return JSON.stringify(bodyRawData[bodyRawOption.toLowerCase()]);
 
   if (bodyOption === FORM_DATA) {
     const formData = new FormData();
@@ -15,7 +15,7 @@ function getBody(keyValueData, bodyOption, bodyRawData) {
     );
 
     for (const { key, value } of formDataArray) {
-      formData.set(key, value);
+      formData.append(key, value);
     }
 
     return formData;

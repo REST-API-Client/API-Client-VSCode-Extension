@@ -10,7 +10,8 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:rest-api-tester.newRequest"
+    "onCommand:rest-api-tester.newRequest",
+    "onView:rest-api-tester.historyMenu"
   ],
   "main": "./dist/extension.js",
   "contributes": {
@@ -33,17 +34,13 @@
     "views": {
       "RESTAPITester": [
         {
-          "id": "REST API Tester",
-          "name": ""
+          "type": "webview",
+          "id": "rest-api-tester.historyMenu",
+          "name": "REST API Tester",
+          "contextualTitle": "REST API Tester"
         }
       ]
-    },
-    "viewsWelcome": [
-      {
-        "view": "REST API Tester",
-        "contents": "To start sending HTTP requests, press the 'New Request' button below. \n[New Request](command:rest-api-tester.newRequest)"
-      }
-    ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run package",
@@ -81,7 +78,7 @@
   "dependencies": {
     "@monaco-editor/react": "^4.4.5",
     "axios": "^0.27.2",
-    "formdata-node": "^4.3.3",
+    "form-data": "^4.0.0",
     "path-browserify": "^1.0.1",
     "postman-collection": "^4.1.4",
     "prop-types": "^15.8.1",
