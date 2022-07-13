@@ -6,6 +6,7 @@ import {
   ANY_MIME_TYPE,
   CACHE_CONTROL,
   CONNECTION,
+  CONTENT_TYPE,
   DEFLATE,
   FORM_DATA,
   FORM_URLENCODED,
@@ -52,6 +53,7 @@ const initialState = [
     value: KEEP_ALIVE,
     description: "",
   },
+
   {
     optionType: HEADERS,
     isChecked: false,
@@ -107,6 +109,28 @@ const useKeyValueTableStore = create((set) => ({
         dataIndex === index ? { ...tableData, description: detail } : tableData,
       ),
     })),
+
+  addRequestBodyHeaders: (headerValue) =>
+    set((state) => ({
+      keyValueTableData: [
+        {
+          optionType: HEADERS,
+          isChecked: true,
+          key: CONTENT_TYPE,
+          value: headerValue,
+          description: "",
+        },
+        ...state.keyValueTableData,
+      ],
+    })),
+
+  removeRequestBodyHeaders: () => {
+    set((state) => ({
+      keyValueTableData: state.keyValueTableData.filter(
+        (keyValueData) => keyValueData.key !== CONTENT_TYPE,
+      ),
+    }));
+  },
 
   addNewTableRow: (type) =>
     set((state) => ({
