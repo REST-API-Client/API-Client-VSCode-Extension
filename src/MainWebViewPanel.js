@@ -10,7 +10,7 @@ import {
   getUrl,
 } from "./utils";
 
-class WebViewPanel {
+class MainWebViewPanel {
   #extensionUri;
   #mainPanel;
   #url;
@@ -18,8 +18,10 @@ class WebViewPanel {
   #headers;
   #body;
 
-  constructor(extensionUri) {
+  constructor(extensionUri, stateManager, sidebarWebViewPanel) {
     this.#extensionUri = extensionUri;
+    this.stateManager = stateManager;
+    this.sidebarWebViewPanel = sidebarWebViewPanel;
   }
 
   initializeWebView() {
@@ -51,12 +53,13 @@ class WebViewPanel {
         authOption,
         authData,
         bodyOption,
+        bodyRawOption,
         bodyRawData,
         keyValueData,
         purpose,
       }) => {
         if (purpose === "Alert Copy") {
-          vscode.window.showInformationMessage("Copied to Clipboard ✅");
+          vscode.window.showInformationMessage("Copied to Clipboard  ✅");
 
           return;
         }
@@ -70,7 +73,12 @@ class WebViewPanel {
         this.#url = getUrl(requestUrl);
         this.#method = requestMethod;
         this.#headers = getHeaders(keyValueData, authOption, authData);
-        this.#body = getBody(keyValueData, bodyOption, bodyRawData);
+        this.#body = getBody(
+          keyValueData,
+          bodyOption,
+          bodyRawOption,
+          bodyRawData,
+        );
 
         this.#postWebviewMessage();
 
@@ -80,6 +88,9 @@ class WebViewPanel {
   }
 
   async #postWebviewMessage() {
+    const { userRequestHistory } =
+      this.stateManager.getExtensionContext("userRequestHistory");
+
     const axiosConfiguration = {
       url: this.#url,
       method: this.#method,
@@ -89,7 +100,30 @@ class WebViewPanel {
 
     const responseObject = await generateResponseObject(axiosConfiguration);
 
+    if (responseObject.type !== "Error") {
+      if (!userRequestHistory) {
+        await this.stateManager.updateExtensionContext("userRequestHistory", {
+          history: [axiosConfiguration],
+        });
+      } else {
+        if (userRequestHistory.length > 21) {
+          const slicedHistoryArray = userRequestHistory.slice(0, 20);
+
+          await this.stateManager.updateExtensionContext("userRequestHistory", {
+            history: [axiosConfiguration, ...slicedHistoryArray],
+          });
+        } else {
+          await this.stateManager.updateExtensionContext("userRequestHistory", {
+            history: [axiosConfiguration, ...userRequestHistory],
+          });
+        }
+      }
+    }
+
     this.#mainPanel.webview.postMessage(responseObject);
+    this.sidebarWebViewPanel.postMainWebViewPanelMessage(
+      this.stateManager.getExtensionContext("userRequestHistory"),
+    );
 
     return;
   }
@@ -133,11 +167,10 @@ class WebViewPanel {
         </head>
         <body>
           <div id="root"></div>
-          <script nonce="${nonce}"></script>
-          <script src="${scriptSrc}"></script>
+          <script src="${scriptSrc}" nonce="${nonce}"></script>
         </body>
       </html>`;
   }
 }
 
-export default WebViewPanel;
+export default MainWebViewPanel;
