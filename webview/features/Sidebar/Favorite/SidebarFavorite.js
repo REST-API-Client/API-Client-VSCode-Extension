@@ -1,7 +1,4 @@
-import React, { useLayoutEffect } from "react";
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
-import { FaTrashAlt } from "react-icons/fa";
-import styled from "styled-components";
+import React from "react";
 
 import EmptyFavoritesMessage from "../Empty/EmptyFavoritesMessage";
 
