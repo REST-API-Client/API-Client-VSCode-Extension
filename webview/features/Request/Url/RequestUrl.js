@@ -5,10 +5,7 @@ import shallow from "zustand/shallow";
 import { PARAMS } from "../../../constants/request";
 import useKeyValueTableStore from "../../../store/useKeyValueTableStore";
 import useRequestStore from "../../../store/useRequestStore";
-import {
-  generateParameterString,
-  removeUrlParameter,
-} from "../../../utils/utils";
+import { generateParameterString, removeUrlParameter } from "../../../utils";
 
 const RequestUrl = () => {
   const { requestOption, requestUrl, handleRequestUrlChange } = useRequestStore(
