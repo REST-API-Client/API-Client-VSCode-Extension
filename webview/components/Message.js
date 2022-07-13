@@ -27,6 +27,7 @@ const MessageWrapper = styled.div`
     margin: 1rem 0;
     opacity: 0.65;
     line-height: 1.1;
+    text-align: center;
   }
 
   img {
@@ -39,6 +40,12 @@ const MessageWrapper = styled.div`
     margin: 1.3rem 0;
     opacity: 0.8;
     color: var(--vscode-foreground);
+  }
+
+  .sidebarEmptyIcon {
+    margin-bottom: 1.3rem;
+    font-size: 2rem;
+    opacity: 0.65;
   }
 `;
 
