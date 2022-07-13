@@ -11,6 +11,7 @@ const RequestAuthSelectMenu = () => {
   const { authOption, handleRequestAuthType } = useRequestStore(
     (state) => ({
       authOption: state.authOption,
+      authData: state.authData,
       handleRequestAuthType: state.handleRequestAuthType,
     }),
     shallow,
