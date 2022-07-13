@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useLayoutEffect } from "react";
 import styled from "styled-components";
 import shallow from "zustand/shallow";
 
@@ -9,13 +9,31 @@ import useSidebarStore from "../../../store/useSidebarStore";
 import SidebarMenuOption from "./SidebarMenuOption";
 
 const SidebarMenu = () => {
-  const { sidebarOption, handleSidebarOption } = useSidebarStore(
+  const {
+    sidebarOption,
+    handleSidebarOption,
+    handleUserFavorites,
+    handleUserHistory,
+  } = useSidebarStore(
     (state) => ({
       sidebarOption: state.sidebarOption,
       handleSidebarOption: state.handleSidebarOption,
+      handleUserHistory: state.handleUserHistory,
+      handleUserFavorites: state.handleUserFavorites,
     }),
     shallow,
   );
+
+  useLayoutEffect(() => {
+    window.addEventListener("message", (message) => {
+      const { messageType, history, favorites } = message.data;
+
+      if (messageType === "History") {
+        handleUserHistory(history?.userRequestHistory);
+        handleUserFavorites(favorites?.userRequestHistory);
+      }
+    });
+  }, []);
 
   return (
     <>
