@@ -2,6 +2,7 @@ import React from "react";
 import shallow from "zustand/shallow";
 
 import { FORM_DATA, FORM_URLENCODED, RAW } from "../../../constants/request";
+import CodeEditor from "../../../shared/CodeEditor";
 import KeyValueTable from "../../../shared/KeyValueTable";
 import useKeyValueTableStore from "../../../store/useKeyValueTableStore";
 import useRequestStore from "../../../store/useRequestStore";
@@ -9,10 +10,16 @@ import RequestNoBody from "./RequestNoBody";
 
 const RequestBodySelectMenuOption = () => {
   const keyValueProps = useKeyValueTableStore();
-  const { bodyOption } = useRequestStore(
+  const { bodyOption, codeEditorProps } = useRequestStore(
     (state) => ({
       bodyOption: state.bodyOption,
-      bodyRawData: state.bodyRawData,
+      codeEditorProps: {
+        bodyRawOption: state.bodyRawOption.toLowerCase(),
+        bodyRawData: state.bodyRawData,
+        handleBodyRawOptionData: state.handleBodyRawOptionData,
+        shouldBeautifyEditor: state.shouldBeautifyEditor,
+        handleBeautifyButton: state.handleBeautifyButton,
+      },
     }),
     shallow,
   );
@@ -28,7 +35,7 @@ const RequestBodySelectMenuOption = () => {
         />
       );
     case RAW:
-      return <h1>Raw</h1>;
+      return <CodeEditor {...codeEditorProps} requestForm />;
 
     default:
       return <RequestNoBody />;

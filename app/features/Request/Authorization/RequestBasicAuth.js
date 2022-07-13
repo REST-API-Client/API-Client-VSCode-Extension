@@ -1,52 +1,61 @@
-import React, { useState } from "react";
+import React from "react";
 import shallow from "zustand/shallow";
 
 import InputWrapper from "../../../components/InputWrapper";
 import Wrapper from "../../../components/Wrapper";
+import { PASSWORD, USERNAME } from "../../../constants/request";
 import useRequestStore from "../../../store/useRequestStore";
 
 const RequestBasicAuth = () => {
-  const [shouldShowPassword, setShouldShowPassword] = useState(false);
-  const { authData, handleRequestUsernameData, handleRequestPasswordData } =
-    useRequestStore(
-      (state) => ({
-        authData: state.authData,
-        handleRequestUsernameData: state.handleRequestUsernameData,
-        handleRequestPasswordData: state.handleRequestPasswordData,
-      }),
-      shallow,
-    );
-
-  const handlePasswordDisplayOption = () => {
-    setShouldShowPassword((state) => !state);
-  };
+  const {
+    authData,
+    handleRequestAuthData,
+    shouldShowPassword,
+    handleShouldShowPassword,
+  } = useRequestStore(
+    (state) => ({
+      authData: state.authData,
+      handleRequestAuthData: state.handleRequestAuthData,
+      shouldShowPassword: state.shouldShowPassword,
+      handleShouldShowPassword: state.handleShouldShowPassword,
+    }),
+    shallow,
+  );
 
   return (
     <Wrapper>
       <InputWrapper>
-        <label htmlFor="username">Username</label>
+        <label htmlFor="username">Username:</label>
         <input
           type="text"
-          placeholder="username"
           name="username"
+          placeholder="username"
           className="authInputBox"
           value={authData.username}
-          onChange={(event) => handleRequestUsernameData(event.target.value)}
+          onChange={(event) =>
+            handleRequestAuthData(USERNAME, event.target.value)
+          }
         />
       </InputWrapper>
       <InputWrapper>
-        <label htmlFor="password">Password</label>
+        <label htmlFor="password">Password:</label>
         <input
           type={shouldShowPassword ? "text" : "password"}
-          placeholder="password"
           name="password"
+          placeholder="password"
           className="authInputBox"
           value={authData.password}
-          onChange={(event) => handleRequestPasswordData(event.target.value)}
+          onChange={(event) =>
+            handleRequestAuthData(PASSWORD, event.target.value)
+          }
         />
       </InputWrapper>
       <InputWrapper>
-        <input type="checkbox" onChange={handlePasswordDisplayOption} />
+        <input
+          type="checkbox"
+          checked={shouldShowPassword}
+          onChange={handleShouldShowPassword}
+        />
         <label>Show Password</label>
       </InputWrapper>
     </Wrapper>

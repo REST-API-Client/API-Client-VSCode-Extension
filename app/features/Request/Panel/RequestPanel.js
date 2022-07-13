@@ -29,6 +29,7 @@ const RequestPanel = () => {
       authOption: state.authOption,
       authData: state.authData,
       bodyOption: state.bodyOption,
+      bodyRawOption: state.bodyRawOption,
       bodyRawData: state.bodyRawData,
     }),
     shallow,

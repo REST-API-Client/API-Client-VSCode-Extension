@@ -3,20 +3,29 @@ import styled from "styled-components";
 import shallow from "zustand/shallow";
 
 import SelectWrapper from "../../../components/SelectWrapper";
-import { NONE, REQUEST_BODY_OPTIONS } from "../../../constants/request";
+import {
+  NONE,
+  RAW,
+  REQUEST_BODY_OPTIONS,
+  REQUEST_BODY_RAW_OPTIONS,
+} from "../../../constants/request";
 import { BODY } from "../../../constants/shared";
 import useKeyValueTableStore from "../../../store/useKeyValueTableStore";
 import useRequestStore from "../../../store/useRequestStore";
-import RequestBodySelectMenuOption from "./RequestBodySelectMenuOption";
+import RequestBodyFormatButton from "../Button/RequestBodyFormatButton";
+import RequestBodyRawOptions from "./RequestBodyRawOptions";
+import RequestBodyMenuOption from "./RequestBodySelectMenuOption";
 
 const RequestBodySelectMenu = () => {
-  const { bodyOption, handleRequestBodyOption } = useRequestStore(
-    (state) => ({
-      bodyOption: state.bodyOption,
-      handleRequestBodyOption: state.handleRequestBodyOption,
-    }),
-    shallow,
-  );
+  const { bodyOption, bodyRawOption, handleRequestBodyOption } =
+    useRequestStore(
+      (state) => ({
+        bodyOption: state.bodyOption,
+        bodyRawOption: state.bodyRawOption,
+        handleRequestBodyOption: state.handleRequestBodyOption,
+      }),
+      shallow,
+    );
 
   const { addRequestBodyHeaders, removeRequestBodyHeaders } =
     useKeyValueTableStore(
@@ -26,6 +35,10 @@ const RequestBodySelectMenu = () => {
       }),
       shallow,
     );
+
+  const rawOptionHeaderField = REQUEST_BODY_RAW_OPTIONS.filter(
+    (rawOption) => rawOption.option === bodyRawOption,
+  );
 
   const handleBodyOptionChoice = (event) => {
     handleRequestBodyOption(event.target.value);
@@ -48,14 +61,24 @@ const RequestBodySelectMenu = () => {
               name="bodyOption"
               checked={bodyOption === option}
               value={option}
-              header-type={headerField}
+              header-type={
+                option === RAW
+                  ? rawOptionHeaderField[0].headerField
+                  : headerField
+              }
               onChange={handleBodyOptionChoice}
             />
             <label htmlFor={option}>{option}</label>
           </RadioInputWrapper>
         ))}
+        {bodyOption === RAW && (
+          <>
+            <RequestBodyRawOptions />
+            <RequestBodyFormatButton />
+          </>
+        )}
       </SelectWrapper>
-      <RequestBodySelectMenuOption />
+      <RequestBodyMenuOption />
     </>
   );
 };

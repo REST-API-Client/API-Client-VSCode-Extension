@@ -16,7 +16,7 @@ const Button = ({ children, buttonType, primary, handleButtonClick }) => {
 
 const ButtonWrapper = styled.button`
   width: ${(props) => (props.primary ? "8rem" : "12rem")};
-  margin-left: ${(props) => (props.primary ? "1rem" : "auto")};
+  margin-left: ${(props) => (props.primary ? "1rem" : "2.7rem")};
   font-size: 1.2rem;
   font-weight: 500;
   background-color: ${(props) =>

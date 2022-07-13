@@ -16,7 +16,6 @@ const KeyValueTable = ({
   deleteTableRow,
   readOnly,
 }) => {
-  console.log(keyValueTableData);
   return (
     <TableContainerWrapper>
       <TableContainer readOnlyMode={readOnly}>
