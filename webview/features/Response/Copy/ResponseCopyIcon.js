@@ -9,7 +9,7 @@ const ResponseCopyIcon = () => {
   const { data } = useResponseDataStore((state) => state.responseData);
 
   const handleCopyIconClick = () => {
-    vscode.postMessage({ purpose: "Alert Copy" });
+    vscode.postMessage({ command: "Alert Copy" });
 
     navigator.clipboard.writeText(data);
   };

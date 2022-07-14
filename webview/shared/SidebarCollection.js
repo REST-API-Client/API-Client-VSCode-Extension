@@ -6,6 +6,8 @@ import styled from "styled-components";
 
 import Information from "../components/Information";
 import MoreInformation from "../components/MoreInformation";
+import { HISTORY, USER_FAVORITES_COLLECTION } from "../constants/sidebar";
+import { ADD_TO_FAVORITES, REMOVE_FROM_FAVORITES } from "../constants/sidebar";
 import EmptyCollectionMessage from "../features/Sidebar/Empty/EmptyCollectionMessage";
 import { generateMethodColor } from "../utils";
 
@@ -13,11 +15,15 @@ const SidebarCollection = ({
   sidebarOption,
   userCollection,
   handleSidebarIconClick,
+  handleDeleteAllButton,
 }) => {
   return (
     <CollectionWrapper>
       {userCollection?.length ? (
-        <div className="deleteAllButtonContainer">
+        <div
+          className="deleteAllButtonContainer"
+          onClick={handleDeleteAllButton}
+        >
           <h5>Delete all</h5>
         </div>
       ) : null}
@@ -40,31 +46,37 @@ const SidebarCollection = ({
                   <p>1 hour ago</p>
                 </div>
                 <div>
-                  {sidebarOption === "History" ? (
+                  {sidebarOption === HISTORY ? (
                     isUserFavorite ? (
                       <AiFillHeart
                         className="sidebarIcon favorite"
                         onClick={() =>
-                          handleSidebarIconClick("Remove Favorite", id)
+                          handleSidebarIconClick(REMOVE_FROM_FAVORITES, id)
                         }
                       />
                     ) : (
                       <AiOutlineHeart
                         className="sidebarIcon"
-                        onClick={() => handleSidebarIconClick("Favorite", id)}
+                        onClick={() =>
+                          handleSidebarIconClick(ADD_TO_FAVORITES, id)
+                        }
                       />
                     )
                   ) : null}
                   <FaTrashAlt
                     className="sidebarIcon"
                     onClick={() =>
-                      sidebarOption === "History"
+                      sidebarOption === HISTORY
                         ? handleSidebarIconClick(
                             "Delete",
                             id,
                             "userRequestHistory",
                           )
-                        : handleSidebarIconClick("Delete", id, "userFavorites")
+                        : handleSidebarIconClick(
+                            "Delete",
+                            id,
+                            USER_FAVORITES_COLLECTION,
+                          )
                     }
                   />
                 </div>
@@ -94,7 +106,7 @@ const CollectionWrapper = styled.div`
     padding: 0.25rem 0.4rem;
     color: #cbcbcb;
     border-radius: 10px;
-    background: #464646;
+    background: #853333;
     transition: opacity 0.15s ease-in-out;
     cursor: pointer;
 
@@ -117,6 +129,7 @@ SidebarCollection.propTypes = {
   sidebarOption: PropTypes.string,
   userCollection: PropTypes.array,
   handleSidebarIconClick: PropTypes.func,
+  handleDeleteAllButton: PropTypes.func,
 };
 
 export default SidebarCollection;

@@ -38,7 +38,9 @@ const RequestPanel = () => {
   const handleFormSubmit = (event) => {
     event.preventDefault();
 
-    handleRequestProcessStatus(LOADING);
+    if (requestData.requestUrl.length !== 0) {
+      handleRequestProcessStatus(LOADING);
+    }
 
     vscode.postMessage({
       ...requestData,

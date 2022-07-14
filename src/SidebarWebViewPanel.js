@@ -1,5 +1,6 @@
 import vscode from "vscode";
 
+import { CATEGORY, COLLECTION, COMMAND, MESSAGE } from "./constants";
 import { getNonce } from "./utils";
 
 class SidebarWebViewPanel {
@@ -27,56 +28,72 @@ class SidebarWebViewPanel {
     );
 
     this.#view.webview.postMessage({
-      messageType: "History",
-      history: this.stateManager.getExtensionContext("userRequestHistory"),
-      favorites: this.stateManager.getExtensionContext("userFavorites"),
+      messageCategory: CATEGORY.COLLECTION_DATA,
+      history: this.stateManager.getExtensionContext(
+        COLLECTION.HISTORY_COLLECTION,
+      ),
+      favorites: this.stateManager.getExtensionContext(
+        COLLECTION.FAVORITES_COLLECTION,
+      ),
     });
 
     this.#receiveSidebarWebViewMessage();
-
-    return;
   }
 
   postMainWebViewPanelMessage(userHistoryData, userFavoritesData) {
     this.#view.webview.postMessage({
-      messageType: "History",
+      messageCategory: CATEGORY.COLLECTION_DATA,
       history: userHistoryData,
       favorites: userFavoritesData,
     });
-
-    return;
   }
 
   #receiveSidebarWebViewMessage() {
-    this.#view.webview.onDidReceiveMessage(async ({ purpose, id, target }) => {
-      if (purpose === "Start App") {
-        vscode.commands.executeCommand("rest-api-tester.newRequest");
-      } else if (purpose === "Favorite") {
+    this.#view.webview.onDidReceiveMessage(async ({ command, id, target }) => {
+      if (command === COMMAND.START_APP) {
+        vscode.commands.executeCommand(COMMAND.MAIN_WEB_VIEW_PANEL);
+      } else if (command === COMMAND.ADD_TO_FAVORITES) {
         await this.stateManager.updateExtensionContext(
-          "userRequestHistory",
+          COLLECTION.HISTORY_COLLECTION,
           id,
-          "add",
+          COMMAND.ADD,
         );
-      } else if (purpose === "Remove Favorite") {
+      } else if (command === COMMAND.REMOVE_FROM_FAVORITES) {
         await this.stateManager.updateExtensionContext(
-          "userRequestHistory",
+          COLLECTION.HISTORY_COLLECTION,
           id,
         );
 
-        await this.stateManager.deleteExtensionContext("userFavorites", id);
-      } else if (purpose === "Delete") {
-        if (target === "userFavorites") {
+        await this.stateManager.deleteExtensionContext(
+          COLLECTION.FAVORITES_COLLECTION,
+          id,
+        );
+      } else if (command === COMMAND.DELETE) {
+        if (target === COLLECTION.FAVORITES_COLLECTION) {
           await this.stateManager.updateExtensionContext(
-            "userRequestHistory",
+            COLLECTION.HISTORY_COLLECTION,
             id,
           );
         }
 
         await this.stateManager.deleteExtensionContext(target, id);
+      } else if (command === COMMAND.DELETE_ALL_COLLECTION) {
+        const answer = await vscode.window.showWarningMessage(
+          MESSAGE.DELETE_REMINDER,
+          MESSAGE.YES,
+          MESSAGE.NO,
+        );
+
+        if (answer === MESSAGE.YES) {
+          await this.stateManager.deleteExtensionContext(target);
+
+          this.#view.webview.postMessage({
+            messageCategory: CATEGORY.DELETION_COMPLETE,
+            target,
+          });
+        }
       }
     });
-
-    return;
   }
 
   #getHtmlForSidebarWebView(webview) {

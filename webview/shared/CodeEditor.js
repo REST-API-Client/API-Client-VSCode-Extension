@@ -71,17 +71,19 @@ const CodeEditor = ({
 
     if (responseBodyOption !== RAW) {
       setTimeout(async () => {
-        editorRef.current.updateOptions(READ_ONLY_FALSE_OPTION);
+        editorRef.current?.updateOptions(READ_ONLY_FALSE_OPTION);
 
-        await editorRef.current.getAction("editor.action.formatDocument").run();
+        await editorRef.current
+          ?.getAction("editor.action.formatDocument")
+          .run();
 
-        editorRef.current.updateOptions(READ_ONLY_TRUE_OPTION);
+        editorRef.current?.updateOptions(READ_ONLY_TRUE_OPTION);
       }, 300);
 
       setEditorLanguage(responseBodyViewFormat.toLowerCase());
     } else {
       setTimeout(() => {
-        editorRef.current.updateOptions(LINE_NUMBER_OPTION);
+        editorRef.current?.updateOptions(LINE_NUMBER_OPTION);
       }, 300);
 
       setEditorLanguage(TEXT);

@@ -1,3 +1,6 @@
+import { COLLECTION } from "./constants";
+import { filterDuplicatesFromObject } from "./utils";
+
 class ExtentionStateManager {
   #context;
 
@@ -13,8 +16,6 @@ class ExtentionStateManager {
 
   async addExtensionContext(state, { history }) {
     await this.#context.globalState.update(state, history);
-
-    return;
   }
 
   async updateExtensionContext(state, id, status) {
@@ -31,45 +32,31 @@ class ExtentionStateManager {
     ]);
 
     if (status) {
-      const arr = [];
-      const userFavoritesCollection = this.#context.globalState
-        .get(state)
-        .filter((history) => history.isUserFavorite);
-
-      const prevUserFavoriteCollection =
-        this.#context.globalState
-          .get("userFavorites")
-          ?.filter((history) => history.id !== id) || [];
-
-      const totalUserFavoriteCollection = [
-        ...prevUserFavoriteCollection,
-        ...userFavoritesCollection,
-      ];
-
       const duplicateFilteredUserFavoriteCollection =
-        totalUserFavoriteCollection.filter((history) => {
-          if (!arr.includes(history.id)) {
-            arr.push(history.id);
-            return history;
-          }
-        });
+        filterDuplicatesFromObject(
+          this.#context.globalState.get(state),
+          this.#context.globalState.get(COLLECTION.FAVORITES_COLLECTION),
+          id,
+        );
 
-      await this.#context.globalState.update("userFavorites", [
+      await this.#context.globalState.update(COLLECTION.FAVORITES_COLLECTION, [
         ...duplicateFilteredUserFavoriteCollection,
       ]);
     }
-
-    return;
   }
 
   async deleteExtensionContext(targetExtensionContext, id) {
-    const filteredExtenionContext = this.#context.globalState
-      .get(targetExtensionContext)
-      .filter((history) => history.id !== id);
+    if (!id) {
+      await this.#context.globalState.update(targetExtensionContext, []);
+    } else {
+      const filteredExtenionContext = this.#context.globalState
+        .get(targetExtensionContext)
+        .filter((history) => history.id !== id);
 
-    await this.#context.globalState.update(targetExtensionContext, [
-      ...filteredExtenionContext,
-    ]);
+      await this.#context.globalState.update(targetExtensionContext, [
+        ...filteredExtenionContext,
+      ]);
+    }
   }
 }
 

@@ -1,14 +1,10 @@
-import {
-  AUTHORIZATION,
-  BASIC_AUTH,
-  BEARER_TOKEN,
-} from "../constants/authTypes";
+import { TYPE } from "../constants";
 
 function getHeaders(keyValueData, authOption, { username, password, token }) {
   const headersObject = {};
 
   const headersData = keyValueData.filter(
-    (data) => data.optionType === "Headers" && data.isChecked,
+    (data) => data.optionType === TYPE.HEADERS && data.isChecked,
   );
 
   if (!headersData.length) return;
@@ -17,14 +13,14 @@ function getHeaders(keyValueData, authOption, { username, password, token }) {
     headersObject[key] = value;
   }
 
-  if (authOption === BASIC_AUTH) {
-    headersObject[AUTHORIZATION] = `Basic ${new Buffer.from(
+  if (authOption === TYPE.BASIC_AUTH) {
+    headersObject[TYPE.AUTHORIZATION] = `Basic ${new Buffer.from(
       username + ":" + password,
     ).toString("base64")}`;
   }
 
-  if (authOption === BEARER_TOKEN) {
-    headersObject[AUTHORIZATION] = `Bearer ${token}`;
+  if (authOption === TYPE.BEARER_TOKEN) {
+    headersObject[TYPE.AUTHORIZATION] = `Bearer ${token}`;
   }
 
   return headersObject;

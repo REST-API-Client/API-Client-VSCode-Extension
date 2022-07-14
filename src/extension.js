@@ -1,5 +1,6 @@
 import vscode from "vscode";
 
+import { COLLECTION, COMMAND, MESSAGE } from "./constants";
 import ExtentionStateManager from "./ExtensionStateManger";
 import MainWebViewPanel from "./MainWebViewPanel";
 import SidebarWebViewPanel from "./SideBarWebViewPanel";
@@ -16,22 +17,24 @@ export async function activate(context) {
     SidebarWebViewProvider,
   );
 
-  if (!stateManager.getExtensionContext("userRequestHistory")) {
-    await stateManager.addExtensionContext("userRequestHistory", {
+  if (!stateManager.getExtensionContext(COLLECTION.HISTORY_COLLECTION)) {
+    await stateManager.addExtensionContext(COLLECTION.HISTORY_COLLECTION, {
       history: [],
     });
   }
 
+  vscode.window.showInformationMessage(MESSAGE.WELCOME_MESSAGE);
+
   context.subscriptions.push(
     vscode.window.registerWebviewViewProvider(
-      "rest-api-tester.historyMenu",
+      COMMAND.SIDEBAR_WEB_VIEW_PANEL,
       SidebarWebViewProvider,
       { webviewOptions: { retainContextWhenHidden: true } },
     ),
   );
 
   context.subscriptions.push(
-    vscode.commands.registerCommand("rest-api-tester.newRequest", () => {
+    vscode.commands.registerCommand(COMMAND.MAIN_WEB_VIEW_PANEL, () => {
       MainWebViewProvider.initializeWebView();
     }),
   );

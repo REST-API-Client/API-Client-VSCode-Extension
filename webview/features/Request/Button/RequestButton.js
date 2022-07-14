@@ -1,10 +1,15 @@
 import React from "react";
 
 import Button from "../../../components/Button";
+import useResponseDataStore from "../../../store/useResponseDataStore";
 
 const RequestButton = () => {
+  const requestInProcess = useResponseDataStore(
+    (state) => state.requestInProcess,
+  );
+
   return (
-    <Button primary buttonType="submit">
+    <Button primary buttonType="submit" buttonStatus={requestInProcess}>
       Send
     </Button>
   );

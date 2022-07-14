@@ -1,8 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 import vscode from "vscode";
 
-import { WARNING_MESSAGE, WELCOME_MESSAGE } from "./constants/message";
-import { MAIN_PANEL_NAME } from "./constants/name";
+import { COLLECTION, COMMAND, MESSAGE, NAME, TYPE } from "./constants";
 import {
   generateResponseObject,
   getBody,
@@ -26,11 +25,9 @@ class MainWebViewPanel {
   }
 
   initializeWebView() {
-    vscode.window.showInformationMessage(WELCOME_MESSAGE);
-
     this.#mainPanel = vscode.window.createWebviewPanel(
-      "RestApiTester",
-      MAIN_PANEL_NAME,
+      TYPE.WEB_VIEW_TYPE,
+      NAME.MAIN_PANEL_NAME,
       vscode.ViewColumn.One,
       {
         enableScripts: true,
@@ -57,16 +54,16 @@ class MainWebViewPanel {
         bodyRawOption,
         bodyRawData,
         keyValueData,
-        purpose,
+        command,
       }) => {
-        if (purpose === "Alert Copy") {
-          vscode.window.showInformationMessage("Copied to Clipboard ✅");
+        if (command === COMMAND.ALERT_COPY) {
+          vscode.window.showInformationMessage(MESSAGE.COPY_SUCCESFUL);
 
           return;
         }
 
         if (requestUrl.length === 0) {
-          vscode.window.showWarningMessage(WARNING_MESSAGE);
+          vscode.window.showWarningMessage(MESSAGE.WARNING_MESSAGE);
 
           return;
         }
@@ -82,15 +79,14 @@ class MainWebViewPanel {
         );
 
         this.#postWebviewMessage();
-
-        return;
       },
     );
   }
 
   async #postWebviewMessage() {
-    const { userRequestHistory } =
-      this.stateManager.getExtensionContext("userRequestHistory");
+    const { userRequestHistory } = this.stateManager.getExtensionContext(
+      COLLECTION.HISTORY_COLLECTION,
+    );
 
     const axiosConfiguration = {
       url: this.#url,
@@ -102,40 +98,44 @@ class MainWebViewPanel {
     const responseObject = await generateResponseObject(axiosConfiguration);
     const requestedTime = new Date().getTime();
 
-    if (responseObject.type !== "Error") {
+    if (responseObject.type !== MESSAGE.ERROR) {
       if (!userRequestHistory) {
-        await this.stateManager.addExtensionContext("userRequestHistory", {
-          history: [
-            {
-              ...axiosConfiguration,
-              requestedTime,
-              isUserFavorite: false,
-              id: uuidv4(),
-            },
-          ],
-        });
+        await this.stateManager.addExtensionContext(
+          COLLECTION.HISTORY_COLLECTION,
+          {
+            history: [
+              {
+                ...axiosConfiguration,
+                requestedTime,
+                isUserFavorite: false,
+                id: uuidv4(),
+              },
+            ],
+          },
+        );
       } else {
-        await this.stateManager.addExtensionContext("userRequestHistory", {
-          history: [
-            {
-              ...axiosConfiguration,
-              requestedTime,
-              isUserFavorite: false,
-              id: uuidv4(),
-            },
-            ...userRequestHistory,
-          ],
-        });
+        await this.stateManager.addExtensionContext(
+          COLLECTION.HISTORY_COLLECTION,
+          {
+            history: [
+              {
+                ...axiosConfiguration,
+                requestedTime,
+                isUserFavorite: false,
+                id: uuidv4(),
+              },
+              ...userRequestHistory,
+            ],
+          },
+        );
       }
     }
 
     this.#mainPanel.webview.postMessage(responseObject);
     this.sidebarWebViewPanel.postMainWebViewPanelMessage(
-      this.stateManager.getExtensionContext("userRequestHistory"),
-      this.stateManager.getExtensionContext("userFavorites"),
+      this.stateManager.getExtensionContext(COLLECTION.HISTORY_COLLECTION),
+      this.stateManager.getExtensionContext(COLLECTION.FAVORITES_COLLECTION),
     );
-
-    return;
   }
 
   #getHtmlForWebView(panel) {

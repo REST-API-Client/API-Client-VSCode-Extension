@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
+import { START_APP } from "../../../constants/sidebar";
 import vscode from "../../../vscode";
 
 const SidebarGuideMenu = () => {
   const handleButtonClick = () => {
-    vscode.postMessage({ purpose: "Start App" });
+    vscode.postMessage({ command: START_APP });
   };
 
   return (
