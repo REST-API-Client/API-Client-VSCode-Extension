@@ -1,11 +1,12 @@
 import vscode from "vscode";
 
 import { CATEGORY, COLLECTION, COMMAND, MESSAGE } from "./constants";
-import { getNonce } from "./utils";
+import { filterObjectKey, generateResponseObject, getNonce } from "./utils";
 
 class SidebarWebViewPanel {
   #extensionUri;
   #view;
+  mainWebViewPanel;
 
   constructor(extensionUri, stateManager) {
     this.#extensionUri = extensionUri;
@@ -51,7 +52,13 @@ class SidebarWebViewPanel {
   #receiveSidebarWebViewMessage() {
     this.#view.webview.onDidReceiveMessage(async ({ command, id, target }) => {
       if (command === COMMAND.START_APP) {
-        vscode.commands.executeCommand(COMMAND.MAIN_WEB_VIEW_PANEL);
+        const columnToShowIn = vscode.window.activeTextEditor
+          ? vscode.window.activeTextEditor.viewColumn
+          : undefined;
+
+        return this.mainWebViewPanel
+          ? this.mainWebViewPanel.reveal(columnToShowIn)
+          : vscode.commands.executeCommand(COMMAND.MAIN_WEB_VIEW_PANEL);
       } else if (command === COMMAND.ADD_TO_FAVORITES) {
         await this.stateManager.updateExtensionContext(
           COLLECTION.HISTORY_COLLECTION,
@@ -92,6 +99,28 @@ class SidebarWebViewPanel {
             target,
           });
         }
+      } else {
+        if (!this.mainWebViewPanel) {
+          vscode.commands.executeCommand(COMMAND.MAIN_WEB_VIEW_PANEL);
+        }
+
+        setTimeout(async () => {
+          this.mainWebViewPanel.webview.postMessage({
+            type: COLLECTION.COLLECTION_REQUEST,
+          });
+
+          const selectedCollection = filterObjectKey(
+            this.stateManager.getExtensionContext(target),
+            id,
+            COLLECTION.FILTERABLE_OBJECT_KEY,
+          );
+
+          const responseObject = await generateResponseObject(
+            selectedCollection,
+          );
+
+          this.mainWebViewPanel.webview.postMessage(responseObject);
+        }, 700);
       }
     });
   }
