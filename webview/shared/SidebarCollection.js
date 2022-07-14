@@ -13,8 +13,10 @@ import { calculateCollectionTime, generateMethodColor } from "../utils";
 const SidebarCollection = ({
   sidebarOption,
   userCollection,
-  handleSidebarIconClick,
+  handleUrlClick,
+  handleDeleteButton,
   handleDeleteAllButton,
+  handleSidebarFavoriteIcon,
 }) => {
   return (
     <CollectionWrapper>
@@ -48,7 +50,7 @@ const SidebarCollection = ({
                     <h4>{method}</h4>
                   </div>
                   <div>
-                    <p>{url}</p>
+                    <p onClick={() => handleUrlClick(id)}>{url}</p>
                   </div>
                 </Information>
                 <MoreInformation>
@@ -65,7 +67,7 @@ const SidebarCollection = ({
                         <AiFillHeart
                           className="sidebarIcon favorite"
                           onClick={() =>
-                            handleSidebarIconClick(
+                            handleSidebarFavoriteIcon(
                               SIDEBAR.REMOVE_FROM_FAVORITES,
                               id,
                             )
@@ -75,26 +77,17 @@ const SidebarCollection = ({
                         <AiOutlineHeart
                           className="sidebarIcon"
                           onClick={() =>
-                            handleSidebarIconClick(SIDEBAR.ADD_TO_FAVORITES, id)
+                            handleSidebarFavoriteIcon(
+                              SIDEBAR.ADD_TO_FAVORITES,
+                              id,
+                            )
                           }
                         />
                       )
                     ) : null}
                     <FaTrashAlt
                       className="sidebarIcon"
-                      onClick={() =>
-                        sidebarOption === SIDEBAR.HISTORY
-                          ? handleSidebarIconClick(
-                              "Delete",
-                              id,
-                              "userRequestHistory",
-                            )
-                          : handleSidebarIconClick(
-                              "Delete",
-                              id,
-                              SIDEBAR.USER_FAVORITES_COLLECTION,
-                            )
-                      }
+                      onClick={() => handleDeleteButton(id)}
                     />
                   </div>
                 </MoreInformation>
@@ -144,10 +137,12 @@ const HistoryListWrapper = styled.div`
 `;
 
 SidebarCollection.propTypes = {
+  handleUrlClick: PropTypes.func,
   sidebarOption: PropTypes.string,
   userCollection: PropTypes.array,
-  handleSidebarIconClick: PropTypes.func,
+  handleDeleteButton: PropTypes.func,
   handleDeleteAllButton: PropTypes.func,
+  handleSidebarFavoriteIcon: PropTypes.func,
 };
 
 export default SidebarCollection;
