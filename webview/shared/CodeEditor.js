@@ -9,13 +9,13 @@ import ResponsePreview from "../features/Response/Preview/ResponseDataPreview";
 import useResponseOptionStore from "../store/useResponseOptionStore";
 
 const CodeEditor = ({
-  bodyRawOption,
   bodyRawData,
-  handleBodyRawOptionData,
+  requestForm,
+  bodyRawOption,
+  responseValue,
   shouldBeautifyEditor,
   handleBeautifyButton,
-  responseValue,
-  requestForm,
+  handleBodyRawOptionData,
 }) => {
   const editorRef = useRef(null);
   const { responseOption, responseBodyOption, responseBodyViewFormat } =
@@ -106,13 +106,13 @@ const EditorWrapper = styled.div`
 `;
 
 CodeEditor.propTypes = {
-  responseValue: PropTypes.string,
-  bodyRawOption: PropTypes.string,
+  requestForm: PropTypes.bool,
   bodyRawData: PropTypes.object,
-  handleBodyRawOptionData: PropTypes.func,
+  bodyRawOption: PropTypes.string,
+  responseValue: PropTypes.string,
   shouldBeautifyEditor: PropTypes.bool,
   handleBeautifyButton: PropTypes.func,
-  requestForm: PropTypes.bool,
+  handleBodyRawOptionData: PropTypes.func,
 };
 
 export default CodeEditor;

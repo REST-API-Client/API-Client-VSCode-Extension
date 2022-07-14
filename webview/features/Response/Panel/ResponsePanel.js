@@ -32,6 +32,8 @@ const ResponsePanel = () => {
     } else if (event.data.type === RESPONSE.ERROR) {
       handleResponseData(event.data);
       handleRequestProcessStatus(RESPONSE.ERROR);
+    } else if (event.data.type === RESPONSE.COLLECTION_REQUEST) {
+      handleRequestProcessStatus(COMMON.LOADING);
     }
   };
 

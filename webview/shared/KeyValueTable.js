@@ -7,14 +7,14 @@ import styled from "styled-components";
 const KeyValueTable = ({
   title,
   type,
-  keyValueTableData,
-  handleRequestCheckbox,
-  handleRequestKey,
-  handleRequestValue,
-  handleRequestDescription,
+  readOnly,
   addNewTableRow,
   deleteTableRow,
-  readOnly,
+  handleRequestKey,
+  keyValueTableData,
+  handleRequestValue,
+  handleRequestCheckbox,
+  handleRequestDescription,
 }) => {
   return (
     <TableContainerWrapper>
@@ -177,17 +177,17 @@ const Table = styled.table`
 `;
 
 KeyValueTable.propTypes = {
-  title: PropTypes.string,
   type: PropTypes.string,
-  handleAddButton: PropTypes.func,
-  keyValueTableData: PropTypes.array,
-  handleRequestCheckbox: PropTypes.func,
-  handleRequestKey: PropTypes.func,
-  handleRequestValue: PropTypes.func,
-  handleRequestDescription: PropTypes.func,
-  addNewTableRow: PropTypes.func,
-  deleteTableRow: PropTypes.func,
+  title: PropTypes.string,
   readOnly: PropTypes.bool,
+  deleteTableRow: PropTypes.func,
+  addNewTableRow: PropTypes.func,
+  handleAddButton: PropTypes.func,
+  handleRequestKey: PropTypes.func,
+  keyValueTableData: PropTypes.array,
+  handleRequestValue: PropTypes.func,
+  handleRequestCheckbox: PropTypes.func,
+  handleRequestDescription: PropTypes.func,
 };
 
 export default KeyValueTable;

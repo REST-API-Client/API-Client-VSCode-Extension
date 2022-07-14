@@ -12,7 +12,7 @@ import {
 
 class MainWebViewPanel {
   #extensionUri;
-  #mainPanel;
+  mainPanel;
   #url;
   #method;
   #headers;
@@ -25,7 +25,7 @@ class MainWebViewPanel {
   }
 
   initializeWebView() {
-    this.#mainPanel = vscode.window.createWebviewPanel(
+    this.mainPanel = vscode.window.createWebviewPanel(
       TYPE.WEB_VIEW_TYPE,
       NAME.MAIN_PANEL_NAME,
       vscode.ViewColumn.One,
@@ -39,12 +39,13 @@ class MainWebViewPanel {
       },
     );
 
-    this.#mainPanel.webview.html = this.#getHtmlForWebView(this.#mainPanel);
+    this.mainPanel.webview.html = this.#getHtmlForWebView(this.mainPanel);
+
     this.#receiveWebviewMessage();
   }
 
   #receiveWebviewMessage() {
-    this.#mainPanel.webview.onDidReceiveMessage(
+    this.mainPanel.webview.onDidReceiveMessage(
       ({
         requestMethod,
         requestUrl,
@@ -133,7 +134,7 @@ class MainWebViewPanel {
       }
     }
 
-    this.#mainPanel.webview.postMessage(responseObject);
+    this.mainPanel.webview.postMessage(responseObject);
     this.sidebarWebViewPanel.postMainWebViewPanelMessage(
       this.stateManager.getExtensionContext(COLLECTION.HISTORY_COLLECTION),
       this.stateManager.getExtensionContext(COLLECTION.FAVORITES_COLLECTION),

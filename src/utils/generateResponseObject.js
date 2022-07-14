@@ -1,5 +1,6 @@
 import axios from "axios";
 
+import { MESSAGE, TYPE } from "../constants";
 import { generateArrayObjectFromData } from "./index";
 
 async function generateResponseObject(configuration) {
@@ -18,7 +19,7 @@ async function generateResponseObject(configuration) {
     }
 
     const responseDataObject = {
-      type: "Response",
+      type: TYPE.RESPONSE,
       data: response.data,
       headers: headersArray,
       headersLength: headersSize,
@@ -41,12 +42,12 @@ async function generateResponseObject(configuration) {
       const headersArray = generateArrayObjectFromData(error.response.headers);
 
       const errorObject = {
-        type: "Response",
+        type: TYPE.RESPONSE,
         data: error.response.data,
         headers: headersArray,
         headersLength: headersSize,
         statusCode: error.response.status,
-        statusText: "Not Found",
+        statusText: MESSAGE.NOT_FOUND,
         requestTime: totalRequestTime,
       };
 
@@ -57,14 +58,14 @@ async function generateResponseObject(configuration) {
       return errorObject;
     } else if (error.request) {
       const errorObject = {
-        type: "Error",
+        type: MESSAGE.ERROR,
         message: error.message,
       };
 
       return errorObject;
     } else {
       const errorObject = {
-        type: "Error",
+        type: MESSAGE.ERROR,
         message: error.message,
       };
 
