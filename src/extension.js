@@ -1,5 +1,6 @@
 import vscode from "vscode";
 
+import { WELCOME_MESSAGE } from "./constants/message";
 import ExtentionStateManager from "./ExtensionStateManger";
 import MainWebViewPanel from "./MainWebViewPanel";
 import SidebarWebViewPanel from "./SideBarWebViewPanel";
@@ -21,6 +22,7 @@ export async function activate(context) {
       history: [],
     });
   }
+  vscode.window.showInformationMessage(WELCOME_MESSAGE);
 
   context.subscriptions.push(
     vscode.window.registerWebviewViewProvider(
