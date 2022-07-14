@@ -8,6 +8,7 @@ const RESPONSE = {
   META_DATA: "Meta Data",
   VIEW_FORMAT: "View Format",
   RESPONSE_BODY: "Response Body",
+  COLLECTION_REQUEST: "Collection Request",
 };
 
 export default RESPONSE;

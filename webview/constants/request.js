@@ -18,6 +18,7 @@ const REQUEST = {
   FORM_DATA: "Form Data",
   BASIC_AUTH: "Basic Auth",
   CONNECTION: "Connection",
+  URL_REQUEST: "Url Request",
   KEEP_ALIVE: "keep-alive",
   CONTENT_TYPE: "Content-Type",
   BEARER_TOKEN: "Bearer Token",
