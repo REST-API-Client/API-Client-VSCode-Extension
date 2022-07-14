@@ -1,4 +1,5 @@
 const SIDEBAR = {
+  DELETE: "Delete",
   HISTORY: "History",
   START_APP: "Start App",
   FAVORITES: "Favorites",
