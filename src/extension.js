@@ -36,6 +36,8 @@ export async function activate(context) {
   context.subscriptions.push(
     vscode.commands.registerCommand(COMMAND.MAIN_WEB_VIEW_PANEL, () => {
       MainWebViewProvider.initializeWebView();
+
+      SidebarWebViewProvider.mainWebViewPanel = MainWebViewProvider.mainPanel;
     }),
   );
 }
