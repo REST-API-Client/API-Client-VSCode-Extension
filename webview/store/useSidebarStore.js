@@ -13,10 +13,10 @@ const useSidebarStore = create((set) => ({
 
   handleSidebarOption: (option) => set(() => ({ sidebarOption: option })),
 
-  handleUserHistory: (historyData) =>
+  handleUserHistoryCollection: (historyData) =>
     set(() => ({ userRequestHistory: historyData })),
 
-  handleUserFavorites: (favoritesData) =>
+  handleUserFavoritesCollection: (favoritesData) =>
     set(() => ({ userFavorites: favoritesData })),
 
   handleUserFavoriteIcon: (id) =>
@@ -28,7 +28,15 @@ const useSidebarStore = create((set) => ({
       ),
     })),
 
-  addHistoryToFavorite: (collection) =>
+  handleUserDeleteIcon: (targetState, id) => {
+    set((state) => ({
+      [targetState]: state[targetState].filter(
+        (historyData) => historyData.id !== id,
+      ),
+    }));
+  },
+
+  addCollectionToFavorites: (collection) =>
     set((state) => ({
       userFavorites: [...state.userFavorites, ...collection],
     })),
@@ -41,12 +49,17 @@ const useSidebarStore = create((set) => ({
     }));
   },
 
-  handleUserDeleteIcon: (targetState, id) => {
+  resetFavoriteIconState: () =>
     set((state) => ({
-      [targetState]: state[targetState].filter(
-        (historyData) => historyData.id !== id,
+      userRequestHistory: state.userRequestHistory.map((historyData) =>
+        historyData.isUserFavorite === true
+          ? { ...historyData, isUserFavorite: false }
+          : historyData,
       ),
-    }));
+    })),
+
+  deleteCollection: (targetState) => {
+    set(() => ({ [targetState]: [] }));
   },
 }));
 

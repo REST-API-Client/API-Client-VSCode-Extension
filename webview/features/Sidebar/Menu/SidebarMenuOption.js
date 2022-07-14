@@ -1,7 +1,14 @@
 import React from "react";
 import shallow from "zustand/shallow";
 
-import { FAVORITES } from "../../../constants/sidebar";
+import {
+  ADD_TO_FAVORITES,
+  DELETE_ALL_COLLECTION,
+  FAVORITES,
+  REMOVE_FROM_FAVORITES,
+  USER_FAVORITES_COLLECTION,
+  USER_REQUEST_HISTORY_COLLECTION,
+} from "../../../constants/sidebar";
 import SidebarCollection from "../../../shared/SidebarCollection";
 import useSidebarStore from "../../../store/useSidebarStore";
 import vscode from "../../../vscode";
@@ -12,7 +19,7 @@ const SidebarMenuOption = () => {
     userRequestHistory,
     userFavorites,
     handleUserFavoriteIcon,
-    addHistoryToFavorite,
+    addCollectionToFavorites,
     removeFromFavoriteCollection,
     handleUserDeleteIcon,
   } = useSidebarStore(
@@ -20,7 +27,7 @@ const SidebarMenuOption = () => {
       sidebarOption: state.sidebarOption,
       userRequestHistory: state.userRequestHistory,
       userFavorites: state.userFavorites,
-      addHistoryToFavorite: state.addHistoryToFavorite,
+      addCollectionToFavorites: state.addCollectionToFavorites,
       removeFromFavoriteCollection: state.removeFromFavoriteCollection,
       handleUserFavoriteIcon: state.handleUserFavoriteIcon,
       handleUserDeleteIcon: state.handleUserDeleteIcon,
@@ -28,29 +35,44 @@ const SidebarMenuOption = () => {
     shallow,
   );
 
-  const handleSidebarIconClick = (purpose, id, target) => {
-    if (purpose === "Favorite") {
-      vscode.postMessage({ purpose, id });
+  const handleSidebarIconClick = (command, id, target) => {
+    if (command === ADD_TO_FAVORITES) {
+      vscode.postMessage({ command, id });
 
-      const selectedHistoryCollection = userRequestHistory.filter(
+      const selectedCollection = userRequestHistory.filter(
         (collection) => collection.id === id,
       );
 
       handleUserFavoriteIcon(id);
-      addHistoryToFavorite(selectedHistoryCollection);
-    } else if (purpose === "Remove Favorite") {
-      vscode.postMessage({ purpose, id });
+      addCollectionToFavorites(selectedCollection);
+    } else if (command === REMOVE_FROM_FAVORITES) {
+      vscode.postMessage({ command, id });
 
       handleUserFavoriteIcon(id);
       removeFromFavoriteCollection(id);
     } else {
-      vscode.postMessage({ purpose, id, target });
+      vscode.postMessage({ command, id, target });
 
-      if (target === "userFavorites") {
+      if (target === USER_FAVORITES_COLLECTION) {
         handleUserFavoriteIcon(id);
       }
 
       handleUserDeleteIcon(target, id);
+    }
+  };
+
+  const handleDeleteAllButton = () => {
+    switch (sidebarOption) {
+      case FAVORITES:
+        return vscode.postMessage({
+          command: DELETE_ALL_COLLECTION,
+          target: USER_FAVORITES_COLLECTION,
+        });
+      default:
+        return vscode.postMessage({
+          command: DELETE_ALL_COLLECTION,
+          target: USER_REQUEST_HISTORY_COLLECTION,
+        });
     }
   };
 
@@ -61,6 +83,7 @@ const SidebarMenuOption = () => {
           sidebarOption={sidebarOption}
           userCollection={userFavorites}
           handleSidebarIconClick={handleSidebarIconClick}
+          handleDeleteAllButton={handleDeleteAllButton}
         />
       );
     default:
@@ -69,6 +92,7 @@ const SidebarMenuOption = () => {
           sidebarOption={sidebarOption}
           userCollection={userRequestHistory}
           handleSidebarIconClick={handleSidebarIconClick}
+          handleDeleteAllButton={handleDeleteAllButton}
         />
       );
   }

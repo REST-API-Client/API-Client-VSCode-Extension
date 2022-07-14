@@ -4,6 +4,7 @@ import shallow from "zustand/shallow";
 
 import MenuOption from "../../../components/MenuOption";
 import SelectWrapper from "../../../components/SelectWrapper";
+import { COLLECTION_DATA, DELETE_COMPLETE } from "../../../constants/sidebar";
 import { SIDEBAR_MENU_OPTIONS } from "../../../constants/sidebar";
 import useSidebarStore from "../../../store/useSidebarStore";
 import SidebarMenuOption from "./SidebarMenuOption";
@@ -12,25 +13,32 @@ const SidebarMenu = () => {
   const {
     sidebarOption,
     handleSidebarOption,
-    handleUserFavorites,
-    handleUserHistory,
+    handleUserHistoryCollection,
+    handleUserFavoritesCollection,
+    deleteCollection,
+    resetFavoriteIconState,
   } = useSidebarStore(
     (state) => ({
       sidebarOption: state.sidebarOption,
       handleSidebarOption: state.handleSidebarOption,
-      handleUserHistory: state.handleUserHistory,
-      handleUserFavorites: state.handleUserFavorites,
+      handleUserHistoryCollection: state.handleUserHistoryCollection,
+      handleUserFavoritesCollection: state.handleUserFavoritesCollection,
+      deleteCollection: state.deleteCollection,
+      resetFavoriteIconState: state.resetFavoriteIconState,
     }),
     shallow,
   );
 
   useLayoutEffect(() => {
     window.addEventListener("message", (message) => {
-      const { messageType, history, favorites } = message.data;
+      const { messageCategory, history, favorites, target } = message.data;
 
-      if (messageType === "History") {
-        handleUserHistory(history?.userRequestHistory);
-        handleUserFavorites(favorites?.userRequestHistory);
+      if (messageCategory === COLLECTION_DATA) {
+        handleUserHistoryCollection(history?.userRequestHistory);
+        handleUserFavoritesCollection(favorites?.userRequestHistory);
+      } else if (messageCategory === DELETE_COMPLETE) {
+        deleteCollection(target);
+        resetFavoriteIconState();
       }
     });
   }, []);
