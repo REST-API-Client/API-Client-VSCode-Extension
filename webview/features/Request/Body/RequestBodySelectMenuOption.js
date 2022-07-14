@@ -1,7 +1,7 @@
 import React from "react";
 import shallow from "zustand/shallow";
 
-import { FORM_DATA, FORM_URLENCODED, RAW } from "../../../constants/request";
+import { REQUEST } from "../../../constants";
 import CodeEditor from "../../../shared/CodeEditor";
 import KeyValueTable from "../../../shared/KeyValueTable";
 import useKeyValueTableStore from "../../../store/useKeyValueTableStore";
@@ -25,8 +25,8 @@ const RequestBodySelectMenuOption = () => {
   );
 
   switch (bodyOption) {
-    case FORM_DATA:
-    case FORM_URLENCODED:
+    case REQUEST.FORM_DATA:
+    case REQUEST.FORM_URLENCODED:
       return (
         <KeyValueTable
           type={bodyOption}
@@ -34,7 +34,7 @@ const RequestBodySelectMenuOption = () => {
           {...keyValueProps}
         />
       );
-    case RAW:
+    case REQUEST.RAW:
       return <CodeEditor {...codeEditorProps} requestForm />;
 
     default:

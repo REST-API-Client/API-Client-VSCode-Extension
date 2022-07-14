@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FaGripLines } from "react-icons/fa";
 import styled from "styled-components";
 
-import { MAXIMUM_HEIGHT, MINIMUM_HEIGHT } from "../../constants/height";
+import { HEIGHT } from "../../constants";
 import useHeightStore from "../../store/useHeightStore";
 
 const ResizeBar = () => {
@@ -31,7 +31,10 @@ const ResizeBar = () => {
       const currentHeight = Number(height.replace("vh", ""));
       const newHeight = currentHeight + (event.clientY - resizeBarY) / 10;
 
-      if (newHeight > MINIMUM_HEIGHT && newHeight < MAXIMUM_HEIGHT) {
+      if (
+        newHeight > HEIGHT.MINIMUM_HEIGHT &&
+        newHeight < HEIGHT.MAXIMUM_HEIGHT
+      ) {
         setResizeBarY(newHeight);
         handleRequestHeightChange(newHeight);
       }

@@ -3,13 +3,7 @@ import styled from "styled-components";
 import shallow from "zustand/shallow";
 
 import SelectWrapper from "../../../components/SelectWrapper";
-import {
-  NONE,
-  RAW,
-  REQUEST_BODY_OPTIONS,
-  REQUEST_BODY_RAW_OPTIONS,
-} from "../../../constants/request";
-import { BODY } from "../../../constants/shared";
+import { COMMON, OPTION, REQUEST } from "../../../constants";
 import useKeyValueTableStore from "../../../store/useKeyValueTableStore";
 import useRequestStore from "../../../store/useRequestStore";
 import RequestBodyFormatButton from "../Button/RequestBodyFormatButton";
@@ -36,14 +30,14 @@ const RequestBodySelectMenu = () => {
       shallow,
     );
 
-  const rawOptionHeaderField = REQUEST_BODY_RAW_OPTIONS.filter(
+  const rawOptionHeaderField = OPTION.REQUEST_BODY_RAW_OPTIONS.filter(
     (rawOption) => rawOption.option === bodyRawOption,
   );
 
   const handleBodyOptionChoice = (event) => {
     handleRequestBodyOption(event.target.value);
 
-    if (event.target.value === NONE) {
+    if (event.target.value === REQUEST.NONE) {
       removeRequestBodyHeaders();
     } else {
       removeRequestBodyHeaders();
@@ -54,15 +48,15 @@ const RequestBodySelectMenu = () => {
   return (
     <>
       <SelectWrapper requestMenu>
-        {REQUEST_BODY_OPTIONS.map(({ option, headerField }, index) => (
-          <RadioInputWrapper key={BODY + index}>
+        {OPTION.REQUEST_BODY_OPTIONS.map(({ option, headerField }, index) => (
+          <RadioInputWrapper key={COMMON.BODY + index}>
             <input
               type="radio"
               name="bodyOption"
               checked={bodyOption === option}
               value={option}
               header-type={
-                option === RAW
+                option === REQUEST.RAW
                   ? rawOptionHeaderField[0].headerField
                   : headerField
               }
@@ -71,7 +65,7 @@ const RequestBodySelectMenu = () => {
             <label htmlFor={option}>{option}</label>
           </RadioInputWrapper>
         ))}
-        {bodyOption === RAW && (
+        {bodyOption === REQUEST.RAW && (
           <>
             <RequestBodyRawOptions />
             <RequestBodyFormatButton />

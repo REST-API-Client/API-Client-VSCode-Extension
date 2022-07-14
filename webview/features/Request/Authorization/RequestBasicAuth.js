@@ -3,7 +3,7 @@ import shallow from "zustand/shallow";
 
 import InputWrapper from "../../../components/InputWrapper";
 import Wrapper from "../../../components/Wrapper";
-import { PASSWORD, USERNAME } from "../../../constants/request";
+import { REQUEST } from "../../../constants";
 import useRequestStore from "../../../store/useRequestStore";
 
 const RequestBasicAuth = () => {
@@ -33,7 +33,7 @@ const RequestBasicAuth = () => {
           className="authInputBox"
           value={authData.username}
           onChange={(event) =>
-            handleRequestAuthData(USERNAME, event.target.value)
+            handleRequestAuthData(REQUEST.USERNAME, event.target.value)
           }
         />
       </InputWrapper>
@@ -46,7 +46,7 @@ const RequestBasicAuth = () => {
           className="authInputBox"
           value={authData.password}
           onChange={(event) =>
-            handleRequestAuthData(PASSWORD, event.target.value)
+            handleRequestAuthData(REQUEST.PASSWORD, event.target.value)
           }
         />
       </InputWrapper>

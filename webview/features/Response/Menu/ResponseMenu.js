@@ -4,8 +4,7 @@ import shallow from "zustand/shallow";
 import DetailOption from "../../../components/DetailOption";
 import MenuOption from "../../../components/MenuOption";
 import SelectWrapper from "../../../components/SelectWrapper";
-import { RESPONSE, RESPONSE_MENU_OPTIONS } from "../../../constants/response";
-import { HEADERS } from "../../../constants/shared";
+import { COMMON, OPTION, RESPONSE } from "../../../constants";
 import useResponseDataStore from "../../../store/useResponseDataStore";
 import useResponseOptionStore from "../../../store/useResponseOptionStore";
 import ResponseMetaData from "../MetaData/ResponseMetaData";
@@ -25,8 +24,8 @@ const ResponseMenu = () => {
     <>
       <DetailOption>
         <SelectWrapper>
-          {RESPONSE_MENU_OPTIONS.map((responseMenuOption, index) => (
-            <React.Fragment key={RESPONSE + index}>
+          {OPTION.RESPONSE_MENU_OPTIONS.map((responseMenuOption, index) => (
+            <React.Fragment key={RESPONSE.RESPONSE + index}>
               <MenuOption
                 currentOption={responseOption}
                 menuOption={responseMenuOption}
@@ -39,7 +38,7 @@ const ResponseMenu = () => {
                   {responseMenuOption}
                 </h3>
               </MenuOption>
-              {responseMenuOption === HEADERS && (
+              {responseMenuOption === COMMON.HEADERS && (
                 <p>({responseData.headersLength})</p>
               )}
             </React.Fragment>

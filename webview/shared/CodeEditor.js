@@ -4,15 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import shallow from "zustand/shallow";
 
-import { EDITOR_HEIGHT, FORM_HEIGHT } from "../constants/height";
-import {
-  EDITOR_OPTIONS,
-  LINE_NUMBER_OPTION,
-  READ_ONLY_FALSE_OPTION,
-  READ_ONLY_TRUE_OPTION,
-} from "../constants/options";
-import { RAW } from "../constants/request";
-import { PREVIEW, TEXT, THEME } from "../constants/response";
+import { HEIGHT, OPTION, REQUEST, RESPONSE } from "../constants";
 import ResponsePreview from "../features/Response/Preview/ResponseDataPreview";
 import useResponseOptionStore from "../store/useResponseOptionStore";
 
@@ -69,38 +61,38 @@ const CodeEditor = ({
       editorRef.current?.setValue(responseValue);
     }
 
-    if (responseBodyOption !== RAW) {
+    if (responseBodyOption !== REQUEST.RAW) {
       setTimeout(async () => {
-        editorRef.current?.updateOptions(READ_ONLY_FALSE_OPTION);
+        editorRef.current?.updateOptions(OPTION.READ_ONLY_FALSE_OPTION);
 
         await editorRef.current
           ?.getAction("editor.action.formatDocument")
           .run();
 
-        editorRef.current?.updateOptions(READ_ONLY_TRUE_OPTION);
+        editorRef.current?.updateOptions(OPTION.READ_ONLY_TRUE_OPTION);
       }, 300);
 
       setEditorLanguage(responseBodyViewFormat.toLowerCase());
     } else {
       setTimeout(() => {
-        editorRef.current?.updateOptions(LINE_NUMBER_OPTION);
+        editorRef.current?.updateOptions(OPTION.LINE_NUMBER_OPTION);
       }, 300);
 
-      setEditorLanguage(TEXT);
+      setEditorLanguage(RESPONSE.TEXT);
     }
   }, [responseOption, responseBodyOption, responseBodyViewFormat]);
 
   return (
     <EditorWrapper>
-      {responseBodyOption === PREVIEW && !requestForm ? (
+      {responseBodyOption === RESPONSE.PREVIEW && !requestForm ? (
         <ResponsePreview sourceCode={responseValue} />
       ) : (
         <Editor
-          height={requestForm ? FORM_HEIGHT : EDITOR_HEIGHT}
+          height={requestForm ? HEIGHT.FORM_HEIGHT : HEIGHT.EDITOR_HEIGHT}
           language={requestForm ? bodyRawOption : editorLanguage}
-          theme={THEME}
+          theme={RESPONSE.THEME}
           value={requestForm ? bodyRawData[bodyRawOption] : responseValue}
-          options={EDITOR_OPTIONS}
+          options={OPTION.EDITOR_OPTIONS}
           onChange={requestForm && handleRequestBodyEditorChange}
           onMount={handleEditorOnMount}
         />

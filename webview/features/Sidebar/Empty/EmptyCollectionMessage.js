@@ -3,12 +3,12 @@ import React from "react";
 import { AiOutlineHeart, AiOutlineHistory } from "react-icons/ai";
 
 import Message from "../../../components/Message";
-import { HISTORY } from "../../../constants/sidebar";
+import { SIDEBAR } from "../../../constants";
 
 const EmptyCollectionMessage = ({ currentSidebarOption }) => {
   return (
     <Message>
-      {currentSidebarOption === HISTORY ? (
+      {currentSidebarOption === SIDEBAR.HISTORY ? (
         <>
           <AiOutlineHistory className="sidebarEmptyIcon" />
           <p>Your history collection seems to be empty.</p>

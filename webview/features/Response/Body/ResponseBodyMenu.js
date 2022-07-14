@@ -3,10 +3,7 @@ import styled from "styled-components";
 import shallow from "zustand/shallow";
 
 import SelectWrapper from "../../../components/SelectWrapper";
-import {
-  RESPONSE_BODY,
-  RESPONSE_BODY_OPTIONS,
-} from "../../../constants/response";
+import { OPTION, RESPONSE } from "../../../constants";
 import useResponseOptionStore from "../../../store/useResponseOptionStore";
 import ResponseCopyIcon from "../Copy/ResponseCopyIcon";
 import ResponseBodyViewOption from "./ResponseBodyMenuOption";
@@ -27,9 +24,9 @@ const RequestBodyMenu = () => {
 
   return (
     <SelectWrapper>
-      {RESPONSE_BODY_OPTIONS.map((option, index) => (
+      {OPTION.RESPONSE_BODY_OPTIONS.map((option, index) => (
         <OptionContainer
-          key={RESPONSE_BODY + index}
+          key={RESPONSE.RESPONSE_BODY + index}
           primary={responseBodyOption === option}
           radius={index}
           onClick={handleOptionChange}

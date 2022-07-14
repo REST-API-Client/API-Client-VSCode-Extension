@@ -22,8 +22,8 @@ const InputWrapperContainer = styled.div`
     border-radius: 0.3rem;
     padding: 0.5rem 0.7rem;
     font-size: 1.2rem;
-    background-color: transparent;
     color: var(--default-text);
+    background-color: transparent;
     opacity: 0.45;
   }
 

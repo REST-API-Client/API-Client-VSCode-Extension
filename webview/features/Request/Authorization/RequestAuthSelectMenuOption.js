@@ -1,6 +1,6 @@
 import React from "react";
 
-import { BASIC_AUTH, BEARER_TOKEN } from "../../../constants/request";
+import { REQUEST } from "../../../constants";
 import useRequestStore from "../../../store/useRequestStore";
 import RequestBearerToken from "./RequestAuthBearerToken";
 import RequestBasicAuth from "./RequestBasicAuth";
@@ -10,9 +10,9 @@ const RequestAuthSelectMenuOption = () => {
   const authOption = useRequestStore((state) => state.authOption);
 
   switch (authOption) {
-    case BASIC_AUTH:
+    case REQUEST.BASIC_AUTH:
       return <RequestBasicAuth />;
-    case BEARER_TOKEN:
+    case REQUEST.BEARER_TOKEN:
       return <RequestBearerToken />;
     default:
       return <RequestNoAuth />;

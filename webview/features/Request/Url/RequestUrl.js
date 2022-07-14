@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import shallow from "zustand/shallow";
 
-import { PARAMS } from "../../../constants/request";
+import { REQUEST } from "../../../constants";
 import useKeyValueTableStore from "../../../store/useKeyValueTableStore";
 import useRequestStore from "../../../store/useRequestStore";
 import { generateParameterString, removeUrlParameter } from "../../../utils";
@@ -21,10 +21,10 @@ const RequestUrl = () => {
   );
 
   useEffect(() => {
-    if (requestOption !== PARAMS) return;
+    if (requestOption !== REQUEST.PARAMS) return;
 
     const filteredData = keyValueTableData.filter(
-      (data) => data.optionType === PARAMS && data.isChecked,
+      (data) => data.optionType === REQUEST.PARAMS && data.isChecked,
     );
 
     if (filteredData.length === 0) {

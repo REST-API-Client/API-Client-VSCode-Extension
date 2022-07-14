@@ -1,75 +1,60 @@
 import create from "zustand";
 
-import {
-  ACCEPT,
-  ACCEPT_ENCODING,
-  ANY_MIME_TYPE,
-  CACHE_CONTROL,
-  CONNECTION,
-  CONTENT_TYPE,
-  DEFLATE,
-  FORM_DATA,
-  FORM_URLENCODED,
-  GZIP,
-  KEEP_ALIVE,
-  NO_CACHE,
-  PARAMS,
-} from "../constants/request";
-import { HEADERS } from "../constants/shared";
+import { COMMON, REQUEST } from "../constants";
 
 const initialState = [
   {
-    optionType: PARAMS,
+    optionType: REQUEST.PARAMS,
     isChecked: false,
     key: "",
     value: "",
     description: "",
   },
   {
-    optionType: HEADERS,
+    optionType: COMMON.HEADERS,
     isChecked: true,
-    key: CACHE_CONTROL,
-    value: NO_CACHE,
+    key: REQUEST.CACHE_CONTROL,
+    value: REQUEST.NO_CACHE,
     description: "",
   },
   {
-    optionType: HEADERS,
+    optionType: COMMON.HEADERS,
     isChecked: true,
-    key: ACCEPT,
-    value: ANY_MIME_TYPE,
+    key: REQUEST.ACCEPT,
+    value: REQUEST.ANY_MIME_TYPE,
     description: "",
   },
   {
-    optionType: HEADERS,
+    optionType: COMMON.HEADERS,
     isChecked: true,
-    key: ACCEPT_ENCODING,
-    value: `${GZIP},${DEFLATE}`,
+    key: REQUEST.ACCEPT_ENCODING,
+    value: `${REQUEST.GZIP},${REQUEST.DEFLATE}`,
     description: "",
   },
   {
-    optionType: HEADERS,
+    optionType: COMMON.HEADERS,
     isChecked: true,
-    key: CONNECTION,
-    value: KEEP_ALIVE,
+    key: REQUEST.CONNECTION,
+    value: REQUEST.KEEP_ALIVE,
     description: "",
   },
 
   {
-    optionType: HEADERS,
+    optionType: COMMON.HEADERS,
     isChecked: false,
     key: "",
     value: "",
     description: "",
   },
   {
-    optionType: FORM_DATA,
+    optionType: REQUEST.FORM_DATA,
     isChecked: false,
     key: "",
     value: "",
     description: "",
   },
   {
-    optionType: FORM_URLENCODED,
+    optionType: REQUEST.FORM_URLENCODED,
     isChecked: false,
     key: "",
     value: "",
@@ -114,9 +99,9 @@ const useKeyValueTableStore = create((set) => ({
     set((state) => ({
       keyValueTableData: [
         {
-          optionType: HEADERS,
+          optionType: COMMON.HEADERS,
           isChecked: true,
-          key: CONTENT_TYPE,
+          key: REQUEST.CONTENT_TYPE,
           value: headerValue,
           description: "",
         },
@@ -127,7 +112,7 @@ const useKeyValueTableStore = create((set) => ({
   removeRequestBodyHeaders: () => {
     set((state) => ({
       keyValueTableData: state.keyValueTableData.filter(
-        (keyValueData) => keyValueData.key !== CONTENT_TYPE,
+        (keyValueData) => keyValueData.key !== REQUEST.CONTENT_TYPE,
       ),
     }));
   },

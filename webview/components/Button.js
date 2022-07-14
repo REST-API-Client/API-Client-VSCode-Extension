@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import styled from "styled-components";
 
-import { LOADING } from "../constants/shared";
+import { COMMON } from "../constants";
 
 const Button = ({
   children,
@@ -16,7 +16,7 @@ const Button = ({
       primary={primary}
       type={buttonType}
       onClick={handleButtonClick}
-      disabled={buttonStatus === LOADING}
+      disabled={buttonStatus === COMMON.LOADING}
     >
       {children}
     </ButtonWrapper>

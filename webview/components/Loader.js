@@ -2,7 +2,7 @@ import React from "react";
 import { PropagateLoader } from "react-spinners";
 import styled from "styled-components";
 
-import { LOADER_CSS_OPTIONS } from "../constants/options";
+import { OPTION } from "../constants";
 
 const Loader = () => {
   return (
@@ -11,7 +11,7 @@ const Loader = () => {
         color="var(--vscode-foreground)"
         speedMultiplier="1"
         size="22px"
-        cssOverride={LOADER_CSS_OPTIONS}
+        cssOverride={OPTION.LOADER_CSS_OPTIONS}
       />
     </LoaderWrapper>
   );

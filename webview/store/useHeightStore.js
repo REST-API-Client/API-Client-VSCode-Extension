@@ -1,9 +1,9 @@
 import create from "zustand";
 
-import { INITIAL_HEIGHT } from "../constants/height";
+import { HEIGHT } from "../constants";
 
 const initialState = {
-  height: INITIAL_HEIGHT,
+  height: HEIGHT.INITIAL_HEIGHT,
 };
 
 const useHeightStore = create((set) => ({

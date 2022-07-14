@@ -2,10 +2,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import styled from "styled-components";
 
-import {
-  META_DATA,
-  RESPONSE_RESULT_INFORMATION,
-} from "../../../constants/response";
+import { OPTION, RESPONSE } from "../../../constants";
 
 const ResponseMetaData = ({
   responseSize,
@@ -19,10 +16,10 @@ const ResponseMetaData = ({
 
   return (
     <ResponseMetaDataContainer>
-      {RESPONSE_RESULT_INFORMATION.map((option, index) => (
+      {OPTION.RESPONSE_RESULT_INFORMATION.map((option, index) => (
         <MetaDataContainer
           secondary={index === 0 && statusCode === 404}
-          key={META_DATA + index}
+          key={RESPONSE.META_DATA + index}
           currentOption={index}
           menuOption={option}
         >

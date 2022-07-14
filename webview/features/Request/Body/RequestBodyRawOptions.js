@@ -3,11 +3,7 @@ import styled from "styled-components";
 import shallow from "zustand/shallow";
 
 import SelectWrapper from "../../../components/SelectWrapper";
-import {
-  NONE,
-  RAW,
-  REQUEST_BODY_RAW_OPTIONS,
-} from "../../../constants/request";
+import { OPTION, REQUEST } from "../../../constants";
 import useKeyValueTableStore from "../../../store/useKeyValueTableStore";
 import useRequestStore from "../../../store/useRequestStore";
 
@@ -35,7 +31,7 @@ const RequestBodyRawOptions = () => {
 
     handleBodyRawOption(event.target.value);
 
-    if (event.target.value === NONE) {
+    if (event.target.value === REQUEST.NONE) {
       removeRequestBodyHeaders();
     } else {
       removeRequestBodyHeaders();
@@ -49,11 +45,17 @@ const RequestBodyRawOptions = () => {
         onChange={handleBodyRawSelectOption}
         value={bodyRawOption}
       >
-        {REQUEST_BODY_RAW_OPTIONS.map(({ option, headerField }, index) => (
-          <option key={RAW + index} header-type={headerField} value={option}>
-            {option}
-          </option>
-        ))}
+        {OPTION.REQUEST_BODY_RAW_OPTIONS.map(
+          ({ option, headerField }, index) => (
+            <option
+              key={REQUEST.RAW + index}
+              header-type={headerField}
+              value={option}
+            >
+              {option}
+            </option>
+          ),
+        )}
       </SelectOptionWrapper>
     </SelectWrapper>
   );
