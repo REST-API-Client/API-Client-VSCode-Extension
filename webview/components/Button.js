@@ -2,12 +2,21 @@ import PropTypes from "prop-types";
 import React from "react";
 import styled from "styled-components";
 
-const Button = ({ children, buttonType, primary, handleButtonClick }) => {
+import { LOADING } from "../constants/shared";
+
+const Button = ({
+  children,
+  buttonType,
+  buttonStatus,
+  primary,
+  handleButtonClick,
+}) => {
   return (
     <ButtonWrapper
       primary={primary}
       type={buttonType}
       onClick={handleButtonClick}
+      disabled={buttonStatus === LOADING}
     >
       {children}
     </ButtonWrapper>
@@ -31,6 +40,7 @@ const ButtonWrapper = styled.button`
 Button.propTypes = {
   children: PropTypes.node,
   buttonType: PropTypes.string,
+  buttonStatus: PropTypes.string,
   primary: PropTypes.bool,
   handleButtonClick: PropTypes.func,
 };
