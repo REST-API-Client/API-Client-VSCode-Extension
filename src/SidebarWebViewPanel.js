@@ -29,6 +29,7 @@ class SidebarWebViewPanel {
     this.#view.webview.postMessage({
       messageType: "History",
       history: this.stateManager.getExtensionContext("userRequestHistory"),
+      favorites: this.stateManager.getExtensionContext("userFavorites"),
     });
 
     this.#receiveSidebarWebViewMessage();
@@ -36,23 +37,46 @@ class SidebarWebViewPanel {
     return;
   }
 
-  postMainWebViewPanelMessage(userHistoryData) {
+  postMainWebViewPanelMessage(userHistoryData, userFavoritesData) {
     this.#view.webview.postMessage({
       messageType: "History",
       history: userHistoryData,
+      favorites: userFavoritesData,
     });
 
     return;
   }
 
   #receiveSidebarWebViewMessage() {
-    this.#view.webview.onDidReceiveMessage(({ command }) => {
-      if (command === "Start App") {
+    this.#view.webview.onDidReceiveMessage(async ({ purpose, id, target }) => {
+      if (purpose === "Start App") {
         vscode.commands.executeCommand("rest-api-tester.newRequest");
+      } else if (purpose === "Favorite") {
+        await this.stateManager.updateExtensionContext(
+          "userRequestHistory",
+          id,
+          "add",
+        );
+      } else if (purpose === "Remove Favorite") {
+        await this.stateManager.updateExtensionContext(
+          "userRequestHistory",
+          id,
+        );
 
-        return;
+        await this.stateManager.deleteExtensionContext("userFavorites", id);
+      } else if (purpose === "Delete") {
+        if (target === "userFavorites") {
+          await this.stateManager.updateExtensionContext(
+            "userRequestHistory",
+            id,
+          );
+        }
+
+        await this.stateManager.deleteExtensionContext(target, id);
       }
     });
+
+    return;
   }
 
   #getHtmlForSidebarWebView(webview) {

@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from "uuid";
 import vscode from "vscode";
 
 import { WARNING_MESSAGE, WELCOME_MESSAGE } from "./constants/message";
@@ -59,7 +60,7 @@ class MainWebViewPanel {
         purpose,
       }) => {
         if (purpose === "Alert Copy") {
-          vscode.window.showInformationMessage("Copied to Clipboard  ✅");
+          vscode.window.showInformationMessage("Copied to Clipboard ✅");
 
           return;
         }
@@ -99,30 +100,39 @@ class MainWebViewPanel {
     };
 
     const responseObject = await generateResponseObject(axiosConfiguration);
+    const requestedTime = new Date().getTime();
 
     if (responseObject.type !== "Error") {
       if (!userRequestHistory) {
-        await this.stateManager.updateExtensionContext("userRequestHistory", {
-          history: [axiosConfiguration],
+        await this.stateManager.addExtensionContext("userRequestHistory", {
+          history: [
+            {
+              ...axiosConfiguration,
+              requestedTime,
+              isUserFavorite: false,
+              id: uuidv4(),
+            },
+          ],
         });
       } else {
-        if (userRequestHistory.length > 21) {
-          const slicedHistoryArray = userRequestHistory.slice(0, 20);
-
-          await this.stateManager.updateExtensionContext("userRequestHistory", {
-            history: [axiosConfiguration, ...slicedHistoryArray],
-          });
-        } else {
-          await this.stateManager.updateExtensionContext("userRequestHistory", {
-            history: [axiosConfiguration, ...userRequestHistory],
-          });
-        }
+        await this.stateManager.addExtensionContext("userRequestHistory", {
+          history: [
+            {
+              ...axiosConfiguration,
+              requestedTime,
+              isUserFavorite: false,
+              id: uuidv4(),
+            },
+            ...userRequestHistory,
+          ],
+        });
       }
     }
 
     this.#mainPanel.webview.postMessage(responseObject);
     this.sidebarWebViewPanel.postMainWebViewPanelMessage(
       this.stateManager.getExtensionContext("userRequestHistory"),
+      this.stateManager.getExtensionContext("userFavorites"),
     );
 
     return;

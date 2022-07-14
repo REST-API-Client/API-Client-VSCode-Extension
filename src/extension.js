@@ -6,19 +6,21 @@ import SidebarWebViewPanel from "./SideBarWebViewPanel";
 
 export async function activate(context) {
   const stateManager = new ExtentionStateManager(context);
-
-  if (!stateManager.getExtensionContext("userRequestHistory")) {
-    await stateManager.updateExtensionContext("userRequestHistory", {
-      history: null,
-    });
-  }
-
-  console.log(stateManager.getExtensionContext("userRequestHistory"));
-
   const SidebarWebViewProvider = new SidebarWebViewPanel(
     context.extensionUri,
     stateManager,
   );
+  const MainWebViewProvider = new MainWebViewPanel(
+    context.extensionUri,
+    stateManager,
+    SidebarWebViewProvider,
+  );
+
+  if (!stateManager.getExtensionContext("userRequestHistory")) {
+    await stateManager.addExtensionContext("userRequestHistory", {
+      history: [],
+    });
+  }
 
   context.subscriptions.push(
     vscode.window.registerWebviewViewProvider(
@@ -30,12 +32,6 @@ export async function activate(context) {
 
   context.subscriptions.push(
     vscode.commands.registerCommand("rest-api-tester.newRequest", () => {
-      const MainWebViewProvider = new MainWebViewPanel(
-        context.extensionUri,
-        stateManager,
-        SidebarWebViewProvider,
-      );
-
       MainWebViewProvider.initializeWebView();
     }),
   );

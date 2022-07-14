@@ -5,7 +5,7 @@ import vscode from "../../../vscode";
 
 const SidebarGuideMenu = () => {
   const handleButtonClick = () => {
-    vscode.postMessage({ command: "Start App" });
+    vscode.postMessage({ purpose: "Start App" });
   };
 
   return (
