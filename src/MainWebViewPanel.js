@@ -107,6 +107,7 @@ class MainWebViewPanel {
               {
                 ...axiosConfiguration,
                 requestedTime,
+                favoritedTime: null,
                 isUserFavorite: false,
                 id: uuidv4(),
               },
@@ -121,6 +122,7 @@ class MainWebViewPanel {
               {
                 ...axiosConfiguration,
                 requestedTime,
+                favoritedTime: null,
                 isUserFavorite: false,
                 id: uuidv4(),
               },

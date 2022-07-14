@@ -24,12 +24,14 @@ const calculateCollectionTime = (collectionCreatedTime) => {
     } else {
       return `${minutes} minutes ago`;
     }
-  } else {
+  } else if (seconds > 0) {
     if (seconds === 1) {
       return `${seconds} second ago`;
     } else {
       return `${seconds} seconds ago`;
     }
+  } else {
+    return "Just now";
   }
 };
 
