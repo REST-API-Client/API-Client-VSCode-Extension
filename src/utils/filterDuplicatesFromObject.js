@@ -8,12 +8,14 @@ const filterDuplicatesFromObject = (
     (history) => history.isUserFavorite,
   );
 
+  previousCollection?.map((history) => (history.favoritedTime = null)) || [];
+
   const filteredPreviousCollection =
     previousCollection?.filter((history) => history.id !== id) || [];
 
   const combinedCollection = [
-    ...filteredPreviousCollection,
     ...filteredCurrentCollection,
+    ...filteredPreviousCollection,
   ];
 
   const duplicateFilteredCollection = combinedCollection.filter((history) => {

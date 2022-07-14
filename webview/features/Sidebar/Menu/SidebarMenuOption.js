@@ -1,14 +1,7 @@
 import React from "react";
 import shallow from "zustand/shallow";
 
-import {
-  ADD_TO_FAVORITES,
-  DELETE_ALL_COLLECTION,
-  FAVORITES,
-  REMOVE_FROM_FAVORITES,
-  USER_FAVORITES_COLLECTION,
-  USER_REQUEST_HISTORY_COLLECTION,
-} from "../../../constants/sidebar";
+import { SIDEBAR } from "../../../constants";
 import SidebarCollection from "../../../shared/SidebarCollection";
 import useSidebarStore from "../../../store/useSidebarStore";
 import vscode from "../../../vscode";
@@ -36,25 +29,28 @@ const SidebarMenuOption = () => {
   );
 
   const handleSidebarIconClick = (command, id, target) => {
-    if (command === ADD_TO_FAVORITES) {
+    const currentTime = new Date().getTime();
+
+    if (command === SIDEBAR.ADD_TO_FAVORITES) {
       vscode.postMessage({ command, id });
 
       const selectedCollection = userRequestHistory.filter(
         (collection) => collection.id === id,
       );
+      selectedCollection[0].favoritedTime = currentTime;
 
-      handleUserFavoriteIcon(id);
+      handleUserFavoriteIcon(id, currentTime);
       addCollectionToFavorites(selectedCollection);
-    } else if (command === REMOVE_FROM_FAVORITES) {
+    } else if (command === SIDEBAR.REMOVE_FROM_FAVORITES) {
       vscode.postMessage({ command, id });
 
-      handleUserFavoriteIcon(id);
+      handleUserFavoriteIcon(id, null);
       removeFromFavoriteCollection(id);
     } else {
       vscode.postMessage({ command, id, target });
 
-      if (target === USER_FAVORITES_COLLECTION) {
-        handleUserFavoriteIcon(id);
+      if (target === SIDEBAR.USER_FAVORITES_COLLECTION) {
+        handleUserFavoriteIcon(id, null);
       }
 
       handleUserDeleteIcon(target, id);
@@ -63,21 +59,21 @@ const SidebarMenuOption = () => {
 
   const handleDeleteAllButton = () => {
     switch (sidebarOption) {
-      case FAVORITES:
+      case SIDEBAR.FAVORITES:
         return vscode.postMessage({
-          command: DELETE_ALL_COLLECTION,
-          target: USER_FAVORITES_COLLECTION,
+          command: SIDEBAR.DELETE_ALL_COLLECTION,
+          target: SIDEBAR.USER_FAVORITES_COLLECTION,
         });
       default:
         return vscode.postMessage({
-          command: DELETE_ALL_COLLECTION,
-          target: USER_REQUEST_HISTORY_COLLECTION,
+          command: SIDEBAR.DELETE_ALL_COLLECTION,
+          target: SIDEBAR.USER_REQUEST_HISTORY_COLLECTION,
         });
     }
   };
 
   switch (sidebarOption) {
-    case FAVORITES:
+    case SIDEBAR.FAVORITES:
       return (
         <SidebarCollection
           sidebarOption={sidebarOption}

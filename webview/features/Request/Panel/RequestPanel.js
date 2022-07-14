@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import shallow from "zustand/shallow";
 
-import { LOADING } from "../../../constants/shared";
+import { COMMON } from "../../../constants";
 import useHeightStore from "../../../store/useHeightStore";
 import useKeyValueTableStore from "../../../store/useKeyValueTableStore";
 import useRequestStore from "../../../store/useRequestStore";
@@ -39,7 +39,7 @@ const RequestPanel = () => {
     event.preventDefault();
 
     if (requestData.requestUrl.length !== 0) {
-      handleRequestProcessStatus(LOADING);
+      handleRequestProcessStatus(COMMON.LOADING);
     }
 
     vscode.postMessage({

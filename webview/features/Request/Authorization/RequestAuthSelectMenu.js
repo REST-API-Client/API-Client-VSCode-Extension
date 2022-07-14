@@ -3,7 +3,7 @@ import styled from "styled-components";
 import shallow from "zustand/shallow";
 
 import SelectWrapper from "../../../components/SelectWrapper";
-import { AUTH, AUTHORIZATION_OPTIONS } from "../../../constants/request";
+import { OPTION, REQUEST } from "../../../constants";
 import useRequestStore from "../../../store/useRequestStore";
 import RequestAuthMenuOption from "./RequestAuthSelectMenuOption";
 
@@ -25,8 +25,8 @@ const RequestAuthSelectMenu = () => {
           onChange={(event) => handleRequestAuthType(event.target.value)}
           value={authOption}
         >
-          {AUTHORIZATION_OPTIONS.map((option, index) => (
-            <option key={AUTH + index} value={option}>
+          {OPTION.AUTHORIZATION_OPTIONS.map((option, index) => (
+            <option key={REQUEST.AUTH + index} value={option}>
               {option}
             </option>
           ))}

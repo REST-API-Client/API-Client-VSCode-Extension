@@ -3,8 +3,7 @@ import styled from "styled-components";
 import shallow from "zustand/shallow";
 
 import Loader from "../../../components/Loader";
-import { ERROR, RESPONSE } from "../../../constants/response";
-import { FINISHED, LOADING } from "../../../constants/shared";
+import { COMMON, RESPONSE } from "../../../constants";
 import useResponseDataStore from "../../../store/useResponseDataStore";
 import ResponseEmptyMenu from "../Empty/ResponseEmptyMenu";
 import ResponseErrorMenu from "../Error/ResponseErrorMenu";
@@ -27,12 +26,12 @@ const ResponsePanel = () => {
   );
 
   const handleExtensionMessage = (event) => {
-    if (event.data.type === RESPONSE) {
+    if (event.data.type === RESPONSE.RESPONSE) {
       handleResponseData(event.data);
-      handleRequestProcessStatus(FINISHED);
-    } else if (event.data.type === ERROR) {
+      handleRequestProcessStatus(COMMON.FINISHED);
+    } else if (event.data.type === RESPONSE.ERROR) {
       handleResponseData(event.data);
-      handleRequestProcessStatus(ERROR);
+      handleRequestProcessStatus(RESPONSE.ERROR);
     }
   };
 
@@ -41,15 +40,15 @@ const ResponsePanel = () => {
   }, []);
 
   switch (requestInProcess) {
-    case LOADING:
+    case COMMON.LOADING:
       return <Loader />;
-    case FINISHED:
+    case COMMON.FINISHED:
       return (
         <ResponsePanelWrapper>
           <ResponseMenu />
         </ResponsePanelWrapper>
       );
-    case ERROR:
+    case RESPONSE.ERROR:
       return (
         <ResponsePanelWrapper>
           <ResponseErrorMenu {...responseData} />

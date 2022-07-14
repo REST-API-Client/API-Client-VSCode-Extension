@@ -19,11 +19,15 @@ const useSidebarStore = create((set) => ({
   handleUserFavoritesCollection: (favoritesData) =>
     set(() => ({ userFavorites: favoritesData })),
 
-  handleUserFavoriteIcon: (id) =>
+  handleUserFavoriteIcon: (id, time) =>
     set((state) => ({
       userRequestHistory: state.userRequestHistory.map((historyData) =>
         historyData.id === id
-          ? { ...historyData, isUserFavorite: !historyData.isUserFavorite }
+          ? {
+              ...historyData,
+              isUserFavorite: !historyData.isUserFavorite,
+              favoritedTime: time,
+            }
           : historyData,
       ),
     })),
@@ -38,7 +42,7 @@ const useSidebarStore = create((set) => ({
 
   addCollectionToFavorites: (collection) =>
     set((state) => ({
-      userFavorites: [...state.userFavorites, ...collection],
+      userFavorites: [...collection, ...state.userFavorites],
     })),
 
   removeFromFavoriteCollection: (id) => {

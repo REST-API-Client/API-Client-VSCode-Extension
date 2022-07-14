@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { METHOD, REQUEST_METHOD_OPTIONS } from "../../../constants/request";
+import { OPTION, REQUEST } from "../../../constants";
 import useRequestStore from "../../../store/useRequestStore";
 
 const RequestMethod = () => {
@@ -14,8 +14,8 @@ const RequestMethod = () => {
       onChange={(event) => handleRequestMethodChange(event.target.value)}
       name="httpRequestMethods"
     >
-      {REQUEST_METHOD_OPTIONS.map((requestMethod, index) => (
-        <option key={METHOD + index} value={requestMethod}>
+      {OPTION.REQUEST_METHOD_OPTIONS.map((requestMethod, index) => (
+        <option key={REQUEST.METHOD + index} value={requestMethod}>
           {requestMethod}
         </option>
       ))}

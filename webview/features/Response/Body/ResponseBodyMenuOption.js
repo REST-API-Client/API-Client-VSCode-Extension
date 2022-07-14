@@ -3,10 +3,7 @@ import styled from "styled-components";
 import shallow from "zustand/shallow";
 
 import SelectWrapper from "../../../components/SelectWrapper";
-import {
-  RESPONSE_BODY_VIEW_FORMAT_OPTIONS,
-  VIEW_FORMAT,
-} from "../../../constants/response";
+import { OPTION, RESPONSE } from "../../../constants";
 import useResponseOptionStore from "../../../store/useResponseOptionStore";
 
 const ResponseBodyViewOption = () => {
@@ -34,8 +31,8 @@ const ResponseBodyViewOption = () => {
             }
             value={responseBodyViewFormat}
           >
-            {RESPONSE_BODY_VIEW_FORMAT_OPTIONS.map((option, index) => (
-              <option key={VIEW_FORMAT + index} value={option}>
+            {OPTION.RESPONSE_BODY_VIEW_FORMAT_OPTIONS.map((option, index) => (
+              <option key={RESPONSE.VIEW_FORMAT + index} value={option}>
                 {option}
               </option>
             ))}

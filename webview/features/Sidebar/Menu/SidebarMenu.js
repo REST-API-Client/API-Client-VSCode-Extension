@@ -4,8 +4,7 @@ import shallow from "zustand/shallow";
 
 import MenuOption from "../../../components/MenuOption";
 import SelectWrapper from "../../../components/SelectWrapper";
-import { COLLECTION_DATA, DELETE_COMPLETE } from "../../../constants/sidebar";
-import { SIDEBAR_MENU_OPTIONS } from "../../../constants/sidebar";
+import { OPTION, SIDEBAR } from "../../../constants";
 import useSidebarStore from "../../../store/useSidebarStore";
 import SidebarMenuOption from "./SidebarMenuOption";
 
@@ -33,10 +32,10 @@ const SidebarMenu = () => {
     window.addEventListener("message", (message) => {
       const { messageCategory, history, favorites, target } = message.data;
 
-      if (messageCategory === COLLECTION_DATA) {
+      if (messageCategory === SIDEBAR.COLLECTION_DATA) {
         handleUserHistoryCollection(history?.userRequestHistory);
         handleUserFavoritesCollection(favorites?.userRequestHistory);
-      } else if (messageCategory === DELETE_COMPLETE) {
+      } else if (messageCategory === SIDEBAR.DELETE_COMPLETE) {
         deleteCollection(target);
         resetFavoriteIconState();
       }
@@ -47,7 +46,7 @@ const SidebarMenu = () => {
     <>
       <SidebarMenuWrapper>
         <SelectWrapper secondary>
-          {SIDEBAR_MENU_OPTIONS.map((option, index) => (
+          {OPTION.SIDEBAR_MENU_OPTIONS.map((option, index) => (
             <MenuOption
               key={index}
               currentOption={sidebarOption}

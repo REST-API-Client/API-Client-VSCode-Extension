@@ -1,12 +1,11 @@
 import create from "zustand";
 
-import { PRETTY } from "../constants/response";
-import { BODY, JSON } from "../constants/shared";
+import { COMMON, RESPONSE } from "../constants";
 
 const initialState = {
-  responseOption: BODY,
-  responseBodyOption: PRETTY,
-  responseBodyViewFormat: JSON,
+  responseOption: COMMON.BODY,
+  responseBodyOption: RESPONSE.PRETTY,
+  responseBodyViewFormat: COMMON.JSON,
 };
 
 const useResponseOptionStore = create((set) => ({

@@ -19,12 +19,15 @@ class ExtentionStateManager {
   }
 
   async updateExtensionContext(state, id, status) {
+    const currentTime = new Date().getTime();
+
     this.#context.globalState
       .get(state)
       .map(
         (history) =>
           history.id === id &&
-          (history.isUserFavorite = !history.isUserFavorite),
+          ((history.isUserFavorite = !history.isUserFavorite),
+          (history.favoritedTime = currentTime)),
       );
 
     await this.#context.globalState.update(state, [

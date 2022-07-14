@@ -1,15 +1,15 @@
 import create from "zustand";
 
-import { GET, NO_AUTH, NONE, PARAMS } from "../constants/request";
+import { REQUEST } from "../constants";
 
 const initialState = {
-  requestMethod: GET,
+  requestMethod: REQUEST.GET,
   requestUrl: "",
   requestUrlParams: "",
-  requestOption: PARAMS,
-  authOption: NO_AUTH,
+  requestOption: REQUEST.PARAMS,
+  authOption: REQUEST.NO_AUTH,
   authData: { username: "", password: "", token: "" },
-  bodyOption: NONE,
+  bodyOption: REQUEST.NONE,
   bodyRawOption: "Text",
   bodyRawData: { text: "", javascript: "", json: "", html: "" },
   shouldBeautifyEditor: false,

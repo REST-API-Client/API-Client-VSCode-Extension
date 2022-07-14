@@ -25,7 +25,6 @@ const InformationWrapper = styled.div`
     white-space: normal;
     line-height: 1.25;
     opacity: 0.85;
-
     cursor: pointer;
 
     :hover {

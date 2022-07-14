@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
-import { START_APP } from "../../../constants/sidebar";
+import { SIDEBAR } from "../../../constants";
 import vscode from "../../../vscode";
 
 const SidebarGuideMenu = () => {
   const handleButtonClick = () => {
-    vscode.postMessage({ command: START_APP });
+    vscode.postMessage({ command: SIDEBAR.START_APP });
   };
 
   return (

@@ -1,7 +1,6 @@
 import React from "react";
 
-import { AUTH, PARAMS } from "../../../constants/request";
-import { BODY, HEADERS } from "../../../constants/shared";
+import { COMMON, REQUEST } from "../../../constants";
 import KeyValueTable from "../../../shared/KeyValueTable";
 import useKeyValueTableStore from "../../../store/useKeyValueTableStore";
 import useRequestStore from "../../../store/useRequestStore";
@@ -13,15 +12,13 @@ const RequestMenuOption = () => {
   const requestOption = useRequestStore((state) => state.requestOption);
 
   switch (requestOption) {
-    case PARAMS:
-    case HEADERS:
+    case REQUEST.PARAMS:
+    case COMMON.HEADERS:
       return <KeyValueTable type={requestOption} {...keyValueProps} />;
-    case AUTH:
+    case REQUEST.AUTH:
       return <RequestAuthSelectMenu />;
-    case BODY:
-      return <RequestBodySelectMenu />;
     default:
-      return <h1>Options </h1>;
+      return <RequestBodySelectMenu />;
   }
 };
 

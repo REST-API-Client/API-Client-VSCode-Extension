@@ -3,7 +3,7 @@ import shallow from "zustand/shallow";
 
 import InputWrapper from "../../../components/InputWrapper";
 import Wrapper from "../../../components/Wrapper";
-import { TOKEN } from "../../../constants/request";
+import { REQUEST } from "../../../constants";
 import useRequestStore from "../../../store/useRequestStore";
 
 const RequestAuthBearerToken = () => {
@@ -24,7 +24,9 @@ const RequestAuthBearerToken = () => {
           placeholder="token"
           className="authInputBox"
           value={authDataToken}
-          onChange={(event) => handleRequestAuthData(TOKEN, event.target.value)}
+          onChange={(event) =>
+            handleRequestAuthData(REQUEST.TOKEN, event.target.value)
+          }
         />
       </InputWrapper>
     </Wrapper>
