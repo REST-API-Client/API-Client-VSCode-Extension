@@ -2,13 +2,15 @@ import React from "react";
 import styled from "styled-components";
 import shallow from "zustand/shallow";
 
+import CopyIcon from "../../../components/CopyIcon";
 import SelectWrapper from "../../../components/SelectWrapper";
-import { OPTION, RESPONSE } from "../../../constants";
+import { COMMON, OPTION, RESPONSE } from "../../../constants";
+import useResponseDataStore from "../../../store/useResponseDataStore";
 import useResponseOptionStore from "../../../store/useResponseOptionStore";
-import ResponseCopyIcon from "../Copy/ResponseCopyIcon";
 import ResponseBodyViewOption from "./ResponseBodyMenuOption";
 
 const RequestBodyMenu = () => {
+  const responseData = useResponseDataStore((state) => state.responseData);
   const { responseBodyOption, handleResponseBodyOptionChange } =
     useResponseOptionStore(
       (state) => ({
@@ -35,7 +37,9 @@ const RequestBodyMenu = () => {
         </OptionContainer>
       ))}
       <ResponseBodyViewOption />
-      {responseBodyOption !== "Preview" && <ResponseCopyIcon />}
+      {responseBodyOption !== COMMON.PREVIEW && (
+        <CopyIcon value={responseData.data} />
+      )}
     </SelectWrapper>
   );
 };
