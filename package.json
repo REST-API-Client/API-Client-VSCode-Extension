@@ -1,13 +1,36 @@
 {
   "name": "rest-api-tester",
+  "publisher": "unjinjang",
   "displayName": "REST API Tester",
-  "description": "REST API Testing VSCode Extension",
-  "version": "0.0.1",
+  "icon": "icons/icon.png",
+  "description": "Beginner friendly basic api requesting VSCode extension",
+  "version": "1.0.0",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/REST-API-Tester/HTTP-Request-VSCode-Extension/issues"
+  },
+  "author": {
+    "name": "Un Jin Jang",
+    "email": "alpsboy1996@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/REST-API-Tester"
+  },
   "engines": {
     "vscode": "^1.68.0"
   },
   "categories": [
-    "Other"
+    "Programming Languages"
+  ],
+  "keywords": [
+    "api",
+    "http",
+    "REST",
+    "postman",
+    "request",
+    "response",
+    "api-client"
   ],
   "activationEvents": [
     "onCommand:rest-api-tester.newRequest",
