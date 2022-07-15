@@ -1,99 +1,70 @@
 import Editor from "@monaco-editor/react";
 import PropTypes from "prop-types";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
-import shallow from "zustand/shallow";
 
-import { HEIGHT, OPTION, REQUEST, RESPONSE } from "../constants";
+import { OPTION, REQUEST, RESPONSE } from "../constants";
 import ResponsePreview from "../features/Response/Preview/ResponseDataPreview";
-import useResponseOptionStore from "../store/useResponseOptionStore";
 
 const CodeEditor = ({
-  bodyRawData,
+  language,
+  viewOption,
   requestForm,
-  bodyRawOption,
-  responseValue,
+  previewMode,
+  editorOption,
+  editorHeight,
+  codeEditorValue,
+  handleEditorChange,
   shouldBeautifyEditor,
   handleBeautifyButton,
-  handleBodyRawOptionData,
 }) => {
   const editorRef = useRef(null);
-  const { responseOption, responseBodyOption, responseBodyViewFormat } =
-    useResponseOptionStore(
-      (state) => ({
-        responseOption: state.responseOption,
-        responseBodyOption: state.responseBodyOption,
-        responseBodyViewFormat: state.responseBodyViewFormat,
-      }),
-      shallow,
-    );
-  const [editorLanguage, setEditorLanguage] = useState(
-    responseBodyViewFormat.toLowerCase(),
-  );
-
   const handleEditorOnMount = (editor) => {
     editorRef.current = editor;
   };
 
-  function handleRequestBodyEditorChange(bodyValue) {
-    handleBodyRawOptionData(bodyRawOption, bodyValue);
-  }
-
   useEffect(() => {
-    if (requestForm) {
-      if (shouldBeautifyEditor) {
-        handleBeautifyButton();
+    if (shouldBeautifyEditor && requestForm) {
+      handleBeautifyButton();
 
-        setTimeout(async () => {
-          await editorRef.current
-            .getAction("editor.action.formatDocument")
-            .run();
-        }, 300);
-      }
+      setTimeout(async () => {
+        await editorRef.current.getAction("editor.action.formatDocument").run();
+      }, 200);
     }
   }, [shouldBeautifyEditor]);
 
   useEffect(() => {
-    if (requestForm) return;
-    if (responseBodyOption === "Preview") return;
+    if (requestForm || !previewMode || viewOption === RESPONSE.PREVIEW) return;
 
-    if (editorRef.current?.getValue() !== responseValue) {
-      editorRef.current?.setValue(responseValue);
+    if (editorRef.current?.getValue() !== codeEditorValue) {
+      editorRef.current?.setValue(codeEditorValue);
     }
 
-    if (responseBodyOption !== REQUEST.RAW) {
-      setTimeout(async () => {
-        editorRef.current?.updateOptions(OPTION.READ_ONLY_FALSE_OPTION);
+    setTimeout(async () => {
+      editorRef.current?.updateOptions(OPTION.READ_ONLY_FALSE_OPTION);
 
-        await editorRef.current
-          ?.getAction("editor.action.formatDocument")
-          .run();
+      await editorRef.current?.getAction("editor.action.formatDocument").run();
 
-        editorRef.current?.updateOptions(OPTION.READ_ONLY_TRUE_OPTION);
-      }, 300);
-
-      setEditorLanguage(responseBodyViewFormat.toLowerCase());
-    } else {
-      setTimeout(() => {
+      if (viewOption === REQUEST.RAW) {
         editorRef.current?.updateOptions(OPTION.LINE_NUMBER_OPTION);
-      }, 300);
-
-      setEditorLanguage(RESPONSE.TEXT);
-    }
-  }, [responseOption, responseBodyOption, responseBodyViewFormat]);
+      } else {
+        editorRef.current?.updateOptions(OPTION.READ_ONLY_TRUE_OPTION);
+      }
+    }, 300);
+  }, [viewOption, language]);
 
   return (
     <EditorWrapper>
-      {responseBodyOption === RESPONSE.PREVIEW && !requestForm ? (
-        <ResponsePreview sourceCode={responseValue} />
+      {viewOption === RESPONSE.PREVIEW && previewMode ? (
+        <ResponsePreview sourceCode={codeEditorValue} />
       ) : (
         <Editor
-          height={requestForm ? HEIGHT.FORM_HEIGHT : HEIGHT.EDITOR_HEIGHT}
-          language={requestForm ? bodyRawOption : editorLanguage}
+          height={editorHeight}
+          language={language}
           theme={RESPONSE.THEME}
-          value={requestForm ? bodyRawData[bodyRawOption] : responseValue}
-          options={OPTION.EDITOR_OPTIONS}
-          onChange={requestForm && handleRequestBodyEditorChange}
+          value={codeEditorValue}
+          options={editorOption}
+          onChange={handleEditorChange}
           onMount={handleEditorOnMount}
         />
       )}
@@ -106,13 +77,17 @@ const EditorWrapper = styled.div`
 `;
 
 CodeEditor.propTypes = {
+  language: PropTypes.string,
   requestForm: PropTypes.bool,
-  bodyRawData: PropTypes.object,
-  bodyRawOption: PropTypes.string,
-  responseValue: PropTypes.string,
+  requestForm: PropTypes.bool,
+  previewMode: PropTypes.bool,
+  viewOption: PropTypes.string,
+  editorHeight: PropTypes.string,
+  editorOption: PropTypes.object,
+  codeEditorValue: PropTypes.string,
+  handleEditorChange: PropTypes.func,
   shouldBeautifyEditor: PropTypes.bool,
   handleBeautifyButton: PropTypes.func,
-  handleBodyRawOptionData: PropTypes.func,
 };
 
 export default CodeEditor;
