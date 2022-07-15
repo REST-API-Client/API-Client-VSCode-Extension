@@ -1,17 +1,16 @@
+import PropTypes from "prop-types";
 import React from "react";
 import { FiCopy } from "react-icons/fi";
 import styled from "styled-components";
 
-import useResponseDataStore from "../../../store/useResponseDataStore";
-import vscode from "../../../vscode";
+import { COMMON } from "../constants";
+import vscode from "../vscode";
 
-const ResponseCopyIcon = () => {
-  const { data } = useResponseDataStore((state) => state.responseData);
-
+const CopyIcon = ({ value }) => {
   const handleCopyIconClick = () => {
-    vscode.postMessage({ command: "Alert Copy" });
+    vscode.postMessage({ command: COMMON.ALERT_COPY });
 
-    navigator.clipboard.writeText(data);
+    navigator.clipboard.writeText(value);
   };
 
   return (
@@ -37,4 +36,8 @@ const CopyIconWrapper = styled.div`
   }
 `;
 
-export default ResponseCopyIcon;
+CopyIcon.propTypes = {
+  value: PropTypes.string,
+};
+
+export default CopyIcon;

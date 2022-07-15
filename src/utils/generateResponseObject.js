@@ -26,6 +26,8 @@ async function generateResponseObject(configuration) {
       statusCode: response.status,
       statusText: response.statusText,
       requestTime: totalRequestTime,
+      url: configuration.url,
+      method: configuration.method,
     };
 
     responseDataObject.responseSize = Buffer.from(

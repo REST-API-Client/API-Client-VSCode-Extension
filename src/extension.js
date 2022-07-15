@@ -38,8 +38,10 @@ export async function activate(context) {
       MainWebViewProvider.initializeWebView();
 
       SidebarWebViewProvider.mainWebViewPanel = MainWebViewProvider.mainPanel;
+
+      MainWebViewProvider.mainPanel.onDidDispose(() => {
+        SidebarWebViewProvider.mainWebViewPanel = null;
+      }, null);
     }),
   );
 }
-
-export function deactivate() {}

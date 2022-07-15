@@ -58,7 +58,7 @@ class MainWebViewPanel {
         command,
       }) => {
         if (command === COMMAND.ALERT_COPY) {
-          vscode.window.showInformationMessage(MESSAGE.COPY_SUCCESFUL);
+          vscode.window.showInformationMessage(MESSAGE.COPY_SUCCESFUL_MESSAGE);
 
           return;
         }

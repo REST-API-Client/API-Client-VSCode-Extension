@@ -27,6 +27,10 @@ const SelectWrapperContainer = styled.div`
   h3 {
     opacity: 0.93;
   }
+
+  .variantsLabel {
+    margin-left: 1.5rem;
+  }
 `;
 
 SelectWrapper.propTypes = {

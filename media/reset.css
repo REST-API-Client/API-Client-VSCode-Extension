@@ -1,6 +1,7 @@
 html {
   box-sizing: border-box;
   font-size: 13px;
+  overflow-y: hidden;
 }
 
 *,

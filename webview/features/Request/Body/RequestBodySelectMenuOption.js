@@ -1,7 +1,7 @@
 import React from "react";
 import shallow from "zustand/shallow";
 
-import { REQUEST } from "../../../constants";
+import { HEIGHT, OPTION, REQUEST } from "../../../constants";
 import CodeEditor from "../../../shared/CodeEditor";
 import KeyValueTable from "../../../shared/KeyValueTable";
 import useKeyValueTableStore from "../../../store/useKeyValueTableStore";
@@ -10,19 +10,29 @@ import RequestNoBody from "./RequestNoBody";
 
 const RequestBodySelectMenuOption = () => {
   const keyValueProps = useKeyValueTableStore();
-  const { bodyOption, codeEditorProps } = useRequestStore(
+  const {
+    bodyOption,
+    bodyRawOption,
+    codeEditorProps,
+    bodyRawData,
+    handleBodyRawOptionData,
+  } = useRequestStore(
     (state) => ({
       bodyOption: state.bodyOption,
+      bodyRawData: state.bodyRawData,
+      bodyRawOption: state.bodyRawOption.toLowerCase(),
+      handleBodyRawOptionData: state.handleBodyRawOptionData,
       codeEditorProps: {
-        bodyRawOption: state.bodyRawOption.toLowerCase(),
-        bodyRawData: state.bodyRawData,
-        handleBodyRawOptionData: state.handleBodyRawOptionData,
         shouldBeautifyEditor: state.shouldBeautifyEditor,
         handleBeautifyButton: state.handleBeautifyButton,
       },
     }),
     shallow,
   );
+
+  function handleRequestBodyEditorChange(bodyValue) {
+    handleBodyRawOptionData(bodyRawOption, bodyValue);
+  }
 
   switch (bodyOption) {
     case REQUEST.FORM_DATA:
@@ -35,8 +45,17 @@ const RequestBodySelectMenuOption = () => {
         />
       );
     case REQUEST.RAW:
-      return <CodeEditor {...codeEditorProps} requestForm />;
-
+      return (
+        <CodeEditor
+          language={bodyRawOption}
+          editorOption={OPTION.EDITOR_OPTIONS}
+          editorHeight={HEIGHT.REQUEST_EDITOR_HEIGHT}
+          codeEditorValue={bodyRawData[bodyRawOption]}
+          handleEditorChange={handleRequestBodyEditorChange}
+          requestForm
+          {...codeEditorProps}
+        />
+      );
     default:
       return <RequestNoBody />;
   }
