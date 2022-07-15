@@ -14,6 +14,12 @@ const initialState = {
   bodyRawData: { text: "", javascript: "", json: "", html: "" },
   shouldBeautifyEditor: false,
   shouldShowPassword: false,
+  codeSnippetOption: {
+    language: "C",
+    variant: "libcurl",
+    editorLanguage: "c",
+  },
+  codeSnippetValue: "",
 };
 
 const useRequestStore = create((set) => ({
@@ -28,6 +34,8 @@ const useRequestStore = create((set) => ({
   bodyRawData: initialState.bodyRawData,
   shouldShowPassword: initialState.shouldShowPassword,
   shouldBeautifyEditor: initialState.shouldBeautifyEditor,
+  codeSnippetOption: initialState.codeSnippetOption,
+  codeSnippetValue: initialState.codeSnippetValue,
 
   handleRequestUrlChange: (url) => set(() => ({ requestUrl: url })),
 
@@ -62,6 +70,26 @@ const useRequestStore = create((set) => ({
 
   handleBeautifyButton: () =>
     set((state) => ({ shouldBeautifyEditor: !state.shouldBeautifyEditor })),
+
+  handleCodeSnippetOptionChange: (
+    languageOption,
+    variantOption,
+    editorLanguageOption,
+  ) =>
+    set(() => ({
+      codeSnippetOption: {
+        language: languageOption,
+        variant: variantOption,
+        editorLanguage: editorLanguageOption,
+      },
+    })),
+
+  handleCodeSnippetVariantChange: (variantOption) =>
+    set((state) => ({
+      codeSnippetOption: { ...state.codeSnippetOption, variant: variantOption },
+    })),
+
+  setCodeSnippetValue: (value) => set(() => ({ codeSnippetValue: value })),
 }));
 
 export default useRequestStore;
