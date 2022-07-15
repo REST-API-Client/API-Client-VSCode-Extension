@@ -1,4 +1,5 @@
 const path = require("path");
+const webpack = require("webpack");
 const nodeExternals = require("webpack-node-externals");
 
 const extensionConfig = {
@@ -52,14 +53,20 @@ const MainWebViewConfig = {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
   },
+  plugins: [
+    new webpack.ProvidePlugin({
+      Buffer: ["buffer", "Buffer"],
+      process: "process/browser",
+    }),
+  ],
   resolve: {
     mainFields: ["browser", "module", "main"],
-    extensions: [".js", "jsx"],
+    extensions: [".js"],
   },
   module: {
     rules: [
       {
-        test: /\.(png|jp(e*)g|svg)$/,
+        test: /\.(png|svg)$/,
         use: [
           {
             loader: "file-loader",
@@ -70,7 +77,7 @@ const MainWebViewConfig = {
         ],
       },
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js)$/,
         exclude: path.resolve(__dirname, "node_modules"),
         use: {
           loader: "babel-loader",
@@ -91,12 +98,12 @@ const SidebarWebViewConfig = {
   },
   resolve: {
     mainFields: ["browser", "module", "main"],
-    extensions: [".js", "jsx"],
+    extensions: [".js"],
   },
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js)$/,
         exclude: path.resolve(__dirname, "node_modules"),
         use: {
           loader: "babel-loader",
