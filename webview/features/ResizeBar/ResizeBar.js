@@ -32,11 +32,13 @@ const ResizeBar = () => {
       const newHeight = currentHeight + (event.clientY - resizeBarY) / 10;
 
       if (
-        newHeight > HEIGHT.MINIMUM_HEIGHT &&
-        newHeight < HEIGHT.MAXIMUM_HEIGHT
+        newHeight >= HEIGHT.MINIMUM_HEIGHT &&
+        newHeight <= HEIGHT.MAXIMUM_HEIGHT
       ) {
         setResizeBarY(newHeight);
         handleRequestHeightChange(newHeight);
+      } else {
+        setIsDragging(false);
       }
     }
   };
