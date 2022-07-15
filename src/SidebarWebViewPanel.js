@@ -120,7 +120,7 @@ class SidebarWebViewPanel {
           );
 
           this.mainWebViewPanel.webview.postMessage(responseObject);
-        }, 700);
+        }, 1000);
       }
     });
   }
