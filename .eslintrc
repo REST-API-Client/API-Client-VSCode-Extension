@@ -4,7 +4,8 @@
     "commonjs": true,
     "es6": true,
     "node": true,
-    "mocha": true
+    "mocha": true,
+    "jest/globals": true
   },
   "parser": "@babel/eslint-parser",
   "parserOptions": {
@@ -15,8 +16,8 @@
     },
     "sourceType": "module"
   },
-  "plugins": ["simple-import-sort", "react"],
-  "extends": ["plugin:react/recommended"],
+  "plugins": ["simple-import-sort", "react", "jest"],
+  "extends": ["plugin:react/recommended", "plugin:jest/recommended"],
   "settings": {
     "react": {
       "version": "detect"
