@@ -6,19 +6,19 @@ import MainWebViewPanel from "./MainWebViewPanel";
 import SidebarWebViewPanel from "./SideBarWebViewPanel";
 
 export async function activate(context) {
-  const stateManager = new ExtentionStateManager(context);
+  const StateManager = new ExtentionStateManager(context);
   const SidebarWebViewProvider = new SidebarWebViewPanel(
     context.extensionUri,
-    stateManager,
+    StateManager,
   );
   const MainWebViewProvider = new MainWebViewPanel(
     context.extensionUri,
-    stateManager,
+    StateManager,
     SidebarWebViewProvider,
   );
 
-  if (!stateManager.getExtensionContext(COLLECTION.HISTORY_COLLECTION)) {
-    await stateManager.addExtensionContext(COLLECTION.HISTORY_COLLECTION, {
+  if (!StateManager.getExtensionContext(COLLECTION.HISTORY_COLLECTION)) {
+    await StateManager.addExtensionContext(COLLECTION.HISTORY_COLLECTION, {
       history: [],
     });
   }
