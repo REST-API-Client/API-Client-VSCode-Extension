@@ -163,7 +163,10 @@ class MainWebViewPanel {
     const scriptSrc = panel.webview.asWebviewUri(scriptPath);
     const nonce = getNonce();
 
-    panel.iconPath = vscode.Uri.joinPath(this.#extensionUri, "icons/icon.png");
+    panel.iconPath = vscode.Uri.joinPath(
+      this.#extensionUri,
+      "icons/images/icon.png",
+    );
 
     return `
       <!DOCTYPE html>

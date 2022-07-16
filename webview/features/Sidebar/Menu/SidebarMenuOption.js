@@ -28,7 +28,7 @@ const SidebarMenuOption = () => {
     shallow,
   );
 
-  const SidebarCollectionProps = {
+  const sidebarCollectionProps = {
     sidebarOption,
     handleSidebarFavoriteIcon(command, id) {
       const currentTime = new Date().getTime();
@@ -108,14 +108,14 @@ const SidebarMenuOption = () => {
       return (
         <SidebarCollection
           userCollection={userFavorites}
-          {...SidebarCollectionProps}
+          {...sidebarCollectionProps}
         />
       );
     default:
       return (
         <SidebarCollection
           userCollection={userRequestHistory}
-          {...SidebarCollectionProps}
+          {...sidebarCollectionProps}
         />
       );
   }

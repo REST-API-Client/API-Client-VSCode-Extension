@@ -4,21 +4,12 @@ import shallow from "zustand/shallow";
 
 import Loader from "../../../components/Loader";
 import { COMMON, RESPONSE } from "../../../constants";
-import useRequestStore from "../../../store/useRequestStore";
 import useResponseDataStore from "../../../store/useResponseDataStore";
 import ResponseEmptyMenu from "../Empty/ResponseEmptyMenu";
 import ResponseErrorMenu from "../Error/ResponseErrorMenu";
 import ResponseMenu from "../Menu/ResponseMenu";
 
 const ResponsePanel = () => {
-  const { requestUrl, handleRequestUrlChange } = useRequestStore(
-    (state) => ({
-      requestUrl: state.requestUrl,
-      handleRequestUrlChange: state.handleRequestUrlChange,
-    }),
-    shallow,
-  );
-
   const {
     responseData,
     requestInProcess,
@@ -38,10 +29,6 @@ const ResponsePanel = () => {
     if (event.data.type === RESPONSE.RESPONSE) {
       handleResponseData(event.data);
       handleRequestProcessStatus(COMMON.FINISHED);
-
-      if (requestUrl !== event.data.url) {
-        handleRequestUrlChange(event.data.url);
-      }
     } else if (event.data.type === RESPONSE.ERROR) {
       handleResponseData(event.data);
       handleRequestProcessStatus(RESPONSE.ERROR);
