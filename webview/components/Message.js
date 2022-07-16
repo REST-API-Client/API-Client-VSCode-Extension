@@ -12,6 +12,7 @@ const MessageWrapper = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: ${(props) => (props.primary ? "1rem" : " 3.8rem")};
+  overflow-x: hidden;
 
   h2 {
     margin: 1.3rem 0;
@@ -28,6 +29,18 @@ const MessageWrapper = styled.div`
     opacity: 0.65;
     line-height: 1.1;
     text-align: center;
+    line-height: 1.25;
+  }
+
+  span {
+    width: 100%;
+    margin: 0 0.25rem;
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: rgb(121 255 242);
+    word-break: break-all;
+    white-space: normal;
+    line-height: 1.25;
   }
 
   img {
