@@ -2,9 +2,9 @@ import React from "react";
 import shallow from "zustand/shallow";
 
 import { REQUEST, SIDEBAR } from "../../../constants";
-import SidebarCollection from "../../../shared/SidebarCollection";
 import useSidebarStore from "../../../store/useSidebarStore";
 import vscode from "../../../vscode";
+import SidebarCollection from "../Collection/SidebarCollection";
 
 const SidebarMenuOption = () => {
   const {

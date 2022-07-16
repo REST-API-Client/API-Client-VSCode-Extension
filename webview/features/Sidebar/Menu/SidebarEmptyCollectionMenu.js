@@ -6,7 +6,7 @@ import { SIDEBAR } from "../../../constants";
 import EmptyFavoritesCollectionMessage from "../Message/EmptyFavoritesCollectionMessage";
 import EmptyHistoryCollectionMessage from "../Message/EmptyHistoryCollectionMessage";
 
-const EmptyCollectionMenu = ({ currentSidebarOption }) => {
+const SibebarEmptyCollectionMenu = ({ currentSidebarOption }) => {
   return (
     <Message>
       {currentSidebarOption === SIDEBAR.HISTORY ? (
@@ -18,8 +18,8 @@ const EmptyCollectionMenu = ({ currentSidebarOption }) => {
   );
 };
 
-EmptyCollectionMenu.propTypes = {
+SibebarEmptyCollectionMenu.propTypes = {
   currentSidebarOption: PropTypes.string,
 };
 
-export default EmptyCollectionMenu;
+export default SibebarEmptyCollectionMenu;

@@ -4,13 +4,13 @@ import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { FaTrashAlt } from "react-icons/fa";
 import styled from "styled-components";
 
-import Information from "../components/Information";
-import MoreInformation from "../components/MoreInformation";
-import { SIDEBAR } from "../constants";
-import SidebarDeleteAllButton from "../features/Sidebar/Button/SidebarDeleteAllButton";
-import EmptyCollectionMenu from "../features/Sidebar/Menu/EmptyCollectionMenu";
-import EmptySearchResultMessage from "../features/Sidebar/Message/EmptySearchResultMessage";
-import { calculateCollectionTime, generateMethodColor } from "../utils";
+import Information from "../../../components/Information";
+import MoreInformation from "../../../components/MoreInformation";
+import { SIDEBAR } from "../../../constants";
+import { calculateCollectionTime, generateMethodColor } from "../../../utils";
+import SidebarDeleteAllButton from "../Button/SidebarDeleteAllButton";
+import SibebarEmptyCollectionMenu from "../Menu/SidebarEmptyCollectionMenu";
+import EmptySearchResultMessage from "../Message/EmptySearchResultMessage";
 
 const SidebarCollection = ({
   sidebarOption,
@@ -117,7 +117,7 @@ const SidebarCollection = ({
             <EmptySearchResultMessage value={searchInputValue} />
           )
         ) : (
-          <EmptyCollectionMenu currentSidebarOption={sidebarOption} />
+          <SibebarEmptyCollectionMenu currentSidebarOption={sidebarOption} />
         )}
       </CollectionWrapper>
     </>
