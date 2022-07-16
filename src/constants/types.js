@@ -7,7 +7,7 @@ const TYPE = {
   BODY_FORM_DATA: "Form Data",
   BEARER_TOKEN: "Bearer Token",
   AUTHORIZATION: "Authorization",
-  WEB_VIEW_TYPE: "RestApiTester",
+  WEB_VIEW_TYPE: "RestApiClient",
   BODY_FORM_URLENCODED: "x-www-form-urlencoded",
 };
 
