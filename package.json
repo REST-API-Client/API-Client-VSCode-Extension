@@ -1,13 +1,13 @@
 {
-  "name": "rest-api-tester",
+  "name": "rest-api-client",
   "publisher": "unjinjang",
-  "displayName": "REST API Tester",
-  "icon": "icons/icon.png",
-  "description": "Beginner friendly basic api requesting VSCode extension",
+  "displayName": "REST API Client",
+  "icon": "icons/images/icon.png",
+  "description": "Beginner-friendly and simple API client made for VSCode extension.",
   "version": "1.0.0",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/REST-API-Tester/HTTP-Request-VSCode-Extension/issues"
+    "url": "https://github.com/REST-API-Client/API-Client-VSCode-Extension/issues"
   },
   "author": {
     "name": "Un Jin Jang",
@@ -15,52 +15,55 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/REST-API-Tester"
+    "url": "https://github.com/REST-API-Client"
   },
   "engines": {
     "vscode": "^1.68.0"
   },
   "categories": [
-    "Programming Languages"
+    "Programming Languages",
+    "Snippets",
+    "Testing"
   ],
   "keywords": [
     "api",
     "http",
     "REST",
+    "client",
     "postman",
     "request",
     "response",
     "api-client"
   ],
   "activationEvents": [
-    "onCommand:rest-api-tester.newRequest",
-    "onView:rest-api-tester.collectionMenu"
+    "onCommand:rest-api-client.newRequest",
+    "onView:rest-api-client.collectionMenu"
   ],
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "rest-api-tester.newRequest",
-        "category": "APP Test",
+        "command": "rest-api-client.newRequest",
+        "category": "Start",
         "title": "New Request"
       }
     ],
     "viewsContainers": {
       "activitybar": [
         {
-          "id": "RESTAPITester",
-          "title": "REST API Tester",
-          "icon": "icons/httpIcon.svg"
+          "id": "RESTAPIClient",
+          "title": "REST API Client",
+          "icon": "icons/svg/httpIcon.svg"
         }
       ]
     },
     "views": {
-      "RESTAPITester": [
+      "RESTAPIClient": [
         {
           "type": "webview",
-          "id": "rest-api-tester.collectionMenu",
-          "name": "REST API Tester",
-          "contextualTitle": "REST API Tester"
+          "id": "rest-api-client.collectionMenu",
+          "name": "REST API Client",
+          "contextualTitle": "REST API Client"
         }
       ]
     }
