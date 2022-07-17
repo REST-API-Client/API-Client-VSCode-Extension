@@ -4,7 +4,7 @@ import React from "react";
 
 import RequestBodyRawOptions from "../features/Request/Body/RequestBodyRawOptions";
 
-describe("RequestAuthSelectMenu component test", () => {
+describe("RequestBodyRawOptions component test", () => {
   it("should select option should display correct default option", () => {
     const { getByRole } = render(<RequestBodyRawOptions />);
 
@@ -16,7 +16,7 @@ describe("RequestAuthSelectMenu component test", () => {
     expect(getAllByRole("option").length).toBe(4);
   });
 
-  it("should allow user to select request method", async () => {
+  it("should allow user to select request body raw options", async () => {
     const { getByRole } = render(<RequestBodyRawOptions />);
 
     await waitFor(() =>
