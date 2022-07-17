@@ -4,8 +4,8 @@ import shallow from "zustand/shallow";
 import DetailOption from "../../../components/DetailOption";
 import MenuOption from "../../../components/MenuOption";
 import { COMMON, OPTION, REQUEST } from "../../../constants/";
-import useKeyValueTableStore from "../../../store/useKeyValueTableStore";
-import useRequestStore from "../../../store/useRequestStore";
+import useKeyValueTableStore from "../../../store/keyValueTableStore";
+import useRequestStore from "../../../store/requestStore";
 import RequestMenuOption from "./RequestMenuOption";
 
 const RequestMenu = () => {

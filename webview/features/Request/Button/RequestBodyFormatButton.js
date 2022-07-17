@@ -1,7 +1,7 @@
 import React from "react";
 
 import Button from "../../../components/Button";
-import useRequestStore from "../../../store/useRequestStore";
+import useRequestStore from "../../../store/requestStore";
 
 const RequestBodyFormatButton = () => {
   const handleBeautifyButton = useRequestStore(

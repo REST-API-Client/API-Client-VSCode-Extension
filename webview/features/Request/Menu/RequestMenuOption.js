@@ -2,8 +2,8 @@ import React from "react";
 
 import { COMMON, REQUEST } from "../../../constants";
 import KeyValueTable from "../../../shared/KeyValueTable";
-import useKeyValueTableStore from "../../../store/useKeyValueTableStore";
-import useRequestStore from "../../../store/useRequestStore";
+import useKeyValueTableStore from "../../../store/keyValueTableStore";
+import useRequestStore from "../../../store/requestStore";
 import RequestAuthSelectMenu from "../Authorization/RequestAuthSelectMenu";
 import RequestBodySelectMenu from "../Body/RequestBodySelectMenu";
 import RequestCodeSnippet from "../CodeSnippet/RequestCodeSnippet";

@@ -5,7 +5,7 @@ import shallow from "zustand/shallow";
 import MenuOption from "../../../components/MenuOption";
 import SelectWrapper from "../../../components/SelectWrapper";
 import { OPTION, SIDEBAR } from "../../../constants";
-import useSidebarStore from "../../../store/useSidebarStore";
+import useSidebarStore from "../../../store/sidebarStore";
 import SidebarMenuOption from "./SidebarMenuOption";
 
 const SidebarMenu = () => {

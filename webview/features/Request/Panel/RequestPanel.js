@@ -3,10 +3,10 @@ import styled from "styled-components";
 import shallow from "zustand/shallow";
 
 import { COMMON } from "../../../constants";
-import useHeightStore from "../../../store/useHeightStore";
-import useKeyValueTableStore from "../../../store/useKeyValueTableStore";
-import useRequestStore from "../../../store/useRequestStore";
-import useResponseDataStore from "../../../store/useResponseDataStore";
+import useHeightStore from "../../../store/heightStore";
+import useKeyValueTableStore from "../../../store/keyValueTableStore";
+import useRequestStore from "../../../store/requestStore";
+import useResponseDataStore from "../../../store/responseDataStore";
 import vscode from "../../../vscode";
 import RequestButton from "../Button/RequestButton";
 import RequestDetailOption from "../Menu/RequestMenu";

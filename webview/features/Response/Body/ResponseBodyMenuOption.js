@@ -4,7 +4,7 @@ import shallow from "zustand/shallow";
 
 import SelectWrapper from "../../../components/SelectWrapper";
 import { OPTION, RESPONSE } from "../../../constants";
-import useResponseOptionStore from "../../../store/useResponseOptionStore";
+import useResponseOptionStore from "../../../store/responseOptionStore";
 
 const ResponseBodyViewOption = () => {
   const {

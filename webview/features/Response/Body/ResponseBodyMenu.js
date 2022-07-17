@@ -5,8 +5,8 @@ import shallow from "zustand/shallow";
 import CopyIcon from "../../../components/CopyIcon";
 import SelectWrapper from "../../../components/SelectWrapper";
 import { COMMON, OPTION, RESPONSE } from "../../../constants";
-import useResponseDataStore from "../../../store/useResponseDataStore";
-import useResponseOptionStore from "../../../store/useResponseOptionStore";
+import useResponseDataStore from "../../../store/responseDataStore";
+import useResponseOptionStore from "../../../store/responseOptionStore";
 import vscode from "../../../vscode";
 import ResponseBodyViewOption from "./ResponseBodyMenuOption";
 
@@ -45,7 +45,10 @@ const RequestBodyMenu = () => {
       ))}
       <ResponseBodyViewOption />
       {responseBodyOption !== COMMON.PREVIEW && (
-        <CopyIcon handleClick={handleCopyIconClick} value={responseData.data} />
+        <CopyIcon
+          handleClick={handleCopyIconClick}
+          value={responseData?.data}
+        />
       )}
     </SelectWrapper>
   );

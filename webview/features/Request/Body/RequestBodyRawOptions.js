@@ -4,8 +4,8 @@ import shallow from "zustand/shallow";
 
 import SelectWrapper from "../../../components/SelectWrapper";
 import { OPTION, REQUEST } from "../../../constants";
-import useKeyValueTableStore from "../../../store/useKeyValueTableStore";
-import useRequestStore from "../../../store/useRequestStore";
+import useKeyValueTableStore from "../../../store/keyValueTableStore";
+import useRequestStore from "../../../store/requestStore";
 
 const RequestBodyRawOptions = () => {
   const { bodyRawOption, handleBodyRawOption } = useRequestStore(

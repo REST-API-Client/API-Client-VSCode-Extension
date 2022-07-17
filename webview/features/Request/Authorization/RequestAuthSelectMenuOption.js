@@ -1,7 +1,7 @@
 import React from "react";
 
 import { REQUEST } from "../../../constants";
-import useRequestStore from "../../../store/useRequestStore";
+import useRequestStore from "../../../store/requestStore";
 import RequestBearerToken from "./RequestAuthBearerToken";
 import RequestBasicAuth from "./RequestBasicAuth";
 import RequestNoAuth from "./RequestNoAuth";

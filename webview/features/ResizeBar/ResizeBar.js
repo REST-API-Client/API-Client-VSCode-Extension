@@ -3,7 +3,7 @@ import { FaGripLines } from "react-icons/fa";
 import styled from "styled-components";
 
 import { HEIGHT } from "../../constants";
-import useHeightStore from "../../store/useHeightStore";
+import useHeightStore from "../../store/heightStore";
 
 const ResizeBar = () => {
   const { height, handleRequestHeightChange } = useHeightStore(

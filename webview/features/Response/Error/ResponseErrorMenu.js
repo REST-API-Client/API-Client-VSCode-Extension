@@ -7,7 +7,7 @@ import Message from "../../../components/Message";
 const ResponseErrorMenu = ({ type, message }) => {
   return (
     <Message primary>
-      <img src={errorImage} />
+      <img src={errorImage} alt="error" />
       <h2>Could not send request 😔</h2>
       <h3>
         {type}: {message}

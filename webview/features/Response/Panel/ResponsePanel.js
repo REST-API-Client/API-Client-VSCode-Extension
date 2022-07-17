@@ -4,7 +4,7 @@ import shallow from "zustand/shallow";
 
 import Loader from "../../../components/Loader";
 import { COMMON, RESPONSE } from "../../../constants";
-import useResponseDataStore from "../../../store/useResponseDataStore";
+import useResponseDataStore from "../../../store/responseDataStore";
 import ResponseEmptyMenu from "../Empty/ResponseEmptyMenu";
 import ResponseErrorMenu from "../Error/ResponseErrorMenu";
 import ResponseMenu from "../Menu/ResponseMenu";

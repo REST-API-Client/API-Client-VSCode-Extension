@@ -3,8 +3,8 @@ import styled from "styled-components";
 import shallow from "zustand/shallow";
 
 import { REQUEST } from "../../../constants";
-import useKeyValueTableStore from "../../../store/useKeyValueTableStore";
-import useRequestStore from "../../../store/useRequestStore";
+import useKeyValueTableStore from "../../../store/keyValueTableStore";
+import useRequestStore from "../../../store/requestStore";
 import { generateParameterString, removeUrlParameter } from "../../../utils";
 
 const RequestUrl = () => {
