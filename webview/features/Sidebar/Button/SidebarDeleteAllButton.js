@@ -21,9 +21,9 @@ const DeleteAllButtonWrapper = styled.div`
   h5 {
     text-align: end;
     padding: 0.25rem 0.4rem;
-    color: #cbcbcb;
-    border-radius: 10px;
-    background: #853333;
+    color: rgb(203 203 203);
+    border-radius: 1rem;
+    background: rgb(133 51 51);
     transition: opacity 0.15s ease-in-out;
     cursor: pointer;
 
