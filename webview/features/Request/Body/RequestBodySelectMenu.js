@@ -50,19 +50,21 @@ const RequestBodySelectMenu = () => {
       <SelectWrapper requestMenu>
         {OPTION.REQUEST_BODY_OPTIONS.map(({ option, headerField }, index) => (
           <RadioInputWrapper key={COMMON.BODY + index}>
-            <input
-              type="radio"
-              name="bodyOption"
-              checked={bodyOption === option}
-              value={option}
-              header-type={
-                option === REQUEST.RAW
-                  ? rawOptionHeaderField[0].headerField
-                  : headerField
-              }
-              onChange={handleBodyOptionChoice}
-            />
-            <label htmlFor={option}>{option}</label>
+            <label>
+              <input
+                type="radio"
+                name="bodyOption"
+                checked={bodyOption === option}
+                value={option}
+                header-type={
+                  option === REQUEST.RAW
+                    ? rawOptionHeaderField[0].headerField
+                    : headerField
+                }
+                onChange={handleBodyOptionChoice}
+              />
+              {option}
+            </label>
           </RadioInputWrapper>
         ))}
         {bodyOption === REQUEST.RAW && (
@@ -78,7 +80,6 @@ const RequestBodySelectMenu = () => {
 };
 
 const RadioInputWrapper = styled.div`
-  display: flex;
   margin: 0.5rem 1rem;
 
   input {
@@ -88,6 +89,7 @@ const RadioInputWrapper = styled.div`
   }
 
   label {
+    display: flex;
     user-select: none;
   }
 `;

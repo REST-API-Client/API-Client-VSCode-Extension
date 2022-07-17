@@ -6,7 +6,7 @@ import useKeyValueTableStore from "../../../store/useKeyValueTableStore";
 import useRequestStore from "../../../store/useRequestStore";
 import RequestAuthSelectMenu from "../Authorization/RequestAuthSelectMenu";
 import RequestBodySelectMenu from "../Body/RequestBodySelectMenu";
-import RequestCodeSnippet from "../CodeSnippet/RequestCodeGenerator";
+import RequestCodeSnippet from "../CodeSnippet/RequestCodeSnippet";
 
 const RequestMenuOption = () => {
   const keyValueProps = useKeyValueTableStore();

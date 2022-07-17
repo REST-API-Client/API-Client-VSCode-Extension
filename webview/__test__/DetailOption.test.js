@@ -13,6 +13,7 @@ describe("DetailOption component test", () => {
 
     expect(getByText(/Detail Options child component/i)).toBeInTheDocument();
   });
+
   it("should render children element correctly", () => {
     const { getAllByRole } = render(
       <DetailOption>

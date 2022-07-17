@@ -3,19 +3,14 @@ import React from "react";
 import { FiCopy } from "react-icons/fi";
 import styled from "styled-components";
 
-import { COMMON } from "../constants";
-import vscode from "../vscode";
-
-const CopyIcon = ({ value }) => {
-  const handleCopyIconClick = () => {
-    vscode.postMessage({ command: COMMON.ALERT_COPY });
-
-    navigator.clipboard.writeText(value);
-  };
-
+const CopyIcon = ({ handleClick, value }) => {
   return (
     <CopyIconWrapper>
-      <FiCopy className="copyIcon" onClick={handleCopyIconClick} />
+      <FiCopy
+        className="copyIcon"
+        role="button"
+        onClick={() => handleClick(value)}
+      />
     </CopyIconWrapper>
   );
 };
@@ -38,6 +33,7 @@ const CopyIconWrapper = styled.div`
 
 CopyIcon.propTypes = {
   value: PropTypes.string,
+  handleClick: PropTypes.func,
 };
 
 export default CopyIcon;

@@ -5,7 +5,7 @@ import React from "react";
 import RequestMethod from "../features/Request/Method/RequestMethod";
 
 describe("RequestMethod component test", () => {
-  it("should select option should display correct default option", () => {
+  it("should display correct default select option", () => {
     const { getByRole } = render(<RequestMethod />);
 
     expect(getByRole("option", { name: "GET" }).selected).toBe(true);
@@ -29,5 +29,6 @@ describe("RequestMethod component test", () => {
     );
 
     expect(getByRole("option", { name: "POST" }).selected).toBe(true);
+    expect(getByRole("option", { name: "GET" }).selected).toBe(false);
   });
 });

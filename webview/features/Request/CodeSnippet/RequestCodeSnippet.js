@@ -5,11 +5,12 @@ import styled from "styled-components";
 
 import CopyIcon from "../../../components/CopyIcon";
 import SelectWrapper from "../../../components/SelectWrapper";
-import { HEIGHT, OPTION } from "../../../constants";
+import { COMMON, HEIGHT, OPTION } from "../../../constants";
 import CodeEditor from "../../../shared/CodeEditor";
 import useKeyValueTableStore from "../../../store/useKeyValueTableStore";
 import useRequestStore from "../../../store/useRequestStore";
 import { generateSdkRequestObject } from "../../../utils";
+import vscode from "../../../vscode";
 
 const RequestCodeSnippet = () => {
   const {
@@ -30,6 +31,12 @@ const RequestCodeSnippet = () => {
   const keyValueTableData = useKeyValueTableStore(
     (state) => state.keyValueTableData,
   );
+
+  const handleCopyIconClick = (value) => {
+    vscode.postMessage({ command: COMMON.ALERT_COPY });
+
+    navigator.clipboard.writeText(value);
+  };
 
   const sdkRequestObject = generateSdkRequestObject(
     requestUrl,
@@ -110,7 +117,7 @@ const RequestCodeSnippet = () => {
               )),
           )}
         </SelectOptionWrapper>
-        <CopyIcon value={codeSnippetValue} />
+        <CopyIcon handleClick={handleCopyIconClick} value={codeSnippetValue} />
       </SelectWrapper>
       <CodeEditor
         codeEditorValue={codeSnippetValue}
