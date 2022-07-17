@@ -8,6 +8,7 @@ const removeUrlParameter = (url) => {
   for (let i = 0; i < url.length; i++) {
     if (url[i] === "?") {
       targetIndex = i;
+
       break;
     }
   }
