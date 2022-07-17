@@ -7,6 +7,7 @@ import SelectWrapper from "../../../components/SelectWrapper";
 import { COMMON, OPTION, RESPONSE } from "../../../constants";
 import useResponseDataStore from "../../../store/useResponseDataStore";
 import useResponseOptionStore from "../../../store/useResponseOptionStore";
+import vscode from "../../../vscode";
 import ResponseBodyViewOption from "./ResponseBodyMenuOption";
 
 const RequestBodyMenu = () => {
@@ -24,6 +25,12 @@ const RequestBodyMenu = () => {
     handleResponseBodyOptionChange(event.target.innerText);
   };
 
+  const handleCopyIconClick = (value) => {
+    vscode.postMessage({ command: COMMON.ALERT_COPY });
+
+    navigator.clipboard.writeText(value);
+  };
+
   return (
     <SelectWrapper>
       {OPTION.RESPONSE_BODY_OPTIONS.map((option, index) => (
@@ -38,7 +45,7 @@ const RequestBodyMenu = () => {
       ))}
       <ResponseBodyViewOption />
       {responseBodyOption !== COMMON.PREVIEW && (
-        <CopyIcon value={responseData.data} />
+        <CopyIcon handleClick={handleCopyIconClick} value={responseData.data} />
       )}
     </SelectWrapper>
   );
