@@ -25,6 +25,7 @@ describe("ResponseMetaData component test", () => {
     expect(getByText(/time:/i)).toBeInTheDocument();
     expect(getByText(/status:/i)).toBeInTheDocument();
   });
+
   it("should render meta data menu with correct data", () => {
     const { getByText } = render(<ResponseMetaData {...mockData} />);
 
@@ -33,6 +34,7 @@ describe("ResponseMetaData component test", () => {
     expect(getByText(/0.26 KB/i)).toBeInTheDocument();
     expect(getByText(/200 OK/i)).toHaveStyle("color:rgb(66 245 66)");
   });
+
   it("should render meta data menu with 404 response properly", () => {
     const { getByText } = render(<ResponseMetaData {...errorMockData} />);
 

@@ -16,6 +16,7 @@ describe("SidebarEmptyCollectionMenu component test", () => {
       getByText(/Start making requests to view your history collection./i),
     ).toBeInTheDocument();
   });
+
   it("should display correct empty favorites collection menu", () => {
     const { getByText } = render(
       <SidebarEmptyCollectionMenu currentSidebarOption="Favorites" />,

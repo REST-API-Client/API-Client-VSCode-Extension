@@ -12,11 +12,13 @@ describe("ResponseBodyMenu component test", () => {
     expect(getByText(/html/i)).toBeInTheDocument();
     expect(getByText(/text/i)).toBeInTheDocument();
   });
+
   it("should render correct default response body pretty option", () => {
     const { getByRole } = render(<ResponseBodyMenuOption />);
 
     expect(getByRole("option", { name: "JSON" }).selected).toBe(true);
   });
+
   it("should display the correct number of options", () => {
     const { getAllByRole } = render(<ResponseBodyMenuOption />);
 

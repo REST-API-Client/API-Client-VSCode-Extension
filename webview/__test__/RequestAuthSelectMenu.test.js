@@ -10,6 +10,7 @@ describe("RequestAuthSelectMenu component test", () => {
 
     expect(getByRole("option", { name: "No Auth" }).selected).toBe(true);
   });
+
   it("should display the correct number of options", () => {
     const { getAllByRole } = render(<RequestAuthSelectMenu />);
 

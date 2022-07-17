@@ -9,6 +9,7 @@ describe("ResponseMenu component test", () => {
 
     expect(getAllByRole("option").length).toEqual(3);
   });
+
   it("should render response menu option correctly", () => {
     const { getByText } = render(<ResponseMenu />);
 

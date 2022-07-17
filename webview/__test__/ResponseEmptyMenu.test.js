@@ -11,6 +11,7 @@ describe("ResponseEmptyMenu component test", () => {
       getByText(/Enter request URL and click send to get a response/i),
     ).toBeInTheDocument();
   });
+
   it("should display svg when response is not sent yet", () => {
     const { getByAltText } = render(<ResponseEmptyMenu />);
 

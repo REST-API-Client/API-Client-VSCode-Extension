@@ -12,6 +12,7 @@ describe("SidebarDeleteAllButton component test", () => {
 
     expect(getByText(/delete all/i)).toBeInTheDocument();
   });
+
   it("should render sidebar with correct style", () => {
     const { getByText } = render(<SidebarDeleteAllButton />);
 
@@ -20,6 +21,7 @@ describe("SidebarDeleteAllButton component test", () => {
     expect(getByText(/delete/i)).toHaveStyle(`color: rgb(203 203 203)`);
     expect(getByText(/delete/i)).toHaveStyle(`border-radius: 1rem`);
   });
+
   it("should delete everything from array once clicked", () => {
     const { getByText } = render(<SidebarDeleteAllButton />);
 

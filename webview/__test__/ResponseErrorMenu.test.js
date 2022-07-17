@@ -11,6 +11,7 @@ describe("ResponseErrorMenu component test", () => {
 
     expect(getByText(/unable to find restapiclient/i)).toBeInTheDocument();
   });
+
   it("should display correct message when image with correct alt", () => {
     const { getByAltText } = render(<ResponseErrorMenu />);
 
