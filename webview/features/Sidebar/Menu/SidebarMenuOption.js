@@ -2,7 +2,7 @@ import React from "react";
 import shallow from "zustand/shallow";
 
 import { REQUEST, SIDEBAR } from "../../../constants";
-import useSidebarStore from "../../../store/useSidebarStore";
+import useSidebarStore from "../../../store/sidebarStore";
 import vscode from "../../../vscode";
 import SidebarCollection from "../Collection/SidebarCollection";
 

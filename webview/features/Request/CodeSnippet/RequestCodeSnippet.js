@@ -7,8 +7,8 @@ import CopyIcon from "../../../components/CopyIcon";
 import SelectWrapper from "../../../components/SelectWrapper";
 import { COMMON, HEIGHT, OPTION } from "../../../constants";
 import CodeEditor from "../../../shared/CodeEditor";
-import useKeyValueTableStore from "../../../store/useKeyValueTableStore";
-import useRequestStore from "../../../store/useRequestStore";
+import useKeyValueTableStore from "../../../store/keyValueTableStore";
+import useRequestStore from "../../../store/requestStore";
 import { generateSdkRequestObject } from "../../../utils";
 import vscode from "../../../vscode";
 

@@ -10,6 +10,7 @@ describe("RequestBodyRawOptions component test", () => {
 
     expect(getByRole("option", { name: "Text" }).selected).toBe(true);
   });
+
   it("should display the correct number of options", () => {
     const { getAllByRole } = render(<RequestBodyRawOptions />);
 

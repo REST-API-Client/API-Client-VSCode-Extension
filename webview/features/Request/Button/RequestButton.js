@@ -1,7 +1,7 @@
 import React from "react";
 
 import Button from "../../../components/Button";
-import useResponseDataStore from "../../../store/useResponseDataStore";
+import useResponseDataStore from "../../../store/responseDataStore";
 
 const RequestButton = () => {
   const requestInProcess = useResponseDataStore(

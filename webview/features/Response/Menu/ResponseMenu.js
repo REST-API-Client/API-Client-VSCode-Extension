@@ -5,8 +5,8 @@ import DetailOption from "../../../components/DetailOption";
 import MenuOption from "../../../components/MenuOption";
 import SelectWrapper from "../../../components/SelectWrapper";
 import { COMMON, OPTION, RESPONSE } from "../../../constants";
-import useResponseDataStore from "../../../store/useResponseDataStore";
-import useResponseOptionStore from "../../../store/useResponseOptionStore";
+import useResponseDataStore from "../../../store/responseDataStore";
+import useResponseOptionStore from "../../../store/responseOptionStore";
 import ResponseMetaData from "../MetaData/ResponseMetaData";
 import ResponseMenuOption from "./ResponseMenuOption";
 
@@ -39,7 +39,7 @@ const ResponseMenu = () => {
                 </h3>
               </MenuOption>
               {responseMenuOption === COMMON.HEADERS && (
-                <p>({responseData.headersLength})</p>
+                <p>({responseData?.headersLength})</p>
               )}
             </React.Fragment>
           ))}

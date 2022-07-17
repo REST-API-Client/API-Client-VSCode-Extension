@@ -4,7 +4,7 @@ import shallow from "zustand/shallow";
 
 import SelectWrapper from "../../../components/SelectWrapper";
 import { OPTION, REQUEST } from "../../../constants";
-import useRequestStore from "../../../store/useRequestStore";
+import useRequestStore from "../../../store/requestStore";
 import RequestAuthMenuOption from "./RequestAuthSelectMenuOption";
 
 const RequestAuthSelectMenu = () => {

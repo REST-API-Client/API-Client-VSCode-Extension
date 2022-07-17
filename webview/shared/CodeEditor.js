@@ -4,7 +4,7 @@ import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 
 import { OPTION, REQUEST, RESPONSE } from "../constants";
-import ResponsePreview from "../features/Response/Preview/ResponseDataPreview";
+import ResponsePreview from "../features/Response/Preview/ResponsePreview";
 
 const CodeEditor = ({
   language,

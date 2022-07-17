@@ -8,12 +8,11 @@ describe("Wrapper component test", () => {
     const { getByText } = render(
       <Wrapper>
         <div>
-          <h1>REST API Tester</h1>
-          <p>Welcome</p>
+          <h1>Welcome to REST API Tester</h1>
         </div>
       </Wrapper>,
     );
 
-    expect(getByText(/REST API Tester/i)).toBeInTheDocument();
+    expect(getByText(/Welcome to REST API Tester/i)).toBeInTheDocument();
   });
 });

@@ -10,7 +10,7 @@ const EmptyFavoritesCollectionMessage = () => {
       <p>Your favorites collection seems to be empty.</p>
       <p>
         Press the heart icon from your history collection to add it to your
-        favorites collection
+        favorites collection.
       </p>
     </Message>
   );

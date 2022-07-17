@@ -5,7 +5,7 @@ import styled from "styled-components";
 const ResponsePreview = ({ sourceCode }) => {
   return (
     <IframeWrapper>
-      <iframe srcDoc={sourceCode} />
+      <iframe title="Response Data Preview" srcDoc={sourceCode} />
     </IframeWrapper>
   );
 };
