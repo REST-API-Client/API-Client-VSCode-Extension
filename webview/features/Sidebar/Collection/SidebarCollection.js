@@ -77,7 +77,7 @@ const SidebarCollection = ({
                               <p>Added {favoriteListedTime}</p>
                             )}
                           </div>
-                          <div>
+                          <div role="iconWrapper">
                             {sidebarOption === SIDEBAR.HISTORY ? (
                               isUserFavorite ? (
                                 <AiFillHeart
