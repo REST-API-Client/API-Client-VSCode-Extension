@@ -16,6 +16,7 @@ describe("RequestAuthBearerToken component test", () => {
 
     expect(getByPlaceholderText(/Token/i)).toBeInTheDocument();
   });
+
   it("should display the data from requestDataSlice", () => {
     useStore.mockImplementationOnce(() => ({
       authDataToken: "secret token value!!",

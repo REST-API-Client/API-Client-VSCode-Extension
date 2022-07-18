@@ -56,20 +56,18 @@ describe("SidebarCollection component test", () => {
   });
 
   it("should change value when user inputs value", () => {
+    const testInputValue = "facebook?!";
     const { getByPlaceholderText } = render(
       <SidebarCollection userCollection={mockData} />,
     );
 
-    const requestUrlInputElement =
-      getByPlaceholderText(/Search collection.../i);
-
-    const testInputValue = "facebook?!";
-
-    fireEvent.change(requestUrlInputElement, {
+    fireEvent.change(getByPlaceholderText(/Search collection.../i), {
       target: { value: testInputValue },
     });
 
-    expect(requestUrlInputElement.value).toBe(testInputValue);
+    expect(getByPlaceholderText(/Search collection.../i).value).toBe(
+      testInputValue,
+    );
   });
 
   it("should display correct url when passed userCollection as props", () => {
