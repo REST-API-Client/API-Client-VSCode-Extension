@@ -54,7 +54,7 @@ class MainWebViewPanel {
         bodyOption,
         bodyRawOption,
         bodyRawData,
-        keyValueData,
+        keyValueTableData,
         command,
       }) => {
         if (command === COMMAND.ALERT_COPY) {
@@ -71,9 +71,9 @@ class MainWebViewPanel {
 
         this.#url = getUrl(requestUrl);
         this.#method = requestMethod;
-        this.#headers = getHeaders(keyValueData, authOption, authData);
+        this.#headers = getHeaders(keyValueTableData, authOption, authData);
         this.#body = getBody(
-          keyValueData,
+          keyValueTableData,
           bodyOption,
           bodyRawOption,
           bodyRawData,
