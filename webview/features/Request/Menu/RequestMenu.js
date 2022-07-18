@@ -4,17 +4,14 @@ import shallow from "zustand/shallow";
 import DetailOption from "../../../components/DetailOption";
 import MenuOption from "../../../components/MenuOption";
 import { COMMON, OPTION, REQUEST } from "../../../constants/";
-import useKeyValueTableStore from "../../../store/keyValueTableStore";
-import useRequestStore from "../../../store/requestStore";
+import useStore from "../../../store/useStore";
 import RequestMenuOption from "./RequestMenuOption";
 
 const RequestMenu = () => {
-  const keyValueTableData = useKeyValueTableStore(
-    (state) => state.keyValueTableData,
-  );
-  const { requestOption, changeRequestOption } = useRequestStore(
+  const { requestOption, keyValueTableData, changeRequestOption } = useStore(
     (state) => ({
       requestOption: state.requestOption,
+      keyValueTableData: state.keyValueTableData,
       changeRequestOption: state.handleRequestOptionChange,
     }),
     shallow,

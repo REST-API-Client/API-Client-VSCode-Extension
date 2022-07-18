@@ -4,26 +4,23 @@ import shallow from "zustand/shallow";
 
 import SelectWrapper from "../../../components/SelectWrapper";
 import { OPTION, REQUEST } from "../../../constants";
-import useKeyValueTableStore from "../../../store/keyValueTableStore";
-import useRequestStore from "../../../store/requestStore";
+import useStore from "../../../store/useStore";
 
 const RequestBodyRawOptions = () => {
-  const { bodyRawOption, handleBodyRawOption } = useRequestStore(
+  const {
+    bodyRawOption,
+    handleBodyRawOption,
+    addRequestBodyHeaders,
+    removeRequestBodyHeaders,
+  } = useStore(
     (state) => ({
       bodyRawOption: state.bodyRawOption,
-      bodyRawData: state.bodyRawData,
       handleBodyRawOption: state.handleBodyRawOption,
+      addRequestBodyHeaders: state.addRequestBodyHeaders,
+      removeRequestBodyHeaders: state.removeRequestBodyHeaders,
     }),
     shallow,
   );
-  const { addRequestBodyHeaders, removeRequestBodyHeaders } =
-    useKeyValueTableStore(
-      (state) => ({
-        addRequestBodyHeaders: state.addRequestBodyHeaders,
-        removeRequestBodyHeaders: state.removeRequestBodyHeaders,
-      }),
-      shallow,
-    );
 
   const handleBodyRawSelectOption = (event) => {
     const selectedOptionIndex = event.target.selectedIndex;

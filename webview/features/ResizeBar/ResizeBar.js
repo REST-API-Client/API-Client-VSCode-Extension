@@ -3,12 +3,16 @@ import { FaGripLines } from "react-icons/fa";
 import styled from "styled-components";
 
 import { HEIGHT } from "../../constants";
-import useHeightStore from "../../store/heightStore";
+import useStore from "../../store/useStore";
 
 const ResizeBar = () => {
-  const { height, handleRequestHeightChange } = useHeightStore(
-    (state) => state,
+  const { requestMenuHeight, handleRequestHeightChange } = useStore(
+    (state) => ({
+      requestMenuHeight: state.requestMenuHeight,
+      handleRequestHeightChange: state.handleRequestHeightChange,
+    }),
   );
+
   const [isDragging, setIsDragging] = useState(false);
   const [resizeBarY, setResizeBarY] = useState(null);
 
@@ -28,7 +32,7 @@ const ResizeBar = () => {
     event.preventDefault();
 
     if (isDragging && resizeBarY) {
-      const currentHeight = Number(height.replace("vh", ""));
+      const currentHeight = Number(requestMenuHeight.replace("vh", ""));
       const newHeight = currentHeight + (event.clientY - resizeBarY) / 10;
 
       if (

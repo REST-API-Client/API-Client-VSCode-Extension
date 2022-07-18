@@ -3,21 +3,23 @@ import styled from "styled-components";
 import shallow from "zustand/shallow";
 
 import { REQUEST } from "../../../constants";
-import useKeyValueTableStore from "../../../store/keyValueTableStore";
-import useRequestStore from "../../../store/requestStore";
+import useStore from "../../../store/useStore";
 import { generateParameterString, removeUrlParameter } from "../../../utils";
 
 const RequestUrl = () => {
-  const { requestOption, requestUrl, handleRequestUrlChange } = useRequestStore(
+  const {
+    requestUrl,
+    requestOption,
+    keyValueTableData,
+    handleRequestUrlChange,
+  } = useStore(
     (state) => ({
-      requestOption: state.requestOption,
       requestUrl: state.requestUrl,
+      requestOption: state.requestOption,
+      keyValueTableData: state.keyValueTableData,
       handleRequestUrlChange: state.handleRequestUrlChange,
     }),
     shallow,
-  );
-  const keyValueTableData = useKeyValueTableStore(
-    (state) => state.keyValueTableData,
   );
 
   useEffect(() => {

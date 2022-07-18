@@ -5,25 +5,25 @@ import shallow from "zustand/shallow";
 import MenuOption from "../../../components/MenuOption";
 import SelectWrapper from "../../../components/SelectWrapper";
 import { OPTION, SIDEBAR } from "../../../constants";
-import useSidebarStore from "../../../store/sidebarStore";
+import useStore from "../../../store/useStore";
 import SidebarMenuOption from "./SidebarMenuOption";
 
 const SidebarMenu = () => {
   const {
     sidebarOption,
+    deleteCollection,
     handleSidebarOption,
+    resetFavoriteIconState,
     handleUserHistoryCollection,
     handleUserFavoritesCollection,
-    deleteCollection,
-    resetFavoriteIconState,
-  } = useSidebarStore(
+  } = useStore(
     (state) => ({
       sidebarOption: state.sidebarOption,
+      deleteCollection: state.deleteCollection,
       handleSidebarOption: state.handleSidebarOption,
+      resetFavoriteIconState: state.resetFavoriteIconState,
       handleUserHistoryCollection: state.handleUserHistoryCollection,
       handleUserFavoritesCollection: state.handleUserFavoritesCollection,
-      deleteCollection: state.deleteCollection,
-      resetFavoriteIconState: state.resetFavoriteIconState,
     }),
     shallow,
   );

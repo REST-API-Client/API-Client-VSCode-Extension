@@ -2,34 +2,48 @@ import codegen from "postman-code-generators";
 import { Request } from "postman-collection";
 import React, { useEffect } from "react";
 import styled from "styled-components";
+import shallow from "zustand/shallow";
 
 import CopyIcon from "../../../components/CopyIcon";
 import SelectWrapper from "../../../components/SelectWrapper";
 import { COMMON, HEIGHT, OPTION } from "../../../constants";
 import CodeEditor from "../../../shared/CodeEditor";
-import useKeyValueTableStore from "../../../store/keyValueTableStore";
-import useRequestStore from "../../../store/requestStore";
+import useStore from "../../../store/useStore";
 import { generateSdkRequestObject } from "../../../utils";
 import vscode from "../../../vscode";
 
 const RequestCodeSnippet = () => {
   const {
-    requestUrl,
-    requestMethod,
-    authOption,
     authData,
+    requestUrl,
+    authOption,
     bodyOption,
-    bodyRawOption,
     bodyRawData,
+    requestMethod,
+    bodyRawOption,
+    codeSnippetValue,
+    keyValueTableData,
     codeSnippetOption,
+    setCodeSnippetValue,
     handleCodeSnippetOptionChange,
     handleCodeSnippetVariantChange,
-    codeSnippetValue,
-    setCodeSnippetValue,
-  } = useRequestStore();
-
-  const keyValueTableData = useKeyValueTableStore(
-    (state) => state.keyValueTableData,
+  } = useStore(
+    (state) => ({
+      authData: state.authData,
+      requestUrl: state.requestUrl,
+      authOption: state.authOption,
+      bodyOption: state.bodyOption,
+      bodyRawData: state.bodyRawData,
+      requestMethod: state.requestMethod,
+      bodyRawOption: state.bodyRawOption,
+      codeSnippetValue: state.codeSnippetValue,
+      keyValueTableData: state.keyValueTableData,
+      codeSnippetOption: state.codeSnippetOption,
+      setCodeSnippetValue: state.setCodeSnippetValue,
+      handleCodeSnippetOptionChange: state.handleCodeSnippetOptionChange,
+      handleCodeSnippetVariantChange: state.handleCodeSnippetVariantChange,
+    }),
+    shallow,
   );
 
   const handleCopyIconClick = (value) => {

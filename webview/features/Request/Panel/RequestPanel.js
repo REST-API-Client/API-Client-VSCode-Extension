@@ -3,10 +3,7 @@ import styled from "styled-components";
 import shallow from "zustand/shallow";
 
 import { COMMON } from "../../../constants";
-import useHeightStore from "../../../store/heightStore";
-import useKeyValueTableStore from "../../../store/keyValueTableStore";
-import useRequestStore from "../../../store/requestStore";
-import useResponseDataStore from "../../../store/responseDataStore";
+import useStore from "../../../store/useStore";
 import vscode from "../../../vscode";
 import RequestButton from "../Button/RequestButton";
 import RequestDetailOption from "../Menu/RequestMenu";
@@ -14,26 +11,25 @@ import RequestMethod from "../Method/RequestMethod";
 import RequestUrl from "../Url/RequestUrl";
 
 const RequestPanel = () => {
-  const requestMenuRef = useRef(height);
-  const height = useHeightStore((state) => state.height);
-  const keyValueData = useKeyValueTableStore(
-    (state) => state.keyValueTableData,
-  );
-  const handleRequestProcessStatus = useResponseDataStore(
-    (state) => state.handleRequestProcessStatus,
-  );
-  const requestData = useRequestStore(
-    (state) => ({
-      requestMethod: state.requestMethod,
-      requestUrl: state.requestUrl,
-      authOption: state.authOption,
-      authData: state.authData,
-      bodyOption: state.bodyOption,
-      bodyRawOption: state.bodyRawOption,
-      bodyRawData: state.bodyRawData,
-    }),
-    shallow,
-  );
+  const requestMenuRef = useRef(null);
+  const { requestData, requestMenuHeight, handleRequestProcessStatus } =
+    useStore(
+      (state) => ({
+        requestData: {
+          authData: state.authData,
+          requestUrl: state.requestUrl,
+          authOption: state.authOption,
+          bodyOption: state.bodyOption,
+          bodyRawData: state.bodyRawData,
+          bodyRawOption: state.bodyRawOption,
+          requestMethod: state.requestMethod,
+          keyValueTableData: state.keyValueTableData,
+        },
+        requestMenuHeight: state.requestMenuHeight,
+        handleRequestProcessStatus: state.handleRequestProcessStatus,
+      }),
+      shallow,
+    );
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
@@ -44,13 +40,12 @@ const RequestPanel = () => {
 
     vscode.postMessage({
       ...requestData,
-      keyValueData,
     });
   };
 
   useEffect(() => {
-    requestMenuRef.current.style.height = height;
-  }, [height]);
+    requestMenuRef.current.style.height = requestMenuHeight;
+  }, [requestMenuHeight]);
 
   return (
     <RequestPanelWrapper ref={requestMenuRef}>

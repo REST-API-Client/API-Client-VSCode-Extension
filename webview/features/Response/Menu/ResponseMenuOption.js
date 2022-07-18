@@ -4,25 +4,23 @@ import shallow from "zustand/shallow";
 import { COMMON, HEIGHT, OPTION, REQUEST } from "../../../constants";
 import CodeEditor from "../../../shared/CodeEditor";
 import KeyValueTable from "../../../shared/KeyValueTable";
-import useResponseDataStore from "../../../store/responseDataStore";
-import useResponseOptionStore from "../../../store/responseOptionStore";
+import useStore from "../../../store/useStore";
 import RequestBodyMenu from "../Body/ResponseBodyMenu";
 
 const ResponseMenuOption = () => {
-  const { responseOption, responseBodyViewFormat, responseBodyOption } =
-    useResponseOptionStore(
-      (state) => ({
-        responseOption: state.responseOption,
-        responseBodyViewFormat: state.responseBodyViewFormat,
-        responseBodyOption: state.responseBodyOption,
-      }),
-      shallow,
-    );
-
-  const { responseData, responseHeaders } = useResponseDataStore(
+  const {
+    responseData,
+    responseOption,
+    responseHeaders,
+    responseBodyOption,
+    responseBodyViewFormat,
+  } = useStore(
     (state) => ({
       responseData: state.responseData?.data,
+      responseOption: state.responseOption,
       responseHeaders: state.responseData?.headers,
+      responseBodyOption: state.responseBodyOption,
+      responseBodyViewFormat: state.responseBodyViewFormat,
     }),
     shallow,
   );

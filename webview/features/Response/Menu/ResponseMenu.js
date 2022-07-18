@@ -5,15 +5,14 @@ import DetailOption from "../../../components/DetailOption";
 import MenuOption from "../../../components/MenuOption";
 import SelectWrapper from "../../../components/SelectWrapper";
 import { COMMON, OPTION, RESPONSE } from "../../../constants";
-import useResponseDataStore from "../../../store/responseDataStore";
-import useResponseOptionStore from "../../../store/responseOptionStore";
+import useStore from "../../../store/useStore";
 import ResponseMetaData from "../MetaData/ResponseMetaData";
 import ResponseMenuOption from "./ResponseMenuOption";
 
 const ResponseMenu = () => {
-  const responseData = useResponseDataStore((state) => state.responseData);
-  const { responseOption, handleResponseOptionChange } = useResponseOptionStore(
+  const { responseData, responseOption, handleResponseOptionChange } = useStore(
     (state) => ({
+      responseData: state.responseData,
       responseOption: state.responseOption,
       handleResponseOptionChange: state.handleResponseOptionChange,
     }),

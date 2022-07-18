@@ -4,19 +4,19 @@ import shallow from "zustand/shallow";
 import InputWrapper from "../../../components/InputWrapper";
 import Wrapper from "../../../components/Wrapper";
 import { REQUEST } from "../../../constants";
-import useRequestStore from "../../../store/requestStore";
+import useStore from "../../../store/useStore";
 
 const RequestBasicAuth = () => {
   const {
     authData,
-    handleRequestAuthData,
     shouldShowPassword,
+    handleRequestAuthData,
     handleShouldShowPassword,
-  } = useRequestStore(
+  } = useStore(
     (state) => ({
       authData: state.authData,
-      handleRequestAuthData: state.handleRequestAuthData,
       shouldShowPassword: state.shouldShowPassword,
+      handleRequestAuthData: state.handleRequestAuthData,
       handleShouldShowPassword: state.handleShouldShowPassword,
     }),
     shallow,
