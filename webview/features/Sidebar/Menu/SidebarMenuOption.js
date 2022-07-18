@@ -2,28 +2,28 @@ import React from "react";
 import shallow from "zustand/shallow";
 
 import { REQUEST, SIDEBAR } from "../../../constants";
-import useSidebarStore from "../../../store/sidebarStore";
+import useStore from "../../../store/useStore";
 import vscode from "../../../vscode";
 import SidebarCollection from "../Collection/SidebarCollection";
 
 const SidebarMenuOption = () => {
   const {
+    userFavorites,
     sidebarOption,
     userRequestHistory,
-    userFavorites,
+    handleUserDeleteIcon,
     handleUserFavoriteIcon,
     addCollectionToFavorites,
     removeFromFavoriteCollection,
-    handleUserDeleteIcon,
-  } = useSidebarStore(
+  } = useStore(
     (state) => ({
       sidebarOption: state.sidebarOption,
-      userRequestHistory: state.userRequestHistory,
       userFavorites: state.userFavorites,
+      userRequestHistory: state.userRequestHistory,
+      handleUserDeleteIcon: state.handleUserDeleteIcon,
+      handleUserFavoriteIcon: state.handleUserFavoriteIcon,
       addCollectionToFavorites: state.addCollectionToFavorites,
       removeFromFavoriteCollection: state.removeFromFavoriteCollection,
-      handleUserFavoriteIcon: state.handleUserFavoriteIcon,
-      handleUserDeleteIcon: state.handleUserDeleteIcon,
     }),
     shallow,
   );

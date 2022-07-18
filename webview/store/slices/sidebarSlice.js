@@ -1,15 +1,15 @@
-import create from "zustand";
+import { SIDEBAR } from "../../constants";
 
 const initialState = {
-  sidebarOption: "History",
-  userRequestHistory: [],
   userFavorites: [],
+  userRequestHistory: [],
+  sidebarOption: SIDEBAR.HISTORY,
 };
 
-const useSidebarStore = create((set) => ({
+const sidebarSlice = (set) => ({
+  userFavorites: initialState.userFavorites,
   sidebarOption: initialState.sidebarOption,
   userRequestHistory: initialState.userRequestHistory,
-  userFavorites: initialState.userFavorites,
 
   handleSidebarOption: (option) => set(() => ({ sidebarOption: option })),
 
@@ -65,6 +65,6 @@ const useSidebarStore = create((set) => ({
   deleteCollection: (targetState) => {
     set(() => ({ [targetState]: [] }));
   },
-}));
+});
 
-export default useSidebarStore;
+export default sidebarSlice;

@@ -1,16 +1,31 @@
 import React from "react";
+import shallow from "zustand/shallow";
 
 import { COMMON, REQUEST } from "../../../constants";
 import KeyValueTable from "../../../shared/KeyValueTable";
-import useKeyValueTableStore from "../../../store/keyValueTableStore";
-import useRequestStore from "../../../store/requestStore";
+import useStore from "../../../store/useStore";
 import RequestAuthSelectMenu from "../Authorization/RequestAuthSelectMenu";
 import RequestBodySelectMenu from "../Body/RequestBodySelectMenu";
 import RequestCodeSnippet from "../CodeSnippet/RequestCodeSnippet";
 
 const RequestMenuOption = () => {
-  const keyValueProps = useKeyValueTableStore();
-  const requestOption = useRequestStore((state) => state.requestOption);
+  const { requestOption, keyValueProps } = useStore(
+    (state) => ({
+      requestOption: state.requestOption,
+      keyValueProps: {
+        addNewTableRow: state.addNewTableRow,
+        deleteTableRow: state.deleteTableRow,
+        handleRequestKey: state.handleRequestKey,
+        keyValueTableData: state.keyValueTableData,
+        handleRequestValue: state.handleRequestValue,
+        addRequestBodyHeaders: state.addRequestBodyHeaders,
+        handleRequestCheckbox: state.handleRequestCheckbox,
+        handleRequestDescription: state.handleRequestDescription,
+        removeRequestBodyHeaders: state.removeRequestBodyHeaders,
+      },
+    }),
+    shallow,
+  );
 
   switch (requestOption) {
     case REQUEST.PARAMS:

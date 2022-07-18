@@ -4,31 +4,28 @@ import shallow from "zustand/shallow";
 
 import SelectWrapper from "../../../components/SelectWrapper";
 import { COMMON, OPTION, REQUEST } from "../../../constants";
-import useKeyValueTableStore from "../../../store/keyValueTableStore";
-import useRequestStore from "../../../store/requestStore";
+import useStore from "../../../store/useStore";
 import RequestBodyFormatButton from "../Button/RequestBodyFormatButton";
 import RequestBodyRawOptions from "./RequestBodyRawOptions";
 import RequestBodyMenuOption from "./RequestBodySelectMenuOption";
 
 const RequestBodySelectMenu = () => {
-  const { bodyOption, bodyRawOption, handleRequestBodyOption } =
-    useRequestStore(
-      (state) => ({
-        bodyOption: state.bodyOption,
-        bodyRawOption: state.bodyRawOption,
-        handleRequestBodyOption: state.handleRequestBodyOption,
-      }),
-      shallow,
-    );
-
-  const { addRequestBodyHeaders, removeRequestBodyHeaders } =
-    useKeyValueTableStore(
-      (state) => ({
-        addRequestBodyHeaders: state.addRequestBodyHeaders,
-        removeRequestBodyHeaders: state.removeRequestBodyHeaders,
-      }),
-      shallow,
-    );
+  const {
+    bodyOption,
+    bodyRawOption,
+    handleRequestBodyOption,
+    addRequestBodyHeaders,
+    removeRequestBodyHeaders,
+  } = useStore(
+    (state) => ({
+      bodyOption: state.bodyOption,
+      bodyRawOption: state.bodyRawOption,
+      handleRequestBodyOption: state.handleRequestBodyOption,
+      addRequestBodyHeaders: state.addRequestBodyHeaders,
+      removeRequestBodyHeaders: state.removeRequestBodyHeaders,
+    }),
+    shallow,
+  );
 
   const rawOptionHeaderField = OPTION.REQUEST_BODY_RAW_OPTIONS.filter(
     (rawOption) => rawOption.option === bodyRawOption,

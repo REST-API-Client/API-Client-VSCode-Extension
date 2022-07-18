@@ -5,16 +5,15 @@ import shallow from "zustand/shallow";
 import CopyIcon from "../../../components/CopyIcon";
 import SelectWrapper from "../../../components/SelectWrapper";
 import { COMMON, OPTION, RESPONSE } from "../../../constants";
-import useResponseDataStore from "../../../store/responseDataStore";
-import useResponseOptionStore from "../../../store/responseOptionStore";
+import useStore from "../../../store/useStore";
 import vscode from "../../../vscode";
 import ResponseBodyViewOption from "./ResponseBodyMenuOption";
 
 const RequestBodyMenu = () => {
-  const responseData = useResponseDataStore((state) => state.responseData);
-  const { responseBodyOption, handleResponseBodyOptionChange } =
-    useResponseOptionStore(
+  const { responseData, responseBodyOption, handleResponseBodyOptionChange } =
+    useStore(
       (state) => ({
+        responseData: state.responseData,
         responseBodyOption: state.responseBodyOption,
         handleResponseBodyOptionChange: state.handleResponseBodyOptionChange,
       }),

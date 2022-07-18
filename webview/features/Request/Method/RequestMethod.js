@@ -2,10 +2,10 @@ import React from "react";
 import styled from "styled-components";
 
 import { OPTION, REQUEST } from "../../../constants";
-import useRequestStore from "../../../store/requestStore";
+import useStore from "../../../store/useStore";
 
 const RequestMethod = () => {
-  const handleRequestMethodChange = useRequestStore(
+  const handleRequestMethodChange = useStore(
     (state) => state.handleRequestMethodChange,
   );
 

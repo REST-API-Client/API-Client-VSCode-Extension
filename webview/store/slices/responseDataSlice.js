@@ -1,17 +1,24 @@
-import create from "zustand";
-
-import { COMMON, RESPONSE } from "../constants";
+import { COMMON, RESPONSE } from "../../constants";
 
 const initialState = {
+  requestInProcess: "",
+  responseData: undefined,
   responseOption: COMMON.BODY,
   responseBodyOption: RESPONSE.PRETTY,
   responseBodyViewFormat: COMMON.JSON,
 };
 
-const useResponseOptionStore = create((set) => ({
+const responseDataSlice = (set) => ({
+  responseData: initialState.responseData,
   responseOption: initialState.responseOption,
+  requestInProcess: initialState.requestInProcess,
   responseBodyOption: initialState.responseBodyOption,
   responseBodyViewFormat: initialState.responseBodyViewFormat,
+
+  handleResponseData: (data) => set(() => ({ responseData: data })),
+
+  handleRequestProcessStatus: (processStatus) =>
+    set(() => ({ requestInProcess: processStatus })),
 
   handleResponseOptionChange: (option) =>
     set(() => ({ responseOption: option })),
@@ -21,6 +28,6 @@ const useResponseOptionStore = create((set) => ({
 
   handleResponseBodyViewFormatChange: (option) =>
     set(() => ({ responseBodyViewFormat: option })),
-}));
+});
 
-export default useResponseOptionStore;
+export default responseDataSlice;

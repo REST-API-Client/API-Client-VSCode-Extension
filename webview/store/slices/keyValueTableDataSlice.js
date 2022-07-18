@@ -1,6 +1,4 @@
-import create from "zustand";
-
-import { COMMON, REQUEST } from "../constants";
+import { COMMON, REQUEST } from "../../constants";
 
 const initialState = [
   {
@@ -62,7 +60,7 @@ const initialState = [
   },
 ];
 
-const useKeyValueTableStore = create((set) => ({
+const keyValueTableDataSlice = (set) => ({
   keyValueTableData: [...initialState],
 
   handleRequestCheckbox: (dataIndex) =>
@@ -138,6 +136,6 @@ const useKeyValueTableStore = create((set) => ({
       ),
     }));
   },
-}));
+});
 
-export default useKeyValueTableStore;
+export default keyValueTableDataSlice;

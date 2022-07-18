@@ -4,7 +4,7 @@ import shallow from "zustand/shallow";
 
 import Loader from "../../../components/Loader";
 import { COMMON, RESPONSE } from "../../../constants";
-import useResponseDataStore from "../../../store/responseDataStore";
+import useStore from "../../../store/useStore";
 import ResponseEmptyMenu from "../Empty/ResponseEmptyMenu";
 import ResponseErrorMenu from "../Error/ResponseErrorMenu";
 import ResponseMenu from "../Menu/ResponseMenu";
@@ -15,7 +15,7 @@ const ResponsePanel = () => {
     requestInProcess,
     handleResponseData,
     handleRequestProcessStatus,
-  } = useResponseDataStore(
+  } = useStore(
     (state) => ({
       responseData: state.responseData,
       requestInProcess: state.requestInProcess,

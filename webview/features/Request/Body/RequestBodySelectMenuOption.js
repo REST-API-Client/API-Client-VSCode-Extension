@@ -4,28 +4,38 @@ import shallow from "zustand/shallow";
 import { HEIGHT, OPTION, REQUEST } from "../../../constants";
 import CodeEditor from "../../../shared/CodeEditor";
 import KeyValueTable from "../../../shared/KeyValueTable";
-import useKeyValueTableStore from "../../../store/keyValueTableStore";
-import useRequestStore from "../../../store/requestStore";
+import useStore from "../../../store/useStore";
 import RequestNoBody from "./RequestNoBody";
 
 const RequestBodySelectMenuOption = () => {
-  const keyValueProps = useKeyValueTableStore();
   const {
     bodyOption,
-    bodyRawOption,
-    codeEditorProps,
     bodyRawData,
+    bodyRawOption,
+    keyValueProps,
+    codeEditorProps,
     handleBodyRawOptionData,
-  } = useRequestStore(
+  } = useStore(
     (state) => ({
       bodyOption: state.bodyOption,
       bodyRawData: state.bodyRawData,
       bodyRawOption: state.bodyRawOption.toLowerCase(),
-      handleBodyRawOptionData: state.handleBodyRawOptionData,
+      keyValueProps: {
+        addNewTableRow: state.addNewTableRow,
+        deleteTableRow: state.deleteTableRow,
+        handleRequestKey: state.handleRequestKey,
+        keyValueTableData: state.keyValueTableData,
+        handleRequestValue: state.handleRequestValue,
+        addRequestBodyHeaders: state.addRequestBodyHeaders,
+        handleRequestCheckbox: state.handleRequestCheckbox,
+        handleRequestDescription: state.handleRequestDescription,
+        removeRequestBodyHeaders: state.removeRequestBodyHeaders,
+      },
       codeEditorProps: {
         shouldBeautifyEditor: state.shouldBeautifyEditor,
         handleBeautifyButton: state.handleBeautifyButton,
       },
+      handleBodyRawOptionData: state.handleBodyRawOptionData,
     }),
     shallow,
   );

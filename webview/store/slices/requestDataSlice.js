@@ -1,41 +1,39 @@
-import create from "zustand";
-
-import { REQUEST } from "../constants";
+import { REQUEST } from "../../constants";
 
 const initialState = {
-  requestMethod: REQUEST.GET,
   requestUrl: "",
+  codeSnippetValue: "",
   requestUrlParams: "",
-  requestOption: REQUEST.PARAMS,
-  authOption: REQUEST.NO_AUTH,
-  authData: { username: "", password: "", token: "" },
-  bodyOption: REQUEST.NONE,
   bodyRawOption: "Text",
-  bodyRawData: { text: "", javascript: "", json: "", html: "" },
-  shouldBeautifyEditor: false,
+  bodyOption: REQUEST.NONE,
   shouldShowPassword: false,
+  requestMethod: REQUEST.GET,
+  shouldBeautifyEditor: false,
+  authOption: REQUEST.NO_AUTH,
+  requestOption: REQUEST.PARAMS,
   codeSnippetOption: {
     language: "C",
     variant: "libcurl",
     editorLanguage: "c",
   },
-  codeSnippetValue: "",
+  authData: { username: "", password: "", token: "" },
+  bodyRawData: { text: "", javascript: "", json: "", html: "" },
 };
 
-const useRequestStore = create((set) => ({
-  requestUrl: initialState.requestUrl,
-  requestMethod: initialState.requestMethod,
-  requestUrlParams: initialState.requestUrlParams,
-  requestOption: initialState.requestOption,
-  authOption: initialState.authOption,
+const requestDataSlice = (set) => ({
   authData: initialState.authData,
+  authOption: initialState.authOption,
+  requestUrl: initialState.requestUrl,
   bodyOption: initialState.bodyOption,
-  bodyRawOption: initialState.bodyRawOption,
   bodyRawData: initialState.bodyRawData,
+  requestMethod: initialState.requestMethod,
+  requestOption: initialState.requestOption,
+  bodyRawOption: initialState.bodyRawOption,
+  codeSnippetValue: initialState.codeSnippetValue,
+  requestUrlParams: initialState.requestUrlParams,
+  codeSnippetOption: initialState.codeSnippetOption,
   shouldShowPassword: initialState.shouldShowPassword,
   shouldBeautifyEditor: initialState.shouldBeautifyEditor,
-  codeSnippetOption: initialState.codeSnippetOption,
-  codeSnippetValue: initialState.codeSnippetValue,
 
   handleRequestUrlChange: (url) => set(() => ({ requestUrl: url })),
 
@@ -90,6 +88,6 @@ const useRequestStore = create((set) => ({
     })),
 
   setCodeSnippetValue: (value) => set(() => ({ codeSnippetValue: value })),
-}));
+});
 
-export default useRequestStore;
+export default requestDataSlice;
