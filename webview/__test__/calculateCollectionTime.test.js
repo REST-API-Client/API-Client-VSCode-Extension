@@ -7,9 +7,9 @@ describe("calculateCollectionTime utility function tests", () => {
     const thirdMockTime = calculateCollectionTime(1657998982525);
     const fourthMockTime = calculateCollectionTime(1658086010977);
 
-    expect(firstMockTime).toBe("39 days ago");
+    expect(firstMockTime).toBe("40 days ago");
     expect(secondMockTime).toBe("Just now");
     expect(thirdMockTime).toBe("1 day ago");
-    expect(fourthMockTime).toBe("2 hours ago");
+    expect(fourthMockTime).toBe("19 hours ago");
   });
 });
