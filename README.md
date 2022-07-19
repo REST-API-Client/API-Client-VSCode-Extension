@@ -40,7 +40,7 @@ Visual Studio Code extension to send basic HTTP/S requests and receive a respons
 
 > ❗️ REST API Client cannot be installed or used when using a web version of Visual Studio Code
 
-#### 🔐 Privacy and Security
+#### 🔐 Security and Privacy
 
 - REST API Client **does not** collect or store any of your personal information or request data
 - REST API Client uses VSCode global state API in order to store your request history and favorites collections locally.
@@ -91,8 +91,6 @@ Visual Studio Code extension to send basic HTTP/S requests and receive a respons
 - Intuitive icon UI to favorite a request history or delete
 - Search bar to find your specific request history
 - Click and search from the sidebar collection
-
-<br>
 
 ![Sidebar preview](https://user-images.githubusercontent.com/83770081/179733141-0fef0d7c-b179-4440-b624-a137ccb14e05.gif)
 
@@ -155,7 +153,7 @@ I appreciate even the tiniest suggestion or contribution you make to this projec
 
 #### 🏗 Running the extension locally for development
 
-1. Run `git clone` from this [repository]
+1. Run `git clone` from this [repository](https://github.com/REST-API-Client/API-Client-VSCode-Extension)
 2. Run npm install in order to install all the dependencies needed
 3. Press F5 to launch extension development mode
 
