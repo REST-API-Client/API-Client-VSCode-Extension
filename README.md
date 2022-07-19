@@ -34,8 +34,6 @@ Visual Studio Code extension to send basic HTTP/S requests and receive a respons
 - [👨🏻‍💻 Contributing](#-contributing)
 - [📋 License](#-license)
 
-<br>
-
 ## 🚀 Installation
 
 > ❗️ This extension is best paired with a dark-colored Visual Studio Code theme.
@@ -46,8 +44,6 @@ Visual Studio Code extension to send basic HTTP/S requests and receive a respons
 
 - REST API Client **does not** collect or store any of your personal information or request data
 - REST API Client uses VSCode global state API in order to store your request history and favorites collections locally.
-
-<br>
 
 ## ✨ Features
 
@@ -100,8 +96,6 @@ Visual Studio Code extension to send basic HTTP/S requests and receive a respons
 
 ![Sidebar preview](https://user-images.githubusercontent.com/83770081/179733141-0fef0d7c-b179-4440-b624-a137ccb14e05.gif)
 
-<br>
-
 ## 💻 Commands
 
 Simply click Open Menu button or open the Command Palette and type the command below:
@@ -115,8 +109,6 @@ Simply click Open Menu button or open the Command Palette and type the command b
 | `> Start: New Request` | Create a API Client menu |
 
 > ❗️ You can only create one panel at a time.
-
-<br>
 
 ## 📚 Tech Stacks
 
@@ -140,15 +132,11 @@ Simply click Open Menu button or open the Command Palette and type the command b
 - **Local DB** : [VSCode extension global state API](https://code.visualstudio.com/api/extension-capabilities/common-capabilities#:~:text=globalState%20%3A%20A%20global%20storage%20where,using%20setKeysForSync%20method%20on%20globalState%20.)
 - **Code Snippet Generator** : [Postman-collection](https://www.npmjs.com/package/postman-collection), [Postman-Code-Generators](https://www.npmjs.com/package/postman-code-generators)
 
-<br>
-
 ## 🗒 Changelog
 
 #### Current version 1.0.0
 
 Visit [here](https://github.com/REST-API-Client/API-Client-VSCode-Extension/blob/main/CHANGELOG.md) for a detailed release notes
-
-<br>
 
 ## 👨🏻‍💻 Contributing
 
@@ -174,8 +162,6 @@ I appreciate even the tiniest suggestion or contribution you make to this projec
 #### ⚠️ Bugs or Suggestions
 
 If you found any bugs while using this extension or you have a suggestion please post it in [issues](https://github.com/REST-API-Client/API-Client-VSCode-Extension/issues).
-
-<br>
 
 ## 📋 License
 
