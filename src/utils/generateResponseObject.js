@@ -43,7 +43,7 @@ async function generateResponseObject(configuration) {
 
       const errorObject = {
         type: TYPE.RESPONSE,
-        data: error.response.data,
+        data: JSON.stringify(error.response.data),
         headers: headersArray,
         headersLength: headersSize,
         statusCode: error.response.status,
