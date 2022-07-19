@@ -28,11 +28,13 @@ Visual Studio Code extension to send basic HTTP/S requests and receive a respons
 
 - [🚀 Installation](#-installation)
 - [✨ Features](#-features)
-- [📚 Tech Stacks](#-tech-stacks)
 - [💻 Commands](#-commands)
+- [📚 Tech Stacks](#-tech-stacks)
 - [🗒 Changelog](#-changelog)
 - [👨🏻‍💻 Contributing](#-contributing)
 - [📋 License](#-license)
+
+<br>
 
 ## 🚀 Installation
 
