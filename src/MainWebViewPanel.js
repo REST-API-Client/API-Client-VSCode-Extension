@@ -42,6 +42,8 @@ class MainWebViewPanel {
     this.mainPanel.webview.html = this.#getHtmlForWebView(this.mainPanel);
 
     this.#receiveWebviewMessage();
+
+    return this.mainPanel;
   }
 
   #receiveWebviewMessage() {
@@ -94,6 +96,7 @@ class MainWebViewPanel {
       method: this.#method,
       headers: this.#headers,
       data: this.#body,
+      responseType: "text",
     };
 
     const responseObject = await generateResponseObject(axiosConfiguration);

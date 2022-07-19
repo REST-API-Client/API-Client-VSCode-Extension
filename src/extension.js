@@ -16,6 +16,7 @@ export async function activate(context) {
     StateManager,
     SidebarWebViewProvider,
   );
+  let currentPanel = null;
 
   if (!StateManager.getExtensionContext(COLLECTION.HISTORY_COLLECTION)) {
     await StateManager.addExtensionContext(COLLECTION.HISTORY_COLLECTION, {
@@ -35,13 +36,18 @@ export async function activate(context) {
 
   context.subscriptions.push(
     vscode.commands.registerCommand(COMMAND.MAIN_WEB_VIEW_PANEL, () => {
-      MainWebViewProvider.initializeWebView();
+      if (currentPanel) {
+        currentPanel.reveal(vscode.ViewColumn.One);
+      } else {
+        currentPanel = MainWebViewProvider.initializeWebView();
 
-      SidebarWebViewProvider.mainWebViewPanel = MainWebViewProvider.mainPanel;
+        SidebarWebViewProvider.mainWebViewPanel = MainWebViewProvider.mainPanel;
 
-      MainWebViewProvider.mainPanel.onDidDispose(() => {
-        SidebarWebViewProvider.mainWebViewPanel = null;
-      }, null);
+        MainWebViewProvider.mainPanel.onDidDispose(() => {
+          SidebarWebViewProvider.mainWebViewPanel = null;
+          currentPanel = null;
+        }, null);
+      }
     }),
   );
 }

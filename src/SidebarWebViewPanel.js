@@ -52,13 +52,7 @@ class SidebarWebViewPanel {
   #receiveSidebarWebViewMessage() {
     this.#view.webview.onDidReceiveMessage(async ({ command, id, target }) => {
       if (command === COMMAND.START_APP) {
-        const columnToShowIn = vscode.window.activeTextEditor
-          ? vscode.window.activeTextEditor.viewColumn
-          : undefined;
-
-        return this.mainWebViewPanel
-          ? this.mainWebViewPanel.reveal(columnToShowIn)
-          : vscode.commands.executeCommand(COMMAND.MAIN_WEB_VIEW_PANEL);
+        vscode.commands.executeCommand(COMMAND.MAIN_WEB_VIEW_PANEL);
       } else if (command === COMMAND.ADD_TO_FAVORITES) {
         await this.stateManager.updateExtensionContext(
           COLLECTION.HISTORY_COLLECTION,
