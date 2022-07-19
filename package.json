@@ -3,7 +3,7 @@
   "publisher": "unjinjang",
   "displayName": "REST API Client",
   "icon": "icons/images/icon.png",
-  "description": "Simple and intuitive API Client VSCode extension.",
+  "description": "Simple and intuitive API Client made into a VSCode extension.",
   "version": "1.0.0",
   "license": "MIT",
   "bugs": {
