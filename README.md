@@ -1,21 +1,25 @@
 <div align="center">
-  <a href="https://github.com/KatsuteDev/Background#readme">
+<a href="https://github.com/REST-API-Client/API-Client-VSCode-Extension">
     <img
       src="https://user-images.githubusercontent.com/83770081/179551561-e773aa66-db92-437a-be66-c7480f19d434.png"
       width="100"
       height="100"
     />
   </a>
+
   <h3>REST API Client</h3>
   <h5>Simple and intuitive API Client made into a VSCode extension.</h5>
 
-<a href="https://marketplace.visualstudio.com/">Visual Studio Marketplace</a>
+<a href="https://marketplace.visualstudio.com/items?itemName=unjinjang.rest-api-client">Visual Studio Marketplace</a>
 •
 <a href="https://github.com/REST-API-Client/API-Client-VSCode-Extension">Repository</a>
 •
 <a href="https://github.com/REST-API-Client/API-Client-VSCode-Extension/blob/main/CHANGELOG.md">Releases</a>
+
 <br>
 
+  <img src="https://img.shields.io/visual-studio-marketplace/stars/unjinjang.rest-api-client?color=informational&style=for-the-badge"/>
+  <img src="https://img.shields.io/visual-studio-marketplace/i/unjinjang.rest-api-client?color=blue&style=for-the-badge"/>
 </div>
 
 <br>
