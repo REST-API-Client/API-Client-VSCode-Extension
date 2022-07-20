@@ -138,7 +138,7 @@ Simply click Open Menu button or open the Command Palette and type the command b
 
 ## 🗒 Changelog
 
-#### Current version 1.0.0
+#### Current version 1.0.3
 
 Visit [here](https://github.com/REST-API-Client/API-Client-VSCode-Extension/blob/main/CHANGELOG.md) for a detailed release notes
 
