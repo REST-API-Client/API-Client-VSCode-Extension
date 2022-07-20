@@ -41,7 +41,7 @@ const extensionConfig = {
   },
 };
 
-const MainWebViewConfig = {
+const mainWebViewConfig = {
   entry: "./webview/index.js",
   output: {
     path: path.resolve(__dirname, "dist"),
@@ -84,7 +84,7 @@ const MainWebViewConfig = {
   },
 };
 
-const SidebarWebViewConfig = {
+const sidebarWebViewConfig = {
   entry: "./webview/sidebar.js",
   output: {
     path: path.resolve(__dirname, "dist"),
@@ -110,4 +110,4 @@ const SidebarWebViewConfig = {
   },
 };
 
-module.exports = [extensionConfig, MainWebViewConfig, SidebarWebViewConfig];
+module.exports = [extensionConfig, mainWebViewConfig, sidebarWebViewConfig];
