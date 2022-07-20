@@ -160,7 +160,7 @@ I appreciate even the tiniest suggestion or contribution you make to this projec
 1. Fork this Project from [here](https://github.com/REST-API-Client/API-Client-VSCode-Extension)
 2. Create your Branch &#8594; `git checkout -b feature/newFeature`
 3. Code up your outstanding logic &#8594; `console.log("Hello World")`
-4. Commit your Changes &#8594; `git commit -m "feat: Add some newFeature`
+4. Commit your Changes &#8594; `git commit -m "feat: Add some newFeature"`
 5. Push to the Branch &#8594; `git push origin feature/newFeature`
 6. Vist your GitHub repository and open a Pull Request
 
