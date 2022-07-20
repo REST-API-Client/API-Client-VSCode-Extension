@@ -24,6 +24,12 @@ export async function activate(context) {
     });
   }
 
+  if (!StateManager.getExtensionContext(COLLECTION.FAVORITES_COLLECTION)) {
+    await StateManager.addExtensionContext(COLLECTION.FAVORITES_COLLECTION, {
+      history: [],
+    });
+  }
+
   vscode.window.showInformationMessage(MESSAGE.WELCOME_MESSAGE);
 
   context.subscriptions.push(

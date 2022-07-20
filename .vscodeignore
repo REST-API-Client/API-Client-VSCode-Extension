@@ -7,5 +7,5 @@ test/**
 .yarnrc
 **/jsconfig.json
 **/*.map
-**/.eslintrc.json
+**/.eslintrc
 .prettierrc

@@ -1,6 +1,5 @@
 const path = require("path");
 const webpack = require("webpack");
-const nodeExternals = require("webpack-node-externals");
 
 const extensionConfig = {
   target: "node",
@@ -11,16 +10,11 @@ const extensionConfig = {
     libraryTarget: "commonjs2",
   },
   devtool: "source-map",
-  externals: [
-    {
-      vscode: "commonjs vscode",
-    },
-    nodeExternals(),
-  ],
+  externals: {
+    vscode: "commonjs vscode",
+  },
   resolve: {
-    mainFields: ["browser", "module", "main"],
     extensions: [".js"],
-    alias: {},
     fallback: {
       buffer: require.resolve("buffer"),
       path: require.resolve("path-browserify"),
