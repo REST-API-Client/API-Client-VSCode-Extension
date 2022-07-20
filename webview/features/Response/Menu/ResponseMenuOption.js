@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 import shallow from "zustand/shallow";
 
 import { COMMON, HEIGHT, OPTION, REQUEST } from "../../../constants";
@@ -27,7 +28,11 @@ const ResponseMenuOption = () => {
 
   switch (responseOption) {
     case COMMON.HEADERS:
-      return <KeyValueTable keyValueTableData={responseHeaders} readOnly />;
+      return (
+        <ResponseHeaderWrapper>
+          <KeyValueTable keyValueTableData={responseHeaders} readOnly />
+        </ResponseHeaderWrapper>
+      );
     default:
       return (
         <>
@@ -48,5 +53,10 @@ const ResponseMenuOption = () => {
       );
   }
 };
+
+const ResponseHeaderWrapper = styled.div`
+  height: 60vh;
+  overflow-y: scroll;
+`;
 
 export default ResponseMenuOption;
