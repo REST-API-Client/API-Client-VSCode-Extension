@@ -18,8 +18,13 @@
 
 <br>
 
-  <img src="https://img.shields.io/visual-studio-marketplace/stars/unjinjang.rest-api-client?color=informational&style=for-the-badge"/>
-  <img src="https://img.shields.io/visual-studio-marketplace/i/unjinjang.rest-api-client?color=blue&style=for-the-badge"/>
+<a href="https://marketplace.visualstudio.com/items?itemName=unjinjang.rest-api-client&ssr=false#review-details">
+    <img src="https://img.shields.io/visual-studio-marketplace/stars/unjinjang.rest-api-client?color=informational&style=for-the-badge"/>
+</a>
+<a href="https://marketplace.visualstudio.com/items?itemName=unjinjang.rest-api-client&ssr=false#overview">
+    <img src="https://img.shields.io/visual-studio-marketplace/i/unjinjang.rest-api-client?color=blue&style=for-the-badge"/>
+<a/>
+
 </div>
 
 <br>
@@ -123,7 +128,6 @@ Simply click Open Menu button or open the Command Palette and type the command b
   <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white"/></a>&nbsp
   <img src="https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E"/></a>&nbsp
   <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"/></a>&nbsp
-  <img src="https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white"/></a>&nbsp
   <img src="https://img.shields.io/badge/Webpack-8DD6F9?style=for-the-badge&logo=Webpack&logoColor=white"/></a>&nbsp
   <img src="https://img.shields.io/badge/Babel-F9DC3E?style=for-the-badge&logo=babel&logoColor=white"/></a>&nbsp
 </p>
@@ -135,6 +139,9 @@ Simply click Open Menu button or open the Command Palette and type the command b
 - **Editor** : [Monaco Editor](https://www.npmjs.com/package/monaco-editor)
 - **Local DB** : [VSCode extension global state API](https://code.visualstudio.com/api/extension-capabilities/common-capabilities#:~:text=globalState%20%3A%20A%20global%20storage%20where,using%20setKeysForSync%20method%20on%20globalState%20.)
 - **Code Snippet Generator** : [Postman-collection](https://www.npmjs.com/package/postman-collection), [Postman-Code-Generators](https://www.npmjs.com/package/postman-code-generators)
+- **Bundler**: [Webpack](https://webpack.js.org/)
+- **Compiler**: [Babel](https://babeljs.io/)
+- **Test:** [Jest](https://jestjs.io/)**,** [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
 
 ## 🗒 Changelog
 
