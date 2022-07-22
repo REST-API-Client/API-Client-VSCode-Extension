@@ -1,7 +1,8 @@
 import codegen from "postman-code-generators";
 import { Request } from "postman-collection";
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import styled from "styled-components";
+import { useDebounce } from "use-debounce";
 import shallow from "zustand/shallow";
 
 import CopyIcon from "../../../components/CopyIcon";
@@ -46,22 +47,37 @@ const RequestCodeSnippet = () => {
     shallow,
   );
 
+  const [debouncedUrlValue] = useDebounce(requestUrl, 800);
+
   const handleCopyIconClick = (value) => {
     vscode.postMessage({ command: COMMON.ALERT_COPY });
 
     navigator.clipboard.writeText(value);
   };
 
-  const sdkRequestObject = generateSdkRequestObject(
-    requestUrl,
-    requestMethod,
-    keyValueTableData,
-    authOption,
-    authData,
-    bodyOption,
-    bodyRawOption,
-    bodyRawData,
-    Request,
+  const memoizedSdkRequestObject = useMemo(
+    () =>
+      generateSdkRequestObject(
+        debouncedUrlValue,
+        requestMethod,
+        keyValueTableData,
+        authOption,
+        authData,
+        bodyOption,
+        bodyRawOption,
+        bodyRawData,
+        Request,
+      ),
+    [
+      debouncedUrlValue,
+      requestMethod,
+      keyValueTableData,
+      authOption,
+      authData,
+      bodyOption,
+      bodyRawOption,
+      bodyRawData,
+    ],
   );
 
   const handleCodeSnippetOption = (event) => {
@@ -80,7 +96,7 @@ const RequestCodeSnippet = () => {
     codegen.convert(
       codeSnippetOption.language.toLowerCase(),
       codeSnippetOption.variant,
-      sdkRequestObject,
+      memoizedSdkRequestObject,
       {},
       (error, snippet) => {
         if (error) {
@@ -90,7 +106,7 @@ const RequestCodeSnippet = () => {
       },
     );
   }, [
-    requestUrl,
+    debouncedUrlValue,
     requestMethod,
     codeSnippetOption.language,
     codeSnippetOption.variant,

@@ -31,10 +31,6 @@ const ButtonWrapper = styled.button`
   background-color: ${(props) =>
     props.primary ? "rgb(14, 99, 156)" : "var(--vscode-input-background)"};
   transition: background-color 0.2s ease-in-out;
-
-  :hover {
-    background-color: ${(props) => props.primary && "rgb(14, 99, 156)"};
-  }
 `;
 
 Button.propTypes = {
