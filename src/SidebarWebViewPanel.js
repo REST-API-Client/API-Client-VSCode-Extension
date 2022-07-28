@@ -153,6 +153,13 @@ class SidebarWebViewPanel {
         </head>
         <body>
           <div id="root"></div>
+          <script nonce="${nonce}">
+          let vscode;
+
+          if (typeof acquireVsCodeApi !== "undefined") {
+            vscode = acquireVsCodeApi();
+          }
+          </script>
           <script nonce="${nonce}" src="${scriptSrc}"></script>
         </body>
       </html>`;

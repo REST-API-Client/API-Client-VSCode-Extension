@@ -3,7 +3,6 @@ import shallow from "zustand/shallow";
 
 import { REQUEST, SIDEBAR } from "../../../constants";
 import useStore from "../../../store/useStore";
-import vscode from "../../../vscode";
 import SidebarCollection from "../Collection/SidebarCollection";
 
 const SidebarMenuOption = () => {

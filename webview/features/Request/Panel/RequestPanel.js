@@ -4,7 +4,6 @@ import shallow from "zustand/shallow";
 
 import { COMMON } from "../../../constants";
 import useStore from "../../../store/useStore";
-import vscode from "../../../vscode";
 import RequestButton from "../Button/RequestButton";
 import RequestDetailOption from "../Menu/RequestMenu";
 import RequestMethod from "../Method/RequestMethod";
