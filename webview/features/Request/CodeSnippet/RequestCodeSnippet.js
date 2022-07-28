@@ -11,7 +11,6 @@ import { COMMON, HEIGHT, OPTION } from "../../../constants";
 import CodeEditor from "../../../shared/CodeEditor";
 import useStore from "../../../store/useStore";
 import { generateSdkRequestObject } from "../../../utils";
-import vscode from "../../../vscode";
 
 const RequestCodeSnippet = () => {
   const {

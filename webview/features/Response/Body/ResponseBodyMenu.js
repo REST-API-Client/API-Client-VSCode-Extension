@@ -6,7 +6,6 @@ import CopyIcon from "../../../components/CopyIcon";
 import SelectWrapper from "../../../components/SelectWrapper";
 import { COMMON, OPTION, RESPONSE } from "../../../constants";
 import useStore from "../../../store/useStore";
-import vscode from "../../../vscode";
 import ResponseBodyViewOption from "./ResponseBodyMenuOption";
 
 const RequestBodyMenu = () => {
