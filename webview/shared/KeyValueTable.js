@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React from "react";
+import React, { memo } from "react";
 import { CgAddR } from "react-icons/cg";
 import { FaTrashAlt } from "react-icons/fa";
 import styled from "styled-components";
@@ -190,4 +190,4 @@ KeyValueTable.propTypes = {
   handleRequestDescription: PropTypes.func,
 };
 
-export default KeyValueTable;
+export default memo(KeyValueTable);
