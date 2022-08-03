@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.4
+
+#### Fix POST body being converted to JSON string before sending to server
+
 ## 1.0.3
 
 #### Fix response header menu not displaying the whole header information
