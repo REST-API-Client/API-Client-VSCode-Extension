@@ -183,6 +183,13 @@ class MainWebViewPanel {
         </head>
         <body>
           <div id="root"></div>
+          <script nonce="${nonce}">
+          let vscode;
+
+          if (typeof acquireVsCodeApi !== "undefined") {
+            vscode = acquireVsCodeApi();
+          }
+          </script>
           <script src="${scriptSrc}" nonce="${nonce}"></script>
         </body>
       </html>`;
