@@ -5,9 +5,8 @@ import { TYPE } from "../constants";
 function getBody(keyValueData, bodyOption, bodyRawOption, bodyRawData) {
   if (bodyOption === "None") return;
 
-  if (bodyOption === TYPE.BODY_RAW) {
+  if (bodyOption === TYPE.BODY_RAW)
     return bodyRawData[bodyRawOption.toLowerCase()];
-  }
 
   if (bodyOption === TYPE.BODY_FORM_DATA) {
     const formData = new FormData();
