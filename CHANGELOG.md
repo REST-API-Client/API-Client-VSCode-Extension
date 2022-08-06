@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.5
+
+#### README.md update
+
 ## 1.0.4
 
 #### Fix POST body being converted to JSON string before sending to server
