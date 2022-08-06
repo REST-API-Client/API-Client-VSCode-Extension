@@ -135,7 +135,7 @@ Simply click Open Menu button or open the Command Palette and type the command b
 - **Extension** : [VS Code Extension API](https://code.visualstudio.com/api)
 - **UI** : [React JS](https://reactjs.org/), [Styled Components](https://styled-components.com/)
 - **HTTP/s Request**: [Axios](https://axios-http.com/)
-- **State Management Library** - [Zustand](https://zustand-demo.pmnd.rs/)
+- **State Management Library**: [Zustand](https://zustand-demo.pmnd.rs/)
 - **Editor** : [Monaco Editor](https://www.npmjs.com/package/monaco-editor)
 - **Local DB** : [VSCode extension global state API](https://code.visualstudio.com/api/extension-capabilities/common-capabilities#:~:text=globalState%20%3A%20A%20global%20storage%20where,using%20setKeysForSync%20method%20on%20globalState%20.)
 - **Code Snippet Generator** : [Postman-collection](https://www.npmjs.com/package/postman-collection), [Postman-Code-Generators](https://www.npmjs.com/package/postman-code-generators)
