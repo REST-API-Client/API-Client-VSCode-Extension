@@ -29,9 +29,17 @@
 
 <br>
 
-Visual Studio Code extension to send basic HTTP/S requests and receive a response with an intuitive UI within Visual Studio code to enhance work productivity.
-
-![REST API Client preview](https://user-images.githubusercontent.com/83770081/179973792-c8db3488-3f90-4829-8eb4-f1f671d89577.gif)
+<div>
+  <p>
+    Visual Studio Code extension to send basic HTTP/S requests and receive a
+    response with an intuitive UI within Visual Studio code to enhance work
+    productivity.
+  </p>
+  <img
+    src="https://user-images.githubusercontent.com/83770081/179973792-c8db3488-3f90-4829-8eb4-f1f671d89577.gif"
+    alt="REST API Client preview"
+  />
+</div>
 
 <br>
 
