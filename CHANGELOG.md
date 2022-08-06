@@ -1,8 +1,12 @@
 # Changelog
 
+## 1.0.6
+
+#### Fix README displaying anchor tag in VSCode marketplace due to wrong way of closing anchor tag
+
 ## 1.0.5
 
-#### README.md update
+#### README update
 
 ## 1.0.4
 
@@ -14,11 +18,11 @@
 
 ## 1.0.2
 
-#### README.md update
+#### README update
 
 ## 1.0.1
 
-#### README.md update
+#### README update
 
 ## 1.0.0
 

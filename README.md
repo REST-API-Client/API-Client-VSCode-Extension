@@ -1,5 +1,5 @@
 <div align="center">
-<a href="https://github.com/REST-API-Client/API-Client-VSCode-Extension">
+  <a href="https://github.com/REST-API-Client/API-Client-VSCode-Extension">
     <img
       src="https://user-images.githubusercontent.com/83770081/179551561-e773aa66-db92-437a-be66-c7480f19d434.png"
       width="100"
@@ -23,7 +23,7 @@
 </a>
 <a href="https://marketplace.visualstudio.com/items?itemName=unjinjang.rest-api-client&ssr=false#overview">
     <img src="https://img.shields.io/visual-studio-marketplace/i/unjinjang.rest-api-client?color=blue&style=for-the-badge"/>
-<a/>
+</a>
 
 </div>
 
