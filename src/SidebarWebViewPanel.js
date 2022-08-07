@@ -4,8 +4,8 @@ import { CATEGORY, COLLECTION, COMMAND, MESSAGE } from "./constants";
 import { filterObjectKey, generateResponseObject, getNonce } from "./utils";
 
 class SidebarWebViewPanel {
-  #extensionUri;
   #view;
+  #extensionUri;
   mainWebViewPanel;
 
   constructor(extensionUri, stateManager) {

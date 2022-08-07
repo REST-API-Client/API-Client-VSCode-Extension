@@ -11,12 +11,12 @@ import {
 } from "./utils";
 
 class MainWebViewPanel {
-  #extensionUri;
-  mainPanel;
   #url;
+  #body;
   #method;
   #headers;
-  #body;
+  #extensionUri;
+  mainPanel;
 
   constructor(extensionUri, stateManager, sidebarWebViewPanel) {
     this.#extensionUri = extensionUri;
