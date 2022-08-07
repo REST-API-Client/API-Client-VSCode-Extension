@@ -11,10 +11,13 @@
   "parserOptions": {
     "ecmaVersion": 2018,
     "requireConfigFile": false,
+    "sourceType": "module",
+    "babelOptions": {
+      "presets": ["@babel/preset-react"]
+    },
     "ecmaFeatures": {
       "jsx": true
-    },
-    "sourceType": "module"
+    }
   },
   "plugins": ["simple-import-sort", "react", "jest"],
   "extends": ["plugin:react/recommended", "plugin:jest/recommended"],
