@@ -1,7 +1,7 @@
 const path = require("path");
 const webpack = require("webpack");
 
-const commonRules = {
+const babelCommonRules = {
   loader: "babel-loader",
   options: {
     presets: ["@babel/preset-env", "@babel/preset-react"],
@@ -70,7 +70,7 @@ const mainWebViewConfig = {
       {
         test: /\.(js)$/,
         exclude: path.resolve(__dirname, "node_modules"),
-        use: commonRules,
+        use: babelCommonRules,
       },
     ],
   },
@@ -91,7 +91,7 @@ const sidebarWebViewConfig = {
       {
         test: /\.(js)$/,
         exclude: path.resolve(__dirname, "node_modules"),
-        use: commonRules,
+        use: babelCommonRules,
       },
     ],
   },
