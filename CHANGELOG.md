@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.7
+
+#### Feature Clicking history collection from sidebar now fills up the UI in main request panel
+
 ## 1.0.6
 
 #### Fix README displaying anchor tag in VSCode marketplace due to wrong way of closing anchor tag
