@@ -16,7 +16,7 @@ const IframeWrapper = styled.div`
 
   iframe {
     width: 100%;
-    height: 65vh;
+    height: 55vh;
     background: white;
     overflow: scroll;
   }
