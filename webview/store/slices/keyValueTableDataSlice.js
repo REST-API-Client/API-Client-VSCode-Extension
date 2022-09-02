@@ -136,6 +136,14 @@ const keyValueTableDataSlice = (set) => ({
       ),
     }));
   },
+
+  handleSidebarCollectionHeaders: (headers) => {
+    set(() => {
+      return {
+        keyValueTableData: [...headers],
+      };
+    });
+  },
 });
 
 export default keyValueTableDataSlice;
