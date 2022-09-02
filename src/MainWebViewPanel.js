@@ -70,7 +70,17 @@ class MainWebViewPanel {
 
           return;
         }
-
+        const requestObject = {
+          requestMethod,
+          requestUrl,
+          authOption,
+          authData,
+          bodyOption,
+          bodyRawOption,
+          bodyRawData,
+          keyValueTableData,
+          command,
+        };
         this.#url = getUrl(requestUrl);
         this.#method = requestMethod;
         this.#headers = getHeaders(keyValueTableData, authOption, authData);
@@ -81,12 +91,12 @@ class MainWebViewPanel {
           bodyRawData,
         );
 
-        this.#postWebviewMessage();
+        this.#postWebviewMessage(requestObject);
       },
     );
   }
 
-  async #postWebviewMessage() {
+  async #postWebviewMessage(requestObject) {
     const { userRequestHistory } = this.stateManager.getExtensionContext(
       COLLECTION.HISTORY_COLLECTION,
     );
@@ -114,6 +124,7 @@ class MainWebViewPanel {
                 favoritedTime: null,
                 isUserFavorite: false,
                 id: uuidv4(),
+                requestObject,
               },
             ],
           },
@@ -129,6 +140,7 @@ class MainWebViewPanel {
                 favoritedTime: null,
                 isUserFavorite: false,
                 id: uuidv4(),
+                requestObject,
               },
               ...userRequestHistory,
             ],
@@ -137,6 +149,9 @@ class MainWebViewPanel {
       }
     }
 
+    console.log(
+      this.stateManager.getExtensionContext(COLLECTION.HISTORY_COLLECTION),
+    );
     this.mainPanel.webview.postMessage(responseObject);
     this.sidebarWebViewPanel.postMainWebViewPanelMessage(
       this.stateManager.getExtensionContext(COLLECTION.HISTORY_COLLECTION),

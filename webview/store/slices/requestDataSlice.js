@@ -88,6 +88,14 @@ const requestDataSlice = (set) => ({
     })),
 
   setCodeSnippetValue: (value) => set(() => ({ codeSnippetValue: value })),
+
+  handleSidebarCollectionClick: (value) =>
+    set((state) => {
+      return {
+        ...state,
+        ...value,
+      };
+    }),
 });
 
 export default requestDataSlice;

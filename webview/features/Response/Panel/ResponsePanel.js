@@ -15,12 +15,16 @@ const ResponsePanel = () => {
     requestInProcess,
     handleResponseData,
     handleRequestProcessStatus,
+    handleSidebarCollectionHeaders,
+    handleSidebarCollectionClick,
   } = useStore(
     (state) => ({
       responseData: state.responseData,
       requestInProcess: state.requestInProcess,
       handleResponseData: state.handleResponseData,
       handleRequestProcessStatus: state.handleRequestProcessStatus,
+      handleSidebarCollectionClick: state.handleSidebarCollectionClick,
+      handleSidebarCollectionHeaders: state.handleSidebarCollectionHeaders,
     }),
     shallow,
   );
@@ -34,6 +38,26 @@ const ResponsePanel = () => {
       handleRequestProcessStatus(RESPONSE.ERROR);
     } else if (event.data.type === RESPONSE.COLLECTION_REQUEST) {
       handleRequestProcessStatus(COMMON.LOADING);
+    } else if (event.data.type === RESPONSE.SIDE_BAR_DATA) {
+      const {
+        keyValueTableData,
+        authData,
+        authOption,
+        requestUrl,
+        requestMethod,
+        bodyOption,
+        bodyRawOption,
+      } = event.data;
+
+      handleSidebarCollectionClick({
+        authData,
+        authOption,
+        requestUrl,
+        requestMethod,
+        bodyOption,
+        bodyRawOption,
+      });
+      handleSidebarCollectionHeaders(keyValueTableData);
     }
   };
 
