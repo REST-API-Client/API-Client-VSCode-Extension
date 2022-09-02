@@ -8,6 +8,7 @@ const TYPE = {
   BEARER_TOKEN: "Bearer Token",
   AUTHORIZATION: "Authorization",
   WEB_VIEW_TYPE: "RestApiClient",
+  SIDE_BAR_DATA: "Selected Collection Data",
   BODY_FORM_URLENCODED: "x-www-form-urlencoded",
 };
 

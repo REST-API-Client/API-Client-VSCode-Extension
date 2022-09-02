@@ -1,6 +1,6 @@
 import vscode from "vscode";
 
-import { CATEGORY, COLLECTION, COMMAND, MESSAGE } from "./constants";
+import { CATEGORY, COLLECTION, COMMAND, MESSAGE, TYPE } from "./constants";
 import { filterObjectKey, generateResponseObject, getNonce } from "./utils";
 
 class SidebarWebViewPanel {
@@ -114,6 +114,10 @@ class SidebarWebViewPanel {
           );
 
           this.mainWebViewPanel.webview.postMessage(responseObject);
+          this.mainWebViewPanel.webview.postMessage({
+            type: TYPE.SIDE_BAR_DATA,
+            ...selectedCollection.requestObject,
+          });
         }, 1000);
       }
     });
