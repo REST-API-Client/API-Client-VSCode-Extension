@@ -52,8 +52,6 @@ const SelectOptionWrapper = styled.select`
   border-radius: 0.25rem;
   font-size: 1rem;
   font-weight: 500;
-  background: transparent;
-  color: rgba(255, 255, 255, 0.78);
 `;
 
 export default ResponseBodyViewOption;
