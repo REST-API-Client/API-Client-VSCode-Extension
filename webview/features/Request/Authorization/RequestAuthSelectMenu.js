@@ -45,8 +45,6 @@ const OptionWrapper = styled.select`
   border-radius: 0.25rem;
   font-size: 1.1rem;
   font-weight: 600;
-  background: transparent;
-  color: rgba(255, 255, 255, 0.78);
 `;
 
 export default RequestAuthSelectMenu;
