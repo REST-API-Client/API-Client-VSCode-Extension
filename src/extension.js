@@ -3,7 +3,7 @@ import vscode from "vscode";
 import { COLLECTION, COMMAND, MESSAGE } from "./constants";
 import ExtentionStateManager from "./ExtensionStateManger";
 import MainWebViewPanel from "./MainWebViewPanel";
-import SidebarWebViewPanel from "./SideBarWebViewPanel";
+import SidebarWebViewPanel from "./SidebarWebViewPanel";
 
 export async function activate(context) {
   const StateManager = new ExtentionStateManager(context);
