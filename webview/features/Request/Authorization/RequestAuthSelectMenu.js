@@ -45,8 +45,11 @@ const OptionWrapper = styled.select`
   border-radius: 0.25rem;
   font-size: 1.1rem;
   font-weight: 600;
+<<<<<<< HEAD
   background-color: var(--vscode-editor-background);
   color: rgba(255, 255, 255, 0.78);
+=======
+>>>>>>> e8a78b516d7612be146673ec1a8b392edf2373c7
 `;
 
 export default RequestAuthSelectMenu;

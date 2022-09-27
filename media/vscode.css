@@ -92,3 +92,8 @@ textarea::placeholder {
 table {
   border: var(--default-border-size) solid var(--border);
 }
+
+a{
+  background-color: var(--vscode-editor-background);
+  color: var(--vscode-textLink-foreground);
+}

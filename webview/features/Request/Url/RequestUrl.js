@@ -56,8 +56,11 @@ const RequestUrl = () => {
 const InputContainer = styled.input`
   padding-left: 1.5rem;
   font-size: 1.15rem;
+<<<<<<< HEAD
   background-color: var(--vscode-editor-background);
   color: rgba(255, 255, 255, 0.78);
+=======
+>>>>>>> e8a78b516d7612be146673ec1a8b392edf2373c7
 `;
 
 export default RequestUrl;
