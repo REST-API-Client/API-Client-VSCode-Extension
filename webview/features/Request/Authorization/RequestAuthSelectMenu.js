@@ -45,7 +45,7 @@ const OptionWrapper = styled.select`
   border-radius: 0.25rem;
   font-size: 1.1rem;
   font-weight: 600;
-  background: transparent;
+  background-color: var(--vscode-editor-background);
   color: rgba(255, 255, 255, 0.78);
 `;
 

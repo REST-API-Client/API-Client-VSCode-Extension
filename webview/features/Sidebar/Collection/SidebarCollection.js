@@ -142,7 +142,8 @@ const UtilitySectionWrapper = styled.div`
     margin-top: 1rem;
     padding: 0.4rem 0.6rem;
     border-radius: 0.35rem;
-    color: white;
+    color: var(--default-text);
+    opacity: 0.78;
   }
 `;
 
