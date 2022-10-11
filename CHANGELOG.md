@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.9
+
+#### Feature change VSCode extension theme to match various VSCode theme
+
 ## 1.0.8
 
 #### Feature CI/CD github actions to deploy vscode extension to marketplace
