@@ -49,6 +49,7 @@
 - [📚 Tech Stacks](#-tech-stacks)
 - [🗒 Changelog](#-changelog)
 - [👨🏻‍💻 Contributing](#-contributing)
+- [🫧 Contributors](#-contributors)
 - [📋 License](#-license)
 
 <br>
@@ -181,6 +182,11 @@ I appreciate even the tiniest suggestion or contribution you make to this projec
 #### ⚠️ Bugs or Suggestions
 
 If you found any bugs while using this extension or you have a suggestion please post it in [issues](https://github.com/REST-API-Client/API-Client-VSCode-Extension/issues).
+
+## 🫧 Contributors 
+-  [Unjin Jang](https://github.com/unwls)
+-  [Cxxshyy](https://github.com/Cxxshyy)
+
 
 ## 📋 License
 
