@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.0
+
+#### Add feature to load JSON files for params, headers and body
+
 ## 1.0.9
 
 #### Feature change VSCode extension theme to match various VSCode theme
