@@ -154,7 +154,7 @@ Simply click Open Menu button or open the Command Palette and type the command b
 
 ## 🗒 Changelog
 
-#### Current version 1.0.9
+#### Current version 1.1.0
 
 Visit [here](https://github.com/REST-API-Client/API-Client-VSCode-Extension/blob/main/CHANGELOG.md) for a detailed release notes
 
@@ -176,8 +176,9 @@ I appreciate even the tiniest suggestion or contribution you make to this projec
 #### 🏗 Running the extension locally for development
 
 1. Run `git clone` from this [repository](https://github.com/REST-API-Client/API-Client-VSCode-Extension)
-2. Run npm install in order to install all the dependencies needed
-3. Press F5 to launch extension development mode
+2. Run `npm install` in order to install all the dependencies needed
+3. Run `npm webpack-dev`
+4. Press F5 to launch extension development mode
 
 #### ⚠️ Bugs or Suggestions
 
@@ -186,6 +187,7 @@ If you found any bugs while using this extension or you have a suggestion please
 ## 🫧 Contributors 
 -  [Unjin Jang](https://github.com/unwls)
 -  [Cxxshyy](https://github.com/Cxxshyy)
+-  [sergptz](https://github.com/sergptz)
 
 
 ## 📋 License
