@@ -1,6 +1,7 @@
 import React from "react";
 import shallow from "zustand/shallow";
 
+import LoadButtonsBlock from "../../../components/LoadButtonsBlock";
 import { COMMON, REQUEST } from "../../../constants";
 import KeyValueTable from "../../../shared/KeyValueTable";
 import useStore from "../../../store/useStore";
@@ -30,7 +31,12 @@ const RequestMenuOption = () => {
   switch (requestOption) {
     case REQUEST.PARAMS:
     case COMMON.HEADERS:
-      return <KeyValueTable type={requestOption} {...keyValueProps} />;
+      return (
+        <>
+          <LoadButtonsBlock optionsType={requestOption} />
+          <KeyValueTable type={requestOption} {...keyValueProps} />
+        </>
+      );
     case REQUEST.AUTH:
       return <RequestAuthSelectMenu />;
     case COMMON.BODY:

@@ -72,6 +72,25 @@ const keyValueTableDataSlice = (set) => ({
       ),
     })),
 
+  handleFileUpload: (data, optionsType = COMMON.HEADERS, replaceValues) => {
+    const rows = []
+    for (let key in data) {
+      rows.push({
+        optionType: optionsType,
+        isChecked: true,
+        key,
+        value: data[key],
+        description: "",
+      })
+    }
+    set((state) => ({ 
+      keyValueTableData: [
+        ...(state.keyValueTableData.filter(v => data[v.key] === undefined && (!replaceValues || v.optionType !== optionsType))),
+        ...rows
+      ]
+    }))
+  },
+
   handleRequestKey: (dataIndex, detail) =>
     set((state) => ({
       keyValueTableData: state.keyValueTableData.map((tableData, index) =>

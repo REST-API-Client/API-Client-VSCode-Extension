@@ -1,6 +1,7 @@
 import React from "react";
 import shallow from "zustand/shallow";
 
+import LoadButtonsBlock from "../../../components/LoadButtonsBlock";
 import { HEIGHT, OPTION, REQUEST } from "../../../constants";
 import CodeEditor from "../../../shared/CodeEditor";
 import KeyValueTable from "../../../shared/KeyValueTable";
@@ -48,11 +49,14 @@ const RequestBodySelectMenuOption = () => {
     case REQUEST.FORM_DATA:
     case REQUEST.FORM_URLENCODED:
       return (
-        <KeyValueTable
-          type={bodyOption}
-          title={bodyOption}
-          {...keyValueProps}
-        />
+        <>
+          <LoadButtonsBlock optionsType={bodyOption} />
+          <KeyValueTable
+            type={bodyOption}
+            title={bodyOption}
+            {...keyValueProps}
+          />
+        </>
       );
     case REQUEST.RAW:
       return (
