@@ -1,8 +1,8 @@
-function generateArrayObjectFromData(objectData) {
-  const array = [];
+function generateArrayObjectFromData(objectData: any) {
+  const array: any = [];
 
   for (const key in objectData) {
-    const temporaryObject = {};
+    const temporaryObject: any = {};
 
     temporaryObject.key = key;
     temporaryObject.value = objectData[key];
