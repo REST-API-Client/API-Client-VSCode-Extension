@@ -21,6 +21,9 @@ jobs:
       - name: Install vsce
         run: npm i -g vsce
 
+      - name: Package extension
+        run: vsce package
+
       - name: Publish to marketplace
         run: vsce publish -p $PERSONAL_ACCESS_TOKEN
         env:
