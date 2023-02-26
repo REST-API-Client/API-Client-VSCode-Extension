@@ -44,11 +44,17 @@
 <br>
 
 - [🚀 Installation](#-installation)
+- [🔐 Security and Privacy](#-security-and-privacy)
 - [✨ Features](#-features)
 - [💻 Commands](#-commands)
 - [📚 Tech Stacks](#-tech-stacks)
+    - [This project was created using the following tech stacks:](#this-project-was-created-using-the-following-tech-stacks)
 - [🗒 Changelog](#-changelog)
+    - [Current version 1.1.0](#current-version-110)
 - [👨🏻‍💻 Contributing](#-contributing)
+    - [🪜 Step-by-step guide on how to make a pull request](#-step-by-step-guide-on-how-to-make-a-pull-request)
+    - [🏗 Running the extension locally for development](#-running-the-extension-locally-for-development)
+    - [⚠️ Bugs or Suggestions](#️-bugs-or-suggestions)
 - [🫧 Contributors](#-contributors)
 - [📋 License](#-license)
 
@@ -60,7 +66,7 @@
 
 > ❗️ REST API Client cannot be installed or used when using a web version of Visual Studio Code
 
-#### 🔐 Security and Privacy
+## 🔐 Security and Privacy
 
 - REST API Client **does not** collect or store any of your personal information or request data
 - REST API Client uses VSCode global state API in order to store your request history and favorites collections locally.
@@ -185,6 +191,7 @@ I appreciate even the tiniest suggestion or contribution you make to this projec
 If you found any bugs while using this extension or you have a suggestion please post it in [issues](https://github.com/REST-API-Client/API-Client-VSCode-Extension/issues).
 
 ## 🫧 Contributors 
+[![Contributors](https://contrib.rocks/image?repo=REST-API-Client/API-Client-VSCode-Extension)](https://github.com/REST-API-Client/API-Client-VSCode-Extension/graphs/contributors)
 -  [Unjin Jang](https://github.com/unwls)
 -  [Cxxshyy](https://github.com/Cxxshyy)
 -  [sergptz](https://github.com/sergptz)
