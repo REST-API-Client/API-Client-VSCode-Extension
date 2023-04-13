@@ -10,7 +10,7 @@ const babelCommonRules = {
 
 const extensionConfig = {
   target: "node",
-  entry: "./src/extension.js",
+  entry: "./src/extension.ts",
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "extension.js",
@@ -21,7 +21,7 @@ const extensionConfig = {
     vscode: "commonjs vscode",
   },
   resolve: {
-    extensions: [".js"],
+    extensions: [".js", ".ts", ".tsx"],
     fallback: {
       buffer: require.resolve("buffer"),
       path: require.resolve("path-browserify"),
@@ -34,12 +34,17 @@ const extensionConfig = {
         test: /\.css$/,
         use: ["style-loader", "css-loader"],
       },
+      {
+        test: /\.tsx?$/,
+        use: "ts-loader",
+        exclude: path.resolve(__dirname, "node_modules"),
+      },
     ],
   },
 };
 
 const mainWebViewConfig = {
-  entry: "./webview/index.js",
+  entry: "./webview/index.tsx",
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
@@ -52,10 +57,15 @@ const mainWebViewConfig = {
   ],
   resolve: {
     mainFields: ["browser", "module", "main"],
-    extensions: [".js"],
+    extensions: [".js", ".ts", ".tsx"],
   },
   module: {
     rules: [
+      {
+        test: /\.tsx?$/,
+        use: "ts-loader",
+        exclude: path.resolve(__dirname, "node_modules"),
+      },
       {
         test: /\.(png|svg)$/,
         use: [
@@ -77,17 +87,22 @@ const mainWebViewConfig = {
 };
 
 const sidebarWebViewConfig = {
-  entry: "./webview/sidebar.js",
+  entry: "./webview/sidebar.tsx",
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "sidebar.js",
   },
   resolve: {
     mainFields: ["browser", "module", "main"],
-    extensions: [".js"],
+    extensions: [".js", ".ts", ".tsx"],
   },
   module: {
     rules: [
+      {
+        test: /\.tsx?$/,
+        use: "ts-loader",
+        exclude: path.resolve(__dirname, "node_modules"),
+      },
       {
         test: /\.(js)$/,
         exclude: path.resolve(__dirname, "node_modules"),
