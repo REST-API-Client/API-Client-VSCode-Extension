@@ -1,27 +1,36 @@
+import { StateCreator } from "zustand";
 import { SIDEBAR } from "../../constants";
+import {
+  ISidebarSlice,
+  IUserRequestSidebarState,
+  ISidebarSliceList,
+} from "./type";
 
-const initialState = {
+const initialState: ISidebarSlice = {
   userFavorites: [],
   userRequestHistory: [],
   sidebarOption: SIDEBAR.HISTORY,
 };
 
-const sidebarSlice = (set: any) => ({
+const sidebarSlice: StateCreator<ISidebarSlice, [], [], ISidebarSlice> = (
+  set,
+) => ({
   userFavorites: initialState.userFavorites,
-  sidebarOption: initialState.sidebarOption,
   userRequestHistory: initialState.userRequestHistory,
+  sidebarOption: initialState.sidebarOption,
 
-  handleSidebarOption: (option: any) => set(() => ({ sidebarOption: option })),
+  handleSidebarOption: (option: string) =>
+    set(() => ({ sidebarOption: option })),
 
-  handleUserHistoryCollection: (historyData: any) =>
+  handleUserHistoryCollection: (historyData: IUserRequestSidebarState[]) =>
     set(() => ({ userRequestHistory: historyData })),
 
-  handleUserFavoritesCollection: (favoritesData: any) =>
+  handleUserFavoritesCollection: (favoritesData: IUserRequestSidebarState[]) =>
     set(() => ({ userFavorites: favoritesData })),
 
-  handleUserFavoriteIcon: (id: any, time: any) =>
-    set((state: any) => ({
-      userRequestHistory: state.userRequestHistory.map((historyData: any) =>
+  handleUserFavoriteIcon: (id: string, time: number) =>
+    set((state) => ({
+      userRequestHistory: state.userRequestHistory.map((historyData) =>
         historyData.id === id
           ? {
               ...historyData,
@@ -32,37 +41,37 @@ const sidebarSlice = (set: any) => ({
       ),
     })),
 
-  handleUserDeleteIcon: (targetState: any, id: any) => {
-    set((state: any) => ({
+  handleUserDeleteIcon: (targetState: keyof ISidebarSliceList, id: string) => {
+    set((state) => ({
       [targetState]: state[targetState].filter(
-        (historyData: any) => historyData.id !== id,
+        (historyData) => historyData.id !== id,
       ),
     }));
   },
 
-  addCollectionToFavorites: (collection: any) =>
-    set((state: any) => ({
+  addCollectionToFavorites: (collection: IUserRequestSidebarState[]) =>
+    set((state) => ({
       userFavorites: [...collection, ...state.userFavorites],
     })),
 
-  removeFromFavoriteCollection: (id: any) => {
-    set((state: any) => ({
+  removeFromFavoriteCollection: (id: string) => {
+    set((state) => ({
       userFavorites: state.userFavorites.filter(
-        (historyData: any) => historyData.id !== id,
+        (historyData) => historyData.id !== id,
       ),
     }));
   },
 
   resetFavoriteIconState: () =>
-    set((state: any) => ({
-      userRequestHistory: state.userRequestHistory.map((historyData: any) =>
+    set((state) => ({
+      userRequestHistory: state.userRequestHistory.map((historyData) =>
         historyData.isUserFavorite === true
           ? { ...historyData, isUserFavorite: false }
           : historyData,
       ),
     })),
 
-  deleteCollection: (targetState: any) => {
+  deleteCollection: (targetState: string) => {
     set(() => ({ [targetState]: [] }));
   },
 });

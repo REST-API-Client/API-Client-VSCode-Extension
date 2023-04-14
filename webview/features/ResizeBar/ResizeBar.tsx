@@ -7,7 +7,7 @@ import useStore from "../../store/useStore";
 
 const ResizeBar = () => {
   const { requestMenuHeight, handleRequestHeightChange } = useStore(
-    (state: any) => ({
+    (state) => ({
       requestMenuHeight: state.requestMenuHeight,
       handleRequestHeightChange: state.handleRequestHeightChange,
     }),

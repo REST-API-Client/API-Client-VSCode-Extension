@@ -15,7 +15,7 @@ const SidebarMenuOption = () => {
     addCollectionToFavorites,
     removeFromFavoriteCollection,
   } = useStore(
-    (state: any) => ({
+    (state) => ({
       sidebarOption: state.sidebarOption,
       userFavorites: state.userFavorites,
       userRequestHistory: state.userRequestHistory,
@@ -29,7 +29,7 @@ const SidebarMenuOption = () => {
 
   const sidebarCollectionProps = {
     sidebarOption,
-    handleSidebarFavoriteIcon(command: any, id: any) {
+    handleSidebarFavoriteIcon(command: string, id: string) {
       const currentTime = new Date().getTime();
 
       if (command === SIDEBAR.ADD_TO_FAVORITES) {
@@ -49,7 +49,7 @@ const SidebarMenuOption = () => {
         removeFromFavoriteCollection(id);
       }
     },
-    handleDeleteButton(id) {
+    handleDeleteButton(id: string) {
       switch (sidebarOption) {
         case SIDEBAR.FAVORITES:
           handleUserDeleteIcon(SIDEBAR.USER_FAVORITES_COLLECTION, id);
@@ -84,7 +84,7 @@ const SidebarMenuOption = () => {
           });
       }
     },
-    handleUrlClick(id) {
+    handleUrlClick(id: string) {
       switch (sidebarOption) {
         case SIDEBAR.FAVORITES:
           return vscode.postMessage({

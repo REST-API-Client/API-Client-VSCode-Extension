@@ -1,4 +1,4 @@
-const calculateCollectionTime = (collectionCreatedTime: any) => {
+const calculateCollectionTime = (collectionCreatedTime: number): string => {
   const timeDifference = new Date().getTime() - collectionCreatedTime;
 
   const seconds = Math.floor((timeDifference / 1000) % 60);

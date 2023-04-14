@@ -1,10 +1,10 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, ReactNode } from "react";
 import styled from "styled-components";
 
 import { COMMON } from "../constants";
 
 interface TButtonProps {
-  children: string;
+  children: string | ReactNode;
   buttonType?: any;
   buttonStatus?: string;
   primary: boolean;
