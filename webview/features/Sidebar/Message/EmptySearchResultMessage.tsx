@@ -1,10 +1,15 @@
-import PropTypes from "prop-types";
 import React from "react";
 import { MdSearchOff } from "react-icons/md";
 
 import Message from "../../../components/Message";
 
-const EmptySearchResultMessage = ({ value }) => {
+interface IEmptySearchResultMessageProps {
+  value: string;
+}
+
+const EmptySearchResultMessage = ({
+  value,
+}: IEmptySearchResultMessageProps) => {
   return (
     <Message>
       <MdSearchOff className="sidebarEmptyIcon" />
@@ -14,10 +19,6 @@ const EmptySearchResultMessage = ({ value }) => {
       <p>Make a new request to add it to your collection.</p>
     </Message>
   );
-};
-
-EmptySearchResultMessage.propTypes = {
-  value: PropTypes.string.isRequired,
 };
 
 export default EmptySearchResultMessage;

@@ -1,4 +1,6 @@
-const generateParameterString = (dataArray: any) => {
+import { IParameterString } from "./type";
+
+const generateParameterString = (dataArray: IParameterString[]) => {
   let parameterString = "?";
 
   if (dataArray.length === 1) {

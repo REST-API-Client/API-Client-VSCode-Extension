@@ -16,7 +16,7 @@ const ResponseMenuOption = () => {
     responseBodyOption,
     responseBodyViewFormat,
   } = useStore(
-    (state: any) => ({
+    (state) => ({
       responseData: state.responseData?.data,
       responseOption: state.responseOption,
       responseHeaders: state.responseData?.headers,

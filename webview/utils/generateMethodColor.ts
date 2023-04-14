@@ -1,4 +1,4 @@
-const generateMethodColor = (method: string) => {
+const generateMethodColor = (method: string): string => {
   switch (method) {
     case "delete":
       return "rgb(235 32 19)";

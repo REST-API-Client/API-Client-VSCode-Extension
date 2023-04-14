@@ -48,13 +48,13 @@
 - [✨ Features](#-features)
 - [💻 Commands](#-commands)
 - [📚 Tech Stacks](#-tech-stacks)
-    - [This project was created using the following tech stacks:](#this-project-was-created-using-the-following-tech-stacks)
+  - [This project was created using the following tech stacks:](#this-project-was-created-using-the-following-tech-stacks)
 - [🗒 Changelog](#-changelog)
-    - [Current version 1.1.0](#current-version-110)
+  - [Current version 1.1.0](#current-version-110)
 - [👨🏻‍💻 Contributing](#-contributing)
-    - [🪜 Step-by-step guide on how to make a pull request](#-step-by-step-guide-on-how-to-make-a-pull-request)
-    - [🏗 Running the extension locally for development](#-running-the-extension-locally-for-development)
-    - [⚠️ Bugs or Suggestions](#️-bugs-or-suggestions)
+  - [🪜 Step-by-step guide on how to make a pull request](#-step-by-step-guide-on-how-to-make-a-pull-request)
+  - [🏗 Running the extension locally for development](#-running-the-extension-locally-for-development)
+  - [⚠️ Bugs or Suggestions](#️-bugs-or-suggestions)
 - [🫧 Contributors](#-contributors)
 - [📋 License](#-license)
 
@@ -160,7 +160,7 @@ Simply click Open Menu button or open the Command Palette and type the command b
 
 ## 🗒 Changelog
 
-#### Current version 1.1.0
+#### Current version 1.1.3
 
 Visit [here](https://github.com/REST-API-Client/API-Client-VSCode-Extension/blob/main/CHANGELOG.md) for a detailed release notes
 
@@ -182,20 +182,22 @@ I appreciate even the tiniest suggestion or contribution you make to this projec
 #### 🏗 Running the extension locally for development
 
 1. Run `git clone` from this [repository](https://github.com/REST-API-Client/API-Client-VSCode-Extension)
-2. Run `npm install` in order to install all the dependencies needed
-3. Run `npm webpack-dev`
+2. Run `npm install`
+3. Run `npm run dev`
 4. Press F5 to launch extension development mode
+5. `command + p` or `ctrl + p` and type `> Developer: Toggle Developer Tools` to open browser console for easy debugging
 
 #### ⚠️ Bugs or Suggestions
 
 If you found any bugs while using this extension or you have a suggestion please post it in [issues](https://github.com/REST-API-Client/API-Client-VSCode-Extension/issues).
 
-## 🫧 Contributors 
-[![Contributors](https://contrib.rocks/image?repo=REST-API-Client/API-Client-VSCode-Extension)](https://github.com/REST-API-Client/API-Client-VSCode-Extension/graphs/contributors)
--  [Unjin Jang](https://github.com/unwls)
--  [Cxxshyy](https://github.com/Cxxshyy)
--  [sergptz](https://github.com/sergptz)
+## 🫧 Contributors
 
+[![Contributors](https://contrib.rocks/image?repo=REST-API-Client/API-Client-VSCode-Extension)](https://github.com/REST-API-Client/API-Client-VSCode-Extension/graphs/contributors)
+
+- [Unjin Jang](https://github.com/unwls)
+- [Cxxshyy](https://github.com/Cxxshyy)
+- [sergptz](https://github.com/sergptz)
 
 ## 📋 License
 

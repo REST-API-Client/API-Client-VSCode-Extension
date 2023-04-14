@@ -18,7 +18,7 @@ const ResponsePanel = () => {
     handleSidebarCollectionHeaders,
     handleSidebarCollectionClick,
   } = useStore(
-    (state: any) => ({
+    (state) => ({
       responseData: state.responseData,
       requestInProcess: state.requestInProcess,
       handleResponseData: state.handleResponseData,
@@ -29,7 +29,7 @@ const ResponsePanel = () => {
     shallow,
   );
 
-  const handleExtensionMessage = (event) => {
+  const handleExtensionMessage = (event: MessageEvent) => {
     if (event.data.type === RESPONSE.RESPONSE) {
       handleResponseData(event.data);
       handleRequestProcessStatus(COMMON.FINISHED);

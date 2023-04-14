@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from "react";
+import React, { useLayoutEffect, MouseEvent } from "react";
 import styled from "styled-components";
 import shallow from "zustand/shallow";
 
@@ -7,6 +7,8 @@ import SelectWrapper from "../../../components/SelectWrapper";
 import { OPTION, SIDEBAR } from "../../../constants";
 import useStore from "../../../store/useStore";
 import SidebarMenuOption from "./SidebarMenuOption";
+
+type OnClickCallback = (event: MouseEvent<HTMLHeadingElement>) => void;
 
 const SidebarMenu = () => {
   const {
@@ -17,7 +19,7 @@ const SidebarMenu = () => {
     handleUserHistoryCollection,
     handleUserFavoritesCollection,
   } = useStore(
-    (state: any) => ({
+    (state) => ({
       sidebarOption: state.sidebarOption,
       deleteCollection: state.deleteCollection,
       handleSidebarOption: state.handleSidebarOption,
@@ -27,6 +29,14 @@ const SidebarMenu = () => {
     }),
     shallow,
   );
+
+  const handleHeadingTextClick: OnClickCallback = (
+    event: MouseEvent<HTMLHeadingElement>,
+  ) => {
+    const clickedHeading = event.currentTarget;
+
+    handleSidebarOption(clickedHeading);
+  };
 
   useLayoutEffect(() => {
     window.addEventListener("message", (message) => {
@@ -52,11 +62,7 @@ const SidebarMenu = () => {
               currentOption={sidebarOption}
               menuOption={option}
             >
-              <h3
-                onClick={(event) => handleSidebarOption(event.target.innerText)}
-              >
-                {option}
-              </h3>
+              <h3 onClick={handleHeadingTextClick}>{option}</h3>
             </MenuOption>
           ))}
         </SelectWrapper>

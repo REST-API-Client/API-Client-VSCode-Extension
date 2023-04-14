@@ -14,10 +14,10 @@ import EmptySearchResultMessage from "../Message/EmptySearchResultMessage";
 interface ISidebarCollectionProps {
   sidebarOption: string;
   userCollection: any[];
-  handleUrlClick: (id: any) => void;
-  handleDeleteButton: (id: any) => void;
+  handleUrlClick: (id: string) => void;
+  handleDeleteButton: (id: string) => void;
   handleDeleteAllButton: () => void;
-  handleSidebarFavoriteIcon: (stringValue: string, id: any) => void;
+  handleSidebarFavoriteIcon: (stringValue: string, id: string) => void;
 }
 const SidebarCollection = ({
   sidebarOption,

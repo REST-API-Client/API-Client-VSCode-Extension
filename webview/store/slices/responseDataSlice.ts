@@ -1,4 +1,7 @@
+import { StateCreator } from "zustand";
 import { COMMON, RESPONSE } from "../../constants";
+
+import { IResponseDataSlice } from "./type";
 
 const initialState = {
   requestInProcess: "",
@@ -8,7 +11,12 @@ const initialState = {
   responseBodyViewFormat: COMMON.JSON,
 };
 
-const responseDataSlice = (set: any) => ({
+const responseDataSlice: StateCreator<
+  IResponseDataSlice,
+  [],
+  [],
+  IResponseDataSlice
+> = (set) => ({
   responseData: initialState.responseData,
   responseOption: initialState.responseOption,
   requestInProcess: initialState.requestInProcess,
@@ -17,16 +25,16 @@ const responseDataSlice = (set: any) => ({
 
   handleResponseData: (data: any) => set(() => ({ responseData: data })),
 
-  handleRequestProcessStatus: (processStatus: any) =>
+  handleRequestProcessStatus: (processStatus: string) =>
     set(() => ({ requestInProcess: processStatus })),
 
-  handleResponseOptionChange: (option: any) =>
+  handleResponseOptionChange: (option: string) =>
     set(() => ({ responseOption: option })),
 
-  handleResponseBodyOptionChange: (option: any) =>
+  handleResponseBodyOptionChange: (option: string) =>
     set(() => ({ responseBodyOption: option })),
 
-  handleResponseBodyViewFormatChange: (option: any) =>
+  handleResponseBodyViewFormatChange: (option: string) =>
     set(() => ({ responseBodyViewFormat: option })),
 });
 

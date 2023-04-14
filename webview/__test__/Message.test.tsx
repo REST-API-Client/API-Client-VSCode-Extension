@@ -17,7 +17,7 @@ describe("Message component test", () => {
   });
 
   it("should render primary message component with correct style", () => {
-    const { container } = render(<Message primary />);
+    const { container } = render(<Message primary>Test</Message>);
 
     expect(container.firstChild).toHaveStyle(`margin-top: 1rem`);
   });

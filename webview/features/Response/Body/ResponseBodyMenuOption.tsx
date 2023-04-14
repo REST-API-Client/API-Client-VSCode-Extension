@@ -12,7 +12,7 @@ const ResponseBodyViewOption = () => {
     responseBodyViewFormat,
     handleResponseBodyViewFormatChange,
   } = useStore(
-    (state: any) => ({
+    (state) => ({
       responseBodyOption: state.responseBodyOption,
       responseBodyViewFormat: state.responseBodyViewFormat,
       handleResponseBodyViewFormatChange:

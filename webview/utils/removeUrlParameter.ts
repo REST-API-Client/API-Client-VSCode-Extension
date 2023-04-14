@@ -1,7 +1,5 @@
-const removeUrlParameter = (url: any) => {
-  if (url[0] === "?") {
-    return "";
-  }
+const removeUrlParameter = (url: string): string | undefined => {
+  if (url[0] === "?") return;
 
   let targetIndex = 0;
 
@@ -14,10 +12,12 @@ const removeUrlParameter = (url: any) => {
   }
 
   if (targetIndex !== 0) {
-    url = url?.split("").splice(0, targetIndex);
+    const reformedUrl = url?.split("").splice(0, targetIndex);
+
+    return reformedUrl.join("");
   }
 
-  return typeof url === "string" ? url : url.join("");
+  return url;
 };
 
 export default removeUrlParameter;
