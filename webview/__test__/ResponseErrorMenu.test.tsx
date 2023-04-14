@@ -13,7 +13,9 @@ describe("ResponseErrorMenu component test", () => {
   });
 
   it("should display correct message when image with correct alt", () => {
-    const { getByAltText } = render(<ResponseErrorMenu />);
+    const { getByAltText } = render(
+      <ResponseErrorMenu type="unit test" message="unit test purpose" />,
+    );
 
     expect(getByAltText("error")).toBeTruthy();
   });
