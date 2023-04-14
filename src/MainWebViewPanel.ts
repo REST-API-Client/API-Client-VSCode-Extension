@@ -149,9 +149,6 @@ class MainWebViewPanel {
       }
     }
 
-    console.log(
-      this.stateManager.getExtensionContext(COLLECTION.HISTORY_COLLECTION),
-    );
     this.mainPanel.webview.postMessage(responseObject);
     this.sidebarWebViewPanel.postMainWebViewPanelMessage(
       this.stateManager.getExtensionContext(COLLECTION.HISTORY_COLLECTION),
