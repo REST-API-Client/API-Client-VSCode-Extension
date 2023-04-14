@@ -1,5 +1,6 @@
 export interface ISidebarSlice extends ISidebarSliceList {
   sidebarOption: string;
+  handleSidebarOption: (option: string) => void;
 }
 
 export interface ISidebarSliceList {
@@ -60,4 +61,12 @@ export interface KeyValueTableDaum {
 
 export interface IResizseBarSlice {
   requestMenuHeight: string;
+}
+
+export interface IResponseDataSlice {
+  requestInProcess: string;
+  responseData: undefined;
+  responseOption: string;
+  responseBodyOption: string;
+  responseBodyViewFormat: string;
 }

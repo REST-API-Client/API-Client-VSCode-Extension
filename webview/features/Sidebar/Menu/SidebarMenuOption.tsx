@@ -36,7 +36,7 @@ const SidebarMenuOption = () => {
         vscode.postMessage({ command, id });
 
         const selectedCollection = userRequestHistory.filter(
-          (collection: any) => collection.id === id,
+          (collection) => collection.id === id,
         );
         selectedCollection[0].favoritedTime = currentTime;
 

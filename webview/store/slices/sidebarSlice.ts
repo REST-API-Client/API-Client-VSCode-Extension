@@ -6,18 +6,12 @@ import {
   ISidebarSliceList,
 } from "./type";
 
-const initialState: ISidebarSlice = {
-  userFavorites: [],
-  userRequestHistory: [],
-  sidebarOption: SIDEBAR.HISTORY,
-};
-
 const sidebarSlice: StateCreator<ISidebarSlice, [], [], ISidebarSlice> = (
   set,
 ) => ({
-  userFavorites: initialState.userFavorites,
-  userRequestHistory: initialState.userRequestHistory,
-  sidebarOption: initialState.sidebarOption,
+  userFavorites: [],
+  userRequestHistory: [],
+  sidebarOption: SIDEBAR.HISTORY,
 
   handleSidebarOption: (option: string) =>
     set(() => ({ sidebarOption: option })),

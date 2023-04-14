@@ -11,7 +11,7 @@ import ResponseBodyViewOption from "./ResponseBodyMenuOption";
 const RequestBodyMenu = () => {
   const { responseData, responseBodyOption, handleResponseBodyOptionChange } =
     useStore(
-      (state: any) => ({
+      (state) => ({
         responseData: state.responseData,
         responseBodyOption: state.responseBodyOption,
         handleResponseBodyOptionChange: state.handleResponseBodyOptionChange,
