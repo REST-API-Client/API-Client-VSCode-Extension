@@ -10,10 +10,16 @@ import {
   ISidebarSlice,
   IResizseBarSlice,
   IResponseDataSlice,
+  IRequestDataSlice,
+  IKeyValueTableDataSlice,
 } from "./slices/type";
 
 const useStore = create<
-  ISidebarSlice & IResizseBarSlice & IResponseDataSlice
+  ISidebarSlice &
+    IResizseBarSlice &
+    IResponseDataSlice &
+    IRequestDataSlice &
+    IKeyValueTableDataSlice
 >()((...set) => ({
   ...sidebarSlice(...set),
   ...resizeBarSlice(...set),

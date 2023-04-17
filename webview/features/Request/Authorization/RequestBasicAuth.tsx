@@ -13,7 +13,7 @@ const RequestBasicAuth = () => {
     handleRequestAuthData,
     handleShouldShowPassword,
   } = useStore(
-    (state: any) => ({
+    (state) => ({
       authData: state.authData,
       shouldShowPassword: state.shouldShowPassword,
       handleRequestAuthData: state.handleRequestAuthData,

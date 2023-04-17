@@ -16,7 +16,7 @@ const ResizeBar = () => {
   const [isDragging, setIsDragging] = useState(false);
   const [resizeBarY, setResizeBarY] = useState(0);
 
-  const handleMouseDown = (event: any) => {
+  const handleMouseDown = (event: React.MouseEvent) => {
     event.preventDefault();
 
     setResizeBarY(event.clientY);
@@ -27,7 +27,7 @@ const ResizeBar = () => {
     setIsDragging(false);
   };
 
-  const handleMouseMove = (event: any) => {
+  const handleMouseMove = (event: MouseEvent) => {
     event.stopPropagation();
     event.preventDefault();
 

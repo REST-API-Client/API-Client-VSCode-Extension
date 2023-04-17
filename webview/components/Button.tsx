@@ -5,7 +5,7 @@ import { COMMON } from "../constants";
 
 interface TButtonProps {
   children: string | ReactNode;
-  buttonType?: any;
+  buttonType?: string;
   buttonStatus?: string;
   primary: boolean;
   handleButtonClick?: () => void;
@@ -30,7 +30,7 @@ const Button = ({
   );
 };
 
-const ButtonWrapper = styled.button<{ primary: boolean }>`
+const ButtonWrapper = styled.button<{ primary: boolean; type: string }>`
   width: ${(props) => (props.primary ? "8rem" : "12rem")};
   margin-left: ${(props) => (props.primary ? "1rem" : "2.7rem")};
   font-size: 1.2rem;

@@ -1,15 +1,7 @@
 import { StateCreator } from "zustand";
 import { COMMON, RESPONSE } from "../../constants";
 
-import { IResponseDataSlice } from "./type";
-
-const initialState = {
-  requestInProcess: "",
-  responseData: undefined,
-  responseOption: COMMON.BODY,
-  responseBodyOption: RESPONSE.PRETTY,
-  responseBodyViewFormat: COMMON.JSON,
-};
+import { IResponseData, IResponseDataSlice } from "./type";
 
 const responseDataSlice: StateCreator<
   IResponseDataSlice,
@@ -17,13 +9,14 @@ const responseDataSlice: StateCreator<
   [],
   IResponseDataSlice
 > = (set) => ({
-  responseData: initialState.responseData,
-  responseOption: initialState.responseOption,
-  requestInProcess: initialState.requestInProcess,
-  responseBodyOption: initialState.responseBodyOption,
-  responseBodyViewFormat: initialState.responseBodyViewFormat,
+  requestInProcess: "",
+  responseData: undefined,
+  responseOption: COMMON.BODY,
+  responseBodyOption: RESPONSE.PRETTY,
+  responseBodyViewFormat: COMMON.JSON,
 
-  handleResponseData: (data: any) => set(() => ({ responseData: data })),
+  handleResponseData: (data: IResponseData) =>
+    set(() => ({ responseData: data })),
 
   handleRequestProcessStatus: (processStatus: string) =>
     set(() => ({ requestInProcess: processStatus })),

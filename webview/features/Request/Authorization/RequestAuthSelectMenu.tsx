@@ -9,7 +9,7 @@ import RequestAuthMenuOption from "./RequestAuthSelectMenuOption";
 
 const RequestAuthSelectMenu = () => {
   const { authOption, handleRequestAuthType } = useStore(
-    (state: any) => ({
+    (state) => ({
       authOption: state.authOption,
       handleRequestAuthType: state.handleRequestAuthType,
     }),

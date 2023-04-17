@@ -35,7 +35,7 @@ const SidebarMenu = () => {
   ) => {
     const clickedHeading = event.currentTarget;
 
-    handleSidebarOption(clickedHeading);
+    handleSidebarOption(clickedHeading.innerText);
   };
 
   useLayoutEffect(() => {

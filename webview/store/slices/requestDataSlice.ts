@@ -1,6 +1,13 @@
+import { StateCreator } from "zustand";
 import { REQUEST } from "../../constants";
+import { IRequestDataSlice, ISidebarResponse } from "./type";
 
-const initialState = {
+const requestDataSlice: StateCreator<
+  IRequestDataSlice,
+  [],
+  [],
+  IRequestDataSlice
+> = (set) => ({
   requestUrl: "",
   codeSnippetValue: "",
   requestUrlParams: "",
@@ -18,65 +25,50 @@ const initialState = {
   },
   authData: { username: "", password: "", token: "" },
   bodyRawData: { text: "", javascript: "", json: "", html: "" },
-};
-
-const requestDataSlice = (set: any) => ({
-  authData: initialState.authData,
-  authOption: initialState.authOption,
-  requestUrl: initialState.requestUrl,
-  bodyOption: initialState.bodyOption,
-  bodyRawData: initialState.bodyRawData,
-  requestMethod: initialState.requestMethod,
-  requestOption: initialState.requestOption,
-  bodyRawOption: initialState.bodyRawOption,
-  codeSnippetValue: initialState.codeSnippetValue,
-  requestUrlParams: initialState.requestUrlParams,
-  codeSnippetOption: initialState.codeSnippetOption,
-  shouldShowPassword: initialState.shouldShowPassword,
-  shouldBeautifyEditor: initialState.shouldBeautifyEditor,
 
   handleRequestUrlChange: (url: string) => set(() => ({ requestUrl: url })),
 
-  handleRequestMethodChange: (method: any) =>
+  handleRequestMethodChange: (method: string) =>
     set(() => ({ requestMethod: method })),
 
-  handleRequestParamsChange: (params: any) =>
+  handleRequestParamsChange: (params: string) =>
     set(() => ({ requestUrlParams: params })),
 
-  handleRequestOptionChange: (option: any) =>
+  handleRequestOptionChange: (option: string) =>
     set(() => ({ requestOption: option })),
 
-  handleRequestAuthType: (type: any) => set(() => ({ authOption: type })),
+  handleRequestAuthType: (type: string) => set(() => ({ authOption: type })),
 
-  handleRequestAuthData: (authType: any, data: any) =>
-    set((state: any) => ({
+  handleRequestAuthData: (authType: string, data: string) =>
+    set((state) => ({
       authData: {
         ...state.authData,
         [authType]: data,
       },
     })),
 
-  handleRequestBodyOption: (type: any) => set(() => ({ bodyOption: type })),
+  handleRequestBodyOption: (type: string) => set(() => ({ bodyOption: type })),
 
-  handleBodyRawOption: (option: any) => set(() => ({ bodyRawOption: option })),
+  handleBodyRawOption: (option: string) =>
+    set(() => ({ bodyRawOption: option })),
 
-  handleBodyRawOptionData: (rawOption: string, data: any) =>
-    set((state: any) => ({
+  handleBodyRawOptionData: (rawOption: string, data: string) =>
+    set((state) => ({
       bodyRawData: { ...state.bodyRawData, [rawOption]: data },
     })),
 
   handleShouldShowPassword: () =>
-    set((state: any) => ({ shouldShowPassword: !state.shouldShowPassword })),
+    set((state) => ({ shouldShowPassword: !state.shouldShowPassword })),
 
   handleBeautifyButton: () =>
-    set((state: any) => ({
+    set((state) => ({
       shouldBeautifyEditor: !state.shouldBeautifyEditor,
     })),
 
   handleCodeSnippetOptionChange: (
-    languageOption: any,
-    variantOption: any,
-    editorLanguageOption: any,
+    languageOption: string,
+    variantOption: string,
+    editorLanguageOption: string,
   ) =>
     set(() => ({
       codeSnippetOption: {
@@ -86,15 +78,16 @@ const requestDataSlice = (set: any) => ({
       },
     })),
 
-  handleCodeSnippetVariantChange: (variantOption: any) =>
-    set((state: any) => ({
+  handleCodeSnippetVariantChange: (variantOption: string) =>
+    set((state) => ({
       codeSnippetOption: { ...state.codeSnippetOption, variant: variantOption },
     })),
 
-  setCodeSnippetValue: (value: any) => set(() => ({ codeSnippetValue: value })),
+  setCodeSnippetValue: (value: string) =>
+    set(() => ({ codeSnippetValue: value })),
 
-  handleSidebarCollectionClick: (value: any) =>
-    set((state: any) => {
+  handleSidebarCollectionClick: (value: ISidebarResponse) =>
+    set((state) => {
       return {
         ...state,
         ...value,

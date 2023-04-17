@@ -2,18 +2,27 @@ import React, { memo } from "react";
 import { CgAddR } from "react-icons/cg";
 import { FaTrashAlt } from "react-icons/fa";
 import styled from "styled-components";
+import { IResponseDataHeader } from "../store/slices/type";
 
 interface IKeyValueTableProps {
-  type: string;
-  title: string;
+  type?: string;
+  title?: string;
   readOnly: boolean;
-  addNewTableRow: any;
-  deleteTableRow: any;
-  handleRequestKey: any;
-  keyValueTableData: any;
-  handleRequestValue: any;
-  handleRequestCheckbox: any;
-  handleRequestDescription: any;
+  addNewTableRow?: (type: string) => void;
+  deleteTableRow?: (index: number) => void;
+  handleRequestKey?: (index: number, value: string) => void;
+  keyValueTableData:
+    | {
+        optionType: string;
+        isChecked: boolean;
+        key: string;
+        value: string;
+        description: string;
+      }[]
+    | IResponseDataHeader[];
+  handleRequestValue?: (index: number, value: string) => void;
+  handleRequestCheckbox?: (index: number) => void;
+  handleRequestDescription?: (index: number, value: string) => void;
 }
 
 const KeyValueTable = ({
@@ -43,14 +52,16 @@ const KeyValueTable = ({
                 <th className="tableIconContainer">
                   <CgAddR
                     className="tableIcon addButton"
-                    onClick={() => addNewTableRow(type)}
+                    onClick={() =>
+                      type && addNewTableRow && addNewTableRow(type)
+                    }
                   />
                 </th>
               )}
             </tr>
           </thead>
           <tbody>
-            {keyValueTableData?.map(
+            {keyValueTableData.map(
               (
                 { optionType, isChecked, key, value, description }: any,
                 index: number,
@@ -63,7 +74,10 @@ const KeyValueTable = ({
                           <input
                             type="checkbox"
                             checked={isChecked}
-                            onChange={() => handleRequestCheckbox(index)}
+                            onChange={() =>
+                              handleRequestCheckbox &&
+                              handleRequestCheckbox(index)
+                            }
                           />
                         </th>
                       )}
@@ -74,6 +88,7 @@ const KeyValueTable = ({
                           placeholder="Key"
                           value={key}
                           onChange={(event) =>
+                            handleRequestKey &&
                             handleRequestKey(index, event.target.value)
                           }
                           readOnly={readOnly}
@@ -86,6 +101,7 @@ const KeyValueTable = ({
                           placeholder="Value"
                           value={value}
                           onChange={(event) =>
+                            handleRequestValue &&
                             handleRequestValue(index, event.target.value)
                           }
                           readOnly={readOnly}
@@ -100,6 +116,7 @@ const KeyValueTable = ({
                               placeholder="Description"
                               value={description}
                               onChange={(event) =>
+                                handleRequestDescription &&
                                 handleRequestDescription(
                                   index,
                                   event.target.value,
@@ -110,7 +127,9 @@ const KeyValueTable = ({
                           <th className="tableIconContainer">
                             <FaTrashAlt
                               className="tableIcon"
-                              onClick={() => deleteTableRow(index)}
+                              onClick={() =>
+                                deleteTableRow && deleteTableRow(index)
+                              }
                             />
                           </th>
                         </>

@@ -6,7 +6,7 @@ import EmptyFavoritesCollectionMessage from "../Message/EmptyFavoritesCollection
 import EmptyHistoryCollectionMessage from "../Message/EmptyHistoryCollectionMessage";
 
 interface ISibebarEmptyCollectionMenuProps {
-  currentSidebarOption: string;
+  currentSidebarOption: string | null;
 }
 
 const SibebarEmptyCollectionMenu = ({

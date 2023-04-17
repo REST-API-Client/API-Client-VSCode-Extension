@@ -1,4 +1,4 @@
-import React from "react";
+import React, { MouseEvent } from "react";
 import styled from "styled-components";
 import shallow from "zustand/shallow";
 
@@ -19,14 +19,18 @@ const RequestBodyMenu = () => {
       shallow,
     );
 
-  const handleOptionChange = (event: any) => {
-    handleResponseBodyOptionChange(event.target.innerText);
+  const handleOptionChange = (event: MouseEvent) => {
+    const clickedTarget = event.target as HTMLDivElement;
+
+    handleResponseBodyOptionChange(clickedTarget.innerText);
   };
 
-  const handleCopyIconClick = (value: any) => {
+  const handleCopyIconClick = (value: string | undefined) => {
     vscode.postMessage({ command: COMMON.ALERT_COPY });
 
-    navigator.clipboard.writeText(value);
+    if (value) {
+      navigator.clipboard.writeText(value);
+    }
   };
 
   return (

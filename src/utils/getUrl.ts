@@ -1,4 +1,4 @@
-function getUrl(requestUrl) {
+function getUrl(requestUrl: string) {
   if (
     requestUrl.indexOf("http://") === -1 &&
     requestUrl.indexOf("https://") === -1

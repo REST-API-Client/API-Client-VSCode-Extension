@@ -7,15 +7,15 @@ import ResponsePreview from "../features/Response/Preview/ResponsePreview";
 
 interface ICodeEditorProps {
   language: string;
-  viewOption: string;
-  requestForm: boolean;
-  previewMode: boolean;
   editorOption: any;
+  viewOption?: string;
   editorHeight: string;
+  requestForm?: boolean;
+  previewMode?: boolean;
   codeEditorValue: string;
-  handleEditorChange: any;
-  shouldBeautifyEditor: boolean;
-  handleBeautifyButton: any;
+  shouldBeautifyEditor?: boolean;
+  handleEditorChange?: (value: string | undefined) => void;
+  handleBeautifyButton?: () => void;
 }
 
 const CodeEditor = ({
@@ -37,7 +37,9 @@ const CodeEditor = ({
 
   useEffect(() => {
     if (shouldBeautifyEditor && requestForm) {
-      handleBeautifyButton();
+      if (handleBeautifyButton) {
+        handleBeautifyButton();
+      }
 
       setTimeout(async () => {
         await editorRef.current.getAction("editor.action.formatDocument").run();

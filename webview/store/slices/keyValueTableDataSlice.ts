@@ -1,84 +1,85 @@
+import { StateCreator } from "zustand";
 import { COMMON, REQUEST } from "../../constants";
+import { IKeyValueTableDataSlice } from "./type";
 
-const initialState = [
-  {
-    optionType: REQUEST.PARAMS,
-    isChecked: false,
-    key: "",
-    value: "",
-    description: "",
-  },
-  {
-    optionType: COMMON.HEADERS,
-    isChecked: true,
-    key: REQUEST.CACHE_CONTROL,
-    value: REQUEST.NO_CACHE,
-    description: "",
-  },
-  {
-    optionType: COMMON.HEADERS,
-    isChecked: true,
-    key: REQUEST.ACCEPT,
-    value: REQUEST.ANY_MIME_TYPE,
-    description: "",
-  },
-  {
-    optionType: COMMON.HEADERS,
-    isChecked: true,
-    key: REQUEST.ACCEPT_ENCODING,
-    value: `${REQUEST.GZIP},${REQUEST.DEFLATE}`,
-    description: "",
-  },
-  {
-    optionType: COMMON.HEADERS,
-    isChecked: true,
-    key: REQUEST.CONNECTION,
-    value: REQUEST.KEEP_ALIVE,
-    description: "",
-  },
+const keyValueTableDataSlice: StateCreator<
+  IKeyValueTableDataSlice,
+  [],
+  [],
+  IKeyValueTableDataSlice
+> = (set) => ({
+  keyValueTableData: [
+    {
+      optionType: REQUEST.PARAMS,
+      isChecked: false,
+      key: "",
+      value: "",
+      description: "",
+    },
+    {
+      optionType: COMMON.HEADERS,
+      isChecked: true,
+      key: REQUEST.CACHE_CONTROL,
+      value: REQUEST.NO_CACHE,
+      description: "",
+    },
+    {
+      optionType: COMMON.HEADERS,
+      isChecked: true,
+      key: REQUEST.ACCEPT,
+      value: REQUEST.ANY_MIME_TYPE,
+      description: "",
+    },
+    {
+      optionType: COMMON.HEADERS,
+      isChecked: true,
+      key: REQUEST.ACCEPT_ENCODING,
+      value: `${REQUEST.GZIP},${REQUEST.DEFLATE}`,
+      description: "",
+    },
+    {
+      optionType: COMMON.HEADERS,
+      isChecked: true,
+      key: REQUEST.CONNECTION,
+      value: REQUEST.KEEP_ALIVE,
+      description: "",
+    },
 
-  {
-    optionType: COMMON.HEADERS,
-    isChecked: false,
-    key: "",
-    value: "",
-    description: "",
-  },
-  {
-    optionType: REQUEST.FORM_DATA,
-    isChecked: false,
-    key: "",
-    value: "",
-    description: "",
-  },
-  {
-    optionType: REQUEST.FORM_URLENCODED,
-    isChecked: false,
-    key: "",
-    value: "",
-    description: "",
-  },
-];
+    {
+      optionType: COMMON.HEADERS,
+      isChecked: false,
+      key: "",
+      value: "",
+      description: "",
+    },
+    {
+      optionType: REQUEST.FORM_DATA,
+      isChecked: false,
+      key: "",
+      value: "",
+      description: "",
+    },
+    {
+      optionType: REQUEST.FORM_URLENCODED,
+      isChecked: false,
+      key: "",
+      value: "",
+      description: "",
+    },
+  ],
 
-const keyValueTableDataSlice = (set: any) => ({
-  keyValueTableData: [...initialState],
-
-  handleRequestCheckbox: (dataIndex: any) =>
-    set((state: any) => ({
-      keyValueTableData: state.keyValueTableData.map(
-        (tableData: any, index: number) =>
-          dataIndex === index
-            ? { ...tableData, isChecked: !tableData.isChecked }
-            : tableData,
+  handleRequestCheckbox: (dataIndex) =>
+    set((state) => ({
+      keyValueTableData: state.keyValueTableData.map((tableData, index) =>
+        dataIndex === index
+          ? { ...tableData, isChecked: !tableData.isChecked }
+          : tableData,
       ),
     })),
 
-  handleFileUpload: (
-    data: any,
-    optionsType = COMMON.HEADERS,
-    replaceValues: any,
-  ) => {
-    const rows: any = [];
+  handleFileUpload: (data, optionsType = COMMON.HEADERS, replaceValues) => {
+    const rows = [];
+
     for (let key in data) {
       rows.push({
         optionType: optionsType,
@@ -88,10 +89,10 @@ const keyValueTableDataSlice = (set: any) => ({
         description: "",
       });
     }
-    set((state: any) => ({
+    set((state) => ({
       keyValueTableData: [
         ...state.keyValueTableData.filter(
-          (v: any) =>
+          (v) =>
             data[v.key] === undefined &&
             (!replaceValues || v.optionType !== optionsType),
         ),
@@ -100,34 +101,29 @@ const keyValueTableDataSlice = (set: any) => ({
     }));
   },
 
-  handleRequestKey: (dataIndex: any, detail: any) =>
-    set((state: any) => ({
-      keyValueTableData: state.keyValueTableData.map(
-        (tableData: any, index: any) =>
-          dataIndex === index ? { ...tableData, key: detail } : tableData,
+  handleRequestKey: (dataIndex, detail) =>
+    set((state) => ({
+      keyValueTableData: state.keyValueTableData.map((tableData, index) =>
+        dataIndex === index ? { ...tableData, key: detail } : tableData,
       ),
     })),
 
-  handleRequestValue: (dataIndex: any, detail: any) =>
-    set((state: any) => ({
-      keyValueTableData: state.keyValueTableData.map(
-        (tableData: any, index: any) =>
-          dataIndex === index ? { ...tableData, value: detail } : tableData,
+  handleRequestValue: (dataIndex, detail) =>
+    set((state) => ({
+      keyValueTableData: state.keyValueTableData.map((tableData, index) =>
+        dataIndex === index ? { ...tableData, value: detail } : tableData,
       ),
     })),
 
-  handleRequestDescription: (dataIndex: any, detail: any) =>
-    set((state: any) => ({
-      keyValueTableData: state.keyValueTableData.map(
-        (tableData: any, index: number) =>
-          dataIndex === index
-            ? { ...tableData, description: detail }
-            : tableData,
+  handleRequestDescription: (dataIndex, detail) =>
+    set((state) => ({
+      keyValueTableData: state.keyValueTableData.map((tableData, index) =>
+        dataIndex === index ? { ...tableData, description: detail } : tableData,
       ),
     })),
 
-  addRequestBodyHeaders: (headerValue: any) =>
-    set((state: any) => ({
+  addRequestBodyHeaders: (headerValue) =>
+    set((state) => ({
       keyValueTableData: [
         {
           optionType: COMMON.HEADERS,
@@ -141,15 +137,15 @@ const keyValueTableDataSlice = (set: any) => ({
     })),
 
   removeRequestBodyHeaders: () => {
-    set((state: any) => ({
+    set((state) => ({
       keyValueTableData: state.keyValueTableData.filter(
-        (keyValueData: any) => keyValueData.key !== REQUEST.CONTENT_TYPE,
+        (keyValueData) => keyValueData.key !== REQUEST.CONTENT_TYPE,
       ),
     }));
   },
 
-  addNewTableRow: (type: any) =>
-    set((state: any) => ({
+  addNewTableRow: (type) =>
+    set((state) => ({
       keyValueTableData: [
         ...state.keyValueTableData,
         {
@@ -162,15 +158,15 @@ const keyValueTableDataSlice = (set: any) => ({
       ],
     })),
 
-  deleteTableRow: (dataIndex: any) => {
-    set((state: any) => ({
+  deleteTableRow: (dataIndex) => {
+    set((state) => ({
       keyValueTableData: state.keyValueTableData.filter(
-        (_: any, index: any) => index !== dataIndex,
+        (_, index) => index !== dataIndex,
       ),
     }));
   },
 
-  handleSidebarCollectionHeaders: (headers: any) => {
+  handleSidebarCollectionHeaders: (headers) => {
     set(() => {
       return {
         keyValueTableData: [...headers],

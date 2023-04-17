@@ -1,6 +1,6 @@
 import codegen from "postman-code-generators";
 import { Request } from "postman-collection";
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, MouseEvent, ChangeEvent } from "react";
 import styled from "styled-components";
 import { useDebounce } from "use-debounce";
 import shallow from "zustand/shallow";
@@ -28,7 +28,7 @@ const RequestCodeSnippet = () => {
     handleCodeSnippetOptionChange,
     handleCodeSnippetVariantChange,
   } = useStore(
-    (state: any) => ({
+    (state) => ({
       authData: state.authData,
       requestUrl: state.requestUrl,
       authOption: state.authOption,
@@ -45,13 +45,15 @@ const RequestCodeSnippet = () => {
     }),
     shallow,
   );
+  const DEBOUNCE_TIME_VALUE = 800;
+  const [debouncedUrlValue] = useDebounce(requestUrl, DEBOUNCE_TIME_VALUE);
 
-  const [debouncedUrlValue] = useDebounce(requestUrl, 800);
-
-  const handleCopyIconClick = (value) => {
+  const handleCopyIconClick = (value: string | undefined) => {
     vscode.postMessage({ command: COMMON.ALERT_COPY });
 
-    navigator.clipboard.writeText(value);
+    if (value) {
+      navigator.clipboard.writeText(value);
+    }
   };
 
   const memoizedSdkRequestObject = useMemo(
@@ -79,13 +81,15 @@ const RequestCodeSnippet = () => {
     ],
   );
 
-  const handleCodeSnippetOption = (event) => {
+  const handleCodeSnippetOption = (event: ChangeEvent<HTMLSelectElement>) => {
+    const clickedTarget = event.target;
+
     const targetOption = OPTION.CODE_SNIPPET_OPTIONS.filter(
-      (languageData) => languageData.label === event.target.value,
+      (languageData) => languageData.label === clickedTarget.value,
     );
 
     handleCodeSnippetOptionChange(
-      event.target.value,
+      clickedTarget.value,
       targetOption[0].variants[0],
       targetOption[0].editorLanguage,
     );
@@ -97,7 +101,7 @@ const RequestCodeSnippet = () => {
       codeSnippetOption.variant,
       memoizedSdkRequestObject,
       {},
-      (error: any, snippet: any) => {
+      (error: string, snippet: string) => {
         if (error) {
         } else {
           setCodeSnippetValue(snippet);
@@ -153,6 +157,8 @@ const RequestCodeSnippet = () => {
         editorHeight={HEIGHT.REQUEST_EDITOR_HEIGHT}
         editorOption={OPTION.CODE_SNIPPET_EDITOR_OPTIONS}
         language={codeSnippetOption.editorLanguage.toLowerCase()}
+        handleEditorChange={() => undefined}
+        handleBeautifyButton={() => undefined}
       />
     </>
   );

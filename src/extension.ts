@@ -1,4 +1,4 @@
-import * as vscode from "vscode";
+import vscode from "vscode";
 
 import { COLLECTION, COMMAND, MESSAGE } from "./constants";
 import ExtentionStateManager from "./ExtensionStateManger";

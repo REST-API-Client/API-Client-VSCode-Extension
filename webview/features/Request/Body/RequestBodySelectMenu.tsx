@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 import styled from "styled-components";
 import shallow from "zustand/shallow";
 
@@ -17,7 +17,7 @@ const RequestBodySelectMenu = () => {
     addRequestBodyHeaders,
     removeRequestBodyHeaders,
   } = useStore(
-    (state: any) => ({
+    (state) => ({
       bodyOption: state.bodyOption,
       bodyRawOption: state.bodyRawOption,
       handleRequestBodyOption: state.handleRequestBodyOption,
@@ -31,14 +31,16 @@ const RequestBodySelectMenu = () => {
     (rawOption) => rawOption.option === bodyRawOption,
   );
 
-  const handleBodyOptionChoice = (event: any) => {
-    handleRequestBodyOption(event.target.value);
+  const handleBodyOptionChoice = (event: ChangeEvent<HTMLInputElement>) => {
+    const inputTarget = event.target;
+    handleRequestBodyOption(inputTarget.value);
 
     if (event.target.value === REQUEST.NONE) {
       removeRequestBodyHeaders();
     } else {
       removeRequestBodyHeaders();
-      addRequestBodyHeaders(event.target.getAttribute("header-type"));
+
+      addRequestBodyHeaders(inputTarget.getAttribute("header-type") || "");
     }
   };
 
