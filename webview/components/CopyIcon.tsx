@@ -3,8 +3,8 @@ import { FiCopy } from "react-icons/fi";
 import styled from "styled-components";
 
 interface TCopyIconProps {
-  handleClick: (value: string) => void;
-  value: string;
+  handleClick: (value: string | undefined) => void;
+  value: string | undefined;
 }
 
 const CopyIcon = ({ handleClick, value }: TCopyIconProps) => {

@@ -1,21 +1,21 @@
 import { COMMON, REQUEST } from "../constants";
 
 const generateSdkRequestObject = (
-  url: any,
-  method: any,
+  url: string,
+  method: string,
   keyValueTableData: any,
-  authOption: any,
+  authOption: string,
   authData: any,
-  bodyOption: any,
-  bodyRawOption: any,
+  bodyOption: string,
+  bodyRawOption: string,
   bodyRawData: any,
   SdkInstance: any,
 ) => {
   const requestHeader = keyValueTableData.filter(
-    (data: any) => data.optionType === COMMON.HEADERS && data.key.length > 0,
+    (data) => data.optionType === COMMON.HEADERS && data.key.length > 0,
   );
   const bodyData = keyValueTableData.filter(
-    (data: any) => data.optionType === bodyOption && data.key.length > 0,
+    (data) => data.optionType === bodyOption && data.key.length > 0,
   );
   const { username, password, token } = authData;
   let authHeaderObject = null;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 import styled from "styled-components";
 import shallow from "zustand/shallow";
 
@@ -13,7 +13,7 @@ const RequestBodyRawOptions = () => {
     addRequestBodyHeaders,
     removeRequestBodyHeaders,
   } = useStore(
-    (state: any) => ({
+    (state) => ({
       bodyRawOption: state.bodyRawOption,
       handleBodyRawOption: state.handleBodyRawOption,
       addRequestBodyHeaders: state.addRequestBodyHeaders,
@@ -22,9 +22,11 @@ const RequestBodyRawOptions = () => {
     shallow,
   );
 
-  const handleBodyRawSelectOption = (event: any) => {
+  const handleBodyRawSelectOption = (event: ChangeEvent<HTMLSelectElement>) => {
     const selectedOptionIndex = event.target.selectedIndex;
-    const selectedOptionElement = event.target.childNodes[selectedOptionIndex];
+    const selectedOptionElement = event.target.childNodes[
+      selectedOptionIndex
+    ] as HTMLSelectElement;
 
     handleBodyRawOption(event.target.value);
 
@@ -32,7 +34,9 @@ const RequestBodyRawOptions = () => {
       removeRequestBodyHeaders();
     } else {
       removeRequestBodyHeaders();
-      addRequestBodyHeaders(selectedOptionElement.getAttribute("header-type"));
+      addRequestBodyHeaders(
+        selectedOptionElement.getAttribute("header-type") || "",
+      );
     }
   };
 

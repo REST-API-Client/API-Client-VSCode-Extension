@@ -12,7 +12,7 @@ import SibebarEmptyCollectionMenu from "../Menu/SidebarEmptyCollectionMenu";
 import EmptySearchResultMessage from "../Message/EmptySearchResultMessage";
 
 interface ISidebarCollectionProps {
-  sidebarOption: string;
+  sidebarOption: string | null;
   userCollection: any[];
   handleUrlClick: (id: string) => void;
   handleDeleteButton: (id: string) => void;

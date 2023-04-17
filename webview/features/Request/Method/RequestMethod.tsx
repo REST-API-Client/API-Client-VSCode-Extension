@@ -7,7 +7,7 @@ import useStore from "../../../store/useStore";
 
 const RequestMethod = () => {
   const { requestMethod, handleRequestMethodChange } = useStore(
-    (state: any) => ({
+    (state) => ({
       requestMethod: state.requestMethod,
       handleRequestMethodChange: state.handleRequestMethodChange,
     }),

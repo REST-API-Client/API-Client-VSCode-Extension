@@ -4,11 +4,14 @@ import errorImage from "../../../assets/image/error.png";
 import Message from "../../../components/Message";
 
 interface TResponseErrorMenu {
-  type: string;
-  message: string;
+  type?: string;
+  message?: string;
 }
 
-const ResponseErrorMenu = ({ type, message }: TResponseErrorMenu) => {
+const ResponseErrorMenu = ({
+  type = "Internal Error",
+  message = "Error occured, please try again",
+}: TResponseErrorMenu) => {
   return (
     <Message primary>
       <img src={errorImage} alt="error" />

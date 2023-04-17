@@ -26,11 +26,14 @@ const ResponseMenuOption = () => {
     shallow,
   );
 
+  console.log(responseHeaders, "hello");
   switch (responseOption) {
     case COMMON.HEADERS:
       return (
         <ResponseHeaderWrapper>
-          <KeyValueTable keyValueTableData={responseHeaders} readOnly />
+          {responseHeaders && (
+            <KeyValueTable keyValueTableData={responseHeaders} readOnly />
+          )}
         </ResponseHeaderWrapper>
       );
     default:
@@ -38,7 +41,7 @@ const ResponseMenuOption = () => {
         <>
           <RequestBodyMenu />
           <CodeEditor
-            codeEditorValue={responseData}
+            codeEditorValue={responseData ? responseData : ""}
             language={
               responseBodyOption === REQUEST.RAW
                 ? REQUEST.RAW

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { FormEvent, useEffect, useRef } from "react";
 import styled from "styled-components";
 import shallow from "zustand/shallow";
 
@@ -10,10 +10,10 @@ import RequestMethod from "../Method/RequestMethod";
 import RequestUrl from "../Url/RequestUrl";
 
 const RequestPanel = () => {
-  const requestMenuRef = useRef<any>(null);
+  const requestMenuRef = useRef<HTMLDivElement | null>(null);
   const { requestData, requestMenuHeight, handleRequestProcessStatus } =
     useStore(
-      (state: any) => ({
+      (state) => ({
         requestData: {
           authData: state.authData,
           requestUrl: state.requestUrl,
@@ -30,7 +30,7 @@ const RequestPanel = () => {
       shallow,
     );
 
-  const handleFormSubmit = (event: any) => {
+  const handleFormSubmit = (event: FormEvent) => {
     event.preventDefault();
 
     if (requestData.requestUrl.length !== 0) {
@@ -43,7 +43,9 @@ const RequestPanel = () => {
   };
 
   useEffect(() => {
-    requestMenuRef.current.style.height = requestMenuHeight;
+    if (requestMenuRef.current) {
+      requestMenuRef.current.style.height = requestMenuHeight;
+    }
   }, [requestMenuHeight]);
 
   return (

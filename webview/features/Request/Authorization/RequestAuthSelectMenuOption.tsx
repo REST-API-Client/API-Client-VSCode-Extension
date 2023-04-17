@@ -7,7 +7,7 @@ import RequestBasicAuth from "./RequestBasicAuth";
 import RequestNoAuth from "./RequestNoAuth";
 
 const RequestAuthSelectMenuOption = () => {
-  const authOption = useStore((state: any) => state.authOption);
+  const authOption = useStore((state) => state.authOption);
 
   switch (authOption) {
     case REQUEST.BASIC_AUTH:

@@ -11,7 +11,7 @@ import RequestCodeSnippet from "../CodeSnippet/RequestCodeSnippet";
 
 const RequestMenuOption = () => {
   const { requestOption, keyValueProps } = useStore(
-    (state: any) => ({
+    (state) => ({
       requestOption: state.requestOption,
       keyValueProps: {
         addNewTableRow: state.addNewTableRow,
@@ -34,7 +34,12 @@ const RequestMenuOption = () => {
       return (
         <>
           <LoadButtonsBlock optionsType={requestOption} />
-          <KeyValueTable type={requestOption} {...keyValueProps} />
+          <KeyValueTable
+            type={requestOption}
+            {...keyValueProps}
+            readOnly={false}
+            title=""
+          />
         </>
       );
     case REQUEST.AUTH:

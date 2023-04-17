@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 interface TMenuOptionProps {
   children: ReactElement;
-  currentOption: string;
+  currentOption: string | null;
   menuOption: string;
 }
 

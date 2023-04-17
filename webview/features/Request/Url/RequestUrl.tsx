@@ -13,7 +13,7 @@ const RequestUrl = () => {
     keyValueTableData,
     handleRequestUrlChange,
   } = useStore(
-    (state: any) => ({
+    (state) => ({
       requestUrl: state.requestUrl,
       requestOption: state.requestOption,
       keyValueTableData: state.keyValueTableData,
@@ -26,13 +26,15 @@ const RequestUrl = () => {
     if (requestOption !== REQUEST.PARAMS) return;
 
     const filteredData = keyValueTableData.filter(
-      (data: any) => data.optionType === REQUEST.PARAMS && data.isChecked,
+      (data) => data.optionType === REQUEST.PARAMS && data.isChecked,
     );
 
     if (filteredData.length === 0) {
       const parameterRemovedUrl = removeUrlParameter(requestUrl);
 
-      handleRequestUrlChange(parameterRemovedUrl);
+      if (parameterRemovedUrl) {
+        handleRequestUrlChange(parameterRemovedUrl);
+      }
 
       return;
     }

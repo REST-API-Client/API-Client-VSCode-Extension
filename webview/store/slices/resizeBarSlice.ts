@@ -2,9 +2,6 @@ import { StateCreator } from "zustand";
 import { HEIGHT } from "../../constants";
 
 import { IResizseBarSlice } from "./type";
-const initialState: IResizseBarSlice = {
-  requestMenuHeight: HEIGHT.INITIAL_HEIGHT,
-};
 
 const resizebarSlice: StateCreator<
   IResizseBarSlice,
@@ -12,7 +9,7 @@ const resizebarSlice: StateCreator<
   [],
   IResizseBarSlice
 > = (set) => ({
-  requestMenuHeight: initialState.requestMenuHeight,
+  requestMenuHeight: HEIGHT.INITIAL_HEIGHT,
 
   handleRequestHeightChange: (value: number) =>
     set(() => ({ requestMenuHeight: `${value}vh` })),

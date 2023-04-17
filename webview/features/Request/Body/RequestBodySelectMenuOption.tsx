@@ -17,7 +17,7 @@ const RequestBodySelectMenuOption = () => {
     codeEditorProps,
     handleBodyRawOptionData,
   } = useStore(
-    (state: any) => ({
+    (state) => ({
       bodyOption: state.bodyOption,
       bodyRawData: state.bodyRawData,
       bodyRawOption: state.bodyRawOption.toLowerCase(),
@@ -41,8 +41,10 @@ const RequestBodySelectMenuOption = () => {
     shallow,
   );
 
-  function handleRequestBodyEditorChange(bodyValue: string) {
-    handleBodyRawOptionData(bodyRawOption, bodyValue);
+  function handleRequestBodyEditorChange(bodyValue: string | undefined) {
+    if (bodyValue) {
+      handleBodyRawOptionData(bodyRawOption, bodyValue);
+    }
   }
 
   switch (bodyOption) {
@@ -52,6 +54,7 @@ const RequestBodySelectMenuOption = () => {
         <>
           <LoadButtonsBlock optionsType={bodyOption} />
           <KeyValueTable
+            readOnly={false}
             type={bodyOption}
             title={bodyOption}
             {...keyValueProps}
@@ -64,7 +67,16 @@ const RequestBodySelectMenuOption = () => {
           language={bodyRawOption}
           editorOption={OPTION.EDITOR_OPTIONS}
           editorHeight={HEIGHT.REQUEST_EDITOR_HEIGHT}
-          codeEditorValue={bodyRawData[bodyRawOption]}
+          codeEditorValue={
+            bodyRawData[
+              bodyRawOption as keyof {
+                text: string;
+                javascript: string;
+                json: string;
+                html: string;
+              }
+            ]
+          }
           handleEditorChange={handleRequestBodyEditorChange}
           requestForm
           {...codeEditorProps}

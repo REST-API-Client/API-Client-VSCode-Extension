@@ -57,6 +57,7 @@ const ResponsePanel = () => {
         bodyOption,
         bodyRawOption,
       });
+
       handleSidebarCollectionHeaders(keyValueTableData);
     }
   };

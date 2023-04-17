@@ -8,7 +8,7 @@ import useStore from "../../../store/useStore";
 
 const RequestAuthBearerToken = () => {
   const { authDataToken, handleRequestAuthData } = useStore(
-    (state: any) => ({
+    (state) => ({
       authDataToken: state.authData.token,
       handleRequestAuthData: state.handleRequestAuthData,
     }),

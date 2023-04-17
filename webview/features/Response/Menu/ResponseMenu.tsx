@@ -26,7 +26,7 @@ const ResponseMenu = () => {
   ) => {
     const clickedHeading = event.currentTarget;
 
-    handleResponseOptionChange(clickedHeading);
+    handleResponseOptionChange(clickedHeading.innerText);
   };
 
   return (
@@ -47,7 +47,7 @@ const ResponseMenu = () => {
             </React.Fragment>
           ))}
         </SelectWrapper>
-        <ResponseMetaData {...responseData} />
+        {responseData && <ResponseMetaData {...responseData} />}
       </DetailOption>
       <ResponseMenuOption />
     </>
