@@ -5,7 +5,7 @@ import ResponsePreview from "../features/Response/Preview/ResponsePreview";
 
 describe("ResponseEResponsePreviewmptyMenu component test", () => {
   it("should display iframe with correct title", () => {
-    const { getByTitle } = render(<ResponsePreview />);
+    const { getByTitle } = render(<ResponsePreview sourceCode="" />);
 
     expect(getByTitle("Response Data Preview")).toBeInTheDocument();
   });

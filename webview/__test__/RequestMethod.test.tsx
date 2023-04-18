@@ -7,8 +7,10 @@ import RequestMethod from "../features/Request/Method/RequestMethod";
 describe("RequestMethod component test", () => {
   it("should display correct default select option", () => {
     const { getByRole } = render(<RequestMethod />);
-
-    expect(getByRole("option", { name: "GET" }).selected).toBe(true);
+    const selectElement = getByRole("option", {
+      name: "GET",
+    }) as HTMLSelectElement;
+    expect(selectElement.options).toBe(true);
   });
 
   it("should display the correct number of options", () => {
@@ -19,7 +21,6 @@ describe("RequestMethod component test", () => {
 
   it("should allow user to select request method", async () => {
     const { getByRole } = render(<RequestMethod />);
-
     await waitFor(() =>
       userEvent.selectOptions(
         getByRole("combobox"),
@@ -28,7 +29,11 @@ describe("RequestMethod component test", () => {
       ),
     );
 
-    expect(getByRole("option", { name: "POST" }).selected).toBe(true);
-    expect(getByRole("option", { name: "GET" }).selected).toBe(false);
+    const selectElement = getByRole("option", {
+      name: "POST",
+    }) as HTMLSelectElement;
+
+    expect(selectElement.options).toBe(true);
+    expect(selectElement.options).toBe(false);
   });
 });
