@@ -4,31 +4,29 @@ import { CATEGORY, COLLECTION, COMMAND, MESSAGE, TYPE } from "./constants";
 import { filterObjectKey, generateResponseObject, getNonce } from "./utils";
 
 class SidebarWebViewPanel {
-  #view;
-  #extensionUri;
-  mainWebViewPanel;
+  private view;
+  private extensionUri;
+  public static mainWebViewPanel;
 
   constructor(extensionUri, stateManager) {
-    this.#extensionUri = extensionUri;
+    this.extensionUri = extensionUri;
     this.stateManager = stateManager;
   }
 
   resolveWebviewView(webviewView) {
-    this.#view = webviewView;
+    this.view = webviewView;
 
-    this.#view.webview.options = {
+    this.view.webview.options = {
       enableScripts: true,
       localResourceRoots: [
-        vscode.Uri.joinPath(this.#extensionUri, "media"),
-        vscode.Uri.joinPath(this.#extensionUri, "dist"),
+        vscode.Uri.joinPath(this.extensionUri, "media"),
+        vscode.Uri.joinPath(this.extensionUri, "dist"),
       ],
     };
 
-    this.#view.webview.html = this.#getHtmlForSidebarWebView(
-      webviewView.webview,
-    );
+    this.view.webview.html = this.getHtmlForSidebarWebView(webviewView.webview);
 
-    this.#view.webview.postMessage({
+    this.view.webview.postMessage({
       messageCategory: CATEGORY.COLLECTION_DATA,
       history: this.stateManager.getExtensionContext(
         COLLECTION.HISTORY_COLLECTION,
@@ -38,19 +36,19 @@ class SidebarWebViewPanel {
       ),
     });
 
-    this.#receiveSidebarWebViewMessage();
+    this.receiveSidebarWebViewMessage();
   }
 
   postMainWebViewPanelMessage(userHistoryData, userFavoritesData) {
-    this.#view.webview.postMessage({
+    this.view.webview.postMessage({
       messageCategory: CATEGORY.COLLECTION_DATA,
       history: userHistoryData,
       favorites: userFavoritesData,
     });
   }
 
-  #receiveSidebarWebViewMessage() {
-    this.#view.webview.onDidReceiveMessage(async ({ command, id, target }) => {
+  private receiveSidebarWebViewMessage() {
+    this.view.webview.onDidReceiveMessage(async ({ command, id, target }) => {
       if (command === COMMAND.START_APP) {
         vscode.commands.executeCommand(COMMAND.MAIN_WEB_VIEW_PANEL);
       } else if (command === COMMAND.ADD_TO_FAVORITES) {
@@ -88,7 +86,7 @@ class SidebarWebViewPanel {
         if (answer === MESSAGE.YES) {
           await this.stateManager.deleteExtensionContext(target);
 
-          this.#view.webview.postMessage({
+          this.view.webview.postMessage({
             messageCategory: CATEGORY.DELETION_COMPLETE,
             target,
           });
@@ -123,19 +121,19 @@ class SidebarWebViewPanel {
     });
   }
 
-  #getHtmlForSidebarWebView(webview) {
+  private getHtmlForSidebarWebView(webview) {
     const scriptPath = vscode.Uri.joinPath(
-      this.#extensionUri,
+      this.extensionUri,
       "dist",
       "sidebar.js",
     );
     const resetCssPath = vscode.Uri.joinPath(
-      this.#extensionUri,
+      this.extensionUri,
       "media",
       "reset.css",
     );
     const vscodeStylesCssPath = vscode.Uri.joinPath(
-      this.#extensionUri,
+      this.extensionUri,
       "media",
       "vscode.css",
     );

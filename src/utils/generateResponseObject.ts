@@ -2,8 +2,11 @@ import axios from "axios";
 
 import { MESSAGE, TYPE } from "../constants";
 import { generateArrayObjectFromData } from "./index";
+import { IRequestHeaderInformation } from "./type";
 
-async function generateResponseObject(configuration) {
+async function generateResponseObject(
+  configuration: IRequestHeaderInformation,
+) {
   const sentTime = new Date().getTime();
 
   try {
@@ -26,6 +29,7 @@ async function generateResponseObject(configuration) {
       statusCode: response.status,
       statusText: response.statusText,
       requestTime: totalRequestTime,
+      responseSize: 0,
     };
 
     responseDataObject.responseSize = Buffer.from(
@@ -33,7 +37,7 @@ async function generateResponseObject(configuration) {
     ).length;
 
     return responseDataObject;
-  } catch (error) {
+  } catch (error: any) {
     if (error.response) {
       const receivedTime = new Date().getTime();
       const totalRequestTime = receivedTime - sentTime;
@@ -49,6 +53,7 @@ async function generateResponseObject(configuration) {
         statusCode: error.response.status,
         statusText: MESSAGE.NOT_FOUND,
         requestTime: totalRequestTime,
+        responseSize: 0,
       };
 
       errorObject.responseSize = Buffer.from(

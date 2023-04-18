@@ -26,7 +26,6 @@ const ResponseMenuOption = () => {
     shallow,
   );
 
-  console.log(responseHeaders, "hello");
   switch (responseOption) {
     case COMMON.HEADERS:
       return (

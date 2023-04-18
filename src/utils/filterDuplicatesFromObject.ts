@@ -1,9 +1,11 @@
+import { IUserRequestSidebarState } from "./type";
+
 const filterDuplicatesFromObject = (
-  currentCollection,
-  previousCollection,
-  id,
+  currentCollection: IUserRequestSidebarState[],
+  previousCollection: IUserRequestSidebarState[],
+  id: string,
 ) => {
-  const arr = [];
+  const arr: string[] = [];
   const filteredCurrentCollection = currentCollection.filter(
     (history) => history.isUserFavorite,
   );

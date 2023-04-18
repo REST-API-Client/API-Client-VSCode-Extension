@@ -1,11 +1,11 @@
-import React, { ReactElement, ReactNode } from "react";
+import React, { ReactNode } from "react";
 import styled from "styled-components";
 
 import { COMMON } from "../constants";
 
 interface TButtonProps {
   children: string | ReactNode;
-  buttonType?: string;
+  buttonType?: "button" | "submit" | "reset" | undefined;
   buttonStatus?: string;
   primary: boolean;
   handleButtonClick?: () => void;
@@ -30,7 +30,7 @@ const Button = ({
   );
 };
 
-const ButtonWrapper = styled.button<{ primary: boolean; type: string }>`
+const ButtonWrapper = styled.button<{ primary: boolean; type?: string }>`
   width: ${(props) => (props.primary ? "8rem" : "12rem")};
   margin-left: ${(props) => (props.primary ? "1rem" : "2.7rem")};
   font-size: 1.2rem;
