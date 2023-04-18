@@ -1,8 +1,10 @@
-function generateArrayObjectFromData(objectData) {
+import { IRequestHeaderInformation } from "./type";
+
+function generateArrayObjectFromData(objectData: IRequestHeaderInformation) {
   const array = [];
 
   for (const key in objectData) {
-    const temporaryObject = {};
+    const temporaryObject = { key: "", value: "" };
 
     temporaryObject.key = key;
     temporaryObject.value = objectData[key];

@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
-import vscode from "vscode";
+import * as vscode from "vscode";
 
 import { COLLECTION, COMMAND, MESSAGE, NAME, TYPE } from "./constants";
 import {
@@ -11,15 +11,15 @@ import {
 } from "./utils";
 
 class MainWebViewPanel {
-  #url;
-  #body;
-  #method;
-  #headers;
-  #extensionUri;
-  mainPanel;
+  private url: string = "";
+  private body;
+  private method: string = "";
+  private headers;
+  private extensionUri;
+  private mainPanel: vscode.WebviewPanel;
 
   constructor(extensionUri, stateManager, sidebarWebViewPanel) {
-    this.#extensionUri = extensionUri;
+    this.extensionUri = extensionUri;
     this.stateManager = stateManager;
     this.sidebarWebViewPanel = sidebarWebViewPanel;
   }
@@ -33,20 +33,22 @@ class MainWebViewPanel {
         enableScripts: true,
         retainContextWhenHidden: true,
         localResourceRoots: [
-          vscode.Uri.joinPath(this.#extensionUri, "media"),
-          vscode.Uri.joinPath(this.#extensionUri, "dist"),
+          vscode.Uri.joinPath(this.extensionUri, "media"),
+          vscode.Uri.joinPath(this.extensionUri, "dist"),
         ],
       },
     );
 
-    this.mainPanel.webview.html = this.#getHtmlForWebView(this.mainPanel);
+    this.mainPanel.webview.html = this.getHtmlForWebView(
+      this.mainPanel.webview,
+    );
 
-    this.#receiveWebviewMessage();
+    this.receiveWebviewMessage();
 
     return this.mainPanel;
   }
 
-  #receiveWebviewMessage() {
+  private receiveWebviewMessage() {
     this.mainPanel.webview.onDidReceiveMessage(
       ({
         requestMethod,
@@ -81,31 +83,31 @@ class MainWebViewPanel {
           keyValueTableData,
           command,
         };
-        this.#url = getUrl(requestUrl);
-        this.#method = requestMethod;
-        this.#headers = getHeaders(keyValueTableData, authOption, authData);
-        this.#body = getBody(
+        this.url = getUrl(requestUrl);
+        this.method = requestMethod;
+        this.headers = getHeaders(keyValueTableData, authOption, authData);
+        this.body = getBody(
           keyValueTableData,
           bodyOption,
           bodyRawOption,
           bodyRawData,
         );
 
-        this.#postWebviewMessage(requestObject);
+        this.postWebviewMessage(requestObject);
       },
     );
   }
 
-  async #postWebviewMessage(requestObject) {
+  private async postWebviewMessage(requestObject) {
     const { userRequestHistory } = this.stateManager.getExtensionContext(
       COLLECTION.HISTORY_COLLECTION,
     );
 
     const axiosConfiguration = {
-      url: this.#url,
-      method: this.#method,
-      headers: this.#headers,
-      data: this.#body,
+      url: this.url,
+      method: this.method,
+      headers: this.headers,
+      data: this.body,
       responseType: "text",
     };
 
@@ -156,30 +158,30 @@ class MainWebViewPanel {
     );
   }
 
-  #getHtmlForWebView(panel) {
+  private getHtmlForWebView(panel: vscode.Webview) {
     const scriptPath = vscode.Uri.joinPath(
-      this.#extensionUri,
+      this.extensionUri,
       "dist",
       "bundle.js",
     );
     const resetCssPath = vscode.Uri.joinPath(
-      this.#extensionUri,
+      this.extensionUri,
       "media",
       "reset.css",
     );
     const vscodeStylesCssPath = vscode.Uri.joinPath(
-      this.#extensionUri,
+      this.extensionUri,
       "media",
       "vscode.css",
     );
 
-    const resetCssSrc = panel.webview.asWebviewUri(resetCssPath);
-    const mainStylesCssSrc = panel.webview.asWebviewUri(vscodeStylesCssPath);
-    const scriptSrc = panel.webview.asWebviewUri(scriptPath);
+    const resetCssSrc = panel.asWebviewUri(resetCssPath);
+    const mainStylesCssSrc = panel.asWebviewUri(vscodeStylesCssPath);
+    const scriptSrc = panel.asWebviewUri(scriptPath);
     const nonce = getNonce();
 
     panel.iconPath = vscode.Uri.joinPath(
-      this.#extensionUri,
+      this.extensionUri,
       "icons/images/icon.png",
     );
 

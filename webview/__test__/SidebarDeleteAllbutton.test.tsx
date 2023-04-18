@@ -8,13 +8,17 @@ const mockData = [1, 2, 3];
 
 describe("SidebarDeleteAllButton component test", () => {
   it("should render text correctly", () => {
-    const { getByText } = render(<SidebarDeleteAllButton />);
+    const { getByText } = render(
+      <SidebarDeleteAllButton clickHandler={() => undefined} />,
+    );
 
     expect(getByText(/delete all/i)).toBeInTheDocument();
   });
 
   it("should render sidebar with correct style", () => {
-    const { getByText } = render(<SidebarDeleteAllButton />);
+    const { getByText } = render(
+      <SidebarDeleteAllButton clickHandler={() => undefined} />,
+    );
 
     expect(getByText(/delete/i)).toHaveStyle(`background: rgb(133 51 51)`);
     expect(getByText(/delete/i)).toHaveStyle(`padding: 0.25rem 0.4rem`);
@@ -23,13 +27,11 @@ describe("SidebarDeleteAllButton component test", () => {
   });
 
   it("should delete everything from array once clicked", () => {
-    const { getByText } = render(<SidebarDeleteAllButton />);
-
-    userEvent.click(
-      getByText(/delete all/i),
-
-      mockData.splice(0, mockData.length),
+    const { getByText } = render(
+      <SidebarDeleteAllButton clickHandler={() => undefined} />,
     );
+
+    userEvent.click(getByText(/delete all/i));
 
     expect(mockData.length).toBe(0);
   });

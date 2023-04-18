@@ -9,7 +9,7 @@ interface TLoadButtonsBlockProps {
 
 const LoadButtonsBlock = ({ optionsType }: TLoadButtonsBlockProps) => (
   <ButtonsWrapper>
-    <LoadJSONFileButton optionsType={optionsType} />
+    <LoadJSONFileButton optionsType={optionsType} replaceValues={false} />
     <LoadJSONFileButton optionsType={optionsType} replaceValues={true} />
   </ButtonsWrapper>
 );

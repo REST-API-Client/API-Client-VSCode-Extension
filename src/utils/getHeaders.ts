@@ -1,12 +1,22 @@
 import { TYPE } from "../constants";
+import { Buffer } from "buffer";
 
-function getHeaders(keyValueData, authOption, { username, password, token }) {
-  const headersObject = {};
+import {
+  IHeaderAuth,
+  IParameterKeyValueData,
+  IRequestHeaderInformation,
+} from "./type";
+
+function getHeaders(
+  keyValueData: IParameterKeyValueData[],
+  authOption: string,
+  { username, password, token }: IHeaderAuth,
+) {
+  const headersObject: IRequestHeaderInformation = {};
 
   const headersData = keyValueData.filter(
     (data) => data.optionType === TYPE.HEADERS && data.isChecked,
   );
-
   if (!headersData.length) return;
 
   for (const { key, value } of headersData) {
@@ -14,7 +24,7 @@ function getHeaders(keyValueData, authOption, { username, password, token }) {
   }
 
   if (authOption === TYPE.BASIC_AUTH) {
-    headersObject[TYPE.AUTHORIZATION] = `Basic ${new Buffer.from(
+    headersObject[TYPE.AUTHORIZATION] = `Basic ${Buffer.from(
       username + ":" + password,
     ).toString("base64")}`;
   }

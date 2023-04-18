@@ -1,4 +1,5 @@
 import { COMMON, REQUEST } from "../constants";
+import { Buffer } from "buffer";
 
 const generateSdkRequestObject = (
   url: string,
@@ -27,7 +28,7 @@ const generateSdkRequestObject = (
       authMode = "basic";
       authHeaderObject = {
         key: REQUEST.AUTH,
-        value: `Basic ${new Buffer.from(username + ":" + password).toString(
+        value: `Basic ${Buffer.from(username + ":" + password).toString(
           "base64",
         )}`,
       };
