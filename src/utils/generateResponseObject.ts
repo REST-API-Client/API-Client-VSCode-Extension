@@ -2,11 +2,9 @@ import axios from "axios";
 
 import { MESSAGE, TYPE } from "../constants";
 import { generateArrayObjectFromData } from "./index";
-import { IRequestHeaderInformation } from "./type";
+import { IRequestData } from "./type";
 
-async function generateResponseObject(
-  configuration: IRequestHeaderInformation,
-) {
+async function generateResponseObject(configuration: IRequestData) {
   const sentTime = new Date().getTime();
 
   try {

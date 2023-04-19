@@ -11,10 +11,7 @@ export interface IUserRequestSidebarState {
 }
 
 export interface Headers {
-  "Cache-Control": string;
-  Accept: string;
-  "Accept-Encoding": string;
-  Connection: string;
+  [key: string]: string;
 }
 
 export interface RequestObject {
@@ -51,4 +48,44 @@ export interface IHeaderAuth {
   username: string;
   password: string;
   token: string;
+}
+
+export interface IRequestObjectType {
+  requestMethod: string;
+  requestUrl: string;
+  authOption: string;
+  authData: AuthData;
+  bodyOption: string;
+  bodyRawOption: string;
+  bodyRawData: BodyRawData;
+  keyValueTableData: IKeyValueTable[];
+}
+
+export interface IAuthData {
+  username: string;
+  password: string;
+  token: string;
+}
+
+export interface IBodyRawData {
+  text: string;
+  javascript: string;
+  json: string;
+  html: string;
+}
+
+export interface IKeyValueTable {
+  optionType: string;
+  isChecked: boolean;
+  key: string;
+  value: string;
+  description: string;
+}
+
+export interface IRequestData {
+  url: string;
+  method: string;
+  headers: IRequestHeaderInformation | string;
+  data: string | FormData | URLSearchParams;
+  responseType: string;
 }

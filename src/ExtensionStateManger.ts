@@ -2,45 +2,54 @@ import * as vscode from "vscode";
 
 import { COLLECTION } from "./constants";
 import { filterDuplicatesFromObject } from "./utils";
+import { IUserRequestSidebarState } from "./utils/type";
 
 class ExtentionStateManager {
-  private context;
+  private context: vscode.ExtensionContext;
 
   constructor(context: vscode.ExtensionContext) {
     this.context = context;
   }
 
-  getExtensionContext(state) {
+  getExtensionContext(state: string) {
+    const userRequestHistory: IUserRequestSidebarState[] | undefined =
+      this.context.globalState.get(state);
+
     return {
-      userRequestHistory: this.context.globalState.get(state),
+      userRequestHistory: userRequestHistory,
     };
   }
 
-  async addExtensionContext(state, { history }) {
+  async addExtensionContext(
+    state: string,
+    { history }: { history: IUserRequestSidebarState[] },
+  ) {
     await this.context.globalState.update(state, history);
   }
 
-  async updateExtensionContext(state, id, status) {
+  async updateExtensionContext(state: string, id: string, status?: string) {
     const currentTime = new Date().getTime();
+    const globalHistoryState: IUserRequestSidebarState[] | undefined =
+      this.context.globalState.get(state);
+    const globalFavoritesState: IUserRequestSidebarState[] | undefined =
+      this.context.globalState.get(COLLECTION.FAVORITES_COLLECTION);
 
-    this.context.globalState
-      .get(state)
-      .map(
-        (history) =>
-          history.id === id &&
-          ((history.isUserFavorite = !history.isUserFavorite),
-          (history.favoritedTime = currentTime)),
-      );
+    if (!globalHistoryState || !globalFavoritesState) return;
 
-    await this.context.globalState.update(state, [
-      ...this.context.globalState.get(state),
-    ]);
+    globalHistoryState.map(
+      (history) =>
+        history.id === id &&
+        ((history.isUserFavorite = !history.isUserFavorite),
+        (history.favoritedTime = currentTime)),
+    );
+
+    await this.context.globalState.update(state, [...globalHistoryState]);
 
     if (status) {
       const duplicateFilteredUserFavoriteCollection =
         filterDuplicatesFromObject(
-          this.context.globalState.get(state),
-          this.context.globalState.get(COLLECTION.FAVORITES_COLLECTION),
+          globalHistoryState,
+          globalFavoritesState,
           id,
         );
 
@@ -50,13 +59,18 @@ class ExtentionStateManager {
     }
   }
 
-  async deleteExtensionContext(targetExtensionContext, id) {
+  async deleteExtensionContext(targetExtensionContext: string, id?: string) {
+    const targetGlobalState: IUserRequestSidebarState[] | undefined =
+      this.context.globalState.get(targetExtensionContext);
+
+    if (!targetGlobalState) return;
+
     if (!id) {
       await this.context.globalState.update(targetExtensionContext, []);
     } else {
-      const filteredExtenionContext = this.context.globalState
-        .get(targetExtensionContext)
-        .filter((history) => history.id !== id);
+      const filteredExtenionContext = targetGlobalState.filter(
+        (history) => history.id !== id,
+      );
 
       await this.context.globalState.update(targetExtensionContext, [
         ...filteredExtenionContext,
