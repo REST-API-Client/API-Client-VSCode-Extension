@@ -49,10 +49,12 @@ export async function activate(context: vscode.ExtensionContext) {
 
         SidebarWebViewProvider.mainWebViewPanel = MainWebViewProvider.mainPanel;
 
-        MainWebViewProvider.mainPanel.onDidDispose(() => {
-          SidebarWebViewProvider.mainWebViewPanel = null;
-          currentPanel = null;
-        }, null);
+        if (MainWebViewProvider.mainPanel) {
+          MainWebViewProvider.mainPanel.onDidDispose(() => {
+            SidebarWebViewProvider.mainWebViewPanel = null;
+            currentPanel = null;
+          }, null);
+        }
       }
     }),
   );

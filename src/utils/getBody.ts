@@ -9,7 +9,7 @@ function getBody(
   bodyRawOption: string,
   bodyRawData: IBodyRawData,
 ) {
-  if (bodyOption === "None") return;
+  if (bodyOption === "None") return "";
 
   if (bodyOption === TYPE.BODY_RAW)
     return bodyRawData[
@@ -46,6 +46,8 @@ function getBody(
 
     return urlEncodedFormData;
   }
+
+  return "";
 }
 
 export default getBody;

@@ -1,22 +1,25 @@
-import vscode from "vscode";
+import * as vscode from "vscode";
 
 import { CATEGORY, COLLECTION, COMMAND, MESSAGE, TYPE } from "./constants";
 import { filterObjectKey, generateResponseObject, getNonce } from "./utils";
+import ExtentionStateManager from "./ExtensionStateManger";
+import { IUserRequestSidebarState } from "./utils/type";
 
 class SidebarWebViewPanel {
-  private view;
+  private sidebarWebview: vscode.WebviewView | null = null;
   private extensionUri;
-  public static mainWebViewPanel;
+  public mainWebViewPanel: vscode.WebviewPanel | null = null;
+  public stateManager;
 
-  constructor(extensionUri, stateManager) {
+  constructor(extensionUri: vscode.Uri, stateManager: ExtentionStateManager) {
     this.extensionUri = extensionUri;
     this.stateManager = stateManager;
   }
 
-  resolveWebviewView(webviewView) {
-    this.view = webviewView;
+  resolveWebviewView(webviewView: vscode.WebviewView): void | Thenable<void> {
+    this.sidebarWebview = webviewView;
 
-    this.view.webview.options = {
+    this.sidebarWebview.webview.options = {
       enableScripts: true,
       localResourceRoots: [
         vscode.Uri.joinPath(this.extensionUri, "media"),
@@ -24,9 +27,11 @@ class SidebarWebViewPanel {
       ],
     };
 
-    this.view.webview.html = this.getHtmlForSidebarWebView(webviewView.webview);
+    this.sidebarWebview.webview.html = this.getHtmlForSidebarWebView(
+      webviewView.webview,
+    );
 
-    this.view.webview.postMessage({
+    this.sidebarWebview.webview.postMessage({
       messageCategory: CATEGORY.COLLECTION_DATA,
       history: this.stateManager.getExtensionContext(
         COLLECTION.HISTORY_COLLECTION,
@@ -39,8 +44,13 @@ class SidebarWebViewPanel {
     this.receiveSidebarWebViewMessage();
   }
 
-  postMainWebViewPanelMessage(userHistoryData, userFavoritesData) {
-    this.view.webview.postMessage({
+  postMainWebViewPanelMessage(
+    userHistoryData: IUserRequestSidebarState[],
+    userFavoritesData: IUserRequestSidebarState[],
+  ) {
+    if (!this.sidebarWebview) return;
+
+    this.sidebarWebview.webview.postMessage({
       messageCategory: CATEGORY.COLLECTION_DATA,
       history: userHistoryData,
       favorites: userFavoritesData,
@@ -48,80 +58,96 @@ class SidebarWebViewPanel {
   }
 
   private receiveSidebarWebViewMessage() {
-    this.view.webview.onDidReceiveMessage(async ({ command, id, target }) => {
-      if (command === COMMAND.START_APP) {
-        vscode.commands.executeCommand(COMMAND.MAIN_WEB_VIEW_PANEL);
-      } else if (command === COMMAND.ADD_TO_FAVORITES) {
-        await this.stateManager.updateExtensionContext(
-          COLLECTION.HISTORY_COLLECTION,
-          id,
-          COMMAND.ADD,
-        );
-      } else if (command === COMMAND.REMOVE_FROM_FAVORITES) {
-        await this.stateManager.updateExtensionContext(
-          COLLECTION.HISTORY_COLLECTION,
-          id,
-        );
+    if (!this.sidebarWebview) return;
 
-        await this.stateManager.deleteExtensionContext(
-          COLLECTION.FAVORITES_COLLECTION,
-          id,
-        );
-      } else if (command === COMMAND.DELETE) {
-        if (target === COLLECTION.FAVORITES_COLLECTION) {
+    this.sidebarWebview.webview.onDidReceiveMessage(
+      async ({
+        command,
+        id,
+        target,
+      }: {
+        command: string;
+        id: string;
+        target: string;
+      }) => {
+        if (command === COMMAND.START_APP) {
+          vscode.commands.executeCommand(COMMAND.MAIN_WEB_VIEW_PANEL);
+        } else if (command === COMMAND.ADD_TO_FAVORITES) {
+          await this.stateManager.updateExtensionContext(
+            COLLECTION.HISTORY_COLLECTION,
+            id,
+            COMMAND.ADD,
+          );
+        } else if (command === COMMAND.REMOVE_FROM_FAVORITES) {
           await this.stateManager.updateExtensionContext(
             COLLECTION.HISTORY_COLLECTION,
             id,
           );
-        }
 
-        await this.stateManager.deleteExtensionContext(target, id);
-      } else if (command === COMMAND.DELETE_ALL_COLLECTION) {
-        const answer = await vscode.window.showWarningMessage(
-          MESSAGE.DELETE_REMINDER,
-          MESSAGE.YES,
-          MESSAGE.NO,
-        );
-
-        if (answer === MESSAGE.YES) {
-          await this.stateManager.deleteExtensionContext(target);
-
-          this.view.webview.postMessage({
-            messageCategory: CATEGORY.DELETION_COMPLETE,
-            target,
-          });
-        }
-      } else {
-        if (!this.mainWebViewPanel) {
-          vscode.commands.executeCommand(COMMAND.MAIN_WEB_VIEW_PANEL);
-        }
-
-        setTimeout(async () => {
-          this.mainWebViewPanel.webview.postMessage({
-            type: COLLECTION.COLLECTION_REQUEST,
-          });
-
-          const selectedCollection = filterObjectKey(
-            this.stateManager.getExtensionContext(target),
+          await this.stateManager.deleteExtensionContext(
+            COLLECTION.FAVORITES_COLLECTION,
             id,
-            COLLECTION.FILTERABLE_OBJECT_KEY,
+          );
+        } else if (command === COMMAND.DELETE) {
+          if (target === COLLECTION.FAVORITES_COLLECTION) {
+            await this.stateManager.updateExtensionContext(
+              COLLECTION.HISTORY_COLLECTION,
+              id,
+            );
+          }
+
+          await this.stateManager.deleteExtensionContext(target, id);
+        } else if (command === COMMAND.DELETE_ALL_COLLECTION) {
+          const answer = await vscode.window.showWarningMessage(
+            MESSAGE.DELETE_REMINDER,
+            MESSAGE.YES,
+            MESSAGE.NO,
           );
 
-          const responseObject = await generateResponseObject(
-            selectedCollection,
-          );
+          if (answer === MESSAGE.YES) {
+            if (!this.sidebarWebview) return;
 
-          this.mainWebViewPanel.webview.postMessage(responseObject);
-          this.mainWebViewPanel.webview.postMessage({
-            type: TYPE.SIDE_BAR_DATA,
-            ...selectedCollection.requestObject,
-          });
-        }, 1000);
-      }
-    });
+            await this.stateManager.deleteExtensionContext(target);
+
+            this.sidebarWebview.webview.postMessage({
+              messageCategory: CATEGORY.DELETION_COMPLETE,
+              target,
+            });
+          }
+        } else {
+          if (!this.mainWebViewPanel) {
+            vscode.commands.executeCommand(COMMAND.MAIN_WEB_VIEW_PANEL);
+          }
+
+          setTimeout(async () => {
+            if (!this.mainWebViewPanel) return;
+
+            this.mainWebViewPanel.webview.postMessage({
+              type: COLLECTION.COLLECTION_REQUEST,
+            });
+
+            const selectedCollection = filterObjectKey(
+              this.stateManager.getExtensionContext(target),
+              id,
+              COLLECTION.FILTERABLE_OBJECT_KEY,
+            );
+
+            const responseObject = await generateResponseObject(
+              selectedCollection,
+            );
+
+            this.mainWebViewPanel.webview.postMessage(responseObject);
+            this.mainWebViewPanel.webview.postMessage({
+              type: TYPE.SIDE_BAR_DATA,
+              ...selectedCollection.requestObject,
+            });
+          }, 1000);
+        }
+      },
+    );
   }
 
-  private getHtmlForSidebarWebView(webview) {
+  private getHtmlForSidebarWebView(webview: vscode.Webview) {
     const scriptPath = vscode.Uri.joinPath(
       this.extensionUri,
       "dist",

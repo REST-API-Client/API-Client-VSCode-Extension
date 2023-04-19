@@ -9,16 +9,25 @@ import {
   getNonce,
   getUrl,
 } from "./utils";
+import { IRequestHeaderInformation, IRequestObjectType } from "./utils/type";
+import SidebarWebViewPanel from "./SidebarWebViewPanel";
+import ExtentionStateManager from "./ExtensionStateManger";
 
 class MainWebViewPanel {
   private url: string = "";
-  private body;
+  private body: string | FormData | URLSearchParams = "";
   private method: string = "";
-  private headers;
+  private headers: IRequestHeaderInformation = { key: "" };
+  public mainPanel: vscode.WebviewPanel | null = null;
   private extensionUri;
-  private mainPanel: vscode.WebviewPanel;
+  public stateManager;
+  public sidebarWebViewPanel;
 
-  constructor(extensionUri, stateManager, sidebarWebViewPanel) {
+  constructor(
+    extensionUri: vscode.Uri,
+    stateManager: ExtentionStateManager,
+    sidebarWebViewPanel: SidebarWebViewPanel,
+  ) {
     this.extensionUri = extensionUri;
     this.stateManager = stateManager;
     this.sidebarWebViewPanel = sidebarWebViewPanel;
@@ -43,12 +52,19 @@ class MainWebViewPanel {
       this.mainPanel.webview,
     );
 
+    this.mainPanel.iconPath = vscode.Uri.joinPath(
+      this.extensionUri,
+      "icons/images/icon.png",
+    );
+
     this.receiveWebviewMessage();
 
     return this.mainPanel;
   }
 
   private receiveWebviewMessage() {
+    if (!this.mainPanel) return;
+
     this.mainPanel.webview.onDidReceiveMessage(
       ({
         requestMethod,
@@ -98,7 +114,7 @@ class MainWebViewPanel {
     );
   }
 
-  private async postWebviewMessage(requestObject) {
+  private async postWebviewMessage(requestObject: IRequestObjectType) {
     const { userRequestHistory } = this.stateManager.getExtensionContext(
       COLLECTION.HISTORY_COLLECTION,
     );
@@ -132,6 +148,8 @@ class MainWebViewPanel {
           },
         );
       } else {
+        if (!userRequestHistory) return;
+
         await this.stateManager.addExtensionContext(
           COLLECTION.HISTORY_COLLECTION,
           {
@@ -151,11 +169,13 @@ class MainWebViewPanel {
       }
     }
 
-    this.mainPanel.webview.postMessage(responseObject);
-    this.sidebarWebViewPanel.postMainWebViewPanelMessage(
-      this.stateManager.getExtensionContext(COLLECTION.HISTORY_COLLECTION),
-      this.stateManager.getExtensionContext(COLLECTION.FAVORITES_COLLECTION),
-    );
+    if (this.mainPanel) {
+      this.mainPanel.webview.postMessage(responseObject);
+      this.sidebarWebViewPanel.postMainWebViewPanelMessage(
+        this.stateManager.getExtensionContext(COLLECTION.HISTORY_COLLECTION),
+        this.stateManager.getExtensionContext(COLLECTION.FAVORITES_COLLECTION),
+      );
+    }
   }
 
   private getHtmlForWebView(panel: vscode.Webview) {
@@ -179,11 +199,6 @@ class MainWebViewPanel {
     const mainStylesCssSrc = panel.asWebviewUri(vscodeStylesCssPath);
     const scriptSrc = panel.asWebviewUri(scriptPath);
     const nonce = getNonce();
-
-    panel.iconPath = vscode.Uri.joinPath(
-      this.extensionUri,
-      "icons/images/icon.png",
-    );
 
     return `
       <!DOCTYPE html>

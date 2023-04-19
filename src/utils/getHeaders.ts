@@ -17,7 +17,8 @@ function getHeaders(
   const headersData = keyValueData.filter(
     (data) => data.optionType === TYPE.HEADERS && data.isChecked,
   );
-  if (!headersData.length) return;
+
+  if (!headersData.length) return { key: "" };
 
   for (const { key, value } of headersData) {
     headersObject[key] = value;
