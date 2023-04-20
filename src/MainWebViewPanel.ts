@@ -102,6 +102,8 @@ class MainWebViewPanel {
         this.url = getUrl(requestUrl);
         this.method = requestMethod;
         this.headers = getHeaders(keyValueTableData, authOption, authData);
+
+        // @ts-expect-error
         this.body = getBody(
           keyValueTableData,
           bodyOption,

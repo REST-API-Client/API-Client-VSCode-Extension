@@ -10,11 +10,7 @@ import { calculateCollectionTime, generateMethodColor } from "../../../utils";
 import SidebarDeleteAllButton from "../Button/SidebarDeleteAllButton";
 import SibebarEmptyCollectionMenu from "../Menu/SidebarEmptyCollectionMenu";
 import EmptySearchResultMessage from "../Message/EmptySearchResultMessage";
-import {
-  IUserRequestSidebarState,
-  RequestObject,
-  Headers,
-} from "../../../../src/utils/type";
+import { RequestObject, Headers } from "../../../../src/utils/type";
 
 interface ISidebarCollectionProps {
   sidebarOption: string | null;

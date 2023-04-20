@@ -12,6 +12,7 @@ async function generateResponseObject(
   const sentTime = new Date().getTime();
 
   try {
+    // @ts-expect-error
     const response = await axios(configuration);
 
     const receivedTime = new Date().getTime();

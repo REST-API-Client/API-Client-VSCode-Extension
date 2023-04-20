@@ -1,6 +1,7 @@
+// @ts-ignore
 import codegen from "postman-code-generators";
 import { Request } from "postman-collection";
-import React, { useEffect, useMemo, MouseEvent, ChangeEvent } from "react";
+import React, { useEffect, useMemo, ChangeEvent } from "react";
 import styled from "styled-components";
 import { useDebounce } from "use-debounce";
 import shallow from "zustand/shallow";
