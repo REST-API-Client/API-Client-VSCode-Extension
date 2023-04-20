@@ -1,10 +1,14 @@
 import { IUserRequestSidebarState } from "./type";
 
 const filterObjectKey = (
-  { userRequestHistory }: { userRequestHistory: IUserRequestSidebarState[] },
+  {
+    userRequestHistory,
+  }: { userRequestHistory: IUserRequestSidebarState[] | undefined },
   id: string,
   filterableKey: string[],
 ) => {
+  if (!userRequestHistory) return;
+
   const [{ ...selectedCollection }] = userRequestHistory.filter(
     (history) => history.id === id,
   );

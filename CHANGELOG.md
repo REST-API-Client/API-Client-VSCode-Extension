@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.1.4
+
+#### Migrate project code from javascript to typescript
+
+## 1.1.3
+
+#### Change README Style
+
+## 1.1.2
+
+#### Fix Bug
+
+## 1.1.1
+
+#### Add JSON File uploading feature
+
 ## 1.1.0
 
 #### Add feature to load JSON files for params, headers and body

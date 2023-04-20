@@ -14,29 +14,42 @@ const LoadJSONFileButton = ({
   replaceValues = false,
 }: ILoadJSONFileButtonProps) => {
   const { handleFileUpload } = useStore(
-    (state: any) => ({ handleFileUpload: state.handleFileUpload }),
+    (state) => ({ handleFileUpload: state.handleFileUpload }),
     shallow,
   );
 
-  async function loadSettingsFromJSONFile(e) {
-    const config = await readFileJSON(e.target.files.item(0));
+  async function loadSettingsFromJSONFile(event: any) {
+    const selectedFiles = event.target.files;
+
+    if (!selectedFiles) return;
+
+    const config = await readFileJSON(selectedFiles.item(0));
+
     handleFileUpload(config, optionsType, replaceValues);
   }
 
-  async function readFileJSON(file: any) {
+  async function readFileJSON(file: File | null) {
+    if (!file) return;
+
     return JSON.parse(await file.text());
   }
 
   const fileInput = document.createElement("input");
   const inputAttrs = {
-    hidden: true,
     type: "file",
     accept: ".json",
   };
+
   for (let attr in inputAttrs) {
-    fileInput.setAttribute(attr, inputAttrs[attr]);
+    fileInput.setAttribute(
+      attr,
+      inputAttrs[attr as keyof { type: string; accept: string }],
+    );
   }
-  fileInput.addEventListener("change", (e) => loadSettingsFromJSONFile(e));
+
+  fileInput.addEventListener("change", (event) =>
+    loadSettingsFromJSONFile(event),
+  );
 
   return (
     <Button

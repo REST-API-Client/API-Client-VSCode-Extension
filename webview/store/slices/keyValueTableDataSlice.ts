@@ -1,6 +1,6 @@
 import { StateCreator } from "zustand";
 import { COMMON, REQUEST } from "../../constants";
-import { IKeyValueTableDataSlice } from "./type";
+import { IKeyValueTableDataSlice, KeyValueTableDaum } from "./type";
 
 const keyValueTableDataSlice: StateCreator<
   IKeyValueTableDataSlice,
@@ -78,7 +78,7 @@ const keyValueTableDataSlice: StateCreator<
     })),
 
   handleFileUpload: (data, optionsType = COMMON.HEADERS, replaceValues) => {
-    const rows = [];
+    const rows: KeyValueTableDaum[] = [];
 
     for (let key in data) {
       rows.push({
@@ -89,6 +89,7 @@ const keyValueTableDataSlice: StateCreator<
         description: "",
       });
     }
+
     set((state) => ({
       keyValueTableData: [
         ...state.keyValueTableData.filter(

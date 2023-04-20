@@ -50,7 +50,6 @@
 - [📚 Tech Stacks](#-tech-stacks)
   - [This project was created using the following tech stacks:](#this-project-was-created-using-the-following-tech-stacks)
 - [🗒 Changelog](#-changelog)
-  - [Current version 1.1.0](#current-version-110)
 - [👨🏻‍💻 Contributing](#-contributing)
   - [🪜 Step-by-step guide on how to make a pull request](#-step-by-step-guide-on-how-to-make-a-pull-request)
   - [🏗 Running the extension locally for development](#-running-the-extension-locally-for-development)
@@ -160,7 +159,7 @@ Simply click Open Menu button or open the Command Palette and type the command b
 
 ## 🗒 Changelog
 
-#### Current version 1.1.3
+#### Current version 1.1.4
 
 Visit [here](https://github.com/REST-API-Client/API-Client-VSCode-Extension/blob/main/CHANGELOG.md) for a detailed release notes
 
@@ -194,10 +193,6 @@ If you found any bugs while using this extension or you have a suggestion please
 ## 🫧 Contributors
 
 [![Contributors](https://contrib.rocks/image?repo=REST-API-Client/API-Client-VSCode-Extension)](https://github.com/REST-API-Client/API-Client-VSCode-Extension/graphs/contributors)
-
-- [Unjin Jang](https://github.com/unwls)
-- [Cxxshyy](https://github.com/Cxxshyy)
-- [sergptz](https://github.com/sergptz)
 
 ## 📋 License
 

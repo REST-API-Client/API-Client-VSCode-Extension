@@ -2,12 +2,17 @@ import axios from "axios";
 
 import { MESSAGE, TYPE } from "../constants";
 import { generateArrayObjectFromData } from "./index";
-import { IRequestData } from "./type";
+import { IRequestData, IUserRequestSidebarState } from "./type";
 
-async function generateResponseObject(configuration: IRequestData) {
+async function generateResponseObject(
+  configuration: IUserRequestSidebarState | IRequestData | undefined,
+) {
+  if (!configuration) return;
+
   const sentTime = new Date().getTime();
 
   try {
+    // @ts-expect-error
     const response = await axios(configuration);
 
     const receivedTime = new Date().getTime();

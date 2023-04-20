@@ -29,17 +29,14 @@ export interface IUserRequestSidebarState {
   headers: Headers;
   responseType: string;
   requestedTime: number;
-  favoritedTime: any;
+  favoritedTime: number | null;
   isUserFavorite: boolean;
   id: string;
   requestObject: RequestObject;
 }
 
 export interface Headers {
-  "Cache-Control": string;
-  Accept: string;
-  "Accept-Encoding": string;
-  Connection: string;
+  [key: string]: string;
 }
 
 export interface RequestObject {
@@ -107,7 +104,7 @@ export interface IResponseData {
 
 export interface IResponseDataHeader {
   key: string;
-  value: any;
+  value: string;
 }
 
 export interface IRequestDataSlice extends ISidebarResponse {
@@ -154,13 +151,7 @@ export interface ISidebarResponse {
 }
 
 export interface IKeyValueTableDataSlice {
-  keyValueTableData: {
-    optionType: string;
-    isChecked: boolean;
-    key: string;
-    value: string;
-    description: string;
-  }[];
+  keyValueTableData: KeyValueTableDaum[];
   addNewTableRow: (type: string) => void;
   deleteTableRow: (index: number) => void;
   removeRequestBodyHeaders: () => void;
@@ -169,13 +160,10 @@ export interface IKeyValueTableDataSlice {
   handleRequestKey: (index: number, detail: string) => void;
   handleRequestValue: (index: number, detail: string) => void;
   handleRequestDescription: (index: number, detail: string) => void;
-  handleSidebarCollectionHeaders: (
-    headers: {
-      optionType: string;
-      isChecked: boolean;
-      key: string;
-      value: string;
-      description: string;
-    }[],
+  handleSidebarCollectionHeaders: (headers: KeyValueTableDaum[]) => void;
+  handleFileUpload: (
+    data: any,
+    optionsType: string,
+    replaceValues: boolean,
   ) => void;
 }

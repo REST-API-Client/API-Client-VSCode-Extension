@@ -10,10 +10,21 @@ import { calculateCollectionTime, generateMethodColor } from "../../../utils";
 import SidebarDeleteAllButton from "../Button/SidebarDeleteAllButton";
 import SibebarEmptyCollectionMenu from "../Menu/SidebarEmptyCollectionMenu";
 import EmptySearchResultMessage from "../Message/EmptySearchResultMessage";
+import { RequestObject, Headers } from "../../../../src/utils/type";
 
 interface ISidebarCollectionProps {
   sidebarOption: string | null;
-  userCollection: any[];
+  userCollection: {
+    url: string;
+    method: string;
+    headers: Headers;
+    responseType: string;
+    requestedTime: number;
+    favoritedTime: number | null;
+    isUserFavorite: boolean;
+    id: string;
+    requestObject: RequestObject;
+  }[];
   handleUrlClick: (id: string) => void;
   handleDeleteButton: (id: string) => void;
   handleDeleteAllButton: () => void;
@@ -67,8 +78,9 @@ const SidebarCollection = ({
                       );
                       const collectionCreatedTime =
                         calculateCollectionTime(requestedTime);
-                      const favoriteListedTime =
-                        calculateCollectionTime(favoritedTime);
+                      const favoriteListedTime = calculateCollectionTime(
+                        favoritedTime || 0,
+                      );
 
                       return (
                         <HistoryListWrapper key={sidebarOption + id}>
