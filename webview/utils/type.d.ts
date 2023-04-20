@@ -5,3 +5,16 @@ export interface IParameterString {
   value: string;
   description: string;
 }
+
+export interface IBodyRawData {
+  text: string;
+  javascript: string;
+  json: string;
+  html: string;
+}
+
+export interface IAuthData {
+  username: string;
+  password: string;
+  token: string;
+}

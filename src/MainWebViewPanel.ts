@@ -130,7 +130,7 @@ class MainWebViewPanel {
     const responseObject = await generateResponseObject(axiosConfiguration);
     const requestedTime = new Date().getTime();
 
-    if (responseObject.type !== MESSAGE.ERROR) {
+    if (responseObject && responseObject.type !== MESSAGE.ERROR) {
       if (!userRequestHistory) {
         await this.stateManager.addExtensionContext(
           COLLECTION.HISTORY_COLLECTION,
@@ -170,6 +170,10 @@ class MainWebViewPanel {
     }
 
     if (this.mainPanel) {
+      console.log(
+        this.stateManager.getExtensionContext(COLLECTION.HISTORY_COLLECTION),
+        this.stateManager.getExtensionContext(COLLECTION.FAVORITES_COLLECTION),
+      );
       this.mainPanel.webview.postMessage(responseObject);
       this.sidebarWebViewPanel.postMainWebViewPanelMessage(
         this.stateManager.getExtensionContext(COLLECTION.HISTORY_COLLECTION),

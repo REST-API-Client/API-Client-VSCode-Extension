@@ -1,15 +1,16 @@
 import { COMMON, REQUEST } from "../constants";
 import { Buffer } from "buffer";
+import { IAuthData, IBodyRawData, IParameterString } from "./type";
 
 const generateSdkRequestObject = (
   url: string,
   method: string,
-  keyValueTableData: any,
+  keyValueTableData: IParameterString[],
   authOption: string,
-  authData: any,
+  authData: IAuthData,
   bodyOption: string,
   bodyRawOption: string,
-  bodyRawData: any,
+  bodyRawData: IBodyRawData,
   SdkInstance: any,
 ) => {
   const requestHeader = keyValueTableData.filter(
@@ -20,8 +21,8 @@ const generateSdkRequestObject = (
   );
   const { username, password, token } = authData;
   let authHeaderObject = null;
-  let authMode = null;
-  let bodyMode = null;
+  let authMode = "";
+  let bodyMode = "";
 
   switch (authOption) {
     case REQUEST.BASIC_AUTH:
@@ -71,7 +72,7 @@ const generateSdkRequestObject = (
       },
       [bodyMode]: bodyData.length
         ? bodyData
-        : bodyRawData[bodyRawOption.toLowerCase()],
+        : bodyRawData[bodyRawOption.toLowerCase() as keyof IBodyRawData],
     },
     auth: {
       type: authMode,

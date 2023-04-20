@@ -45,8 +45,12 @@ class SidebarWebViewPanel {
   }
 
   postMainWebViewPanelMessage(
-    userHistoryData: IUserRequestSidebarState[],
-    userFavoritesData: IUserRequestSidebarState[],
+    userHistoryData: {
+      userRequestHistory: IUserRequestSidebarState[] | undefined;
+    },
+    userFavoritesData: {
+      userRequestHistory: IUserRequestSidebarState[] | undefined;
+    },
   ) {
     if (!this.sidebarWebview) return;
 
@@ -126,8 +130,10 @@ class SidebarWebViewPanel {
               type: COLLECTION.COLLECTION_REQUEST,
             });
 
+            const targetHistory = this.stateManager.getExtensionContext(target);
+
             const selectedCollection = filterObjectKey(
-              this.stateManager.getExtensionContext(target),
+              targetHistory,
               id,
               COLLECTION.FILTERABLE_OBJECT_KEY,
             );
@@ -136,11 +142,13 @@ class SidebarWebViewPanel {
               selectedCollection,
             );
 
-            this.mainWebViewPanel.webview.postMessage(responseObject);
-            this.mainWebViewPanel.webview.postMessage({
-              type: TYPE.SIDE_BAR_DATA,
-              ...selectedCollection.requestObject,
-            });
+            if (selectedCollection) {
+              this.mainWebViewPanel.webview.postMessage(responseObject);
+              this.mainWebViewPanel.webview.postMessage({
+                type: TYPE.SIDE_BAR_DATA,
+                ...selectedCollection.requestObject,
+              });
+            }
           }, 1000);
         }
       },

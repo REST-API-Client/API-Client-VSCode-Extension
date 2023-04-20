@@ -4,7 +4,7 @@ export interface IUserRequestSidebarState {
   headers: Headers;
   responseType: string;
   requestedTime: number;
-  favoritedTime: any;
+  favoritedTime: number | null;
   isUserFavorite: boolean;
   id: string;
   requestObject: RequestObject;
@@ -85,7 +85,7 @@ export interface IKeyValueTable {
 export interface IRequestData {
   url: string;
   method: string;
-  headers: IRequestHeaderInformation | string;
+  headers: IRequestHeaderInformation;
   data: string | FormData | URLSearchParams;
   responseType: string;
 }
