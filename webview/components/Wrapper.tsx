@@ -1,11 +1,8 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import styled from "styled-components";
+import { ICommonChildProps } from "./type";
 
-interface TWrapperProps {
-  children: ReactNode;
-}
-
-const Wrapper = ({ children }: TWrapperProps) => {
+const Wrapper = ({ children }: ICommonChildProps) => {
   return <ComponentWrapper>{children}</ComponentWrapper>;
 };
 

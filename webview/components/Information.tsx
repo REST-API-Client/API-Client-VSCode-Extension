@@ -1,18 +1,14 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import styled from "styled-components";
+import { IInformationProps, IInformationStyledProps } from "./type";
 
-interface TInformationProps {
-  children: ReactNode;
-  textColor: string;
-}
-
-const Information = ({ children, textColor }: TInformationProps) => {
+const Information = ({ children, textColor }: IInformationProps) => {
   return (
     <InformationWrapper textColor={textColor}>{children}</InformationWrapper>
   );
 };
 
-const InformationWrapper = styled.div<{ textColor: string }>`
+const InformationWrapper = styled.div<IInformationStyledProps>`
   display: flex;
   align-items: center;
   transition: opacity 0.15s ease-in-out;

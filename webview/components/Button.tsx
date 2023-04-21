@@ -1,15 +1,8 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import styled from "styled-components";
 
 import { COMMON } from "../constants";
-
-interface TButtonProps {
-  children: string | ReactNode;
-  buttonType?: "button" | "submit" | "reset" | undefined;
-  buttonStatus?: string;
-  primary: boolean;
-  handleButtonClick?: () => void;
-}
+import { IButtonProps, IButtonStyledProps } from "./type";
 
 const Button = ({
   children,
@@ -17,7 +10,7 @@ const Button = ({
   buttonStatus,
   primary,
   handleButtonClick,
-}: TButtonProps) => {
+}: IButtonProps) => {
   return (
     <ButtonWrapper
       primary={primary}
@@ -30,7 +23,7 @@ const Button = ({
   );
 };
 
-const ButtonWrapper = styled.button<{ primary: boolean; type?: string }>`
+const ButtonWrapper = styled.button<IButtonStyledProps>`
   width: ${(props) => (props.primary ? "8rem" : "12rem")};
   margin-left: ${(props) => (props.primary ? "1rem" : "2.7rem")};
   font-size: 1.2rem;

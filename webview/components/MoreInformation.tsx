@@ -1,11 +1,8 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import styled from "styled-components";
+import { ICommonChildProps } from "./type";
 
-interface TMoreInformationProps {
-  children: ReactNode;
-}
-
-const MoreInformation = ({ children }: TMoreInformationProps) => {
+const MoreInformation = ({ children }: ICommonChildProps) => {
   return <MoreInformationWrapper>{children}</MoreInformationWrapper>;
 };
 
