@@ -1,12 +1,8 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import styled from "styled-components";
+import { IDetailOptionProps } from "./type";
 
-interface TDetailOptionProps {
-  children: ReactNode;
-  requestMenu?: boolean;
-}
-
-const DetailOption = ({ children, requestMenu }: TDetailOptionProps) => {
+const DetailOption = ({ children, requestMenu }: IDetailOptionProps) => {
   return (
     <DetailOptionWrapper purpose={requestMenu}>{children}</DetailOptionWrapper>
   );

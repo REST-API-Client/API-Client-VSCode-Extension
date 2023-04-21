@@ -1,11 +1,8 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import styled from "styled-components";
+import { ICommonChildProps } from "./type";
 
-interface TInputWrapperProps {
-  children: ReactNode;
-}
-
-const InputWrapper = ({ children }: TInputWrapperProps) => {
+const InputWrapper = ({ children }: ICommonChildProps) => {
   return <InputWrapperContainer>{children}</InputWrapperContainer>;
 };
 

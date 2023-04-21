@@ -1,11 +1,6 @@
-import React, { ReactElement } from "react";
+import React from "react";
 import styled from "styled-components";
-
-interface TMenuOptionProps {
-  children: ReactElement;
-  currentOption: string | null;
-  menuOption: string;
-}
+import { TMenuOptionProps } from "./type";
 
 const MenuOption = ({
   children,

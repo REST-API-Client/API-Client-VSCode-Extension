@@ -2,12 +2,9 @@ import React from "react";
 import styled from "styled-components";
 
 import LoadJSONFileButton from "../features/Request/Button/LoadJSONFileButton";
+import { ILoadButtonsBlockProps } from "./type";
 
-interface TLoadButtonsBlockProps {
-  optionsType: string;
-}
-
-const LoadButtonsBlock = ({ optionsType }: TLoadButtonsBlockProps) => (
+const LoadButtonsBlock = ({ optionsType }: ILoadButtonsBlockProps) => (
   <ButtonsWrapper>
     <LoadJSONFileButton optionsType={optionsType} replaceValues={false} />
     <LoadJSONFileButton optionsType={optionsType} replaceValues={true} />

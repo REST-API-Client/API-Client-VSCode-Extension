@@ -1,13 +1,9 @@
 import React from "react";
 import { FiCopy } from "react-icons/fi";
 import styled from "styled-components";
+import { ICopyIconProps } from "./type";
 
-interface TCopyIconProps {
-  handleClick: (value: string | undefined) => void;
-  value: string | undefined;
-}
-
-const CopyIcon = ({ handleClick, value }: TCopyIconProps) => {
+const CopyIcon = ({ handleClick, value }: ICopyIconProps) => {
   return (
     <CopyIconWrapper>
       <FiCopy

@@ -1,16 +1,12 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import styled from "styled-components";
+import { IMessageProps, IMessageStyledProps } from "./type";
 
-interface TMenuOptionProps {
-  children: ReactNode;
-  primary?: boolean;
-}
-
-const Message = ({ children, primary }: TMenuOptionProps) => {
+const Message = ({ children, primary }: IMessageProps) => {
   return <MessageWrapper primary={primary}>{children}</MessageWrapper>;
 };
 
-const MessageWrapper = styled.div<{ primary?: boolean }>`
+const MessageWrapper = styled.div<IMessageStyledProps>`
   display: flex;
   flex-direction: column;
   justify-content: center;

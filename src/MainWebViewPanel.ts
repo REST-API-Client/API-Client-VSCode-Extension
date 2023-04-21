@@ -126,7 +126,7 @@ class MainWebViewPanel {
       method: this.method,
       headers: this.headers,
       data: this.body,
-      responseType: "text",
+      responseType: TYPE.TEXT,
     };
 
     const responseObject = await generateResponseObject(axiosConfiguration);

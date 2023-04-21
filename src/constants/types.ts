@@ -1,4 +1,5 @@
 const TYPE = {
+  TEXT: "text",
   BODY_RAW: "Raw",
   HEADERS: "Headers",
   NO_AUTH: "No Auth",

@@ -1,19 +1,13 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import styled from "styled-components";
-
-interface TSelectWrapperProps {
-  children: ReactNode;
-  requestMenu?: boolean;
-  primary?: boolean;
-  secondary?: boolean;
-}
+import { ISelectWrapperProps, ISelectWrapperStyledProps } from "./type";
 
 const SelectWrapper = ({
   children,
   requestMenu,
   primary,
   secondary,
-}: TSelectWrapperProps) => {
+}: ISelectWrapperProps) => {
   return (
     <SelectWrapperContainer
       primary={primary}
@@ -25,11 +19,7 @@ const SelectWrapper = ({
   );
 };
 
-const SelectWrapperContainer = styled.div<{
-  primary?: boolean;
-  secondary?: boolean;
-  border?: boolean;
-}>`
+const SelectWrapperContainer = styled.div<ISelectWrapperStyledProps>`
   display: flex;
   align-items: center;
   justify-content: ${(props) => props.secondary && "space-around"};
