@@ -8,6 +8,13 @@ const babelCommonRules = {
   },
 };
 
+const tsLoader = {
+  loader: "ts-loader",
+  options: {
+    transpileOnly: true,
+  },
+};
+
 const extensionConfig = {
   target: "node",
   entry: "./src/extension.ts",
@@ -36,7 +43,7 @@ const extensionConfig = {
       },
       {
         test: /\.tsx?$/,
-        use: "ts-loader",
+        use: [tsLoader],
         exclude: path.resolve(__dirname, "node_modules"),
       },
     ],
@@ -63,7 +70,7 @@ const mainWebViewConfig = {
     rules: [
       {
         test: /\.tsx?$/,
-        use: "ts-loader",
+        use: [tsLoader],
         exclude: path.resolve(__dirname, "node_modules"),
       },
       {
@@ -100,7 +107,7 @@ const sidebarWebViewConfig = {
     rules: [
       {
         test: /\.tsx?$/,
-        use: "ts-loader",
+        use: [tsLoader],
         exclude: path.resolve(__dirname, "node_modules"),
       },
       {
