@@ -4,7 +4,7 @@
   "displayName": "REST API Client",
   "icon": "icons/images/icon.png",
   "description": "Simple and intuitive API Client made into a VSCode extension.",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/REST-API-Client/API-Client-VSCode-Extension/issues"
