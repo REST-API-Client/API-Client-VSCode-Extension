@@ -73,12 +73,14 @@
 ## ✨ Features
 
 - Send a request and receive a response from your desired API endpoint.
-- Five request method
+- Seven request methods
   - `GET`
   - `POST`
   - `PUT`
   - `PATCH`
   - `DELETE`
+  - `HEAD`
+  - `OPTIONS`
 - Various request options
   - Add parameter to your API endpoint
   - Add authorization option
