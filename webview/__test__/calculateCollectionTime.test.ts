@@ -1,11 +1,22 @@
 import calculateCollectionTime from "../utils/calculateCollectionTime";
 
 describe("calculateCollectionTime utility function tests", () => {
+  beforeEach(() => {
+    jest.useFakeTimers();
+    jest.setSystemTime(new Date("2022-07-18T12:00:00.000Z"));
+  });
+
+  afterEach(() => {
+    jest.useRealTimers();
+  });
+
   it("should return correct time when milliseconds is passed to a function", () => {
-    const firstMockTime = calculateCollectionTime(1654698982525);
-    const secondMockTime = calculateCollectionTime(1675694952821);
-    const thirdMockTime = calculateCollectionTime(1657998982525);
-    const fourthMockTime = calculateCollectionTime(1658086010977);
+    const now = Date.now();
+
+    const firstMockTime = calculateCollectionTime(now - 40 * 24 * 60 * 60 * 1000);
+    const secondMockTime = calculateCollectionTime(now);
+    const thirdMockTime = calculateCollectionTime(now - 1 * 24 * 60 * 60 * 1000);
+    const fourthMockTime = calculateCollectionTime(now - 19 * 60 * 60 * 1000);
 
     expect(firstMockTime).toBe("40 days ago");
     expect(secondMockTime).toBe("Just now");

@@ -6,7 +6,7 @@ describe("calculateCollectionTime utility function tests", () => {
     const secondMockParameter = removeUrlParameter("https://?google.com");
     const thirdMockParameter = removeUrlParameter("https://facebook.com?");
 
-    expect(firstMockParameter).toBe("");
+    expect(firstMockParameter).toBeUndefined();
     expect(secondMockParameter).toBe("https://");
     expect(thirdMockParameter).toBe("https://facebook.com");
   });

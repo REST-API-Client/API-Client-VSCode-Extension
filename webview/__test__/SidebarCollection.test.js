@@ -3,6 +3,15 @@ import React from "react";
 
 import SidebarCollection from "../features/Sidebar/Collection/SidebarCollection";
 
+beforeEach(() => {
+  jest.useFakeTimers();
+  jest.setSystemTime(new Date("2022-07-18T15:06:50.977Z"));
+});
+
+afterEach(() => {
+  jest.useRealTimers();
+});
+
 const mockData = [
   {
     url: "http://netflix.com",

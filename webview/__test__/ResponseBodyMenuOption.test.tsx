@@ -19,7 +19,7 @@ describe("ResponseBodyMenu component test", () => {
       name: "JSON",
     }) as HTMLSelectElement;
 
-    expect(SelectElement.options).toBe(true);
+    expect(SelectElement.selected).toBe(true);
   });
 
   it("should display the correct number of options", () => {
@@ -41,8 +41,7 @@ describe("ResponseBodyMenu component test", () => {
       name: "HTML",
     }) as HTMLSelectElement;
 
-    expect(selectElement.options).toBe(true);
-    expect(selectElement.options).toBe(false);
+    expect(selectElement.selected).toBe(true);
 
     await userEvent.selectOptions(
       getByRole("combobox"),
@@ -54,6 +53,6 @@ describe("ResponseBodyMenu component test", () => {
       name: "Text",
     }) as HTMLSelectElement;
 
-    expect(selectElement.options).toBe(true);
+    expect(selectElement.selected).toBe(true);
   });
 });
