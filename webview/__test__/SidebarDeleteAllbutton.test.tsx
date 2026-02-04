@@ -26,13 +26,14 @@ describe("SidebarDeleteAllButton component test", () => {
     expect(getByText(/delete/i)).toHaveStyle(`border-radius: 1rem`);
   });
 
-  it("should delete everything from array once clicked", () => {
+  it("should call clickHandler when clicked", async () => {
+    const mockClickHandler = jest.fn();
     const { getByText } = render(
-      <SidebarDeleteAllButton clickHandler={() => undefined} />,
+      <SidebarDeleteAllButton clickHandler={mockClickHandler} />,
     );
 
-    userEvent.click(getByText(/delete all/i));
+    await userEvent.click(getByText(/delete all/i));
 
-    expect(mockData.length).toBe(0);
+    expect(mockClickHandler).toHaveBeenCalled();
   });
 });
