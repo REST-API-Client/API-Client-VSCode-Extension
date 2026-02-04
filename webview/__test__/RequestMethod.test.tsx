@@ -10,13 +10,13 @@ describe("RequestMethod component test", () => {
     const selectElement = getByRole("option", {
       name: "GET",
     }) as HTMLSelectElement;
-    expect(selectElement.options).toBe(true);
+    expect(selectElement.selected).toBe(true);
   });
 
   it("should display the correct number of options", () => {
     const { getAllByRole } = render(<RequestMethod />);
 
-    expect(getAllByRole("option").length).toBe(5);
+    expect(getAllByRole("option").length).toBe(7);
   });
 
   it("should allow user to select request method", async () => {
@@ -33,7 +33,6 @@ describe("RequestMethod component test", () => {
       name: "POST",
     }) as HTMLSelectElement;
 
-    expect(selectElement.options).toBe(true);
-    expect(selectElement.options).toBe(false);
+    expect(selectElement.selected).toBe(true);
   });
 });
