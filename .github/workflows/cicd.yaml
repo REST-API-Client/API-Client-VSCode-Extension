@@ -6,12 +6,13 @@ on:
       - main
 
 jobs:
-  release:
+  test-and-bump:
     runs-on: ubuntu-latest
-    if: ${{ !contains(github.event.head_commit.message, '[skip ci]') }}
+    if: ${{ !contains(github.event.head_commit.message, 'release/v') }}
 
     permissions:
       contents: write
+      pull-requests: write
 
     steps:
       - uses: actions/checkout@v4
@@ -19,7 +20,7 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install the dependencies
+      - name: Install dependencies
         run: npm ci
 
       - name: Run tests
@@ -30,12 +31,45 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Bump version
+      - name: Bump version and create release PR
         run: |
-          npm version patch -m "chore: release v%s [skip ci]"
+          npm version patch --no-git-tag-version
+          VERSION=$(node -p "require('./package.json').version")
+          BRANCH="release/v${VERSION}"
+          git checkout -b "$BRANCH"
+          git add package.json package-lock.json
+          git commit -m "chore: release v${VERSION}"
+          git push origin "$BRANCH" --force
+          gh pr create --title "chore: release v${VERSION}" --body "Automated version bump to v${VERSION}"
+        env:
+          GH_TOKEN: ${{ github.token }}
 
-      - name: Push version bump and tag
-        run: git push origin main --follow-tags
+  publish:
+    runs-on: ubuntu-latest
+    if: ${{ contains(github.event.head_commit.message, 'release/v') }}
+
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Create and push tag
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          git tag "v${VERSION}"
+          git push origin "v${VERSION}"
 
       - name: Install vsce
         run: npm i -g @vscode/vsce
