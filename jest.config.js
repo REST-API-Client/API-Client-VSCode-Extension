@@ -1,6 +1,6 @@
 module.exports = {
   collectCoverage: true,
-  collectCoverageFrom: ["webview/**/*.{js,jsx}"],
+  collectCoverageFrom: ["webview/**/*.{js,jsx,ts,tsx}", "!webview/**/*.d.ts"],
   coverageDirectory: "coverage",
   moduleNameMapper: {
     "^.+.(svg|png|jpg)$": "jest-transform-stub",

@@ -7,20 +7,20 @@
     "mocha": true,
     "jest/globals": true
   },
-  "parser": "@babel/eslint-parser",
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaVersion": 2018,
-    "requireConfigFile": false,
+    "ecmaVersion": 2020,
     "sourceType": "module",
-    "babelOptions": {
-      "presets": ["@babel/preset-react"]
-    },
     "ecmaFeatures": {
       "jsx": true
     }
   },
-  "plugins": ["simple-import-sort", "react", "jest"],
-  "extends": ["plugin:react/recommended", "plugin:jest/recommended"],
+  "plugins": ["@typescript-eslint", "simple-import-sort", "react", "jest"],
+  "extends": [
+    "plugin:react/recommended",
+    "plugin:jest/recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
   "settings": {
     "react": {
       "version": "detect"
@@ -29,9 +29,10 @@
   "rules": {
     "no-const-assign": "warn",
     "no-this-before-super": "warn",
-    "no-undef": "warn",
+    "no-undef": "off",
     "no-unreachable": "warn",
-    "no-unused-vars": "warn",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "warn",
     "constructor-super": "warn",
     "valid-typeof": "warn",
     "simple-import-sort/imports": "error",
