@@ -39,7 +39,7 @@ jobs:
           git checkout -b "$BRANCH"
           git add package.json package-lock.json
           git commit -m "chore: release v${VERSION}"
-          git push origin "$BRANCH"
+          git push origin "$BRANCH" --force
           gh pr create --title "chore: release v${VERSION}" --body "Automated version bump to v${VERSION}"
         env:
           GH_TOKEN: ${{ github.token }}
