@@ -4,8 +4,6 @@ import React from "react";
 
 import SidebarDeleteAllButton from "../features/Sidebar/Button/SidebarDeleteAllButton";
 
-const mockData = [1, 2, 3];
-
 describe("SidebarDeleteAllButton component test", () => {
   it("should render text correctly", () => {
     const { getByText } = render(
