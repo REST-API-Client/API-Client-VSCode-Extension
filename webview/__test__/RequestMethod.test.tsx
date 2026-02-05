@@ -7,10 +7,10 @@ import RequestMethod from "../features/Request/Method/RequestMethod";
 describe("RequestMethod component test", () => {
   it("should display correct default select option", () => {
     const { getByRole } = render(<RequestMethod />);
-    const selectElement = getByRole("option", {
+    const optionElement = getByRole("option", {
       name: "GET",
-    }) as HTMLSelectElement;
-    expect(selectElement.selected).toBe(true);
+    }) as HTMLOptionElement;
+    expect(optionElement.selected).toBe(true);
   });
 
   it("should display the correct number of options", () => {
@@ -29,10 +29,10 @@ describe("RequestMethod component test", () => {
       ),
     );
 
-    const selectElement = getByRole("option", {
+    const optionElement = getByRole("option", {
       name: "POST",
-    }) as HTMLSelectElement;
+    }) as HTMLOptionElement;
 
-    expect(selectElement.selected).toBe(true);
+    expect(optionElement.selected).toBe(true);
   });
 });

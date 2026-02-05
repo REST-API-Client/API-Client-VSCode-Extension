@@ -15,11 +15,11 @@ describe("ResponseBodyMenu component test", () => {
 
   it("should render correct default response body pretty option", () => {
     const { getByRole } = render(<ResponseBodyMenuOption />);
-    const SelectElement = getByRole("option", {
+    const optionElement = getByRole("option", {
       name: "JSON",
-    }) as HTMLSelectElement;
+    }) as HTMLOptionElement;
 
-    expect(SelectElement.selected).toBe(true);
+    expect(optionElement.selected).toBe(true);
   });
 
   it("should display the correct number of options", () => {
@@ -37,11 +37,11 @@ describe("ResponseBodyMenu component test", () => {
       getByRole("option", { name: "HTML" }),
     );
 
-    let selectElement = getByRole("option", {
+    let optionElement = getByRole("option", {
       name: "HTML",
-    }) as HTMLSelectElement;
+    }) as HTMLOptionElement;
 
-    expect(selectElement.selected).toBe(true);
+    expect(optionElement.selected).toBe(true);
 
     await userEvent.selectOptions(
       getByRole("combobox"),
@@ -49,10 +49,10 @@ describe("ResponseBodyMenu component test", () => {
       getByRole("option", { name: "Text" }),
     );
 
-    selectElement = getByRole("option", {
+    optionElement = getByRole("option", {
       name: "Text",
-    }) as HTMLSelectElement;
+    }) as HTMLOptionElement;
 
-    expect(selectElement.selected).toBe(true);
+    expect(optionElement.selected).toBe(true);
   });
 });
